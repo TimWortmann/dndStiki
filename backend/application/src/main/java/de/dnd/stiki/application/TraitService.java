@@ -30,4 +30,8 @@ public class TraitService {
     public TraitDto createTrait(TraitLightDto traitLightDto) {
         return entityToDtoMapper.mapEntityToDto(repository.createTrait(dtoToEntityMapper.mapLightDtoToEntity(traitLightDto)));
     }
+
+    public void deleteTrait(Long id) {
+        repository.deleteTrait(id);
+    }
 }

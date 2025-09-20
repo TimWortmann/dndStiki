@@ -31,4 +31,9 @@ public class TraitRepositoryImpl implements TraitRepository {
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
     }
+
+    @Override
+    public void deleteTrait(Long id) {
+        jpaRepository.deleteById(id);
+    }
 }

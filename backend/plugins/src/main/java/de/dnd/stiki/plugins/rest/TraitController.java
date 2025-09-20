@@ -26,4 +26,10 @@ public class TraitController {
     public ResponseEntity<TraitDto> createTrait(@RequestBody TraitLightDto traitLightDto) {
         return ResponseEntity.ok().body(service.createTrait(traitLightDto));
     }
+
+    @DeleteMapping
+    public ResponseEntity deleteTrait(@RequestParam Long id) {
+        service.deleteTrait(id);
+        return ResponseEntity.ok().build();
+    }
 }
