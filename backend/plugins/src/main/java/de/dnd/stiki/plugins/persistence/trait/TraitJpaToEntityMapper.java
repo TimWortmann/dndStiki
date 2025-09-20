@@ -11,6 +11,7 @@ public class TraitJpaToEntityMapper extends AbstractJpaToEntityMapper<TraitJpa, 
     public TraitEntity mapJpaToEntity(TraitJpa jpa) {
         TraitEntity entity = new TraitEntity();
 
+        entity.setId(jpa.getId());
         entity.setName(jpa.getName());
         entity.setText(jpa.getText());
 

@@ -1,7 +1,7 @@
 package de.dnd.stiki.plugins.rest;
 
-import de.dnd.stiki.adapters.background.BackgroundDto;
-import de.dnd.stiki.application.BackgroundService;
+import de.dnd.stiki.adapters.trait.TraitDto;
+import de.dnd.stiki.application.TraitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/background")
-public class BackgroundController {
+@RequestMapping("/trait")
+public class TraitController {
 
     @Autowired
-    BackgroundService service;
+    TraitService service;
 
     @GetMapping()
-    public ResponseEntity<List<BackgroundDto>> getAllBackgrounds() {
+    public ResponseEntity<List<TraitDto>> getAllTraits() {
 
-        return ResponseEntity.ok().body(service.getAllBackgrounds());
+        return ResponseEntity.ok().body(service.getAllTraits());
     }
 }

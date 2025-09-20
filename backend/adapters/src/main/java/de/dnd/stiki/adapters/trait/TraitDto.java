@@ -2,8 +2,17 @@ package de.dnd.stiki.adapters.trait;
 
 public class TraitDto {
 
+    private Long id;
     private String name;
     private String text;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
