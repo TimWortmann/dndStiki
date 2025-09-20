@@ -1,7 +1,9 @@
 package de.dnd.stiki.application;
 
 import de.dnd.stiki.adapters.trait.TraitDto;
+import de.dnd.stiki.adapters.trait.TraitDtoToEntityMapper;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
+import de.dnd.stiki.adapters.trait.TraitLightDto;
 import de.dnd.stiki.domain.trait.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,15 @@ public class TraitService {
     @Autowired
     private TraitEntityToDtoMapper entityToDtoMapper;
 
+    @Autowired
+    private TraitDtoToEntityMapper dtoToEntityMapper;
+
     public List<TraitDto> getAllTraits() {
 
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAllTraits());
+    }
+
+    public TraitDto createTrait(TraitLightDto traitLightDto) {
+        return entityToDtoMapper.mapEntityToDto(repository.createTrait(dtoToEntityMapper.mapLightDtoToEntity(traitLightDto)));
     }
 }

@@ -16,10 +16,19 @@ public class TraitRepositoryImpl implements TraitRepository {
     @Autowired
     private TraitJpaToEntityMapper jpaToEntityMapper;
 
+    @Autowired TraitEntityToJpaMapper entityToJpaMapper;
+
     @Override
     public List<TraitEntity> getAllTraits() {
         List<TraitJpa> jpaList = jpaRepository.findAll();
 
         return jpaToEntityMapper.mapJpasToEntities(jpaList);
+    }
+
+    @Override
+    public TraitEntity createTrait(TraitEntity traitEntity) {
+        TraitJpa jpa = entityToJpaMapper.mapEntityToJpa(traitEntity);
+
+        return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
     }
 }
