@@ -17,6 +17,7 @@ public class TraitEntityToDtoMapper {
 
     public TraitDto mapEntityToDto(TraitEntity entity) {
         TraitDto dto = new TraitDto();
+        dto.setName(entity.getName());
         dto.setText(entity.getText());
         return dto;
     }
