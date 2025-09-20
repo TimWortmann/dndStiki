@@ -296,3 +296,11 @@ DROP SCHEMA IF EXISTS DNDSTIKI [90107-232]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "[*]DND_STIKI.BACKGROUND"; erwartet "DELETE, DROP"
 Syntax error in SQL statement "[*]DND_STIKI.BACKGROUND"; expected "DELETE, DROP"; SQL statement:
 DND_STIKI.BACKGROUND [42001-232]
+2025-09-20 15:17:20.248381+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "BACKGROUND" nicht gefunden
+Table "BACKGROUND" not found; SQL statement:
+INSERT INTO BACKGROUND (NAME) VALUES ('Acolyte') [42102-232]
+2025-09-20 15:17:29.629282+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "BACKGROUND" nicht gefunden
+Table "BACKGROUND" not found; SQL statement:
+INSERT INTO BACKGROUND (NAME) VALUES ('Acolyte') [42102-232]

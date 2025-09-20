@@ -2,7 +2,7 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import de.dnd.stiki.domain.trait.TraitEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,9 +10,21 @@ import java.util.List;
 @Repository
 public class BackgroundRepositoryImpl implements BackgroundRepository {
 
+    @Autowired
+    private BackgroundJpaRepository jpaRepository;
+
+    @Autowired
+    private BackgroundJpaToEntityMapper jpaToEntityMapper;
+
     @Override
     public List<BackgroundEntity> getAllBackgrounds() {
-        BackgroundEntity background = new BackgroundEntity();
+
+        List<BackgroundJpa> jpaList = jpaRepository.findAll();
+
+        return jpaToEntityMapper.mapJpasToEntities(jpaList);
+
+
+        /*BackgroundEntity background = new BackgroundEntity();
         background.setName("Acolyte");
         background.setProficiencies(List.of("Insight", "Religion"));
 
@@ -27,8 +39,6 @@ public class BackgroundRepositoryImpl implements BackgroundRepository {
                 
                  Source: Player&#39;s Handbook p. 127
                  """);
-        background.setTraits(List.of(trait));
-
-        return List.of(background);
+        background.setTraits(List.of(trait));*/
     }
 }
