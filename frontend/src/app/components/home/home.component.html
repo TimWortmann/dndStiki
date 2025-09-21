@@ -6,8 +6,8 @@
     [tableColumns]="backgroundtableColum"
     [isFilterable]="true"
     [isPageable]="true"
-    [paginationSizes]="[2,4,6]"
-    [defaultPageSize]="4">
+    [paginationSizes]="getPaginationSizes()"
+    [defaultPageSize]="getPaginationSizes()[0]">
   </custom-table>
 </div>
 

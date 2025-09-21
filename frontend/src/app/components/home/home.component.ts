@@ -32,14 +32,29 @@ export class HomeComponent {
   constructor(private backgroundService: BackgroundService, private ngZone: NgZone) {}
 
   ngOnInit(): void {
-    this.backgroundService.getAllBackgrounds().subscribe((data) => {
-      this.ngZone.run(() => {
-        console.log("Subscribe")
-        console.log("Data", data)
-        this.backgrounds = data
-        console.log("Backgrounds", this.backgrounds)
-      });
+    this.backgroundService.getAllBackgrounds().subscribe((data) => { 
+      this.backgrounds = data
     }); 
+  }
+
+  getPaginationSizes() : number[] {
+    let array = [];
+    
+    if (this.backgrounds.length > 5) {
+      array.push(5);
+    }
+    if (this.backgrounds.length > 10) { 
+      array.push(10);
+    }
+    if (this.backgrounds.length > 20) { 
+      array.push(20);
+    }
+
+    if (this.backgrounds.length !== 5 && this.backgrounds.length !== 10 && this.backgrounds.length !== 20) {
+      array.push(this.backgrounds.length);
+    }
+
+    return array;
   }
 
 }
