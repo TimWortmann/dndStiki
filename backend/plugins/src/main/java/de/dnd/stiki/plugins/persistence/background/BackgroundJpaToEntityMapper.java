@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
+import de.dnd.stiki.plugins.persistence.skill.SkillJpa;
 import de.dnd.stiki.plugins.persistence.trait.TraitJpaToEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ public class BackgroundJpaToEntityMapper extends AbstractJpaToEntityMapper<Backg
         BackgroundEntity entity = new BackgroundEntity();
 
         entity.setName(jpa.getName());
+        entity.setProficiencies(jpa.getProficiencies().stream().map(SkillJpa::getName).toList());
 
         entity.setTraits(traitJpaToEntityMapper.mapJpasToEntities(jpa.getTraits()));
         return entity;

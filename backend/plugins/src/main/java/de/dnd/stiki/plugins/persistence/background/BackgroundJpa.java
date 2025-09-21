@@ -1,5 +1,6 @@
 package de.dnd.stiki.plugins.persistence.background;
 
+import de.dnd.stiki.plugins.persistence.skill.SkillJpa;
 import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
 import jakarta.persistence.*;
 
@@ -12,6 +13,15 @@ public class BackgroundJpa {
     @Id
     @Column(name="NAME")
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "BACKGROUND_SKILL", // join table
+            schema = "DND_STIKI",
+            joinColumns = @JoinColumn(name = "BACKGROUND_NAME"),   // FK to Background
+            inverseJoinColumns = @JoinColumn(name = "SKILL_NAME")    // FK to Trait
+    )
+    private List<SkillJpa> proficiencies;
 
     @ManyToMany
     @JoinTable(
@@ -28,6 +38,14 @@ public class BackgroundJpa {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<SkillJpa> getProficiencies() {
+        return proficiencies;
+    }
+
+    public void setProficiencies(List<SkillJpa> proficiencies) {
+        this.proficiencies = proficiencies;
     }
 
     public List<TraitJpa> getTraits() {
