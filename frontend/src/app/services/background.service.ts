@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { BackgroundValue } from '../models/BackgroundValue';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +15,5 @@ export class BackgroundService {
    getAllBackgrounds() : Observable<BackgroundValue[]> {
     return this.http.get<BackgroundValue[]>(this.baseUrl + "/background")
    }
+  
 }

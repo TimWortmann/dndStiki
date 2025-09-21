@@ -8,11 +8,11 @@ import { TableColumnValue } from '../../models/TableColumnValue';
   selector: 'custom-table',
   standalone: false,
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrl: './table.component.scss'
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent {
 
-  public tableDataSource = new MatTableDataSource<any>([]);
+   public tableDataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
 
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;

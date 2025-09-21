@@ -1,30 +1,17 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { TableColumnValue } from '../../models/TableColumnValue';
+import { Component, NgZone } from '@angular/core';
 import { BackgroundValue } from '../../models/BackgroundValue';
+import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundService } from '../../services/background.service';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  
-  backgrounds!: BackgroundValue[];
 
-  /*backgrounds: BackgroundValue[] = [
-    {
-      name: "Acolythe",
-      proficiencies: ["Insight", "Religion"],
-      traits: []
-    }, 
-    {
-      name: "Acolythe 2",
-      proficiencies: ["Insight", "Religion"],
-      traits: []
-    }
-  ]*/
+  backgrounds!: BackgroundValue[];
 
   backgroundtableColum: TableColumnValue[] = [
     {
@@ -42,11 +29,17 @@ export class HomeComponent {
   ];
 
 
-   constructor(private backgroundService: BackgroundService) {
-    this.backgroundService.getAllBackgrounds().subscribe({
-      next: (data) => this.backgrounds = data,
-      error: (err) => console.error('Error fetching items', err)
-    });
-   }
+  constructor(private backgroundService: BackgroundService, private ngZone: NgZone) {}
+
+  ngOnInit(): void {
+    this.backgroundService.getAllBackgrounds().subscribe((data) => {
+      this.ngZone.run(() => {
+        console.log("Subscribe")
+        console.log("Data", data)
+        this.backgrounds = data
+        console.log("Backgrounds", this.backgrounds)
+      });
+    }); 
+  }
 
 }
