@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundValue } from '../../models/BackgroundValue';
+import { BackgroundService } from '../../services/background.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,10 @@ import { BackgroundValue } from '../../models/BackgroundValue';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  
+  backgrounds!: BackgroundValue[];
 
-  backgrounds: BackgroundValue[] = [
+  /*backgrounds: BackgroundValue[] = [
     {
       name: "Acolythe",
       proficiencies: ["Insight", "Religion"],
@@ -21,7 +24,7 @@ export class HomeComponent {
       proficiencies: ["Insight", "Religion"],
       traits: []
     }
-  ]
+  ]*/
 
   backgroundtableColum: TableColumnValue[] = [
     {
@@ -37,4 +40,13 @@ export class HomeComponent {
       isSortable: false 
     }
   ];
+
+
+   constructor(private backgroundService: BackgroundService) {
+    this.backgroundService.getAllBackgrounds().subscribe({
+      next: (data) => this.backgrounds = data,
+      error: (err) => console.error('Error fetching items', err)
+    });
+   }
+
 }
