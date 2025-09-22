@@ -6,7 +6,6 @@ import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -81,15 +80,12 @@ public class CompendiumXmlService {
 
             if (backgroundChildNodes.item(1).getNodeName().equals("proficiency")) {
                 String concatinatedProficiencies = backgroundChildNodes.item(1).getTextContent();
-                concatinatedProficiencies = StringUtils.trimAllWhitespace(concatinatedProficiencies);
-                List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split(","));
+                List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split(", "));
                 backgroundEntity.setProficiencies(proficiencies);
             }
 
 
             List<TraitEntity> traitEntityList = new ArrayList<>();
-            int length = backgroundChildNodes.getLength();
-            Node errorNode = backgroundChildNodes.item(3);
             for (int i = 2; i < backgroundChildNodes.getLength(); i++) {
                 if (backgroundChildNodes.item(i).getNodeName().equals("trait")) {
                     TraitEntity traitEntity = new TraitEntity();
