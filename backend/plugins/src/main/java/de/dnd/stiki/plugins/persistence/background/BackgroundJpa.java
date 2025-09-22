@@ -23,7 +23,7 @@ public class BackgroundJpa {
     )
     private List<SkillJpa> proficiencies;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "BACKGROUND_TRAIT", // join table
             schema = "DND_STIKI",

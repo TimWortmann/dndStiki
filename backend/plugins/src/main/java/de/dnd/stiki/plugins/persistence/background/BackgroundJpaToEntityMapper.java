@@ -18,7 +18,10 @@ public class BackgroundJpaToEntityMapper extends AbstractJpaToEntityMapper<Backg
         BackgroundEntity entity = new BackgroundEntity();
 
         entity.setName(jpa.getName());
-        entity.setProficiencies(jpa.getProficiencies().stream().map(SkillJpa::getName).toList());
+
+        if (jpa.getProficiencies() != null) {
+            entity.setProficiencies(jpa.getProficiencies().stream().map(SkillJpa::getName).toList());
+        }
 
         entity.setTraits(traitJpaToEntityMapper.mapJpasToEntities(jpa.getTraits()));
         return entity;
