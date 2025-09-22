@@ -1,0 +1,3 @@
+<input type="file" class="file-input" (change)="onChange($event)" #fileUpload hidden/>
+
+<button mat-flat-button color="primary" (click)="triggerFileUpload()" [disabled]="isDisabled">{{buttonText}}</button>

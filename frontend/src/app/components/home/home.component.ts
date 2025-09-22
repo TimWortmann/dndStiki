@@ -57,4 +57,11 @@ export class HomeComponent {
     return array;
   }
 
+    uploadDatei(file: File) {
+      if (file) {
+        console.log("Filename: "  + file.name)
+      }
+      
+    }
+
 }

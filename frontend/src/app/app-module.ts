@@ -15,13 +15,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { SingleFileUploadComponent } from './components/single-file-upload/single-file-upload.component';
 
 
 @NgModule({
   declarations: [
     App,
     TableComponent,
-    HomeComponent
+    HomeComponent,
+    SingleFileUploadComponent
   ],
   imports: [
     BrowserModule,
