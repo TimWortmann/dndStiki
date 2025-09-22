@@ -14,7 +14,7 @@
 
 <h2>Backgrounds</h2>
 
-<div style="width: 90%;">
+<div style="width: 90%;" *ngIf="backgrounds && backgrounds.length > 0">
   <custom-table
     [tableData]="backgrounds"
     [tableColumns]="backgroundtableColum"
