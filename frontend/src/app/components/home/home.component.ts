@@ -63,9 +63,7 @@ export class HomeComponent {
 
     uploadCompendium(file: File) {
       if (file) {
-        file.text().then(compendiumContent => {
-          this.compendiumService.uploadCompendium(compendiumContent).subscribe();
-        })
+        this.compendiumService.uploadCompendium(file).subscribe((data) => console.log(data));
       }
       
     }
