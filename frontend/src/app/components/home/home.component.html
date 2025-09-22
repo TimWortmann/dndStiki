@@ -1,9 +1,20 @@
-<h1 style="text-align: center;">Backgrounds</h1>
 
-<app-single-file-upload (fileUpload)="uploadCompendium($event)"
-buttonText="Upload Compendium"></app-single-file-upload>
+<div style="margin-left: 10em;">
+  <h1 style="margin-bottom: 2em;">Home</h1>
+  
+  <h2>Compendium</h2>
 
-<div style="width: 50%;  margin: 0 auto;" *ngIf="backgrounds !== undefined">
+  <div class="compendium-upload">
+    <app-single-file-upload
+    (fileUpload)="uploadCompendium($event)"
+    [buttonText]="getCompendiumButtonText()">
+  </app-single-file-upload>
+  <span>{{ compendiumFileName }}</span>
+</div>
+
+<h2>Backgrounds</h2>
+
+<div style="width: 75%;">
   <custom-table
     [tableData]="backgrounds"
     [tableColumns]="backgroundtableColum"
@@ -13,3 +24,5 @@ buttonText="Upload Compendium"></app-single-file-upload>
     [defaultPageSize]="getPaginationSizes()[0]">
   </custom-table>
 </div>
+</div>
+

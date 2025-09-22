@@ -1,0 +1,10 @@
+.compendium-upload {
+  display: flex;
+  align-items: center; /* vertically center span and button */
+  gap: 1rem;  
+  margin-bottom: 3em;         /* space between text and button */
+}
+
+.compendium-upload span {
+  font-weight: 500;
+}

@@ -7,9 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class CompendiumService {
 
-  private baseUrl = 'http://localhost:8080/api'; // replace with your backend
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
+
+  getCompendiumFileName(): Observable<string> {
+    return this.http.get<string>(this.baseUrl + "/compendium", { responseType: 'text' as 'json' });
+  }
 
   uploadCompendium(file: File): Observable<string> {
     

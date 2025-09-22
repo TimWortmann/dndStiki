@@ -12,7 +12,8 @@ import { CompendiumService } from '../../services/compendium.service';
 })
 export class HomeComponent {
 
-  backgrounds!: BackgroundValue[];
+  compendiumFileName?: string;
+  backgrounds: BackgroundValue[] = [];
 
   backgroundtableColum: TableColumnValue[] = [
     {
@@ -36,14 +37,13 @@ export class HomeComponent {
   ) {}
 
   ngOnInit(): void {
-    this.backgroundService.getAllBackgrounds().subscribe((data) => { 
-      this.backgrounds = data
-    }); 
+    this.compendiumService.getCompendiumFileName().subscribe(data => this.compendiumFileName = data);
+    this.backgroundService.getAllBackgrounds().subscribe((data) => this.backgrounds = data); 
   }
 
   getPaginationSizes() : number[] {
     let array = [];
-    
+
     if (this.backgrounds.length > 5) {
       array.push(5);
     }
@@ -61,11 +61,18 @@ export class HomeComponent {
     return array;
   }
 
-    uploadCompendium(file: File) {
-      if (file) {
-        this.compendiumService.uploadCompendium(file).subscribe((data) => console.log(data));
-      }
-      
+  getCompendiumButtonText() : string {
+    if (this.compendiumFileName) {
+      return "Replace Compendium";
     }
+
+    return "Upload Compendium";
+  }
+
+  uploadCompendium(file: File) {
+    if (file) {
+      this.compendiumService.uploadCompendium(file).subscribe((data) => this.compendiumFileName = data);
+    }   
+  }
 
 }

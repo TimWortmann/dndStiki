@@ -5,6 +5,8 @@ import de.dnd.stiki.domain.compendium.CompendiumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CompendiumRepositoryImpl implements CompendiumRepository {
 
@@ -16,6 +18,18 @@ public class CompendiumRepositoryImpl implements CompendiumRepository {
 
     @Autowired
     CompendiumJpaToEntityMapper jpaToEntityMapper;
+
+    @Override
+    public CompendiumEntity getCompendium() {
+
+        List<CompendiumJpa> jpaList = jpaRepository.findAll();
+
+        if (jpaList.isEmpty()) {
+            return new CompendiumEntity();
+        }
+
+        return jpaToEntityMapper.mapJpaToEntity(jpaList.getFirst());
+    }
 
     @Override
     public CompendiumEntity saveCompendium(CompendiumEntity entity) {

@@ -15,6 +15,10 @@ public class CompendiumService {
     @Autowired
     private CompendiumRepository repository;
 
+    public String getCompendiumFileName(){
+        return repository.getCompendium().getFileName();
+    }
+
     public String uploadCompendium(MultipartFile file) throws IOException {
         CompendiumEntity entity = new CompendiumEntity();
         entity.setFileName(file.getOriginalFilename());
