@@ -1,7 +1,8 @@
-import { Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundService } from '../../services/background.service';
+import { CompendiumService } from '../../services/compendium.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,10 @@ export class HomeComponent {
   ];
 
 
-  constructor(private backgroundService: BackgroundService, private ngZone: NgZone) {}
+  constructor(
+    private backgroundService: BackgroundService, 
+    private compendiumService: CompendiumService,
+  ) {}
 
   ngOnInit(): void {
     this.backgroundService.getAllBackgrounds().subscribe((data) => { 
@@ -57,9 +61,11 @@ export class HomeComponent {
     return array;
   }
 
-    uploadDatei(file: File) {
+    uploadCompendium(file: File) {
       if (file) {
-        console.log("Filename: "  + file.name)
+        file.text().then(compendiumContent => {
+          this.compendiumService.uploadCompendium(compendiumContent).subscribe();
+        })
       }
       
     }
