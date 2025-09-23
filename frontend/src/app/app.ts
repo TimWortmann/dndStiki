@@ -1,4 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { Observable } from 'rxjs';
+import { LoadingService } from './services/loading/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,9 @@ import { Component, signal } from '@angular/core';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('frontend');
+  loading$: Observable<boolean>;
+
+  constructor(private loadingService: LoadingService) {
+    this.loading$ = this.loadingService.loading$;
+  }
 }

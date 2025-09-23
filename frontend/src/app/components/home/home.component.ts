@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
-import { BackgroundService } from '../../services/background.service';
-import { CompendiumService } from '../../services/compendium.service';
+import { BackgroundService } from '../../services/background/background.service';
+import { CompendiumService } from '../../services/compendium/compendium.service';
 
 @Component({
   selector: 'app-home',
