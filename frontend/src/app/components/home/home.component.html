@@ -1,19 +1,5 @@
-<ng-template #proficiencyTemplate let-column="column" let-element="element">
-  <span>{{ element[column.dataKey]?.join(', ') }}</span>
-</ng-template>
-
-<ng-template #traitTemplate let-column="column" let-element="element">
-  <div class="trait-cell">
-    <span>{{ element[column.dataKey].length }}</span>
-    <button mat-icon-button (click)="openTraitDialog(column, element)">
-      <mat-icon>info_outline</mat-icon>
-    </button>
-  </div>
-</ng-template>
-
-
-<div style="margin-left: 10em;">
-  <h1 style="margin-bottom: 2em;">Home</h1>
+<div style="margin-left: 10em; margin-right: 10em;">
+  <h1>Home</h1>
   
   <h2>Compendium</h2>
 
@@ -30,19 +16,15 @@
         <mat-icon>delete</mat-icon>
       </button>
     </ng-container>
-</div>
+  </div>
 
-<h2>Backgrounds</h2>
-
-<div style="width: 90%;" *ngIf="backgrounds && backgrounds.length > 0">
-  <custom-table
-    [tableData]="backgrounds"
-    [tableColumns]="backgroundtableColumns"
-    [isFilterable]="true"
-    [isPageable]="true"
-    [paginationSizes]="getPaginationSizes()"
-    [defaultPageSize]="getPaginationSizes()[0]">
-  </custom-table>
-</div>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Backgrounds</mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-backgrounds></app-backgrounds>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 

@@ -1,3 +1,7 @@
+h1 {
+  margin-bottom: 2em;
+}
+
 .compendium-upload {
   display: flex;
   align-items: center; /* vertically center span and button */
@@ -9,8 +13,7 @@
   font-weight: 500;
 }
 
-.trait-cell {
-  display: inline-flex;       /* align children horizontally */
-  align-items: center;        /* vertical center */
-  gap: 0.25rem;               /* optional spacing between span and button */
+.mat-expansion-panel-content app-backgrounds {
+  width: 100%;
+  display: block;
 }

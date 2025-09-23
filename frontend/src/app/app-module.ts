@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
 import { TraitPopupComponent } from './components/trait-popup/trait-popup.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { BackgroundsComponent } from './components/backgrounds/backgrounds.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     TableComponent,
     HomeComponent,
     SingleFileUploadComponent,
-    TraitPopupComponent
+    TraitPopupComponent,
+    BackgroundsComponent
   ],
   imports: [
     BrowserModule,
