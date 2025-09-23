@@ -1,28 +1,26 @@
-import { AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
-import { TraitPopupComponent } from '../trait-popup/trait-popup.component';
+import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BackgroundService } from '../../services/background/background.service';
-import { BackgroundValue } from '../../models/background-value';
 import { TableColumnValue } from '../../models/table-column-value';
 import { TableService } from '../../services/table/table.service';
+import { RaceService } from '../../services/race/race.service';
+import { RaceValue } from '../../models/race-value';
 
 @Component({
-  selector: 'app-backgrounds',
+  selector: 'app-races',
   standalone: false,
-  templateUrl: './backgrounds.component.html',
-  styleUrl: './backgrounds.component.scss'
+  templateUrl: './races.component.html',
+  styleUrl: './races.component.scss'
 })
-export class BackgroundsComponent implements AfterViewInit {
+export class RacesComponent {
 
-  @ViewChild('proficiencyTemplate') proficiencyTemplate!: TemplateRef<any>;
   @ViewChild('traitTemplate') traitTemplate!: TemplateRef<any>;
 
-  data?: BackgroundValue[];
+  data?: RaceValue[];
   tableColumns: TableColumnValue[] = [];
 
   constructor(
     private tableService: TableService,
-    private backgroundService: BackgroundService, 
+    private raceService: RaceService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ){}
@@ -42,11 +40,16 @@ export class BackgroundsComponent implements AfterViewInit {
         isSortable: false
       },
       {
-        name: 'Proficiencies',
-        dataKey: 'proficiencies',
+        name: 'Size',
+        dataKey: 'size',
         position: 'left',
-        isSortable: false,
-        template: this.proficiencyTemplate
+        isSortable: true
+      },
+      {
+        name: 'Speed',
+        dataKey: 'speed',
+        position: 'left',
+        isSortable: true
       },
       {
         name: 'Traits',
@@ -60,7 +63,7 @@ export class BackgroundsComponent implements AfterViewInit {
   }
 
   pullDataFromBackend() {
-    this.backgroundService.getAllBackgrounds()
+    this.raceService.getAllRaces()
       .subscribe((response) => {
         this.data = response;
         this.cdr.detectChanges();
@@ -72,7 +75,6 @@ export class BackgroundsComponent implements AfterViewInit {
   }
 
   openTraitDialog(column: any, element: any): void {
-    this.tableService.openTraitDialog(column, element);
+    this.tableService.openTraitDialog;
   }
-
 }

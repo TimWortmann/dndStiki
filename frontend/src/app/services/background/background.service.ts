@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BackgroundValue } from '../../models/BackgroundValue';
+import { BackgroundValue } from '../../models/background-value';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class BackgroundService {
 
-  private baseUrl = 'http://localhost:8080/api'; // replace with your backend
+  private baseUrl = 'http://localhost:8080/api/background'; 
 
-   constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-   getAllBackgrounds() : Observable<BackgroundValue[]> {
-    return this.http.get<BackgroundValue[]>(this.baseUrl + "/background")
-   }
+  getAllBackgrounds() : Observable<BackgroundValue[]> {
+    return this.http.get<BackgroundValue[]>(this.baseUrl)
+  }
   
 }

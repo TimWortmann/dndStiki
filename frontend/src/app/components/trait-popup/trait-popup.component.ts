@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TraitValue } from '../../models/TraitValue';
+import { TraitValue } from '../../models/trait-value';
 
 @Component({
   selector: 'app-trait-popup',

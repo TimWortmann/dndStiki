@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { BackgroundValue } from '../../models/BackgroundValue';
-import { TableColumnValue } from '../../models/TableColumnValue';
+import { BackgroundValue } from '../../models/background-value';
+import { TableColumnValue } from '../../models/table-column-value';
 import { CompendiumService } from '../../services/compendium/compendium.service';
 import { BackgroundsComponent } from '../backgrounds/backgrounds.component';
 

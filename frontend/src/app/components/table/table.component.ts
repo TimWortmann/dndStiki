@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChil
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';  // ✅ fixed import order
-import { TableColumnValue } from '../../models/TableColumnValue';
+import { TableColumnValue } from '../../models/table-column-value';
 
 @Component({
   selector: 'custom-table',

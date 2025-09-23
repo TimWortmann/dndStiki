@@ -1,4 +1,4 @@
-import { TraitValue } from "./TraitValue";
+import { TraitValue } from "./trait-value";
 
 export interface BackgroundValue {
   name: string; 

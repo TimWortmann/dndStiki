@@ -21,6 +21,7 @@ import { loadingInterceptor } from './services/loading/LoadingInterceptor';
 import { TraitPopupComponent } from './components/trait-popup/trait-popup.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BackgroundsComponent } from './components/backgrounds/backgrounds.component';
+import { RacesComponent } from './components/races/races.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { BackgroundsComponent } from './components/backgrounds/backgrounds.compo
     HomeComponent,
     SingleFileUploadComponent,
     TraitPopupComponent,
-    BackgroundsComponent
+    BackgroundsComponent,
+    RacesComponent
   ],
   imports: [
     BrowserModule,
