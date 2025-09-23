@@ -52,7 +52,7 @@ export class BackgroundsComponent implements AfterViewInit {
         name: 'Traits',
         dataKey: 'traits',
         position: 'left',
-        isSortable: false,
+        isSortable: true,
         template: this.traitTemplate
       },
     ];

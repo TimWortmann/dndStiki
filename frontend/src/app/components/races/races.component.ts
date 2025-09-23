@@ -67,7 +67,7 @@ export class RacesComponent {
         name: 'Traits',
         dataKey: 'traits',
         position: 'left',
-        isSortable: false,
+        isSortable: true,
         template: this.traitTemplate
       },
     ];
