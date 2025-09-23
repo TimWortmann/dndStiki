@@ -1,7 +1,6 @@
 package de.dnd.stiki.application;
 
 import de.dnd.stiki.adapters.trait.TraitDto;
-import de.dnd.stiki.adapters.trait.TraitDtoToEntityMapper;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.trait.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ public class TraitService {
 
     @Autowired
     private TraitEntityToDtoMapper entityToDtoMapper;
-
-    @Autowired
-    private TraitDtoToEntityMapper dtoToEntityMapper;
 
     public List<TraitDto> getAllTraits() {
 
