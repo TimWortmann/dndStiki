@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class CompendiumService {
 
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = 'http://localhost:8080/api/compendium';
 
   constructor(private http: HttpClient) {}
 
   getCompendiumFileName(): Observable<string> {
-    return this.http.get<string>(this.baseUrl + "/compendium", { responseType: 'text' as 'json' });
+    return this.http.get<string>(this.baseUrl, { responseType: 'text' as 'json' });
   }
 
   uploadCompendium(file: File): Observable<string> {
@@ -20,7 +20,11 @@ export class CompendiumService {
     const formData = new FormData();
     formData.append('file', file, file.name);
 
-    return this.http.post<string>(this.baseUrl + "/compendium", formData, { responseType: 'text' as 'json' });
+    return this.http.post<string>(this.baseUrl, formData, { responseType: 'text' as 'json' });
+  }
+
+  deleteCompendium() : Observable<string> {
+    return this.http.delete<string>(this.baseUrl, { responseType: 'text' as 'json' });
   }
   
 }

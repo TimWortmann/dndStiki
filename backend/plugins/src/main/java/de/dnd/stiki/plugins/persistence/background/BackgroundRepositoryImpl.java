@@ -2,6 +2,8 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
+import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
+import de.dnd.stiki.plugins.persistence.trait.TraitJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,9 @@ public class BackgroundRepositoryImpl implements BackgroundRepository {
     @Autowired
     private BackgroundEntityToJpaMapper entityToJpaMapper;
 
+    @Autowired
+    private TraitJpaRepository traitRepository;
+
     @Override
     public List<BackgroundEntity> getAllBackgrounds() {
 
@@ -30,6 +35,12 @@ public class BackgroundRepositoryImpl implements BackgroundRepository {
     @Override
     public List<BackgroundEntity> createBackgrounds(List<BackgroundEntity> entities) {
         List<BackgroundJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
+
+        for(BackgroundJpa jpa : jpaList){
+            for (TraitJpa traitJpa :jpa.getTraits()){
+                traitRepository.save(traitJpa);
+            }
+        }
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }

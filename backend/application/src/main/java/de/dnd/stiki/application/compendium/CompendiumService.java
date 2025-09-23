@@ -1,7 +1,9 @@
 package de.dnd.stiki.application.compendium;
 
+import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.compendium.CompendiumRepository;
+import de.dnd.stiki.domain.trait.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,12 @@ public class CompendiumService {
     private CompendiumRepository repository;
 
     @Autowired
+    private BackgroundRepository backgroundRepository;
+
+    @Autowired
+    private TraitRepository traitRepository;
+
+    @Autowired
     private CompendiumXmlService xmlService;
 
     public String getCompendiumFileName(){
@@ -27,12 +35,18 @@ public class CompendiumService {
         entity.setFileName(file.getOriginalFilename());
         entity.setXmlContent(new String(file.getBytes(), StandardCharsets.UTF_8));
 
-        repository.deleteCompendium();
-        entity = repository.saveCompendium(entity);
+        deleteCompendium();
 
+        entity = repository.saveCompendium(entity);
         xmlService.saveDataFromCompendium(entity);
 
         return entity.getFileName();
+    }
+
+    public void deleteCompendium(){
+        repository.deleteCompendium();
+        backgroundRepository.deleteAllBackgrounds();
+        traitRepository.deleteAllTraits();
     }
 
 

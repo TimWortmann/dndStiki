@@ -54,7 +54,6 @@ public class CompendiumXmlService {
 
     private void readAndCreateBackgrouns(Document document) {
         List<BackgroundEntity> backgrounds = readBackgrounds(document);
-        backgroundRepository.deleteAllBackgrounds();
         backgroundRepository.createBackgrounds(backgrounds);
     }
 

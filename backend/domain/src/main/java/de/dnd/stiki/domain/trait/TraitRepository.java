@@ -6,7 +6,5 @@ public interface TraitRepository {
 
     public List<TraitEntity> getAllTraits();
 
-    public TraitEntity createTrait(TraitEntity traitEntity);
-
-    public void deleteTrait(Long id);
+    public void deleteAllTraits();
 }

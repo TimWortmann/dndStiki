@@ -13,7 +13,7 @@ import { CompendiumService } from '../../services/compendium.service';
 export class HomeComponent {
 
   compendiumFileName?: string;
-  backgrounds: BackgroundValue[] = [];
+  backgrounds?: BackgroundValue[];
 
   backgroundtableColum: TableColumnValue[] = [
     {
@@ -38,41 +38,47 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.compendiumService.getCompendiumFileName().subscribe(data => this.compendiumFileName = data);
+    this.getBackgrounds();
+  }
+
+  getBackgrounds() {
     this.backgroundService.getAllBackgrounds().subscribe((data) => this.backgrounds = data); 
   }
 
   getPaginationSizes() : number[] {
     let array = [];
 
-    if (this.backgrounds.length > 5) {
+    if (this.backgrounds!.length > 5) {
       array.push(5);
     }
-    if (this.backgrounds.length > 10) { 
+    if (this.backgrounds!.length > 10) { 
       array.push(10);
     }
-    if (this.backgrounds.length > 20) { 
+    if (this.backgrounds!.length > 20) { 
       array.push(20);
     }
 
-    if (this.backgrounds.length !== 5 && this.backgrounds.length !== 10 && this.backgrounds.length !== 20) {
-      array.push(this.backgrounds.length);
+    if (this.backgrounds!.length !== 5 && this.backgrounds!.length !== 10 && this.backgrounds!.length !== 20) {
+      array.push(this.backgrounds!.length);
     }
 
     return array;
   }
 
-  getCompendiumButtonText() : string {
-    if (this.compendiumFileName) {
-      return "Replace Compendium";
-    }
-
-    return "Upload Compendium";
-  }
-
   uploadCompendium(file: File) {
     if (file) {
-      this.compendiumService.uploadCompendium(file).subscribe((data) => this.compendiumFileName = data);
+      this.compendiumService.uploadCompendium(file).subscribe((data) => {
+        this.compendiumFileName = data
+        this.getBackgrounds();
+    });
     }   
+  }
+
+  deleteCompendium() {
+    this.compendiumService.deleteCompendium().subscribe(() => {
+      this.compendiumFileName = undefined
+      this.getBackgrounds();
+    })
   }
 
 }

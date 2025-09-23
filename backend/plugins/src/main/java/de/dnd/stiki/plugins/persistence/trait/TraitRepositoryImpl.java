@@ -26,14 +26,7 @@ public class TraitRepositoryImpl implements TraitRepository {
     }
 
     @Override
-    public TraitEntity createTrait(TraitEntity traitEntity) {
-        TraitJpa jpa = entityToJpaMapper.mapEntityToJpa(traitEntity);
-
-        return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
-    }
-
-    @Override
-    public void deleteTrait(Long id) {
-        jpaRepository.deleteById(id);
+    public void deleteAllTraits() {
+        jpaRepository.deleteAll();
     }
 }

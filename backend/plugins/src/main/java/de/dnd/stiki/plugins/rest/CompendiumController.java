@@ -26,4 +26,11 @@ public class CompendiumController {
 
         return ResponseEntity.ok().body(service.uploadCompendium(file));
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteCompendium() {
+        service.deleteCompendium();
+
+        return ResponseEntity.ok().build();
+    }
 }

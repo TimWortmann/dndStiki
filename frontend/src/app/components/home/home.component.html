@@ -5,11 +5,18 @@
   <h2>Compendium</h2>
 
   <div class="compendium-upload">
-    <app-single-file-upload
-    (fileUpload)="uploadCompendium($event)"
-    [buttonText]="getCompendiumButtonText()">
-  </app-single-file-upload>
-  <span>{{ compendiumFileName }}</span>
+    <ng-container *ngIf="!compendiumFileName">
+      <app-single-file-upload 
+        (fileUpload)="uploadCompendium($event)" 
+        buttonText="Upload Compendium">
+      </app-single-file-upload>
+    </ng-container>
+    <ng-container *ngIf="compendiumFileName">
+      <span>{{ compendiumFileName }}</span>
+      <button mat-icon-button color="primary" (click)="deleteCompendium()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
 </div>
 
 <h2>Backgrounds</h2>

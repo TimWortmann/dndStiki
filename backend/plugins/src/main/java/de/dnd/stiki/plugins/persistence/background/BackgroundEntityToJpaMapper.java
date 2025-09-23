@@ -42,7 +42,6 @@ public class BackgroundEntityToJpaMapper extends AbstractEntityToJpaMapper<Backg
             jpa.setProficiencies(proficiencies);
         }
 
-
         jpa.setTraits(traitEntityToJpaMapper.mapEntitiesToJpa(entity.getTraits()));
 
         return jpa;
