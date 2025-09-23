@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundService } from '../../services/background/background.service';
@@ -10,25 +10,14 @@ import { CompendiumService } from '../../services/compendium/compendium.service'
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('proficiencyTemplate') proficiencyTemplate!: TemplateRef<any>;
 
   compendiumFileName?: string;
   backgrounds?: BackgroundValue[];
 
-  backgroundtableColum: TableColumnValue[] = [
-    {
-      name: 'Name',
-      dataKey: 'name',
-      position: 'left',
-      isSortable: false
-    },
-    {
-      name: 'Proficiencies',
-      dataKey: 'proficiencies',
-      position: 'left',
-      isSortable: false 
-    }
-  ];
+  backgroundtableColumns: TableColumnValue[] = [];
 
 
   constructor(
@@ -38,7 +27,27 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.compendiumService.getCompendiumFileName().subscribe(data => this.compendiumFileName = data);
+  }
+  
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+    this.backgroundtableColumns  = [
+      {
+        name: 'Name',
+        dataKey: 'name',
+        position: 'left',
+        isSortable: false
+      },
+      {
+        name: 'Proficiencies',
+        dataKey: 'proficiencies',
+        position: 'left',
+        isSortable: false,
+        template: this.proficiencyTemplate
+      }
+    ];
     this.getBackgrounds();
+  });
   }
 
   getBackgrounds() {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BackgroundService } from '../background.service';
+import { BackgroundService } from './background.service';
 
 describe('BackgroundService', () => {
   let service: BackgroundService;

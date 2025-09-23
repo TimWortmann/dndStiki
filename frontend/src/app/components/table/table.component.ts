@@ -12,7 +12,7 @@ import { TableColumnValue } from '../../models/TableColumnValue';
 })
 export class TableComponent {
 
-   public tableDataSource = new MatTableDataSource<any>([]);
+  public tableDataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
 
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { TableComponent } from './components/table/table.component';
 import { HomeComponent } from './components/home/home.component';
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { SingleFileUploadComponent } from './components/single-file-upload/single-file-upload.component';
 
 // Angular Material

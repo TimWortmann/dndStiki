@@ -1,3 +1,6 @@
+<ng-template #proficiencyTemplate let-column="column" let-element="element">
+  <span style="color: blue;">{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
 
 <div style="margin-left: 10em;">
   <h1 style="margin-bottom: 2em;">Home</h1>
@@ -24,7 +27,7 @@
 <div style="width: 90%;" *ngIf="backgrounds && backgrounds.length > 0">
   <custom-table
     [tableData]="backgrounds"
-    [tableColumns]="backgroundtableColum"
+    [tableColumns]="backgroundtableColumns"
     [isFilterable]="true"
     [isPageable]="true"
     [paginationSizes]="getPaginationSizes()"
