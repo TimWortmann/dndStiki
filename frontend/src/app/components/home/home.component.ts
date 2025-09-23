@@ -3,6 +3,7 @@ import { BackgroundValue } from '../../models/background-value';
 import { TableColumnValue } from '../../models/table-column-value';
 import { CompendiumService } from '../../services/compendium/compendium.service';
 import { BackgroundsComponent } from '../backgrounds/backgrounds.component';
+import { RacesComponent } from '../races/races.component';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { BackgroundsComponent } from '../backgrounds/backgrounds.component';
 export class HomeComponent implements OnInit {
 
   @ViewChild(BackgroundsComponent) backgroundsComponent!: BackgroundsComponent;
+  @ViewChild(RacesComponent) racesComponent!: RacesComponent;
 
   compendiumFileName?: string;
 
@@ -28,7 +30,7 @@ export class HomeComponent implements OnInit {
     if (file) {
       this.compendiumService.uploadCompendium(file).subscribe((data) => {
         this.compendiumFileName = data
-        this.backgroundsComponent.pullDataFromBackend();
+        this.repullDataFromBackend();
     });
     }   
   }
@@ -36,7 +38,12 @@ export class HomeComponent implements OnInit {
   deleteCompendium() {
     this.compendiumService.deleteCompendium().subscribe(() => {
       this.compendiumFileName = undefined
-      this.backgroundsComponent.pullDataFromBackend();
+      this.repullDataFromBackend();
     })
+  }
+
+  repullDataFromBackend() {
+    this.backgroundsComponent.pullDataFromBackend();
+    this.racesComponent.pullDataFromBackend();
   }
 }

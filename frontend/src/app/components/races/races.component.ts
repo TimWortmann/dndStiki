@@ -52,6 +52,18 @@ export class RacesComponent {
         isSortable: true
       },
       {
+        name: 'Ability',
+        dataKey: 'ability',
+        position: 'left',
+        isSortable: true
+      },
+      {
+        name: 'Spell Ability',
+        dataKey: 'spellAbility',
+        position: 'left',
+        isSortable: true
+      },
+      {
         name: 'Traits',
         dataKey: 'traits',
         position: 'left',
@@ -75,6 +87,6 @@ export class RacesComponent {
   }
 
   openTraitDialog(column: any, element: any): void {
-    this.tableService.openTraitDialog;
+    this.tableService.openTraitDialog(column, element);
   }
 }

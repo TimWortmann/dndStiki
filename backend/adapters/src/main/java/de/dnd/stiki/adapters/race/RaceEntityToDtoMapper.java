@@ -19,6 +19,8 @@ public class RaceEntityToDtoMapper extends AbstractEntityToDtoMapper<RaceEntity,
         dto.setName(entity.getName());
         dto.setSize(entity.getSize());
         dto.setSpeed(entity.getSpeed());
+        dto.setAbility(entity.getAbility());
+        dto.setSpellAbility(entity.getSpellAbility());
         dto.setTraits(traitMapper.mapEntitiesToDtos(entity.getTraits()));
 
         return dto;

@@ -12,6 +12,10 @@ public class RaceDto {
 
     private Integer speed;
 
+    private String ability;
+
+    private String spellAbility;
+
     private List<TraitDto> traits;
 
     public String getName() {
@@ -36,6 +40,22 @@ public class RaceDto {
 
     public void setSpeed(Integer speed) {
         this.speed = speed;
+    }
+
+    public String getAbility() {
+        return ability;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public String getSpellAbility() {
+        return spellAbility;
+    }
+
+    public void setSpellAbility(String spellAbility) {
+        this.spellAbility = spellAbility;
     }
 
     public List<TraitDto> getTraits() {

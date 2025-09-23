@@ -19,6 +19,12 @@ public class RaceJpaToEntityMapper extends AbstractJpaToEntityMapper<RaceJpa, Ra
         entity.setName(jpa.getName());
         entity.setSize(jpa.getSize());
         entity.setSpeed(jpa.getSpeed());
+        entity.setAbility(jpa.getAbility());
+
+        if (jpa.getSpellAbility() != null) {
+            entity.setSpellAbility(jpa.getSpellAbility().getName());
+        }
+
         entity.setTraits(traitJpaToEntityMapper.mapJpasToEntities(jpa.getTraits()));
         return entity;
     }

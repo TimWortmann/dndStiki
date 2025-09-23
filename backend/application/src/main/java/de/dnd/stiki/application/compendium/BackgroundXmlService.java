@@ -1,0 +1,53 @@
+package de.dnd.stiki.application.compendium;
+
+import de.dnd.stiki.domain.background.BackgroundEntity;
+import de.dnd.stiki.domain.background.BackgroundRepository;
+import de.dnd.stiki.domain.trait.TraitEntity;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@Service
+public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, BackgroundRepository> {
+
+    @Override
+    public void readAndCreateData(Document document) {
+        List<BackgroundEntity> backgrounds = readDataList(document, "background");
+        repository.createBackgrounds(backgrounds);
+    }
+
+    @Override
+    protected BackgroundEntity readData(Element backgroundElement) {
+
+        BackgroundEntity backgroundEntity = new BackgroundEntity();
+
+        backgroundEntity.setName(backgroundElement.getFirstChild().getTextContent());
+
+        String concatinatedProficiencies = getTextByTagName(backgroundElement, "proficiency");
+        if (concatinatedProficiencies != null) {
+            List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split(", "));
+            backgroundEntity.setProficiencies(proficiencies);
+        }
+
+
+        List<TraitEntity> traitEntityList = new ArrayList<>();
+        NodeList traitNodes = backgroundElement.getElementsByTagName("trait");
+        for (int i = 0; i < traitNodes.getLength(); i++) {
+
+                TraitEntity traitEntity = new TraitEntity();
+                NodeList traitChildNodes = traitNodes.item(i).getChildNodes();
+                traitEntity.setName(traitChildNodes.item(0).getTextContent());
+                traitEntity.setText(traitChildNodes.item(1).getTextContent());
+                traitEntityList.add(traitEntity);
+
+        }
+        backgroundEntity.setTraits(traitEntityList);
+
+        return backgroundEntity;
+    }
+}

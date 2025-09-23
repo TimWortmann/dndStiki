@@ -3,6 +3,7 @@ package de.dnd.stiki.application.compendium;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.compendium.CompendiumRepository;
+import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.domain.trait.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class CompendiumService {
 
     @Autowired
     private TraitRepository traitRepository;
+
+    @Autowired
+    private RaceRepository raceRepository;
 
     @Autowired
     private CompendiumXmlService xmlService;
@@ -47,6 +51,7 @@ public class CompendiumService {
         repository.deleteCompendium();
         backgroundRepository.deleteAllBackgrounds();
         traitRepository.deleteAllTraits();
+        raceRepository.deleteAllRaces();
     }
 
 

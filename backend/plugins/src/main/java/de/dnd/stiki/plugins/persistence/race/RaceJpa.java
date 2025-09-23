@@ -1,5 +1,6 @@
 package de.dnd.stiki.plugins.persistence.race;
 
+import de.dnd.stiki.plugins.persistence.ability.AbilityJpa;
 import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
 import jakarta.persistence.*;
 
@@ -21,6 +22,13 @@ public class RaceJpa {
 
     @Column(name = "SPEED")
     private Integer speed;
+
+    @Column(name = "ABILITY")
+    private String ability;
+
+    @ManyToOne
+    @JoinColumn(name = "spell_ability", referencedColumnName = "name", foreignKey = @ForeignKey(name = "Race_fk_SpellAbility"))
+    private AbilityJpa spellAbility;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -53,6 +61,22 @@ public class RaceJpa {
 
     public void setSpeed(Integer speed) {
         this.speed = speed;
+    }
+
+    public String getAbility() {
+        return ability;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public AbilityJpa getSpellAbility() {
+        return spellAbility;
+    }
+
+    public void setSpellAbility(AbilityJpa spellAbility) {
+        this.spellAbility = spellAbility;
     }
 
     public List<TraitJpa> getTraits() {
