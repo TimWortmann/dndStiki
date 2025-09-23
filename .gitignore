@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 backend/jar/node/
 backend/jar/data/
+backend/data/
 
 ### STS ###
 .apt_generated
