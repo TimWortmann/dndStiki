@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class AbstractJpaToEntityMapper <J, E> {
 
     public List<E> mapJpasToEntities(List<J> jpas) {
-        if (jpas == null) {
+        if (jpas == null || jpas.isEmpty()) {
             return null;
         }
 

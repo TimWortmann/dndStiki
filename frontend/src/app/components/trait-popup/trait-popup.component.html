@@ -1,0 +1,16 @@
+
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Traits ({{titleInfo}})</h1>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let trait of traits">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ trait.name }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="trait-text">{{ trait.text }}</div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+</div>

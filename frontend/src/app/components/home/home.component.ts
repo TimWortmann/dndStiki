@@ -3,6 +3,8 @@ import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundService } from '../../services/background/background.service';
 import { CompendiumService } from '../../services/compendium/compendium.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TraitPopupComponent } from '../trait-popup/trait-popup.component';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private backgroundService: BackgroundService, 
     private compendiumService: CompendiumService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +34,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    this.backgroundtableColumns  = [
+    setTimeout(() => {
+      this.backgroundtableColumns  = [
       {
         name: 'Name',
         dataKey: 'name',
@@ -54,6 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       },
     ];
     this.getBackgrounds();
+    });
   }
 
   getBackgrounds() {
@@ -97,6 +102,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.compendiumFileName = undefined
       this.getBackgrounds();
     })
+  }
+
+  openTraitDialog(column: any, element: any): void {
+    const dialogRef = this.dialog.open(TraitPopupComponent, {
+      data: {
+        titleInfo: element.name,
+        traits: element[column.dataKey]
+      },
+      width: '60vw',     
+      height: '60vh',     
+      maxWidth: '60vw',  
+      maxHeight: '60vh',  
+      autoFocus: false,
+    });
   }
 
 }

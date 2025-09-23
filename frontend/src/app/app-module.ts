@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
+import { TraitPopupComponent } from './components/trait-popup/trait-popup.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { loadingInterceptor } from './services/loading/LoadingInterceptor';
     App,
     TableComponent,
     HomeComponent,
-    SingleFileUploadComponent
+    SingleFileUploadComponent,
+    TraitPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { loadingInterceptor } from './services/loading/LoadingInterceptor';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-  ],
+    MatExpansionModule,
+],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),

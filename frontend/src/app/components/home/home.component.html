@@ -5,7 +5,7 @@
 <ng-template #traitTemplate let-column="column" let-element="element">
   <div class="trait-cell">
     <span>{{ element[column.dataKey].length }}</span>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="openTraitDialog(column, element)">
       <mat-icon>info_outline</mat-icon>
     </button>
   </div>
