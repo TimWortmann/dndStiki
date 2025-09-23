@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BackgroundService } from '../../services/background/background.service';
 import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
+import { TableService } from '../../services/table/table.service';
 
 @Component({
   selector: 'app-backgrounds',
@@ -20,6 +21,7 @@ export class BackgroundsComponent implements AfterViewInit {
   backgroundtableColumns: TableColumnValue[] = [];
 
   constructor(
+    private tableService: TableService,
     private backgroundService: BackgroundService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
@@ -62,37 +64,11 @@ export class BackgroundsComponent implements AfterViewInit {
   }
 
   getPaginationSizes() : number[] {
-    let array = [];
-
-    if (this.backgrounds!.length > 5) {
-      array.push(5);
-    }
-    if (this.backgrounds!.length > 10) { 
-      array.push(10);
-    }
-    if (this.backgrounds!.length > 20) { 
-      array.push(20);
-    }
-
-    if (this.backgrounds!.length !== 5 && this.backgrounds!.length !== 10 && this.backgrounds!.length !== 20) {
-      array.push(this.backgrounds!.length);
-    }
-
-    return array;
+    return this.tableService.getPaginationSizes(this.backgrounds!);
   }
 
   openTraitDialog(column: any, element: any): void {
-    const dialogRef = this.dialog.open(TraitPopupComponent, {
-      data: {
-        titleInfo: element.name,
-        traits: element[column.dataKey]
-      },
-      width: '60vw',     
-      height: '60vh',     
-      maxWidth: '60vw',  
-      maxHeight: '60vh',  
-      autoFocus: false,
-    });
+    this.tableService.openTraitDialog;
   }
 
 }
