@@ -12,15 +12,15 @@ export class LoadingService {
 
   show() {
     this.requests++;
-    this._loading.next(true);
+    Promise.resolve().then(() => this._loading.next(true));
   }
 
-  hide() {
-    this.requests--;
-    if (this.requests <= 0) {
-      this.requests = 0;
-      this._loading.next(false);
-    }
+hide() {
+  this.requests--;
+  if (this.requests <= 0) {
+    this.requests = 0;
+    Promise.resolve().then(() => this._loading.next(false));
   }
+}
   
 }

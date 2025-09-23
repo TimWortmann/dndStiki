@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BackgroundValue } from '../../models/BackgroundValue';
 import { TableColumnValue } from '../../models/TableColumnValue';
 import { BackgroundService } from '../../services/background/background.service';
@@ -13,6 +13,7 @@ import { CompendiumService } from '../../services/compendium/compendium.service'
 export class HomeComponent implements OnInit, AfterViewInit {
 
   @ViewChild('proficiencyTemplate') proficiencyTemplate!: TemplateRef<any>;
+  @ViewChild('traitTemplate') traitTemplate!: TemplateRef<any>;
 
   compendiumFileName?: string;
   backgrounds?: BackgroundValue[];
@@ -30,7 +31,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    setTimeout(() => {
     this.backgroundtableColumns  = [
       {
         name: 'Name',
@@ -44,14 +44,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
         position: 'left',
         isSortable: false,
         template: this.proficiencyTemplate
-      }
+      },
+      {
+        name: 'Traits',
+        dataKey: 'traits',
+        position: 'left',
+        isSortable: false,
+        template: this.traitTemplate
+      },
     ];
     this.getBackgrounds();
-  });
   }
 
   getBackgrounds() {
-    this.backgroundService.getAllBackgrounds().subscribe((data) => this.backgrounds = data); 
+    this.backgroundService.getAllBackgrounds()
+      .subscribe((data) => {
+        this.backgrounds = data;
+      });
   }
 
   getPaginationSizes() : number[] {

@@ -1,5 +1,9 @@
 <ng-template #proficiencyTemplate let-column="column" let-element="element">
-  <span style="color: blue;">{{ element[column.dataKey]?.join(', ') }}</span>
+  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
+<ng-template #traitTemplate let-column="column" let-element="element">
+  <span>{{ element[column.dataKey].length }}</span>
 </ng-template>
 
 <div style="margin-left: 10em;">
