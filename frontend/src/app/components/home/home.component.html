@@ -3,8 +3,14 @@
 </ng-template>
 
 <ng-template #traitTemplate let-column="column" let-element="element">
-  <span>{{ element[column.dataKey].length }}</span>
+  <div class="trait-cell">
+    <span>{{ element[column.dataKey].length }}</span>
+    <button mat-icon-button>
+      <mat-icon>info_outline</mat-icon>
+    </button>
+  </div>
 </ng-template>
+
 
 <div style="margin-left: 10em;">
   <h1 style="margin-bottom: 2em;">Home</h1>
