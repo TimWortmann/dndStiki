@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 backend/jar/node/
 backend/jar/data/
-backend/data/
+backend/data/demo.trace.db
 
 ### STS ###
 .apt_generated
