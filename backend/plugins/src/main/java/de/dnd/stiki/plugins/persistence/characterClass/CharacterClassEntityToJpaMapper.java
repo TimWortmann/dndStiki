@@ -30,6 +30,7 @@ public class CharacterClassEntityToJpaMapper extends AbstractEntityToJpaMapper<C
     public CharacterClassJpa mapEntityToJpa(CharacterClassEntity entity) {
 
         CharacterClassJpa jpa = new CharacterClassJpa();
+        jpa.setName(entity.getName());
         jpa.setHitDice(entity.getHitDice());
 
         List<AbilityJpa> jpaSavingThrowProficiencies = new ArrayList<>();

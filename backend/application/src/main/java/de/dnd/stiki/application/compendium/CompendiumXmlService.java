@@ -22,6 +22,9 @@ public class CompendiumXmlService {
     @Autowired
     RaceXmlService raceXmlService;
 
+    @Autowired
+    CharacterClassXmlService characterClassXmlService;
+
     public void saveDataFromCompendium(CompendiumEntity compendiumEntity) {
 
         Document document = null;
@@ -30,6 +33,7 @@ public class CompendiumXmlService {
             document = parseXmlToNormalizedDocument(compendiumEntity.getXmlContent());
             backgroundXmlService.readAndCreateData(document);
             raceXmlService.readAndCreateData(document);
+            characterClassXmlService.readAndCreateData(document);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

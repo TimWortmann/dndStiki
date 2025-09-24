@@ -41,7 +41,10 @@ public class CharacterClassJpaToEntityMapper extends AbstractJpaToEntityMapper<C
         entity.setWeaponProficiencies(jpa.getWeaponProficiencies());
         entity.setToolProficiencies(jpa.getToolProficiencies());
         entity.setWealth(jpa.getWealth());
-        entity.setSpellAbility(jpa.getSpellAbility().getName());
+
+        if (jpa.getSpellAbility() != null) {
+            entity.setSpellAbility(jpa.getSpellAbility().getName());
+        }
 
         entity.setClassLevels(classLevelJpaToEntityMapper.mapJpasToEntities(jpa.getClassLevels()));
 

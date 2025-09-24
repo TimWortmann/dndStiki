@@ -1,6 +1,7 @@
 package de.dnd.stiki.application.compendium;
 
 import de.dnd.stiki.domain.background.BackgroundRepository;
+import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
 import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.compendium.CompendiumRepository;
 import de.dnd.stiki.domain.race.RaceRepository;
@@ -19,6 +20,9 @@ public class CompendiumService {
     private CompendiumRepository repository;
 
     @Autowired
+    private CompendiumXmlService xmlService;
+
+    @Autowired
     private BackgroundRepository backgroundRepository;
 
     @Autowired
@@ -28,7 +32,7 @@ public class CompendiumService {
     private RaceRepository raceRepository;
 
     @Autowired
-    private CompendiumXmlService xmlService;
+    private CharacterClassRepository characterClassRepository;
 
     public String getCompendiumFileName(){
         return repository.getCompendium().getFileName();
@@ -48,10 +52,11 @@ public class CompendiumService {
     }
 
     public void deleteCompendium(){
-        repository.deleteCompendium();
         backgroundRepository.deleteAllBackgrounds();
         traitRepository.deleteAllTraits();
         raceRepository.deleteAllRaces();
+        characterClassRepository.deleteAllCharacterClasses();
+        repository.deleteCompendium();
     }
 
 

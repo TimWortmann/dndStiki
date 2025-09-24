@@ -41,13 +41,13 @@ public class CharacterClassJpa {
     @Column(name = "NUMBER_SKILLS")
     private Integer numberOfSkillProficiencies;
 
-    @Column(name = "ARMOR")
+    @Column(name = "ARMOR_PROFICIENCIES")
     private List<String> armorProficiencies;
 
-    @Column(name = "WEAPONS")
+    @Column(name = "WEAPON_PROFICIENCIES")
     private List<String> weaponProficiencies;
 
-    @Column(name = "TOOLS")
+    @Column(name = "TOOL_PROFICIENCIES")
     private List<String> toolProficiencies;
 
     @Column(name = "WEALTH")
@@ -58,7 +58,7 @@ public class CharacterClassJpa {
     private AbilityJpa spellAbility;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "CHARACTER_CLASS_NAME", referencedColumnName = "NAME")
+    @JoinColumn(name = "CHARACTER_CLASS", referencedColumnName = "NAME")
     private List <ClassLevelJpa> classLevels;
 
     public String getName() {
