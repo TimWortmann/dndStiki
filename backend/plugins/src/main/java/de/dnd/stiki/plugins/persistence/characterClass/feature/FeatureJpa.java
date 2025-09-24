@@ -15,7 +15,7 @@ public class FeatureJpa {
     @Column(name = "OPTIONAL")
     private boolean optional;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "TRAIT_ID")
     private TraitJpa trait;
 
