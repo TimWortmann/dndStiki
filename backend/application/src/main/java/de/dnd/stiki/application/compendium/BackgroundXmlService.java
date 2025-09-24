@@ -26,7 +26,7 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
 
         BackgroundEntity backgroundEntity = new BackgroundEntity();
 
-        backgroundEntity.setName(backgroundElement.getFirstChild().getTextContent());
+        backgroundEntity.setName(getTextByTagName(backgroundElement, "name"));
 
         String concatinatedProficiencies = getTextByTagName(backgroundElement, "proficiency");
         if (concatinatedProficiencies != null) {
@@ -40,9 +40,8 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
         for (int i = 0; i < traitNodes.getLength(); i++) {
 
                 TraitEntity traitEntity = new TraitEntity();
-                NodeList traitChildNodes = traitNodes.item(i).getChildNodes();
-                traitEntity.setName(traitChildNodes.item(0).getTextContent());
-                traitEntity.setText(traitChildNodes.item(1).getTextContent());
+                traitEntity.setName(getTextByTagName(traitNodes.item(i), "name"));
+                traitEntity.setText(getTextByTagName(traitNodes.item(i), "text"));
                 traitEntityList.add(traitEntity);
 
         }

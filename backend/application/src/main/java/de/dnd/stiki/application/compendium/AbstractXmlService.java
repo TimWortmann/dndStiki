@@ -40,7 +40,19 @@ public abstract class AbstractXmlService <E, R>  {
             return null;
         }
 
+        if (node.getTextContent().isBlank()) {
+            return null;
+        }
+
         return node.getTextContent();
+    }
+
+    protected String getTextByTagName(Node node, String tagName) {
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            return getTextByTagName((Element) node, tagName);
+        }
+
+        return null;
     }
 
 }

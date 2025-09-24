@@ -28,7 +28,7 @@ public class RaceXmlService extends AbstractXmlService<RaceEntity, RaceRepositor
     protected RaceEntity readData(Element raceElement) {
         RaceEntity raceEntity = new RaceEntity();
 
-        raceEntity.setName(raceElement.getFirstChild().getTextContent());
+        raceEntity.setName(getTextByTagName(raceElement, "name"));
 
         raceEntity.setSize(getTextByTagName(raceElement, "size"));
         raceEntity.setSpeed(Integer.valueOf(getTextByTagName(raceElement, "speed")));
@@ -41,9 +41,8 @@ public class RaceXmlService extends AbstractXmlService<RaceEntity, RaceRepositor
         for (int i = 0; i < traitNodes.getLength() ; i++) {
 
             TraitEntity traitEntity = new TraitEntity();
-            NodeList traitChildNodes = traitNodes.item(i).getChildNodes();
-            traitEntity.setName(traitChildNodes.item(0).getTextContent());
-            traitEntity.setText(traitChildNodes.item(1).getTextContent());
+            traitEntity.setName(getTextByTagName(traitNodes.item(i), "name"));
+            traitEntity.setText(getTextByTagName(traitNodes.item(i), "text"));
             traitEntityList.add(traitEntity);
         }
         raceEntity.setTraits(traitEntityList);
