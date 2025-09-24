@@ -39,13 +39,13 @@ export class BackgroundsComponent implements AfterViewInit {
         name: 'Name',
         dataKey: 'name',
         position: 'left',
-        isSortable: false
+        isSortable: true
       },
       {
         name: 'Proficiencies',
         dataKey: 'proficiencies',
         position: 'left',
-        isSortable: false,
+        isSortable: true,
         template: this.proficiencyTemplate
       },
       {

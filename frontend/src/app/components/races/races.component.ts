@@ -37,7 +37,7 @@ export class RacesComponent {
         name: 'Name',
         dataKey: 'name',
         position: 'left',
-        isSortable: false
+        isSortable: true
       },
       {
         name: 'Size',
