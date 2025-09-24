@@ -32,7 +32,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
         entity.setName(getTextByTagName(classElement, "name"));
         entity.setHitDice(Integer.valueOf(getTextByTagName(classElement, "hd")));
 
-        List<String> mixedProficiencies = getProficiencyList(classElement, "proficiency");;
+        List<String> mixedProficiencies = getProficiencyList(classElement, "proficiency");
         entity.setSavingThrowProficiencies(repository.getSavingThrowProficiencies(mixedProficiencies));
         entity.setSkillProficiencies(repository.getSkillProficiencies(mixedProficiencies));
 
@@ -62,7 +62,11 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
 
     private ClassLevelEntity getLevelEntity(Element levelElement) {
         ClassLevelEntity levelEntity = new ClassLevelEntity();
-        levelEntity.setLevel(Integer.valueOf(levelElement.getAttribute("level")));
+
+        String levelAttribute = levelElement.getAttribute("level");
+        if (!levelAttribute.isBlank()) {
+            levelEntity.setLevel(Integer.valueOf(levelAttribute));
+        }
         levelEntity.setScoreImprovement(getXmlBoolean(levelElement, "scoreImprovement"));
         levelEntity.setSpellSlots(getTextByTagName(levelElement, "slots"));
 
