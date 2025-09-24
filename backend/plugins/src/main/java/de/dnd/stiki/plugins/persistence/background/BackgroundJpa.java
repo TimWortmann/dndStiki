@@ -1,7 +1,7 @@
 package de.dnd.stiki.plugins.persistence.background;
 
-import de.dnd.stiki.plugins.persistence.skill.SkillJpa;
-import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
+import de.dnd.stiki.plugins.persistence.basic.skill.SkillJpa;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
 import jakarta.persistence.*;
 
 import java.util.List;

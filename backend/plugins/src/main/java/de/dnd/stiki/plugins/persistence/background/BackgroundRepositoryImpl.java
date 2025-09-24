@@ -2,8 +2,8 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
-import de.dnd.stiki.plugins.persistence.trait.TraitJpaRepository;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

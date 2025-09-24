@@ -1,4 +1,4 @@
-package de.dnd.stiki.plugins.persistence.skill;
+package de.dnd.stiki.plugins.persistence.basic.skill;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

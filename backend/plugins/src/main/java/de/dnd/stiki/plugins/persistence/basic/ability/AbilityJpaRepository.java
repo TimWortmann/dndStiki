@@ -1,4 +1,4 @@
-package de.dnd.stiki.plugins.persistence.ability;
+package de.dnd.stiki.plugins.persistence.basic.ability;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

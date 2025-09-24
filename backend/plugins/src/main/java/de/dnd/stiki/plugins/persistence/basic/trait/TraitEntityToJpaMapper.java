@@ -1,4 +1,4 @@
-package de.dnd.stiki.plugins.persistence.trait;
+package de.dnd.stiki.plugins.persistence.basic.trait;
 
 import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;

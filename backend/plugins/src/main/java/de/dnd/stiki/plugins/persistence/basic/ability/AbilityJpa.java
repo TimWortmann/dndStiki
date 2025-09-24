@@ -1,4 +1,4 @@
-package de.dnd.stiki.plugins.persistence.ability;
+package de.dnd.stiki.plugins.persistence.basic.ability;
 
 import jakarta.persistence.*;
 

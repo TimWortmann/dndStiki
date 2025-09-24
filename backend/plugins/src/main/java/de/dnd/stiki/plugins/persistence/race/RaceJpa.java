@@ -1,7 +1,7 @@
 package de.dnd.stiki.plugins.persistence.race;
 
-import de.dnd.stiki.plugins.persistence.ability.AbilityJpa;
-import de.dnd.stiki.plugins.persistence.trait.TraitJpa;
+import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpa;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
 import jakarta.persistence.*;
 
 import jakarta.persistence.Entity;

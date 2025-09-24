@@ -2,7 +2,7 @@ package de.dnd.stiki.plugins.persistence.race;
 
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
-import de.dnd.stiki.plugins.persistence.trait.TraitJpaToEntityMapper;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

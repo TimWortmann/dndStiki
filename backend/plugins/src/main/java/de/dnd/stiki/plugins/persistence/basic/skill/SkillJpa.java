@@ -1,6 +1,6 @@
-package de.dnd.stiki.plugins.persistence.skill;
+package de.dnd.stiki.plugins.persistence.basic.skill;
 
-import de.dnd.stiki.plugins.persistence.ability.AbilityJpa;
+import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpa;
 import jakarta.persistence.*;
 
 @Entity

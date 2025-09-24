@@ -2,9 +2,9 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;
-import de.dnd.stiki.plugins.persistence.skill.SkillJpa;
-import de.dnd.stiki.plugins.persistence.skill.SkillJpaRepository;
-import de.dnd.stiki.plugins.persistence.trait.TraitEntityToJpaMapper;
+import de.dnd.stiki.plugins.persistence.basic.skill.SkillJpa;
+import de.dnd.stiki.plugins.persistence.basic.skill.SkillJpaRepository;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitEntityToJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

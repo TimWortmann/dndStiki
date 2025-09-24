@@ -1,4 +1,4 @@
-package de.dnd.stiki.plugins.persistence.trait;
+package de.dnd.stiki.plugins.persistence.basic.trait;
 
 import jakarta.persistence.*;
 

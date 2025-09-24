@@ -2,9 +2,9 @@ package de.dnd.stiki.plugins.persistence.race;
 
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;
-import de.dnd.stiki.plugins.persistence.ability.AbilityJpa;
-import de.dnd.stiki.plugins.persistence.ability.AbilityJpaRepository;
-import de.dnd.stiki.plugins.persistence.trait.TraitEntityToJpaMapper;
+import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpa;
+import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpaRepository;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitEntityToJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
