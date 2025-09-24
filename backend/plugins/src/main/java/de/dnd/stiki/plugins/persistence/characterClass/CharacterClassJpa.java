@@ -57,7 +57,8 @@ public class CharacterClassJpa {
     @JoinColumn(name = "SPELL_ABILITY")
     private AbilityJpa spellAbility;
 
-    @OneToMany(mappedBy = "characterClass", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "CHARACTER_CLASS_NAME", referencedColumnName = "NAME")
     private List <ClassLevelJpa> classLevels;
 
     public String getName() {

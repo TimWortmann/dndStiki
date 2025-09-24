@@ -24,10 +24,12 @@ public class ClassLevelJpa {
     @Column(name = "SPELL_SLOTS")
     private String spellSlots;
 
-    @OneToMany(mappedBy = "classLevel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "CLASS_LEVEL_ID", referencedColumnName = "ID")
     private List<FeatureJpa> features;
 
-    @OneToMany(mappedBy = "classLevel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "CLASS_LEVEL_ID", referencedColumnName = "ID")
     private List<CounterJpa> counters;
 
     public Long getId() {
