@@ -35,14 +35,25 @@ public class CharacterClassEntityToJpaMapper extends AbstractEntityToJpaMapper<C
         List<AbilityJpa> jpaSavingThrowProficiencies = new ArrayList<>();
         for (String proficiency : entity.getSavingThrowProficiencies()) {
             Optional<AbilityJpa> optionalAbility = abilityJpaRepository.findById(proficiency);
-            optionalAbility.ifPresent(jpaSavingThrowProficiencies::add);
+
+            if (optionalAbility.isPresent()) {
+                jpaSavingThrowProficiencies.add(optionalAbility.get());
+            }
+            else {
+                throw new RuntimeException("Ability " + proficiency + " not found");
+            }
         }
         jpa.setSavingThrowProficiencies(jpaSavingThrowProficiencies);
 
         List<SkillJpa> jpaSkillProficiencies = new ArrayList<>();
         for (String proficiency : entity.getSkillProficiencies()) {
             Optional<SkillJpa> optionalSkill = skillJpaRepository.findById(proficiency);
-            optionalSkill.ifPresent(jpaSkillProficiencies::add);
+            if (optionalSkill.isPresent()) {
+                jpaSkillProficiencies.add(optionalSkill.get());
+            }
+            else {
+                throw new RuntimeException("Skill " + proficiency + " not found");
+            }
         }
         jpa.setSkillProficiencies(jpaSkillProficiencies);
 
