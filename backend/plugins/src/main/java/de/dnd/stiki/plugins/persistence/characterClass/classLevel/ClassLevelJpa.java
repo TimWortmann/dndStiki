@@ -48,7 +48,7 @@ public class ClassLevelJpa {
         this.level = level;
     }
 
-    public boolean hasScoreImprovement() {
+    public boolean isScoreImprovement() {
         return scoreImprovement;
     }
 

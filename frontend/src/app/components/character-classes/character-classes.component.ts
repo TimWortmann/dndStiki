@@ -50,6 +50,12 @@ export class CharacterClassesComponent implements AfterViewInit {
         isSortable: true
       },
       {
+        name: 'Skill Proficiencies',
+        dataKey: 'numberOfSkillProficiencies',
+        position: 'left',
+        isSortable: true
+      },
+      {
         name: 'Spell Ability',
         dataKey: 'spellAbility',
         position: 'left',

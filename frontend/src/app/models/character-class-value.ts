@@ -5,6 +5,7 @@ export interface CharacterClassValue {
   hitDice: number;
   savingThrowProficiencies: string[];
   skillProficiencies: string[];
+  numberOfSkillProficiencies: number;
   weaponProficiencies: string[];
   armorProficiencies: string[];
   toolProficiencies: string[];

@@ -13,6 +13,8 @@
             </ng-container>
             <h3>Wealth</h3>
             <p>{{characterClass.wealth}}</p>
+            <h3>Number of Skill Proficiencies</h3>
+            <p>{{characterClass.numberOfSkillProficiencies}}</p>
         </div>
 
         <p></p>
@@ -47,7 +49,8 @@
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
                     <mat-expansion-panel-header>
-                        <mat-panel-title>Level {{ classLevel.level}} </mat-panel-title>
+                        <mat-panel-title *ngIf="classLevel.scoreImprovement == undefined || classLevel.scoreImprovement == false">Level {{ classLevel.level}} </mat-panel-title>
+                        <mat-panel-title *ngIf="classLevel.scoreImprovement == true">Level {{ classLevel.level}} (Score Improvement) </mat-panel-title>
                     </mat-expansion-panel-header>
                     <ng-container *ngTemplateOutlet="classLevelContent; context: { $implicit: classLevel }"></ng-container>
                 </mat-expansion-panel>
@@ -65,8 +68,6 @@
 </div>
 
 <ng-template #classLevelContent let-classLevel>
-    <h2 *ngIf="classLevel.scoreImprovement">Score Improvement</h2>
-    
     <h3>Spell Slots</h3>
      <ng-container *ngTemplateOutlet="spellSlotTable; context: { $implicit: classLevel.spellSlots }"></ng-container>
 
@@ -90,7 +91,8 @@
 <ng-template #featureExpansionPanel let-feature>
     <mat-expansion-panel>
         <mat-expansion-panel-header>
-            <mat-panel-title>Feature {{ feature.name }} </mat-panel-title>
+            <mat-panel-title *ngIf="feature.optional === false">Feature {{ feature.name }} </mat-panel-title>
+            <mat-panel-title *ngIf="feature.optional === true">(Optional) Feature {{ feature.name }} </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="text"> {{feature.text}} </div>
     </mat-expansion-panel>

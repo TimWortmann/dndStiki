@@ -22,7 +22,7 @@ public class ClassLevelJpaToEntityMapper extends AbstractJpaToEntityMapper<Class
         ClassLevelEntity entity = new ClassLevelEntity();
         entity.setId(jpa.getId());
         entity.setLevel(jpa.getLevel());
-        entity.setScoreImprovement(jpa.hasScoreImprovement());
+        entity.setScoreImprovement(jpa.isScoreImprovement());
         entity.setSpellSlots(jpa.getSpellSlots());
         entity.setFeatures(featureJpaToEntityMapper.mapJpasToEntities(jpa.getFeatures()));
         entity.setCounters(counterJpaToEntityMapper.mapJpasToEntities(jpa.getCounters()));

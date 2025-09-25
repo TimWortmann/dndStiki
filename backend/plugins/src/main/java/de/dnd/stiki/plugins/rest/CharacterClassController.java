@@ -20,6 +20,8 @@ public class CharacterClassController {
     @GetMapping()
     public ResponseEntity<List<CharacterClassDto>> getAllCharacterClasses() {
 
+        List<CharacterClassDto> list = service.getAllCharacterClasses();
+
         return ResponseEntity.ok().body(service.getAllCharacterClasses());
     }
 }

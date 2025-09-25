@@ -22,7 +22,7 @@ public class ClassLevelEntityToDtoMapper extends AbstractEntityToDtoMapper<Class
         ClassLevelDto dto = new ClassLevelDto();
         dto.setId(entity.getId());
         dto.setLevel(entity.getLevel());
-        dto.setScoreImprovement(entity.hasScoreImprovement());
+        dto.setScoreImprovement(entity.isScoreImprovement());
         dto.setSpellSlots(entity.getSpellSlots());
         dto.setFeatures(featureEntityToDtoMapper.mapEntitiesToDtos(entity.getFeatures()));
         dto.setCounters(counterEntityToDtoMapper.mapEntitiesToDtos(entity.getCounters()));
