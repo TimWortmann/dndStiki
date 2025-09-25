@@ -30,7 +30,9 @@ public class CharacterClassRepositoryImpl implements CharacterClassRepository {
 
     @Override
     public List<CharacterClassEntity> getAllCharacterClasses() {
-        return List.of();
+        List<CharacterClassJpa> jpaList = jpaRepository.findAll();
+
+        return jpaToEntityMapper.mapJpasToEntities(jpaList);
     }
 
     @Override
