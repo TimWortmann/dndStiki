@@ -22,6 +22,8 @@ import { TraitPopupComponent } from './components/trait-popup/trait-popup.compon
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BackgroundsComponent } from './components/backgrounds/backgrounds.component';
 import { RacesComponent } from './components/races/races.component';
+import { CharacterClassesComponent } from './components/character-classes/character-classes.component';
+import { ClassDetailsPopupComponent } from './components/character-classes/class-details-popup/class-details-popup.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { RacesComponent } from './components/races/races.component';
     SingleFileUploadComponent,
     TraitPopupComponent,
     BackgroundsComponent,
-    RacesComponent
+    RacesComponent,
+    CharacterClassesComponent,
+    ClassDetailsPopupComponent,
   ],
   imports: [
     BrowserModule,

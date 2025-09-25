@@ -4,6 +4,7 @@ import { TableColumnValue } from '../../models/table-column-value';
 import { CompendiumService } from '../../services/compendium/compendium.service';
 import { BackgroundsComponent } from '../backgrounds/backgrounds.component';
 import { RacesComponent } from '../races/races.component';
+import { CharacterClassesComponent } from '../character-classes/character-classes.component';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(BackgroundsComponent) backgroundsComponent!: BackgroundsComponent;
   @ViewChild(RacesComponent) racesComponent!: RacesComponent;
+  @ViewChild(CharacterClassesComponent) characterClassesComponent!: CharacterClassesComponent;
 
   compendiumFileName?: string;
 
@@ -45,5 +47,6 @@ export class HomeComponent implements OnInit {
   repullDataFromBackend() {
     this.backgroundsComponent.pullDataFromBackend();
     this.racesComponent.pullDataFromBackend();
+    this.characterClassesComponent.pullDataFromBackend();
   }
 }

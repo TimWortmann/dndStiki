@@ -1,0 +1,68 @@
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Class Details ({{characterClass.name}})</h1>
+    
+    <h2> Basic Infos </h2>
+    <p>Hit Dice: {{characterClass.hitDice}}</p>
+    <p>Spell Ability: {{characterClass.spellAbility}}</p>
+    <p>Wealth: {{characterClass.wealth}}</p>
+
+    <h2> Proficiencies </h2>
+    <p>Saving Throws: {{characterClass.savingThrowProficiencies}}</p>
+    <p>Skills: {{characterClass.skillProficiencies}}</p>
+    <p>Weapons: {{characterClass.weaponProficiencies}}</p>
+    <p>Armor: {{characterClass.armorProficiencies}}</p>
+    <p>Tool: {{characterClass.toolProficiencies}}</p>
+
+
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Level {{ classLevel.level}} </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container *ngTemplateOutlet="classLevelContent; context: { $implicit: classLevel }"></ng-container>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+</div>
+
+<ng-template #classLevelContent let-classLevel>
+    <h2 *ngIf="classLevel.scoreImprovement">Score Improvement</h2>
+    <p>Spell Slots: {{classLevel.spellSlots}}</p>
+
+    <mat-accordion>
+        <ng-container *ngFor="let feature of classLevel.features">
+            <ng-container *ngTemplateOutlet="featureExpansionPanel; context: { $implicit: feature }"></ng-container>
+        </ng-container>
+    </mat-accordion>
+
+    <p></p>
+
+    <mat-accordion>
+        <ng-container *ngFor="let counter of classLevel.counters">
+            <ng-container *ngTemplateOutlet="counterExpansionPanel; context: { $implicit: counter }"></ng-container>
+        </ng-container>
+    </mat-accordion>
+</ng-template>
+
+<ng-template #featureExpansionPanel let-feature>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Feature {{ feature.name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="text"> {{feature.text}} </div>
+    </mat-expansion-panel>
+</ng-template>
+
+<ng-template #counterExpansionPanel let-counter>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Reset Info {{ counter.name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngIf="counter.reset === 'L'"  class="text"> {{ counter.name }} resets on Long Rest. </div>
+        <div *ngIf="counter.reset === 'S'"  class="text"> {{ counter.name }} resets on Short Rest. </div>
+        <div *ngIf="counter.reset !== 'L' && counter.reset !== 'S'"  class="text"> {{ counter.name }} resets on {{counter.reset}}. </div>
+    </mat-expansion-panel>
+</ng-template>
