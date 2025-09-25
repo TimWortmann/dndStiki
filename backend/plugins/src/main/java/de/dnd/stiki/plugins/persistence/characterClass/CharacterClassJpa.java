@@ -42,13 +42,13 @@ public class CharacterClassJpa {
     private Integer numberOfSkillProficiencies;
 
     @Column(name = "ARMOR_PROFICIENCIES")
-    private List<String> armorProficiencies;
+    private String armorProficiencies;
 
     @Column(name = "WEAPON_PROFICIENCIES")
-    private List<String> weaponProficiencies;
+    private String weaponProficiencies;
 
     @Column(name = "TOOL_PROFICIENCIES")
-    private List<String> toolProficiencies;
+    private String toolProficiencies;
 
     @Column(name = "WEALTH")
     private String wealth;
@@ -101,27 +101,27 @@ public class CharacterClassJpa {
         this.numberOfSkillProficiencies = numberOfSkillProficiencies;
     }
 
-    public List<String> getArmorProficiencies() {
+    public String getArmorProficiencies() {
         return armorProficiencies;
     }
 
-    public void setArmorProficiencies(List<String> armorProficiencies) {
+    public void setArmorProficiencies(String armorProficiencies) {
         this.armorProficiencies = armorProficiencies;
     }
 
-    public List<String> getWeaponProficiencies() {
+    public String getWeaponProficiencies() {
         return weaponProficiencies;
     }
 
-    public void setWeaponProficiencies(List<String> weaponProficiencies) {
+    public void setWeaponProficiencies(String weaponProficiencies) {
         this.weaponProficiencies = weaponProficiencies;
     }
 
-    public List<String> getToolProficiencies() {
+    public String getToolProficiencies() {
         return toolProficiencies;
     }
 
-    public void setToolProficiencies(List<String> toolProficiencies) {
+    public void setToolProficiencies(String toolProficiencies) {
         this.toolProficiencies = toolProficiencies;
     }
 

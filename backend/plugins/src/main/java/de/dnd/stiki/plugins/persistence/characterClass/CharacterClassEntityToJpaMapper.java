@@ -59,9 +59,9 @@ public class CharacterClassEntityToJpaMapper extends AbstractEntityToJpaMapper<C
         jpa.setSkillProficiencies(jpaSkillProficiencies);
 
         jpa.setNumberOfSkillProficiencies(entity.getNumberOfSkillProficiencies());
-        jpa.setArmorProficiencies(entity.getArmorProficiencies());
-        jpa.setWeaponProficiencies(entity.getWeaponProficiencies());
-        jpa.setToolProficiencies(entity.getToolProficiencies());
+        jpa.setArmorProficiencies(getConcatinatedProficiencies(entity.getArmorProficiencies()));
+        jpa.setWeaponProficiencies(getConcatinatedProficiencies(entity.getWeaponProficiencies()));
+        jpa.setToolProficiencies(getConcatinatedProficiencies(entity.getToolProficiencies()));
         jpa.setWealth(entity.getWealth());
 
         if (entity.getSpellAbility() != null) {
@@ -79,5 +79,18 @@ public class CharacterClassEntityToJpaMapper extends AbstractEntityToJpaMapper<C
         jpa.setClassLevels(classLevelEntityToJpaMapper.mapEntitiesToJpa(entity.getClassLevels()));
 
         return jpa;
+    }
+
+    private String getConcatinatedProficiencies(List<String> proficiencies) {
+        StringBuilder sb = new StringBuilder();
+        for (String proficiency : proficiencies) {
+            if (sb.isEmpty()) {
+                sb.append(proficiency);
+            }
+            else {
+                sb.append(",").append(proficiency);
+            }
+        }
+        return sb.toString();
     }
 }

@@ -1,27 +1,63 @@
 <div mat-dialog-content class="dialog-content">
     <h1 mat-dialog-title>Class Details ({{characterClass.name}})</h1>
     
-    <h2> Basic Infos </h2>
-    <p>Hit Dice: {{characterClass.hitDice}}</p>
-    <p>Spell Ability: {{characterClass.spellAbility}}</p>
-    <p>Wealth: {{characterClass.wealth}}</p>
+    <div class="infos">
+        <div>
+            <h2> Basic Infos </h2>
+            <h3>Hit Dice</h3>
+            <p>{{characterClass.hitDice}}</p>
 
-    <h2> Proficiencies </h2>
-    <p>Saving Throws: {{characterClass.savingThrowProficiencies}}</p>
-    <p>Skills: {{characterClass.skillProficiencies}}</p>
-    <p>Weapons: {{characterClass.weaponProficiencies}}</p>
-    <p>Armor: {{characterClass.armorProficiencies}}</p>
-    <p>Tool: {{characterClass.toolProficiencies}}</p>
+            <ng-container *ngIf="characterClass.spellAbility">
+                <h3>Spell Ability</h3>
+                <p>{{characterClass.spellAbility}}</p>
+            </ng-container>
+            <h3>Wealth</h3>
+            <p>{{characterClass.wealth}}</p>
+        </div>
+
+        <p></p>
+
+        <div>
+            <h2> Proficiencies </h2>
+            <ng-container *ngIf="characterClass.savingThrowProficiencies[0] !== 'none'">
+                 <h3>Saving Throws</h3>
+                 <p>{{getFancyListString(characterClass.savingThrowProficiencies)}}</p>
+             </ng-container>
+             <ng-container *ngIf="characterClass.skillProficiencies[0] !== 'none'">
+                 <h3>Skills </h3>
+                 <p>{{getFancyListString(characterClass.skillProficiencies)}}</p>
+             </ng-container>
+             <ng-container *ngIf="characterClass.weaponProficiencies[0] !== 'none'">
+                 <h3>Weapons </h3>
+                 <p>{{getFancyListString(characterClass.weaponProficiencies)}}</p>
+             </ng-container>
+             <ng-container *ngIf="characterClass.armorProficiencies[0] !== 'none'">
+                 <h3>Armor </h3>
+                 <p>{{getFancyListString(characterClass.armorProficiencies)}}</p>
+             </ng-container>
+            <ng-container *ngIf="characterClass.toolProficiencies[0] !== 'none'">
+                <h3>Tools </h3>
+                <p>{{getFancyListString(characterClass.toolProficiencies)}}</p>
+             </ng-container>
+        </div>
+
+        <p></p>
+
+        <div>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Level {{ classLevel.level}} </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-container *ngTemplateOutlet="classLevelContent; context: { $implicit: classLevel }"></ng-container>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+
+    <p></p>
 
 
-    <mat-accordion>
-        <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
-            <mat-expansion-panel-header>
-                <mat-panel-title>Level {{ classLevel.level}} </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ng-container *ngTemplateOutlet="classLevelContent; context: { $implicit: classLevel }"></ng-container>
-        </mat-expansion-panel>
-    </mat-accordion>
 </div>
 
 <div mat-dialog-actions class="dialog-actions">
@@ -30,7 +66,11 @@
 
 <ng-template #classLevelContent let-classLevel>
     <h2 *ngIf="classLevel.scoreImprovement">Score Improvement</h2>
-    <p>Spell Slots: {{classLevel.spellSlots}}</p>
+    
+    <h3>Spell Slots</h3>
+     <ng-container *ngTemplateOutlet="spellSlotTable; context: { $implicit: classLevel.spellSlots }"></ng-container>
+
+     <p></p>
 
     <mat-accordion>
         <ng-container *ngFor="let feature of classLevel.features">
@@ -65,4 +105,19 @@
         <div *ngIf="counter.reset === 'S'"  class="text"> {{ counter.name }} resets on Short Rest. </div>
         <div *ngIf="counter.reset !== 'L' && counter.reset !== 'S'"  class="text"> {{ counter.name }} resets on {{counter.reset}}. </div>
     </mat-expansion-panel>
+</ng-template>
+
+<ng-template #spellSlotTable let-spellSlotsString>
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let header of getSpellSlotsHeaderArray()">{{ header }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td *ngFor="let slot of getSpellSlotsDataArray(spellSlotsString)">{{ slot }}</td>
+            </tr>
+        </tbody>
+    </table>
 </ng-template>

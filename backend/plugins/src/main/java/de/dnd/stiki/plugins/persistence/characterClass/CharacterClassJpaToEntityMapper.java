@@ -37,9 +37,9 @@ public class CharacterClassJpaToEntityMapper extends AbstractJpaToEntityMapper<C
         entity.setSkillProficiencies(entitySkillProficiencies);
 
         entity.setNumberOfSkillProficiencies(jpa.getNumberOfSkillProficiencies());
-        entity.setArmorProficiencies(jpa.getArmorProficiencies());
-        entity.setWeaponProficiencies(jpa.getWeaponProficiencies());
-        entity.setToolProficiencies(jpa.getToolProficiencies());
+        entity.setArmorProficiencies(getProficiencyList(jpa.getArmorProficiencies()));
+        entity.setWeaponProficiencies(getProficiencyList(jpa.getWeaponProficiencies()));
+        entity.setToolProficiencies(getProficiencyList(jpa.getToolProficiencies()));
         entity.setWealth(jpa.getWealth());
 
         if (jpa.getSpellAbility() != null) {
@@ -49,5 +49,14 @@ public class CharacterClassJpaToEntityMapper extends AbstractJpaToEntityMapper<C
         entity.setClassLevels(classLevelJpaToEntityMapper.mapJpasToEntities(jpa.getClassLevels()));
 
         return entity;
+    }
+
+    private List<String> getProficiencyList(String concatinatedProficiencies) {
+        if (concatinatedProficiencies == null) {
+            return new ArrayList<>();
+        }
+
+        String[] proficiencyArray = concatinatedProficiencies.split("\\s*,\\s*");
+        return List.of(proficiencyArray);
     }
 }

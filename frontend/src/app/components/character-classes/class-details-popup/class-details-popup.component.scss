@@ -22,3 +22,28 @@ h1 {
   margin: 0 0 1em 0;       /* sieht aus wie <p> */
   line-height: 1.5;        /* bessere Lesbarkeit */
 }
+
+.infos > div {
+  flex: 1;                 /* optional: make them equal width */
+  padding: 1rem;           /* inner spacing */
+  border: 1px solid #ccc;  /* light gray border */
+  border-radius: 10px;     /* rounded edges */
+  background-color: #f9f9f9; /* optional: light background */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* optional: subtle shadow */
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.5rem;  /* less padding */
+  min-width: 30px; 
+}
+
+th {
+  background-color: #f0f0f0;
+}
