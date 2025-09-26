@@ -1,6 +1,6 @@
 package de.dnd.stiki.plugins.rest;
 
-import de.dnd.stiki.application.compendium.CompendiumService;
+import de.dnd.stiki.application.CompendiumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

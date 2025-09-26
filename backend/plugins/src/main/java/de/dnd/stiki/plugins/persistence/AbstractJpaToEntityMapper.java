@@ -23,4 +23,14 @@ public abstract class AbstractJpaToEntityMapper <J, E> {
     }
 
     public abstract E mapJpaToEntity(J jpa);
+
+
+    protected List<String> getListFromString(String concatinatedList) {
+        if (concatinatedList == null) {
+            return new ArrayList<>();
+        }
+
+        String[] stringArray = concatinatedList.split("\\s*,\\s*");
+        return List.of(stringArray);
+    }
 }

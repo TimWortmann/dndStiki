@@ -23,4 +23,22 @@ public abstract class AbstractEntityToJpaMapper<E, J> {
     }
 
     public abstract J mapEntityToJpa(E entity);
+
+    protected String getStringFromList(List<String> list) {
+
+        if (list == null) {
+            return null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (String listElement : list) {
+            if (sb.isEmpty()) {
+                sb.append(listElement);
+            }
+            else {
+                sb.append(",").append(listElement);
+            }
+        }
+        return sb.toString();
+    }
 }
