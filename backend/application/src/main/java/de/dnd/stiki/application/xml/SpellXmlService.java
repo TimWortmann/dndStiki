@@ -2,6 +2,7 @@ package de.dnd.stiki.application.xml;
 
 import de.dnd.stiki.domain.spell.SpellEntity;
 import de.dnd.stiki.domain.spell.SpellRepository;
+import de.dnd.stiki.domain.spell.SpellSchool;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,7 +31,11 @@ public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellReposi
         }
         spellEntity.setLevel(Integer.valueOf(level));
 
-        spellEntity.setSchool(getTextByTagName(spellElement, "school"));
+        String spellSchoolShortName = getTextByTagName(spellElement, "school");
+        if (spellSchoolShortName != null) {
+            spellEntity.setSchool(SpellSchool.fromShortName(spellSchoolShortName).toString());
+        }
+
         spellEntity.setTime(getTextByTagName(spellElement, "time"));
         spellEntity.setRange(getTextByTagName(spellElement, "range"));
 
