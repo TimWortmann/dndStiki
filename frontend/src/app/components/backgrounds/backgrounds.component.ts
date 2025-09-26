@@ -42,7 +42,7 @@ export class BackgroundsComponent implements AfterViewInit {
         isSortable: true
       },
       {
-        name: 'Proficiencies',
+        name: 'Skill Proficiencies',
         dataKey: 'proficiencies',
         position: 'left',
         isSortable: true,
