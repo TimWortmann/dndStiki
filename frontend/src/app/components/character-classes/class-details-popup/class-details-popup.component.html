@@ -75,8 +75,10 @@
 </div>
 
 <ng-template #classLevelContent let-classLevel>
-    <h3>Spell Slots</h3>
-     <ng-container *ngTemplateOutlet="spellSlotTable; context: { $implicit: classLevel.spellSlots }"></ng-container>
+    <div *ngIf="classLevel.spellSlots != '0,0,0,0,0,0,0,0,0,0,'" class="spellSlotsSegment">
+        <h3>Spell Slots</h3>
+        <ng-container *ngTemplateOutlet="spellSlotTable; context: { $implicit: classLevel.spellSlots }"></ng-container>
+    </div>
 
      <p></p>
 
