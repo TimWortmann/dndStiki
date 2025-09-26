@@ -37,7 +37,8 @@ public class SpellJpa {
     @Column(name = "ROLL")
     private String roll;
 
-    //private List<String> classes;
+    @Column(name="CLASSES")
+    private String classes;
 
     public String getName() {
         return name;
@@ -109,5 +110,13 @@ public class SpellJpa {
 
     public void setRoll(String roll) {
         this.roll = roll;
+    }
+
+    public String getClasses() {
+        return classes;
+    }
+
+    public void setClasses(String classes) {
+        this.classes = classes;
     }
 }

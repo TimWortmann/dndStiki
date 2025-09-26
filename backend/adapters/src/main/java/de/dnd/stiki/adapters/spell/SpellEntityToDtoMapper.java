@@ -20,6 +20,7 @@ public class SpellEntityToDtoMapper extends AbstractEntityToDtoMapper<SpellEntit
         dto.setDuration(entity.getDuration());
         dto.setText(entity.getText());
         dto.setRoll(entity.getRoll());
+        dto.setClasses(entity.getClasses());
 
         return dto;
     }

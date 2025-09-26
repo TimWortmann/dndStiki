@@ -16,6 +16,7 @@ export class SpellsComponent {
 
   @ViewChild('levelTemplate') levelTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
+  @ViewChild('classesTemplate') classesTemplate!: TemplateRef<any>;
 
   data?: SpellValue[];
   tableColumns: TableColumnValue[] = [];
@@ -53,6 +54,7 @@ export class SpellsComponent {
         dataKey: 'classes',
         position: 'left',
         isSortable: true,
+        template: this.classesTemplate
       },
       {
         name: 'Details',

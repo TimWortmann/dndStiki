@@ -30,7 +30,7 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
 
         String concatinatedProficiencies = getTextByTagName(backgroundElement, "proficiency");
         if (concatinatedProficiencies != null) {
-            List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split(", "));
+            List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split("\\s*,\\s*"));
             backgroundEntity.setProficiencies(proficiencies);
         }
 

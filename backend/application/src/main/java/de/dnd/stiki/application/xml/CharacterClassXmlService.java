@@ -82,7 +82,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
 
         String concatinateMixedProficiencies = getTextByTagName(classElement, tagName);
         if (concatinateMixedProficiencies != null) {
-            mixedProficiencies =  Arrays.asList(concatinateMixedProficiencies.split(", "));
+            mixedProficiencies =  Arrays.asList(concatinateMixedProficiencies.split("\\s*,\\s*"));
 
         }
         return mixedProficiencies;

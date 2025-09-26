@@ -8,6 +8,7 @@ export interface SpellValue {
   duration: string;
   text: string;
   roll: string;
+  classes: string[];
 }
 
 

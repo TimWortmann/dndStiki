@@ -36,13 +36,19 @@ public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellReposi
 
         String concatinatedComponents = getTextByTagName(spellElement, "components");
         if (concatinatedComponents != null) {
-            List<String> components = Arrays.asList(concatinatedComponents.split(", "));
+            List<String> components = Arrays.asList(concatinatedComponents.split("\\s*,\\s*"));
             spellEntity.setComponents(components);
         }
 
         spellEntity.setDuration(getTextByTagName(spellElement, "duration"));
         spellEntity.setText(getTextByTagName(spellElement, "text"));
         spellEntity.setRoll(getTextByTagName(spellElement, "roll"));
+
+        String concatinatedClasses = getTextByTagName(spellElement, "classes");
+        if (concatinatedClasses != null) {
+            List<String> classes = Arrays.asList(concatinatedClasses.split("\\s*,\\s*"));
+            spellEntity.setClasses(classes);
+        }
 
         return spellEntity;
     }

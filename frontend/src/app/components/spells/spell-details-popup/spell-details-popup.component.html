@@ -1,1 +1,51 @@
-<p>spell-details-popup works!</p>
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Spell Details ({{spell.name}})</h1>
+    <h3 *ngIf="spell.level === 0" class="spellSubtitle"> Cantrip {{spell.school}} </h3>
+    <h3 *ngIf="spell.level !== 0" class="spellSubtitle"> {{spell.level}}rd Level {{spell.school}} </h3>
+    
+    <div class="infos">
+        <div>
+            <h2> Basic Infos </h2>
+            <div class="flex" *ngIf="spell.time">
+                <h3>Casting Time:</h3>
+                <p>{{spell.time}}</p>
+            </div>
+
+            <div class="flex" *ngIf="spell.range">
+                <h3>Range:</h3>
+                <p>{{spell.range}}</p>
+            </div>
+
+            <div class="flex" *ngIf="spell.components && spell.components.length > 0">
+                <h3>Components:</h3>
+                <p>{{getFancyListString(spell.components)}}</p>
+            </div>
+
+            <div class="flex" *ngIf="spell.duration">
+                <h3>Duration:</h3>    
+                <p>{{spell.duration}}</p>
+            </div>
+
+            <div class="flex" *ngIf="spell.classes && spell.classes.length > 0">
+                <h3>Classes:</h3>
+                <p>{{getFancyListString(spell.classes)}}</p>
+            </div>
+
+            <div class="flex" *ngIf="spell.roll">
+                <h3>Roll:</h3>
+                <p>{{spell.roll}}</p>
+            </div>
+
+        </div>
+
+        <p></p>
+        <div>
+             <h2> Description </h2>
+            <div class="text">{{ spell.text }}</div>
+        </div>
+
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+</div>

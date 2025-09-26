@@ -20,6 +20,7 @@ public class SpellJpaToEntityMapper extends AbstractJpaToEntityMapper<SpellJpa, 
         entity.setDuration(jpa.getDuration());
         entity.setText(jpa.getText());
         entity.setRoll(jpa.getRoll());
+        entity.setClasses(getListFromString(jpa.getClasses()));
 
         return  entity;
     }

@@ -22,6 +22,8 @@ public class SpellEntity {
 
     private String roll;
 
+    private List<String> classes;
+
     public String getName() {
         return name;
     }
@@ -92,5 +94,13 @@ public class SpellEntity {
 
     public void setRoll(String roll) {
         this.roll = roll;
+    }
+
+    public List<String> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<String> classes) {
+        this.classes = classes;
     }
 }

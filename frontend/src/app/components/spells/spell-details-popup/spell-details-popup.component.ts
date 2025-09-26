@@ -23,4 +23,19 @@ export class SpellDetailsPopupComponent {
     this.dialogRef.close();
   }
 
+  getFancyListString(list : string[]) : string {
+    let fancyString : string = "";
+
+    list.forEach((element: string) => {
+      if (fancyString === "") {
+        fancyString += element;
+      }
+      else {
+        fancyString += " | " + element;
+      }
+    });
+
+    return fancyString;
+  }
+
 }
