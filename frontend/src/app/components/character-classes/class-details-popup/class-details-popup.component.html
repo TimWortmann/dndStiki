@@ -4,43 +4,52 @@
     <div class="infos">
         <div>
             <h2> Basic Infos </h2>
-            <h3>Hit Dice</h3>
-            <p>{{characterClass.hitDice}}</p>
+             <div class="flex" *ngIf="characterClass.hitDice">
+                 <h3>Hit Dice:</h3>
+                 <p>{{characterClass.hitDice}}</p>
+            </div>
 
-            <ng-container *ngIf="characterClass.spellAbility">
-                <h3>Spell Ability</h3>
+            <div class="flex" *ngIf="characterClass.spellAbility">
+                <h3>Spell Ability:</h3>
                 <p>{{characterClass.spellAbility}}</p>
-            </ng-container>
-            <h3>Wealth</h3>
-            <p>{{characterClass.wealth}}</p>
-            <h3>Number of Skill Proficiencies</h3>
-            <p>{{characterClass.numberOfSkillProficiencies}}</p>
+            </div>
+            
+            <div class="flex" *ngIf="characterClass.wealth">
+                <h3>Wealth:</h3>
+                <p>{{characterClass.wealth}}</p>
+            </div>
+
+             <div class="flex" *ngIf="characterClass.numberOfSkillProficiencies">
+                 <h3>Number of Skill Proficiencies:</h3>
+                 <p>{{characterClass.numberOfSkillProficiencies}}</p>
+             </div>
         </div>
 
         <p></p>
 
         <div>
+            
             <h2> Proficiencies </h2>
-            <ng-container *ngIf="characterClass.savingThrowProficiencies[0] !== 'none'">
-                 <h3>Saving Throws</h3>
+            <div class="flex" *ngIf="characterClass.savingThrowProficiencies[0] !== 'none'">
+                 <h3>Saving Throws:</h3>
                  <p>{{getFancyListString(characterClass.savingThrowProficiencies)}}</p>
-             </ng-container>
-             <ng-container *ngIf="characterClass.skillProficiencies[0] !== 'none'">
-                 <h3>Skills </h3>
+             </div>
+             <div class="flex" *ngIf="characterClass.skillProficiencies[0] !== 'none'">
+                 <h3>Skills:</h3>
                  <p>{{getFancyListString(characterClass.skillProficiencies)}}</p>
-             </ng-container>
-             <ng-container *ngIf="characterClass.weaponProficiencies[0] !== 'none'">
-                 <h3>Weapons </h3>
+             </div>
+             <div class="flex" *ngIf="characterClass.weaponProficiencies[0] !== 'none'">
+                 <h3>Weapons:</h3>
                  <p>{{getFancyListString(characterClass.weaponProficiencies)}}</p>
-             </ng-container>
-             <ng-container *ngIf="characterClass.armorProficiencies[0] !== 'none'">
-                 <h3>Armor </h3>
+             </div>
+             <div class="flex" *ngIf="characterClass.armorProficiencies[0] !== 'none'">
+                 <h3>Armor:</h3>
                  <p>{{getFancyListString(characterClass.armorProficiencies)}}</p>
-             </ng-container>
-            <ng-container *ngIf="characterClass.toolProficiencies[0] !== 'none'">
-                <h3>Tools </h3>
+             </div>
+            <div class="flex" *ngIf="characterClass.toolProficiencies[0] !== 'none'">
+                <h3>Tools:</h3>
                 <p>{{getFancyListString(characterClass.toolProficiencies)}}</p>
-             </ng-container>
+             </div>
         </div>
 
         <p></p>

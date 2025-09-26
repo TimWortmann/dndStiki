@@ -17,6 +17,13 @@ h1 {
     margin-right: 10px;
 }
 
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: baseline; 
+}
+
 .text {
   white-space: pre-line;   /* erhält Zeilenumbrüche + Leerzeilen */
   margin: 0 0 1em 0;       /* sieht aus wie <p> */
