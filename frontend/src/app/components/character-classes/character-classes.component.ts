@@ -17,7 +17,7 @@ import { ClassDetailsPopupComponent } from './class-details-popup/class-details-
 export class CharacterClassesComponent implements AfterViewInit {
 
   @ViewChild('proficiencyTemplate') proficiencyTemplate!: TemplateRef<any>;
-  @ViewChild('detailTemplate') detailTemplate!: TemplateRef<any>;
+  @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
 
   data?: CharacterClassValue[];
   tableColumns: TableColumnValue[] = [];
@@ -66,7 +66,7 @@ export class CharacterClassesComponent implements AfterViewInit {
         dataKey: 'details',
         position: 'left',
         isSortable: false,
-        template: this.detailTemplate,
+        template: this.detailsTemplate,
       },
     ];
     this.pullDataFromBackend();

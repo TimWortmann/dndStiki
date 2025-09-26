@@ -14,7 +14,7 @@ export class ClassDetailsPopupComponent {
   characterClass! : CharacterClassValue;
 
   constructor(
-    public dialogRef: MatDialogRef<TraitPopupComponent>,
+    public dialogRef: MatDialogRef<ClassDetailsPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){
     this.characterClass = data;

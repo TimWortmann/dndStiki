@@ -24,6 +24,8 @@ import { BackgroundsComponent } from './components/backgrounds/backgrounds.compo
 import { RacesComponent } from './components/races/races.component';
 import { CharacterClassesComponent } from './components/character-classes/character-classes.component';
 import { ClassDetailsPopupComponent } from './components/character-classes/class-details-popup/class-details-popup.component';
+import { SpellsComponent } from './components/spells/spells.component';
+import { SpellDetailsPopupComponent } from './components/spells/spell-details-popup/spell-details-popup.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { ClassDetailsPopupComponent } from './components/character-classes/class
     RacesComponent,
     CharacterClassesComponent,
     ClassDetailsPopupComponent,
+    SpellsComponent,
+    SpellDetailsPopupComponent,
   ],
   imports: [
     BrowserModule,

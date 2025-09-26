@@ -1,5 +1,6 @@
-<ng-template #proficiencyTemplate let-column="column" let-element="element">
-  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+<ng-template #levelTemplate let-column="column" let-element="element">
+  <span *ngIf="element[column.dataKey] === 0"> Cantrip</span>
+  <span *ngIf="element[column.dataKey] !== 0">{{ element[column.dataKey] }}</span>
 </ng-template>
 
 <ng-template #detailsTemplate let-column="column" let-element="element">
@@ -10,7 +11,7 @@
   </div>
 </ng-template>
 
-<h2>Classes</h2>
+<h2>Spells</h2>
 
 <div *ngIf="data && data.length > 0">
   <custom-table
