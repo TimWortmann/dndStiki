@@ -14,6 +14,8 @@ export class TableComponent {
 
   public tableDataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
+  paginationSizes!: number[];
+  defaultPageSize!: number;
 
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
@@ -23,8 +25,6 @@ export class TableComponent {
   @Input() isFilterable = false;
   @Input() tableColumns: TableColumnValue[] = [];
   @Input() rowActionIcon!: string;
-  @Input() paginationSizes: number[] = [5, 10, 15];
-  @Input() defaultPageSize = this.paginationSizes[1];
 
   @Output() sort: EventEmitter<Sort> = new EventEmitter();
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
@@ -42,6 +42,8 @@ export class TableComponent {
   }
 
   ngAfterViewInit(): void {
+    this.paginationSizes = this.getDynamicPaginationSizes();
+    this.defaultPageSize = this.paginationSizes[0];
     this.tableDataSource.paginator = this.matPaginator;
     this.tableDataSource.sort = this.matSort;
   }
@@ -67,5 +69,19 @@ export class TableComponent {
 
   emitRowAction(row: any) {
     this.rowAction.emit(row);
+  }
+
+  getDynamicPaginationSizes(): number[] {
+    const dataLength = this.tableDataSource.data.length;
+    const sizes: number[] = [];
+
+    if (dataLength > 5) sizes.push(5);
+    if (dataLength > 10) sizes.push(10);
+    if (dataLength > 20) sizes.push(20);
+
+    // Always include full length if it's not already included
+    if (!sizes.includes(dataLength)) sizes.push(dataLength);
+
+    return sizes.sort((a, b) => a - b);
   }
 }

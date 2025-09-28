@@ -54,8 +54,8 @@
 
   <!-- Pagination -->
   <mat-paginator *ngIf="isPageable"
-                 [pageSizeOptions]="paginationSizes"
-                 [pageSize]="defaultPageSize"
+                 [pageSizeOptions]="getDynamicPaginationSizes()"
+                 [pageSize]="getDynamicPaginationSizes()[0]"
                  showFirstLastButtons>
   </mat-paginator>
 </ng-container>
