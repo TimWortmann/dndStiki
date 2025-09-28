@@ -26,6 +26,8 @@ import { CharacterClassesComponent } from './components/character-classes/charac
 import { ClassDetailsPopupComponent } from './components/character-classes/class-details-popup/class-details-popup.component';
 import { SpellsComponent } from './components/spells/spells.component';
 import { SpellDetailsPopupComponent } from './components/spells/spell-details-popup/spell-details-popup.component';
+import { ItemsComponent } from './components/items/items.component';
+import { ItemDetailsPopupComponent } from './components/items/item-details-popup/item-details-popup.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { SpellDetailsPopupComponent } from './components/spells/spell-details-po
     ClassDetailsPopupComponent,
     SpellsComponent,
     SpellDetailsPopupComponent,
+    ItemsComponent,
+    ItemDetailsPopupComponent,
   ],
   imports: [
     BrowserModule,

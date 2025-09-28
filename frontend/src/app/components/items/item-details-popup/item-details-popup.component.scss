@@ -1,0 +1,41 @@
+.itemSubtitle {
+    margin-bottom: 2%;
+}
+
+.dialog-content {
+    margin: 2%;
+
+}
+
+/* Stick actions to the bottom */
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: auto;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: baseline; 
+}
+
+.text {
+  white-space: pre-line;   /* erhält Zeilenumbrüche + Leerzeilen */
+  margin: 0 0 1em 0;       /* sieht aus wie <p> */
+  line-height: 1.5;        /* bessere Lesbarkeit */
+  font-size: 1.0rem;
+}
+
+.infos > div {
+  flex: 1;                 /* optional: make them equal width */
+  padding: 1rem;           /* inner spacing */
+  border: 1px solid #ccc;  /* light gray border */
+  border-radius: 10px;     /* rounded edges */
+  background-color: #f9f9f9; /* optional: light background */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* optional: subtle shadow */
+}

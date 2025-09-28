@@ -1,29 +1,28 @@
 import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SpellValue } from '../../models/spell-value';
+import { ItemValue } from '../../models/item-value';
 import { TableColumnValue } from '../../models/table-column-value';
-import { SpellService } from '../../services/spell/spell.service';
+import { ItemService } from '../../services/item/item.service';
 import { TableService } from '../../services/table/table.service';
-import { SpellDetailsPopupComponent } from './spell-details-popup/spell-details-popup.component';
+import { SpellDetailsPopupComponent } from '../spells/spell-details-popup/spell-details-popup.component';
+import { ItemDetailsPopupComponent } from './item-details-popup/item-details-popup.component';
 
 @Component({
-  selector: 'app-spells',
+  selector: 'app-items',
   standalone: false,
-  templateUrl: './spells.component.html',
-  styleUrl: './spells.component.scss'
+  templateUrl: './items.component.html',
+  styleUrl: './items.component.scss'
 })
-export class SpellsComponent {
+export class ItemsComponent {
 
-  @ViewChild('levelTemplate') levelTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
-  @ViewChild('classesTemplate') classesTemplate!: TemplateRef<any>;
 
-  data?: SpellValue[];
+  data?: ItemValue[];
   tableColumns: TableColumnValue[] = [];
 
   constructor(
     private tableService: TableService,
-    private spellService: SpellService, 
+    private itemService: ItemService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ){}
@@ -43,18 +42,10 @@ export class SpellsComponent {
         isSortable: true
       },
       {
-        name: 'Level',
-        dataKey: 'level',
+        name: 'Type',
+        dataKey: 'type',
         position: 'left',
-        isSortable: true,
-        template: this.levelTemplate
-      },
-      {
-        name: 'Classes',
-        dataKey: 'classes',
-        position: 'left',
-        isSortable: true,
-        template: this.classesTemplate
+        isSortable: true
       },
       {
         name: 'Details',
@@ -68,7 +59,7 @@ export class SpellsComponent {
   }
 
   pullDataFromBackend() {
-    this.spellService.getAllSpells()
+    this.itemService.getAllSpells()
       .subscribe((response) => {
         this.data = response;
         this.cdr.detectChanges();
@@ -80,7 +71,7 @@ export class SpellsComponent {
   }
 
   openDetailDialog(element: any): void {
-    const dialogRef = this.dialog.open(SpellDetailsPopupComponent, {
+    const dialogRef = this.dialog.open(ItemDetailsPopupComponent, {
       data: element,
       width: '60vw',     
       height: '60vh',     
@@ -89,4 +80,5 @@ export class SpellsComponent {
       autoFocus: false,
     });
   }
+
 }

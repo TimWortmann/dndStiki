@@ -22,8 +22,8 @@ public class ItemJpa {
     @Column(name = "ITEM_VALUE")
     private Double value;
 
-    @Column(name = "PROPERTY")
-    private String property;
+    @Column(name = "PROPERTIES")
+    private String properties;
 
     @Column(name = "DMG1")
     private String dmg1;
@@ -92,12 +92,12 @@ public class ItemJpa {
         this.value = value;
     }
 
-    public String getProperty() {
-        return property;
+    public String getProperties() {
+        return properties;
     }
 
-    public void setProperty(String property) {
-        this.property = property;
+    public void setProperties(String properties) {
+        this.properties = properties;
     }
 
     public String getDmg1() {

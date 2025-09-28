@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,8 +36,12 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
         if (value != null) {
             itemEntity.setValue(Double.parseDouble(value));
         }
+        String concatinatedProperties = getTextByTagName(itemElement, "property");
+        if (concatinatedProperties != null) {
+            List<String> properties = Arrays.asList(concatinatedProperties.split("\\s*,\\s*"));
+            itemEntity.setProperties(properties);
+        }
 
-        itemEntity.setProperty(getTextByTagName(itemElement, "property"));
         itemEntity.setDmg1(getTextByTagName(itemElement, "dmg1"));
         itemEntity.setDmg2(getTextByTagName(itemElement, "dmg2"));
         itemEntity.setDmgType(getTextByTagName(itemElement, "dmgType"));

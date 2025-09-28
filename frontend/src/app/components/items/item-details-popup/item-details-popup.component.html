@@ -1,0 +1,81 @@
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Item Details ({{item.name}})</h1>
+    <h3 class="itemSubtitle"> Type {{item.type}} </h3>
+    
+    <div class="infos">
+        <div *ngIf="hasBasicInfos()">
+            <h2> Basic Infos </h2>
+            <div class="flex" *ngIf="item.detail">
+                <h3>Detail:</h3>
+                <p>{{item.detail}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.weight">
+                <h3>Weight:</h3>
+                <p>{{item.weight}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.value">
+                <h3>Value:</h3>
+                <p>{{item.value}}</p>
+            </div>
+
+            <div class="flex" *ngIf="isListThere(item.properties)">
+                <h3>Properties:</h3>
+                <p>{{getFancyListString(item.properties)}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.dmg1">
+                <h3>Damage:</h3>
+                <p>{{item.dmg1}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.dmg2">
+                <h3>Damager (Alternative):</h3>
+                <p>{{item.dmg2}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.dmgType">
+                <h3>Damage Type:</h3>
+                <p>{{item.dmgType}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.range">
+                <h3>Range:</h3>
+                <p>{{item.range}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.ac">
+                <h3>Armor Class:</h3>
+                <p>{{item.ac}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.stealth">
+                <h3>Stealth:</h3>
+                <p>{{getFancyBoolean(item.stealth)}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.magic">
+                <h3>Magic:</h3>
+                <p>{{getFancyBoolean(item.magic)}}</p>
+            </div>
+
+            <div class="flex" *ngIf="item.strength">
+                <h3>Required Strength:</h3>
+                <p>{{item.strength}}</p>
+            </div>
+
+        </div>
+
+        <p></p>
+        <div>
+             <h2> Description </h2>
+            <div class="text">{{ item.text }}</div>
+        </div>
+
+        <p></p>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+</div>
+

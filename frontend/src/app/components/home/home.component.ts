@@ -6,6 +6,7 @@ import { BackgroundsComponent } from '../backgrounds/backgrounds.component';
 import { RacesComponent } from '../races/races.component';
 import { CharacterClassesComponent } from '../character-classes/character-classes.component';
 import { SpellsComponent } from '../spells/spells.component';
+import { ItemsComponent } from '../items/items.component';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(RacesComponent) racesComponent!: RacesComponent;
   @ViewChild(CharacterClassesComponent) characterClassesComponent!: CharacterClassesComponent;
   @ViewChild(SpellsComponent) spellComponent!: SpellsComponent;
+  @ViewChild(ItemsComponent) itemsComponent!: ItemsComponent;
 
   compendiumFileName?: string;
 
@@ -51,5 +53,6 @@ export class HomeComponent implements OnInit {
     this.racesComponent.pullDataFromBackend();
     this.characterClassesComponent.pullDataFromBackend();
     this.spellComponent.pullDataFromBackend();
+    this.itemsComponent.pullDataFromBackend();
   }
 }

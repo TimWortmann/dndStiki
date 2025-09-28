@@ -1,8 +1,8 @@
-package de.dnd.stiki.domain.item;
+package de.dnd.stiki.adapters.item;
 
 import java.util.List;
 
-public class ItemEntity {
+public class ItemDto {
 
     private String name;
 

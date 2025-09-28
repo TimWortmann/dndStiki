@@ -15,7 +15,7 @@ public class ItemJpaToEntityMapper extends AbstractJpaToEntityMapper<ItemJpa, It
         entity.setType(jpa.getType());
         entity.setWeight(jpa.getWeight());
         entity.setValue(jpa.getValue());
-        entity.setProperty(jpa.getProperty());
+        entity.setProperties(getListFromString(jpa.getProperties()));
         entity.setDmg1(jpa.getDmg1());
         entity.setDmg2(jpa.getDmg2());
         entity.setDmgType(jpa.getDmgType());
