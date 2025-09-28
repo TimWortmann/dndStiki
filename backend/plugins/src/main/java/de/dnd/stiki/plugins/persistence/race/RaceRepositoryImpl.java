@@ -2,8 +2,6 @@ package de.dnd.stiki.plugins.persistence.race;
 
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
-import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
-import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +19,6 @@ public class RaceRepositoryImpl implements RaceRepository {
     @Autowired
     private RaceEntityToJpaMapper entityToJpaMapper;
 
-    @Autowired
-    private TraitJpaRepository traitRepository;
-
     @Override
     public List<RaceEntity> getAllRaces() {
 
@@ -35,12 +30,6 @@ public class RaceRepositoryImpl implements RaceRepository {
     @Override
     public List<RaceEntity> createRaces(List<RaceEntity> entities) {
         List<RaceJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
-
-        for(RaceJpa jpa : jpaList){
-            for (TraitJpa traitJpa :jpa.getTraits()){
-                traitRepository.save(traitJpa);
-            }
-        }
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }

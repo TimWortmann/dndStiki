@@ -30,7 +30,7 @@ public class RaceJpa {
     @JoinColumn(name = "spell_ability", referencedColumnName = "name", foreignKey = @ForeignKey(name = "Race_fk_SpellAbility"))
     private AbilityJpa spellAbility;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "RACE_TRAIT", // join table
             schema = "DND_STIKI",

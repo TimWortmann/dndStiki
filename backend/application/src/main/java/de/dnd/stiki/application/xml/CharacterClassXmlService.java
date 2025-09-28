@@ -14,6 +14,7 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -52,7 +53,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
         entity.setSpellAbility(getTextByTagName(classElement, "spellAbility"));
 
         NodeList levelNodes = classElement.getElementsByTagName("autolevel");
-        entity.setClassLevels(getLevelEntities(levelNodes));
+        entity.setClassLevels(getLevelEntities(levelNodes).stream().sorted(Comparator.comparing(ClassLevelEntity::getLevel)).toList());
 
         NodeList traitNodes = classElement.getElementsByTagName("trait");
         entity.setTraits(getTraitEntities(traitNodes));

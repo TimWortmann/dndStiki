@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { CharacterClassValue } from '../../../models/character-class-value';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TraitPopupComponent } from '../../trait-popup/trait-popup.component';
+import { ClassLevelValue } from '../../../models/class-level-value';
 
 @Component({
   selector: 'app-class-details-popup',

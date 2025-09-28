@@ -51,9 +51,9 @@
              </div>
         </div>
 
-        <p></p>
+        <p *ngIf="characterClass.traits && characterClass.traits.length > 0"></p>
 
-        <div>
+        <div *ngIf="characterClass.traits && characterClass.traits.length > 0">
              <h2> Traits </h2>
              <mat-accordion>
                 <mat-expansion-panel *ngFor="let trait of characterClass.traits">
@@ -68,7 +68,7 @@
         <p></p>
 
         <div>
-            <h2> Level </h2>
+            <h2> Levels </h2>
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
                     <mat-expansion-panel-header>
