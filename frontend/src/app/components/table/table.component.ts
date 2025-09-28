@@ -57,6 +57,17 @@ export class TableComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.tableDataSource.filter = filterValue.trim().toLowerCase();
+
+    // Reset to first page
+    if (this.matPaginator) {
+      this.matPaginator.pageIndex = 0;
+
+      // Update page size options based on filtered data
+      const newSizes = this.getDynamicPaginationSizes();
+      if (newSizes.length) {
+        this.matPaginator._changePageSize(newSizes[0]);
+      }
+    }
   }
 
   sortTable(sortParameters: Sort) {
@@ -72,7 +83,7 @@ export class TableComponent {
   }
 
   getDynamicPaginationSizes(): number[] {
-    const dataLength = this.tableDataSource.data.length;
+    const dataLength = this.tableDataSource.filteredData.length; // use filteredData
     const sizes: number[] = [];
 
     if (dataLength > 5) sizes.push(5);
