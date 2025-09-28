@@ -79,7 +79,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
         if (!levelAttribute.isBlank()) {
             levelEntity.setLevel(Integer.valueOf(levelAttribute));
         }
-        levelEntity.setScoreImprovement(getXmlBoolean(levelElement, "scoreImprovement"));
+        levelEntity.setScoreImprovement(getXmlBooleanAttribute(levelElement, "scoreImprovement"));
         levelEntity.setSpellSlots(getTextByTagName(levelElement, "slots"));
 
         levelEntity.setFeatures(getFeatureEntities(levelElement.getElementsByTagName("feature")));
@@ -112,7 +112,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
 
     private FeatureEntity getFeatureEntity(Element featureElement) {
         FeatureEntity featureEntity = new FeatureEntity();
-        featureEntity.setOptional(getXmlBoolean(featureElement, "optional"));
+        featureEntity.setOptional(getXmlBooleanAttribute(featureElement, "optional"));
         featureEntity.setName(getTextByTagName(featureElement, "name"));
         featureEntity.setText(getTextByTagName(featureElement, "text"));
         return featureEntity;

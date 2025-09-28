@@ -28,6 +28,9 @@ public class CompendiumXmlService {
     @Autowired
     SpellXmlService spellXmlService;
 
+    @Autowired
+    ItemXmlService itemXmlService;
+
     public void saveDataFromCompendium(CompendiumEntity compendiumEntity) {
 
         Document document = null;
@@ -38,6 +41,7 @@ public class CompendiumXmlService {
             raceXmlService.readAndCreateData(document);
             characterClassXmlService.readAndCreateData(document);
             spellXmlService.readAndCreateData(document);
+            itemXmlService.readAndCreateData(document);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

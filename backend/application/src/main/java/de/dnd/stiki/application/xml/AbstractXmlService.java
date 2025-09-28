@@ -55,8 +55,18 @@ public abstract class AbstractXmlService <E, R>  {
         return null;
     }
 
-    protected boolean getXmlBoolean(Element element, String attributeName) {
+    protected boolean getXmlBooleanAttribute(Element element, String attributeName) {
         String booleanString = element.getAttribute(attributeName);
+
+        return "YES".equals(booleanString);
+    }
+
+    protected Boolean getXmlBooleanTag(Element element, String tagName) {
+        String booleanString = getTextByTagName(element, tagName);
+
+        if (booleanString == null) {
+            return null;
+        }
 
         return "YES".equals(booleanString);
     }
