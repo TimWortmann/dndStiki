@@ -1,4 +1,5 @@
 import { ClassLevelValue } from "./class-level-value";
+import { TraitValue } from "./trait-value";
 
 export interface CharacterClassValue {
   name: string;
@@ -12,4 +13,5 @@ export interface CharacterClassValue {
   wealth: string;
   spellAbility: string;
   classLevels: ClassLevelValue[];
+  traits: TraitValue[];
 }

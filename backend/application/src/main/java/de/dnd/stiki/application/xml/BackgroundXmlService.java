@@ -34,7 +34,12 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
             backgroundEntity.setProficiencies(proficiencies);
         }
 
+        backgroundEntity.setTraits(getTraits(backgroundElement));
 
+        return backgroundEntity;
+    }
+
+    private List<TraitEntity> getTraits(Element backgroundElement) {
         List<TraitEntity> traitEntityList = new ArrayList<>();
         NodeList traitNodes = backgroundElement.getElementsByTagName("trait");
         for (int i = 0; i < traitNodes.getLength(); i++) {
@@ -45,8 +50,6 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
                 traitEntityList.add(traitEntity);
 
         }
-        backgroundEntity.setTraits(traitEntityList);
-
-        return backgroundEntity;
+        return traitEntityList;
     }
 }

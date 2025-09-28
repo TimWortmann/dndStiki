@@ -1,6 +1,7 @@
 package de.dnd.stiki.adapters.characterClass;
 
 import de.dnd.stiki.adapters.characterClass.classLevel.ClassLevelDto;
+import de.dnd.stiki.adapters.trait.TraitDto;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class CharacterClassDto {
     private String spellAbility;
 
     private List <ClassLevelDto> classLevels;
+
+    private List <TraitDto> traits;
 
     public List<ClassLevelDto> getClassLevels() {
         return classLevels;
@@ -114,5 +117,13 @@ public class CharacterClassDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<TraitDto> getTraits() {
+        return traits;
+    }
+
+    public void setTraits(List<TraitDto> traits) {
+        this.traits = traits;
     }
 }

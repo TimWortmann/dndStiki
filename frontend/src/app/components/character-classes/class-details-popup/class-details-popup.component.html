@@ -27,8 +27,7 @@
 
         <p></p>
 
-        <div>
-            
+        <div>  
             <h2> Proficiencies </h2>
             <div class="flex" *ngIf="characterClass.savingThrowProficiencies[0] !== 'none'">
                  <h3>Saving Throws:</h3>
@@ -55,6 +54,21 @@
         <p></p>
 
         <div>
+             <h2> Traits </h2>
+             <mat-accordion>
+                <mat-expansion-panel *ngFor="let trait of characterClass.traits">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ trait.name }}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="text">{{ trait.text }}</div>
+           </mat-expansion-panel>
+       </mat-accordion>
+            </div>
+
+        <p></p>
+
+        <div>
+            <h2> Level </h2>
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
                     <mat-expansion-panel-header>
@@ -75,7 +89,7 @@
 </div>
 
 <ng-template #classLevelContent let-classLevel>
-    <div *ngIf="classLevel.spellSlots != '0,0,0,0,0,0,0,0,0,0,'" class="spellSlotsSegment">
+    <div *ngIf="classLevel.spellSlots && classLevel.spellSlots != '0,0,0,0,0,0,0,0,0,0,'" class="spellSlotsSegment">
         <h3>Spell Slots</h3>
         <ng-container *ngTemplateOutlet="spellSlotTable; context: { $implicit: classLevel.spellSlots }"></ng-container>
     </div>

@@ -31,7 +31,11 @@ public class RaceXmlService extends AbstractXmlService<RaceEntity, RaceRepositor
         raceEntity.setName(getTextByTagName(raceElement, "name"));
 
         raceEntity.setSize(getTextByTagName(raceElement, "size"));
-        raceEntity.setSpeed(Integer.valueOf(getTextByTagName(raceElement, "speed")));
+
+        String speed = getTextByTagName(raceElement, "speed");
+        if (speed != null) {
+            raceEntity.setSpeed(Integer.valueOf(speed));
+        }
         raceEntity.setAbility(getTextByTagName(raceElement, "ability"));
         raceEntity.setSpellAbility(getTextByTagName(raceElement, "spellAbility"));
 

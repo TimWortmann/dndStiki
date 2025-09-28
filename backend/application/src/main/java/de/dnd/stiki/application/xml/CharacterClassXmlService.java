@@ -5,6 +5,7 @@ import de.dnd.stiki.domain.characterClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.characterClass.counter.CounterEntity;
 import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
 import de.dnd.stiki.domain.characterClass.feature.FeatureEntity;
+import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,13 +31,20 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
         CharacterClassEntity entity = new CharacterClassEntity();
 
         entity.setName(getTextByTagName(classElement, "name"));
-        entity.setHitDice(Integer.valueOf(getTextByTagName(classElement, "hd")));
+
+        String hitDice = getTextByTagName(classElement, "hd");
+        if (hitDice != null) {
+            entity.setHitDice(Integer.valueOf(hitDice));
+        }
 
         List<String> mixedProficiencies = getProficiencyList(classElement, "proficiency");
         entity.setSavingThrowProficiencies(repository.getSavingThrowProficiencies(mixedProficiencies));
         entity.setSkillProficiencies(repository.getSkillProficiencies(mixedProficiencies));
 
-        entity.setNumberOfSkillProficiencies(Integer.valueOf(getTextByTagName(classElement, "numSkills")));
+        String numberOfSkillProficiencies = getTextByTagName(classElement, "numSkills");
+        if (numberOfSkillProficiencies != null) {
+            entity.setNumberOfSkillProficiencies(Integer.valueOf(numberOfSkillProficiencies));
+        }
         entity.setArmorProficiencies(getProficiencyList(classElement, "armor"));
         entity.setWeaponProficiencies(getProficiencyList(classElement, "weapons"));
         entity.setToolProficiencies(getProficiencyList(classElement, "tools"));
@@ -45,6 +53,9 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
 
         NodeList levelNodes = classElement.getElementsByTagName("autolevel");
         entity.setClassLevels(getLevelEntities(levelNodes));
+
+        NodeList traitNodes = classElement.getElementsByTagName("trait");
+        entity.setTraits(getTraitEntities(traitNodes));
 
         return entity;
     }
@@ -121,6 +132,24 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
        counterEntity.setName(getTextByTagName(counterElement, "name"));
        counterEntity.setReset(getTextByTagName(counterElement, "reset"));
        return counterEntity;
+    }
+
+    private List<TraitEntity> getTraitEntities(NodeList traitNodes) {
+        List<TraitEntity> traitEntities = new ArrayList<>();
+        for (int i = 0; i < traitNodes.getLength(); i++) {
+            if (traitNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                traitEntities.add(getTraitEntity((Element) traitNodes.item(i)));
+            }
+
+        }
+        return traitEntities;
+    }
+
+    private TraitEntity getTraitEntity(Element traitElement) {
+        TraitEntity traitEntity = new TraitEntity();
+        traitEntity.setName(getTextByTagName(traitElement, "name"));
+        traitEntity.setText(getTextByTagName(traitElement, "text"));
+        return traitEntity;
     }
 
 

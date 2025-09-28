@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.persistence.characterClass;
 
 import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpa;
+import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
 import de.dnd.stiki.plugins.persistence.characterClass.classLevel.ClassLevelJpa;
 import de.dnd.stiki.plugins.persistence.basic.skill.SkillJpa;
 import jakarta.persistence.*;
@@ -60,6 +61,15 @@ public class CharacterClassJpa {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "CHARACTER_CLASS", referencedColumnName = "NAME")
     private List <ClassLevelJpa> classLevels;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "CLASS_TRAIT", // join table
+            schema = "DND_STIKI",
+            joinColumns = @JoinColumn(name = "CLASS_NAME"),   // FK to Background
+            inverseJoinColumns = @JoinColumn(name = "TRAIT_ID")    // FK to Trait
+    )
+    private List<TraitJpa> traits;
 
     public String getName() {
         return name;
@@ -147,5 +157,13 @@ public class CharacterClassJpa {
 
     public void setClassLevels(List<ClassLevelJpa> classLevels) {
         this.classLevels = classLevels;
+    }
+
+    public List<TraitJpa> getTraits() {
+        return traits;
+    }
+
+    public void setTraits(List<TraitJpa> traits) {
+        this.traits = traits;
     }
 }

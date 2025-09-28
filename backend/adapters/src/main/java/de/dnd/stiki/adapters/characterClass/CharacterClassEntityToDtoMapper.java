@@ -2,6 +2,7 @@ package de.dnd.stiki.adapters.characterClass;
 
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.characterClass.classLevel.ClassLevelEntityToDtoMapper;
+import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.characterClass.CharacterClassEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,9 @@ public class CharacterClassEntityToDtoMapper extends AbstractEntityToDtoMapper<C
 
     @Autowired
     private ClassLevelEntityToDtoMapper classLevelEntityToDtoMapper;
+
+    @Autowired
+    private TraitEntityToDtoMapper traitEntityToDtoMapper;
 
     @Override
     public CharacterClassDto mapEntityToDto(CharacterClassEntity entity) {
@@ -27,6 +31,7 @@ public class CharacterClassEntityToDtoMapper extends AbstractEntityToDtoMapper<C
         dto.setWealth(entity.getWealth());
         dto.setSpellAbility(entity.getSpellAbility());
         dto.setClassLevels(classLevelEntityToDtoMapper.mapEntitiesToDtos(entity.getClassLevels()));
+        dto.setTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getTraits()));
 
         return dto;
     }

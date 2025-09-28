@@ -1,6 +1,7 @@
 package de.dnd.stiki.domain.characterClass;
 
 import de.dnd.stiki.domain.characterClass.classLevel.ClassLevelEntity;
+import de.dnd.stiki.domain.trait.TraitEntity;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class CharacterClassEntity {
     private String spellAbility;
 
     private List <ClassLevelEntity> classLevels;
+
+    private List<TraitEntity> traits;
 
     public String getName() {
         return name;
@@ -114,5 +117,13 @@ public class CharacterClassEntity {
 
     public void setClassLevels(List<ClassLevelEntity> classLevels) {
         this.classLevels = classLevels;
+    }
+
+    public List<TraitEntity> getTraits() {
+        return traits;
+    }
+
+    public void setTraits(List<TraitEntity> traits) {
+        this.traits = traits;
     }
 }
