@@ -10,10 +10,12 @@ import { TableColumnValue } from '../../models/table-column-value';
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent {
+export class TableComponent implements AfterViewInit {
 
   public tableDataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
+  public filterVisibleColumnsOnly = false;
+  public filterValue = '';
   paginationSizes!: number[];
   defaultPageSize!: number;
 
@@ -29,7 +31,6 @@ export class TableComponent {
   @Output() sort: EventEmitter<Sort> = new EventEmitter();
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
 
-  // dynamically get data from parent
   @Input() set tableData(data: any[]) {
     this.setTableDataSource(data);
   }
@@ -37,7 +38,7 @@ export class TableComponent {
   constructor() {}
 
   ngOnInit(): void {
-    const columnNames = this.tableColumns.map((col) => col.name);
+    const columnNames = this.tableColumns.map(col => col.name);
     this.displayedColumns = this.rowActionIcon ? [this.rowActionIcon, ...columnNames] : columnNames;
   }
 
@@ -52,22 +53,44 @@ export class TableComponent {
     this.tableDataSource = new MatTableDataSource<any>(data);
     this.tableDataSource.paginator = this.matPaginator;
     this.tableDataSource.sort = this.matSort;
+    this.applyFilter(this.filterValue); // preserve filter after data set
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.tableDataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(value: string) {
+    this.filterValue = value; // keep the typed input
+    const filter = value.trim().toLowerCase(); // lowercase only for comparison
 
-    // Reset to first page
+    // Set the filter predicate based on checkbox
+    if (this.filterVisibleColumnsOnly) {
+      this.tableDataSource.filterPredicate = (data: any) => {
+        return this.tableColumns.some(col => {
+          const val = data[col.dataKey];
+          return val != null && val.toString().toLowerCase().includes(filter);
+        });
+      };
+    } else {
+      this.tableDataSource.filterPredicate = (data: any) => {
+        const rowStr = Object.values(data).map(v => v?.toString().toLowerCase()).join(' ');
+        return rowStr.includes(filter);
+      };
+    }
+
+    this.tableDataSource.filter = filter;
+
     if (this.matPaginator) {
-      this.matPaginator.pageIndex = 0;
+      // Reset to first page
+      this.matPaginator.firstPage();
 
-      // Update page size options based on filtered data
+      // Reset page size to the first entry of dynamic sizes
       const newSizes = this.getDynamicPaginationSizes();
       if (newSizes.length) {
         this.matPaginator._changePageSize(newSizes[0]);
       }
     }
+  }
+
+  onFilterToggle() {
+    this.applyFilter(this.filterValue); // live update when checkbox toggled
   }
 
   sortTable(sortParameters: Sort) {
@@ -90,7 +113,6 @@ export class TableComponent {
     if (dataLength > 10) sizes.push(10);
     if (dataLength > 20) sizes.push(20);
 
-    // Always include full length if it's not already included
     if (!sizes.includes(dataLength)) sizes.push(dataLength);
 
     return sizes.sort((a, b) => a - b);

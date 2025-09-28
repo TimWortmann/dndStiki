@@ -1,16 +1,23 @@
 <ng-container>
 
   <!-- Filter -->
-  <ng-container *ngIf="isFilterable" [matColumnDef]="this.rowActionIcon">
-    <mat-form-field style="width: 100%;">
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)">
-    </mat-form-field>
+  <ng-container *ngIf="isFilterable" [matColumnDef]="rowActionIcon">
+    <div style="display: flex; flex-direction: column; gap: 0.5em; margin-bottom: 1em;">
+      
+      <mat-form-field style="width: 100%;">
+        <mat-label>Filter</mat-label>
+        <input matInput [(ngModel)]="filterValue" (ngModelChange)="applyFilter($event)">
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="filterVisibleColumnsOnly" (change)="onFilterToggle()">
+        Filter only visible text
+      </mat-checkbox>
+
+    </div>
   </ng-container>
 
   <!-- Table -->
   <table mat-table [dataSource]="tableDataSource" matSort (matSortChange)="sortTable($event)">
-
     <!-- action column -->
     <ng-container *ngIf="rowActionIcon?.length" [matColumnDef]="rowActionIcon">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -20,16 +27,15 @@
         </button>
       </td>
     </ng-container>
-    <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
 
-      <!-- if sortable column header -->
+    <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+      <!-- sortable header -->
       <ng-container *ngIf="tableColumn.isSortable; else notSortable">
         <th mat-header-cell *matHeaderCellDef [mat-sort-header]="tableColumn.dataKey"
             [arrowPosition]="tableColumn.position === 'right' ? 'before' : 'after'">
           {{tableColumn.name}}
         </th>
       </ng-container>
-      <!-- else not sortable -->
       <ng-template #notSortable>
         <th mat-header-cell *matHeaderCellDef [class.text-right]="tableColumn.position == 'right'">
           {{tableColumn.name}}
@@ -48,6 +54,7 @@
         </ng-template>
       </td>
     </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

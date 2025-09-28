@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
 import { TraitPopupComponent } from './components/trait-popup/trait-popup.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -28,7 +30,8 @@ import { SpellsComponent } from './components/spells/spells.component';
 import { SpellDetailsPopupComponent } from './components/spells/spell-details-popup/spell-details-popup.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsPopupComponent } from './components/items/item-details-popup/item-details-popup.component';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,8 @@ import { ItemDetailsPopupComponent } from './components/items/item-details-popup
     MatIconModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
+    MatCheckboxModule,
+    FormsModule,    
 ],
   providers: [
     provideBrowserGlobalErrorListeners(),
