@@ -20,6 +20,6 @@ public class RaceController {
     @GetMapping()
     public ResponseEntity<List<RaceDto>> getAllRaces() {
 
-        return ResponseEntity.ok().body(service.getAllRaces());
+        return ResponseEntity.ok().body(service.getAll());
     }
 }

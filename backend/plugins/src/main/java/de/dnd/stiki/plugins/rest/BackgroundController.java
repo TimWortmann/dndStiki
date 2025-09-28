@@ -20,6 +20,6 @@ public class BackgroundController {
     @GetMapping()
     public ResponseEntity<List<BackgroundDto>> getAllBackgrounds() {
 
-        return ResponseEntity.ok().body(service.getAllBackgrounds());
+        return ResponseEntity.ok().body(service.getAll());
     }
 }

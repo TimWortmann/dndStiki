@@ -20,6 +20,6 @@ public class ItemController {
     @GetMapping()
     public ResponseEntity<List<ItemDto>> getAllItems() {
 
-        return ResponseEntity.ok().body(service.getAllItems());
+        return ResponseEntity.ok().body(service.getAll());
     }
 }

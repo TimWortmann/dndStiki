@@ -20,6 +20,6 @@ public class SpellController {
     @GetMapping()
     public ResponseEntity<List<SpellDto>> getAllSpells() {
 
-        return ResponseEntity.ok().body(service.getAllSpells());
+        return ResponseEntity.ok().body(service.getAll());
     }
 }
