@@ -42,14 +42,6 @@ export class ItemDetailsPopupComponent {
     return list !== undefined && list.length > 0;
   }
 
-  getFancyBoolean(rawBoolean : boolean) : string {
-    if (rawBoolean === true) {
-      return "Yes";
-    }
-
-    return "No";
-  }
-
   hasBasicInfos() : boolean {
     if (this.item.detail
     || this.item.weight

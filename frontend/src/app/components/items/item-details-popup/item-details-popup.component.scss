@@ -24,6 +24,10 @@
     align-items: baseline; 
 }
 
+.icon-row {
+    align-items: center;
+}
+
 .text {
   white-space: pre-line;   /* erhält Zeilenumbrüche + Leerzeilen */
   margin: 0 0 1em 0;       /* sieht aus wie <p> */

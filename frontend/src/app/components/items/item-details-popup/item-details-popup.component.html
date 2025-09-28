@@ -50,14 +50,16 @@
                 <p>{{item.ac}}</p>
             </div>
 
-            <div class="flex" *ngIf="item.stealth">
+            <div class="flex icon-row" *ngIf="item.stealth">
                 <h3>Stealth:</h3>
-                <p>{{getFancyBoolean(item.stealth)}}</p>
+                <mat-icon *ngIf="item.stealth === true">check</mat-icon>
+                <mat-icon *ngIf="item.stealth !== true">close</mat-icon>
             </div>
 
-            <div class="flex" *ngIf="item.magic">
+            <div class="flex icon-row" *ngIf="item.magic">
                 <h3>Magic:</h3>
-                <p>{{getFancyBoolean(item.magic)}}</p>
+                <mat-icon *ngIf="item.magic === true">check</mat-icon>
+                <mat-icon *ngIf="item.magic !== true">close</mat-icon>
             </div>
 
             <div class="flex" *ngIf="item.strength">
