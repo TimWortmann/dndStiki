@@ -2,39 +2,16 @@ package de.dnd.stiki.plugins.persistence.item;
 
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.item.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.dnd.stiki.plugins.persistence.AbstractRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class ItemRepositoryImpl implements ItemRepository {
+public class ItemRepositoryImpl extends AbstractRepositoryImpl<
+        ItemEntity,
+        ItemJpa,
+        ItemJpaRepository,
+        ItemJpaToEntityMapper,
+        ItemEntityToJpaMapper> implements ItemRepository {
 
-    @Autowired
-    private ItemJpaRepository jpaRepository;
 
-    @Autowired
-    private ItemJpaToEntityMapper jpaToEntityMapper;
-
-    @Autowired
-    private ItemEntityToJpaMapper entityToJpaMapper;
-
-    @Override
-    public List<ItemEntity> getAll() {
-        List<ItemJpa> jpaList = jpaRepository.findAll();
-
-        return jpaToEntityMapper.mapJpasToEntities(jpaList);
-    }
-
-    @Override
-    public List<ItemEntity> save(List<ItemEntity> entities) {
-        List<ItemJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
-
-        return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
-    }
-
-    @Override
-    public void deleteAll() {
-        jpaRepository.deleteAll();
-    }
 }

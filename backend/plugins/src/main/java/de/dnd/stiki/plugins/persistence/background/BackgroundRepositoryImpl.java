@@ -2,40 +2,15 @@ package de.dnd.stiki.plugins.persistence.background;
 
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.dnd.stiki.plugins.persistence.AbstractRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public class BackgroundRepositoryImpl implements BackgroundRepository {
+public class BackgroundRepositoryImpl extends AbstractRepositoryImpl<
+        BackgroundEntity,
+        BackgroundJpa,
+        BackgroundJpaRepository,
+        BackgroundJpaToEntityMapper,
+        BackgroundEntityToJpaMapper> implements BackgroundRepository {
 
-    @Autowired
-    private BackgroundJpaRepository jpaRepository;
-
-    @Autowired
-    private BackgroundJpaToEntityMapper jpaToEntityMapper;
-
-    @Autowired
-    private BackgroundEntityToJpaMapper entityToJpaMapper;
-
-    @Override
-    public List<BackgroundEntity> getAll() {
-
-        List<BackgroundJpa> jpaList = jpaRepository.findAll();
-
-        return jpaToEntityMapper.mapJpasToEntities(jpaList);
-    }
-
-    @Override
-    public List<BackgroundEntity> save(List<BackgroundEntity> entities) {
-        List<BackgroundJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
-
-        return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
-    }
-
-    @Override
-    public void deleteAll() {
-        jpaRepository.deleteAll();
-    }
 }
