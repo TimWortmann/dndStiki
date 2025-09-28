@@ -18,7 +18,7 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
     @Override
     public void readAndCreateData(Document document) {
         List<BackgroundEntity> backgrounds = readDataList(document, "background");
-        repository.createBackgrounds(backgrounds);
+        repository.save(backgrounds);
     }
 
     @Override

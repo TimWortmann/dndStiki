@@ -20,7 +20,7 @@ public class BackgroundRepositoryImpl implements BackgroundRepository {
     private BackgroundEntityToJpaMapper entityToJpaMapper;
 
     @Override
-    public List<BackgroundEntity> getAllBackgrounds() {
+    public List<BackgroundEntity> getAll() {
 
         List<BackgroundJpa> jpaList = jpaRepository.findAll();
 
@@ -28,14 +28,14 @@ public class BackgroundRepositoryImpl implements BackgroundRepository {
     }
 
     @Override
-    public List<BackgroundEntity> createBackgrounds(List<BackgroundEntity> entities) {
+    public List<BackgroundEntity> save(List<BackgroundEntity> entities) {
         List<BackgroundJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }
 
     @Override
-    public void deleteAllBackgrounds() {
+    public void deleteAll() {
         jpaRepository.deleteAll();
     }
 }

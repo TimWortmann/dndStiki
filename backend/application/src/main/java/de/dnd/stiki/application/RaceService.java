@@ -18,6 +18,6 @@ public class RaceService {
     private RaceEntityToDtoMapper entityToDtoMapper;
 
     public List<RaceDto> getAllRaces() {
-        return entityToDtoMapper.mapEntitiesToDtos(repository.getAllRaces());
+        return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 }

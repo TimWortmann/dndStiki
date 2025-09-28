@@ -19,6 +19,6 @@ public class SpellService {
 
     public List<SpellDto> getAllSpells() {
 
-        return entityToDtoMapper.mapEntitiesToDtos(repository.getAllSpells());
+        return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 }

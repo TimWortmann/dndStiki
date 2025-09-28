@@ -1,12 +1,6 @@
 package de.dnd.stiki.domain.item;
 
-import java.util.List;
+import de.dnd.stiki.domain.AbstractRepository;
 
-public interface ItemRepository {
-
-    public List<ItemEntity> getAllItems();
-
-    public List<ItemEntity> saveItems(List<ItemEntity> entity);
-
-    public void deleteAllItems();
+public interface ItemRepository extends AbstractRepository<ItemEntity> {
 }

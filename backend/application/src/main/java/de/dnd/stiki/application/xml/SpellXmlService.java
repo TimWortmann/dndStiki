@@ -16,7 +16,7 @@ public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellReposi
     @Override
     public void readAndCreateData(Document document) {
         List<SpellEntity> spells = readDataList(document, "spell");
-        repository.createSpells(spells);
+        repository.save(spells);
     }
 
     @Override

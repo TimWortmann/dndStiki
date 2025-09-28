@@ -3,7 +3,7 @@ package de.dnd.stiki.application.xml;
 import de.dnd.stiki.domain.characterClass.CharacterClassEntity;
 import de.dnd.stiki.domain.characterClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.characterClass.counter.CounterEntity;
-import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
+import de.dnd.stiki.domain.characterClass.CharacterClassRepository;
 import de.dnd.stiki.domain.characterClass.feature.FeatureEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class CharacterClassXmlService extends AbstractXmlService<CharacterClassE
     @Override
     public void readAndCreateData(Document document) {
         List<CharacterClassEntity> characterClasses = readDataList(document, "class");
-        repository.createCharacterClasses(characterClasses);
+        repository.save(characterClasses);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class RaceRepositoryImpl implements RaceRepository {
     private RaceEntityToJpaMapper entityToJpaMapper;
 
     @Override
-    public List<RaceEntity> getAllRaces() {
+    public List<RaceEntity> getAll() {
 
         List<RaceJpa> jpaList = jpaRepository.findAll();
 
@@ -28,14 +28,14 @@ public class RaceRepositoryImpl implements RaceRepository {
     }
 
     @Override
-    public List<RaceEntity> createRaces(List<RaceEntity> entities) {
+    public List<RaceEntity> save(List<RaceEntity> entities) {
         List<RaceJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }
 
     @Override
-    public void deleteAllRaces() {
+    public void deleteAll() {
         jpaRepository.deleteAll();
     }
 }

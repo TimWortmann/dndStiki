@@ -1,12 +1,6 @@
 package de.dnd.stiki.domain.background;
 
-import java.util.List;
+import de.dnd.stiki.domain.AbstractRepository;
 
-public interface BackgroundRepository {
-
-    public List<BackgroundEntity> getAllBackgrounds();
-
-    public List<BackgroundEntity> createBackgrounds(List<BackgroundEntity> entities);
-
-    public void deleteAllBackgrounds();
+public interface BackgroundRepository extends AbstractRepository<BackgroundEntity> {
 }

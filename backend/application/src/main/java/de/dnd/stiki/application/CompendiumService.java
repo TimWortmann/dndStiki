@@ -2,13 +2,12 @@ package de.dnd.stiki.application;
 
 import de.dnd.stiki.application.xml.CompendiumXmlService;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
+import de.dnd.stiki.domain.characterClass.CharacterClassRepository;
 import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.compendium.CompendiumRepository;
 import de.dnd.stiki.domain.item.ItemRepository;
 import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.domain.spell.SpellRepository;
-import de.dnd.stiki.domain.trait.TraitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,9 +26,6 @@ public class CompendiumService {
 
     @Autowired
     private BackgroundRepository backgroundRepository;
-
-    @Autowired
-    private TraitRepository traitRepository;
 
     @Autowired
     private RaceRepository raceRepository;
@@ -61,12 +57,12 @@ public class CompendiumService {
     }
 
     public void deleteCompendium(){
-        backgroundRepository.deleteAllBackgrounds();
-        traitRepository.deleteAllTraits();
-        raceRepository.deleteAllRaces();
-        characterClassRepository.deleteAllCharacterClasses();
-        spellRepository.deleteAllSpells();
-        itemRepository.deleteAllItems();
+        backgroundRepository.deleteAll();
+        //traitRepository.deleteAllTraits();
+        raceRepository.deleteAll();
+        characterClassRepository.deleteAll();
+        spellRepository.deleteAll();
+        itemRepository.deleteAll();
         compendiumRepository.deleteCompendium();
     }
 

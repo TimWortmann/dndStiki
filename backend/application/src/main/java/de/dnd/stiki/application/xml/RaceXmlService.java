@@ -21,7 +21,7 @@ public class RaceXmlService extends AbstractXmlService<RaceEntity, RaceRepositor
     @Override
     public void readAndCreateData(Document document) {
         List<RaceEntity> races = readDataList(document, "race");
-        repository.createRaces(races);
+        repository.save(races);
     }
 
     @Override

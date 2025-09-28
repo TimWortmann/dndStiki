@@ -2,7 +2,7 @@ package de.dnd.stiki.application;
 
 import de.dnd.stiki.adapters.characterClass.CharacterClassDto;
 import de.dnd.stiki.adapters.characterClass.CharacterClassEntityToDtoMapper;
-import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
+import de.dnd.stiki.domain.characterClass.CharacterClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,6 @@ public class CharacterClassService {
 
     public List<CharacterClassDto> getAllCharacterClasses() {
 
-        return entityToDtoMapper.mapEntitiesToDtos(repository.getAllCharacterClasses());
+        return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 }

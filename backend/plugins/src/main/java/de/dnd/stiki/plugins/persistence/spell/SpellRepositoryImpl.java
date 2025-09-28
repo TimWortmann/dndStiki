@@ -20,21 +20,21 @@ public class SpellRepositoryImpl implements SpellRepository {
     private SpellEntityToJpaMapper entityToJpaMapper;
 
     @Override
-    public List<SpellEntity> getAllSpells() {
+    public List<SpellEntity> getAll() {
         List<SpellJpa> jpaList = jpaRepository.findAll();
 
         return jpaToEntityMapper.mapJpasToEntities(jpaList);
     }
 
     @Override
-    public List<SpellEntity> createSpells(List<SpellEntity> entities) {
+    public List<SpellEntity> save(List<SpellEntity> entities) {
         List<SpellJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }
 
     @Override
-    public void deleteAllSpells() {
+    public void deleteAll() {
         jpaRepository.deleteAll();
     }
 }

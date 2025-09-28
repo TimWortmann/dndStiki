@@ -18,6 +18,6 @@ public class ItemService {
     private ItemEntityToDtoMapper entityToDtoMapper;
 
     public List<ItemDto> getAllItems() {
-        return entityToDtoMapper.mapEntitiesToDtos(repository.getAllItems());
+        return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 }

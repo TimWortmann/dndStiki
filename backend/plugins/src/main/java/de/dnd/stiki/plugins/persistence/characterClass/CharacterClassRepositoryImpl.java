@@ -1,7 +1,7 @@
 package de.dnd.stiki.plugins.persistence.characterClass;
 
 import de.dnd.stiki.domain.characterClass.CharacterClassEntity;
-import de.dnd.stiki.domain.characterClass.feature.CharacterClassRepository;
+import de.dnd.stiki.domain.characterClass.CharacterClassRepository;
 import de.dnd.stiki.plugins.persistence.basic.ability.AbilityJpaRepository;
 import de.dnd.stiki.plugins.persistence.basic.skill.SkillJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +29,21 @@ public class CharacterClassRepositoryImpl implements CharacterClassRepository {
     private SkillJpaRepository skillJpaRepository;
 
     @Override
-    public List<CharacterClassEntity> getAllCharacterClasses() {
+    public List<CharacterClassEntity> getAll() {
         List<CharacterClassJpa> jpaList = jpaRepository.findAll();
 
         return jpaToEntityMapper.mapJpasToEntities(jpaList);
     }
 
     @Override
-    public List<CharacterClassEntity> createCharacterClasses(List<CharacterClassEntity> entities) {
+    public List<CharacterClassEntity> save(List<CharacterClassEntity> entities) {
         List<CharacterClassJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }
 
     @Override
-    public void deleteAllCharacterClasses() {
+    public void deleteAll() {
         jpaRepository.deleteAll();
     }
 

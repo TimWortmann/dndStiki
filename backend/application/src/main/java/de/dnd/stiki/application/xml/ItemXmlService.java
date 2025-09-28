@@ -16,7 +16,7 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
     @Override
     public void readAndCreateData(Document document) {
         List<ItemEntity> items = readDataList(document, "item");
-        repository.saveItems(items);
+        repository.save(items);
     }
 
     @Override

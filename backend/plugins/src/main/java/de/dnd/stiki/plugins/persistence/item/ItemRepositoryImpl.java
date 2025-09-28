@@ -20,21 +20,21 @@ public class ItemRepositoryImpl implements ItemRepository {
     private ItemEntityToJpaMapper entityToJpaMapper;
 
     @Override
-    public List<ItemEntity> getAllItems() {
+    public List<ItemEntity> getAll() {
         List<ItemJpa> jpaList = jpaRepository.findAll();
 
         return jpaToEntityMapper.mapJpasToEntities(jpaList);
     }
 
     @Override
-    public List<ItemEntity> saveItems(List<ItemEntity> entities) {
+    public List<ItemEntity> save(List<ItemEntity> entities) {
         List<ItemJpa> jpaList = entityToJpaMapper.mapEntitiesToJpa(entities);
 
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.saveAll(jpaList));
     }
 
     @Override
-    public void deleteAllItems() {
+    public void deleteAll() {
         jpaRepository.deleteAll();
     }
 }

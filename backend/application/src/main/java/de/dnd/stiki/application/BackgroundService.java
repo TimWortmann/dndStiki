@@ -19,6 +19,6 @@ public class BackgroundService {
 
     public List<BackgroundDto> getAllBackgrounds() {
 
-        return entityToDtoMapper.mapEntitiesToDtos(repository.getAllBackgrounds());
+        return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 }

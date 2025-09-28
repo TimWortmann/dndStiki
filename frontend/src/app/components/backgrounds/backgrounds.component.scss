@@ -1,0 +1,5 @@
+.trait-cell {
+  display: inline-flex;       /* align children horizontally */
+  align-items: center;        /* vertical center */
+  gap: 0.25rem;               /* optional spacing between span and button */
+}
