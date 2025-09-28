@@ -4,7 +4,6 @@ import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -16,9 +15,8 @@ import java.util.List;
 public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, BackgroundRepository> {
 
     @Override
-    public void readAndCreateData(Document document) {
-        List<BackgroundEntity> backgrounds = readDataList(document, "background");
-        repository.save(backgrounds);
+    protected String getMainTagName() {
+        return "background";
     }
 
     @Override

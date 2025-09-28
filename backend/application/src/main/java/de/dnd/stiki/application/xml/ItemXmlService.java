@@ -3,7 +3,6 @@ package de.dnd.stiki.application.xml;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.item.ItemRepository;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;
@@ -12,11 +11,9 @@ import java.util.List;
 @Service
 public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepository> {
 
-
     @Override
-    public void readAndCreateData(Document document) {
-        List<ItemEntity> items = readDataList(document, "item");
-        repository.save(items);
+    protected String getMainTagName() {
+        return "item";
     }
 
     @Override

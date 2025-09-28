@@ -4,7 +4,6 @@ import de.dnd.stiki.domain.spell.SpellEntity;
 import de.dnd.stiki.domain.spell.SpellRepository;
 import de.dnd.stiki.domain.spell.SpellSchool;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;
@@ -14,9 +13,8 @@ import java.util.List;
 public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellRepository> {
 
     @Override
-    public void readAndCreateData(Document document) {
-        List<SpellEntity> spells = readDataList(document, "spell");
-        repository.save(spells);
+    protected String getMainTagName() {
+        return "spell";
     }
 
     @Override

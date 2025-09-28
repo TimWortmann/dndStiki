@@ -1,5 +1,6 @@
 package de.dnd.stiki.application.xml;
 
+import de.dnd.stiki.domain.AbstractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -11,12 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public abstract class AbstractXmlService <E, R>  {
+public abstract class AbstractXmlService <E, R extends AbstractRepository<E>>  {
 
     @Autowired
     R repository;
 
-    public abstract void readAndCreateData(Document document);
+    public void readAndCreateData(Document document) {
+        List<E> entities = readDataList(document, getMainTagName());
+        repository.save(entities);
+    }
+
+    protected abstract String getMainTagName();
 
     protected List<E> readDataList(Document document, String mainTagName) {
         List<E> dataList = new ArrayList<>();

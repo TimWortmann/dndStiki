@@ -3,9 +3,7 @@ package de.dnd.stiki.application.xml;
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.domain.trait.TraitEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -15,13 +13,9 @@ import java.util.List;
 @Service
 public class RaceXmlService extends AbstractXmlService<RaceEntity, RaceRepository> {
 
-    @Autowired
-    private RaceRepository repository;
-
     @Override
-    public void readAndCreateData(Document document) {
-        List<RaceEntity> races = readDataList(document, "race");
-        repository.save(races);
+    protected String getMainTagName() {
+        return "race";
     }
 
     @Override
