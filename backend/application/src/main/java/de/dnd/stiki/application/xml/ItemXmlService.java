@@ -1,12 +1,10 @@
 package de.dnd.stiki.application.xml;
 
-import de.dnd.stiki.domain.item.ItemEntity;
-import de.dnd.stiki.domain.item.ItemRepository;
-import de.dnd.stiki.domain.item.ItemType;
+import de.dnd.stiki.domain.item.*;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,13 +38,24 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
         }
         String concatinatedProperties = getTextByTagName(itemElement, "property");
         if (concatinatedProperties != null) {
-            List<String> properties = Arrays.asList(concatinatedProperties.split("\\s*,\\s*"));
-            itemEntity.setProperties(properties);
+            String[] properties = concatinatedProperties.split("\\s*,\\s*");
+
+            List<String> fullNameProperties = new ArrayList<>();
+            for (String property : properties) {
+                fullNameProperties.add(ItemProperty.fromShortName(property).toString());
+            }
+
+            itemEntity.setProperties(fullNameProperties);
         }
 
         itemEntity.setDmg1(getTextByTagName(itemElement, "dmg1"));
         itemEntity.setDmg2(getTextByTagName(itemElement, "dmg2"));
-        itemEntity.setDmgType(getTextByTagName(itemElement, "dmgType"));
+
+        String dmgType = getTextByTagName(itemElement, "dmgType");
+        if (dmgType != null) {
+            itemEntity.setDmgType(DamageType.fromShortName(dmgType).toString());
+        }
+
         itemEntity.setRange(getTextByTagName(itemElement, "range"));
 
         String ac = getTextByTagName(itemElement, "ac");

@@ -1,3 +1,7 @@
+<ng-template #propertiesTemplate let-column="column" let-element="element">
+  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
 <ng-template #detailsTemplate let-column="column" let-element="element">
   <div>
     <button mat-icon-button (click)="openDetailDialog(element)">

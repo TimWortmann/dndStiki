@@ -15,6 +15,7 @@ import { ItemDetailsPopupComponent } from './item-details-popup/item-details-pop
 })
 export class ItemsComponent {
 
+  @ViewChild('propertiesTemplate') propertiesTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
 
   data?: ItemValue[];
@@ -46,6 +47,13 @@ export class ItemsComponent {
         dataKey: 'type',
         position: 'left',
         isSortable: true
+      },
+      {
+        name: 'Properties',
+        dataKey: 'properties',
+        position: 'left',
+        isSortable: true,
+        template: this.propertiesTemplate
       },
       {
         name: 'Details',
