@@ -2,6 +2,7 @@ package de.dnd.stiki.application.xml;
 
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.item.ItemRepository;
+import de.dnd.stiki.domain.item.ItemType;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 
@@ -22,7 +23,11 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
 
         itemEntity.setName(getTextByTagName(itemElement, "name"));
         itemEntity.setDetail(getTextByTagName(itemElement, "detail"));
-        itemEntity.setType(getTextByTagName(itemElement, "type"));
+
+        String type = getTextByTagName(itemElement, "type");
+        if (type != null) {
+            itemEntity.setType(ItemType.fromShortName(type).toString());
+        }
 
         String weight = getTextByTagName(itemElement, "weight");
         if (weight != null) {
