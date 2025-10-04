@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -75,6 +76,15 @@ public abstract class AbstractXmlService <E, R extends AbstractRepository<E>>  {
         }
 
         return "YES".equals(booleanString);
+    }
+
+    protected List<String> getListByTagName(Element element, String tagName) {
+        String concatinatedList = getTextByTagName(element, tagName);
+        if (concatinatedList != null) {
+            return Arrays.asList(concatinatedList.split("\\s*,\\s*"));
+        }
+
+        return null;
     }
 
 }

@@ -31,12 +31,16 @@ public class CompendiumXmlService {
     @Autowired
     ItemXmlService itemXmlService;
 
+    @Autowired
+    FeatXmlService featXmlService;
+
     public void saveDataFromCompendium(CompendiumEntity compendiumEntity) {
 
         Document document = null;
 
         try {
             document = parseXmlToNormalizedDocument(compendiumEntity.getXmlContent());
+            featXmlService.readAndCreateData(document);
             backgroundXmlService.readAndCreateData(document);
             raceXmlService.readAndCreateData(document);
             characterClassXmlService.readAndCreateData(document);
