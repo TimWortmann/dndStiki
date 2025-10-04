@@ -8,7 +8,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -23,15 +22,8 @@ public class BackgroundXmlService extends AbstractXmlService<BackgroundEntity, B
     protected BackgroundEntity readData(Element backgroundElement) {
 
         BackgroundEntity backgroundEntity = new BackgroundEntity();
-
         backgroundEntity.setName(getTextByTagName(backgroundElement, "name"));
-
-        String concatinatedProficiencies = getTextByTagName(backgroundElement, "proficiency");
-        if (concatinatedProficiencies != null) {
-            List<String> proficiencies = Arrays.asList(concatinatedProficiencies.split("\\s*,\\s*"));
-            backgroundEntity.setProficiencies(proficiencies);
-        }
-
+        backgroundEntity.setProficiencies(getListByTagName(backgroundElement, "proficiency"));
         backgroundEntity.setTraits(getTraits(backgroundElement));
 
         return backgroundEntity;

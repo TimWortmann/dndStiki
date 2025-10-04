@@ -9,8 +9,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public abstract class AbstractXmlService <E, R extends AbstractRepository<E>>  {
@@ -79,11 +80,16 @@ public abstract class AbstractXmlService <E, R extends AbstractRepository<E>>  {
     }
 
     protected List<String> getListByTagName(Element element, String tagName) {
-        String concatinatedList = getTextByTagName(element, tagName);
-        if (concatinatedList != null) {
-            return Arrays.asList(concatinatedList.split("\\s*,\\s*"));
+        String concatenatedList = getTextByTagName(element, tagName);
+        if (concatenatedList != null) {
+            // Split on commas not inside parentheses
+            List<String> result = new ArrayList<>();
+            Matcher m = Pattern.compile("[^,(]+(?:\\([^)]*\\))?").matcher(concatenatedList);
+            while (m.find()) {
+                result.add(m.group().trim());
+            }
+            return result;
         }
-
         return null;
     }
 

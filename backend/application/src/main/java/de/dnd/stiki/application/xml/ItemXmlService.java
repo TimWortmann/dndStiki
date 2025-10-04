@@ -36,6 +36,7 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
         if (value != null) {
             itemEntity.setValue(Double.parseDouble(value));
         }
+
         String concatinatedProperties = getTextByTagName(itemElement, "property");
         if (concatinatedProperties != null) {
             String[] properties = concatinatedProperties.split("\\s*,\\s*");

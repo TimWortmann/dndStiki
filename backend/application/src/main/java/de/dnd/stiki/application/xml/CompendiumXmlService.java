@@ -36,16 +36,16 @@ public class CompendiumXmlService {
 
     public void saveDataFromCompendium(CompendiumEntity compendiumEntity) {
 
-        Document document = null;
+        Document document;
 
         try {
             document = parseXmlToNormalizedDocument(compendiumEntity.getXmlContent());
-            featXmlService.readAndCreateData(document);
             backgroundXmlService.readAndCreateData(document);
             raceXmlService.readAndCreateData(document);
             characterClassXmlService.readAndCreateData(document);
             spellXmlService.readAndCreateData(document);
             itemXmlService.readAndCreateData(document);
+            featXmlService.readAndCreateData(document);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

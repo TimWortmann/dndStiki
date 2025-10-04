@@ -3,6 +3,7 @@ package de.dnd.stiki.plugins.persistence;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -25,12 +26,14 @@ public abstract class AbstractJpaToEntityMapper <J, E> {
     public abstract E mapJpaToEntity(J jpa);
 
 
-    protected List<String> getListFromString(String concatinatedList) {
-        if (concatinatedList == null) {
+    protected List<String> getListFromString(String concatenatedList) {
+        if (concatenatedList == null) {
             return new ArrayList<>();
         }
 
-        String[] stringArray = concatinatedList.split("\\s*,\\s*");
-        return List.of(stringArray);
+        // Split on commas that are NOT inside parentheses
+        return Arrays.stream(concatenatedList.split(",(?![^()]*\\))"))
+                .map(String::trim)
+                .toList();
     }
 }

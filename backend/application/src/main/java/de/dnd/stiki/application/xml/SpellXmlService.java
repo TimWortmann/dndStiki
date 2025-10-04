@@ -6,9 +6,6 @@ import de.dnd.stiki.domain.spell.SpellSchool;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Service
 public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellRepository> {
 
@@ -36,22 +33,11 @@ public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellReposi
 
         spellEntity.setTime(getTextByTagName(spellElement, "time"));
         spellEntity.setRange(getTextByTagName(spellElement, "range"));
-
-        String concatinatedComponents = getTextByTagName(spellElement, "components");
-        if (concatinatedComponents != null) {
-            List<String> components = Arrays.asList(concatinatedComponents.split("\\s*,\\s*"));
-            spellEntity.setComponents(components);
-        }
-
+        spellEntity.setComponents(getListByTagName(spellElement, "components"));
         spellEntity.setDuration(getTextByTagName(spellElement, "duration"));
         spellEntity.setText(getTextByTagName(spellElement, "text"));
         spellEntity.setRoll(getTextByTagName(spellElement, "roll"));
-
-        String concatinatedClasses = getTextByTagName(spellElement, "classes");
-        if (concatinatedClasses != null) {
-            List<String> classes = Arrays.asList(concatinatedClasses.split("\\s*,\\s*"));
-            spellEntity.setClasses(classes);
-        }
+        spellEntity.setClasses(getListByTagName(spellElement, "classes"));
 
         return spellEntity;
     }
