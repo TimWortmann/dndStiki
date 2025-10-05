@@ -7,6 +7,7 @@ import { RacesComponent } from '../races/races.component';
 import { CharacterClassesComponent } from '../character-classes/character-classes.component';
 import { SpellsComponent } from '../spells/spells.component';
 import { ItemsComponent } from '../items/items.component';
+import { FeatsComponent } from '../feats/feats.component';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(CharacterClassesComponent) characterClassesComponent!: CharacterClassesComponent;
   @ViewChild(SpellsComponent) spellComponent!: SpellsComponent;
   @ViewChild(ItemsComponent) itemsComponent!: ItemsComponent;
+  @ViewChild(FeatsComponent) featsComponent!: ItemsComponent;
 
   compendiumFileName?: string;
 
@@ -54,5 +56,6 @@ export class HomeComponent implements OnInit {
     this.characterClassesComponent.pullDataFromBackend();
     this.spellComponent.pullDataFromBackend();
     this.itemsComponent.pullDataFromBackend();
+    this.featsComponent.pullDataFromBackend();
   }
 }

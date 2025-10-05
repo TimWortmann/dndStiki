@@ -32,6 +32,8 @@ import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsPopupComponent } from './components/items/item-details-popup/item-details-popup.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { FeatsComponent } from './components/feats/feats.component';
+import { FeatTextPopupComponent } from './components/feats/feat-text-popup/feat-text-popup.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { FormsModule } from '@angular/forms';
     SpellDetailsPopupComponent,
     ItemsComponent,
     ItemDetailsPopupComponent,
+    FeatsComponent,
+    FeatTextPopupComponent,
   ],
   imports: [
     BrowserModule,

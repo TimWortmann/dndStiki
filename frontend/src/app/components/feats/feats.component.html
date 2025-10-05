@@ -1,0 +1,26 @@
+<ng-template #listTemplate let-column="column" let-element="element">
+    <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
+<ng-template #textTemplate let-column="column" let-element="element">
+  <div>
+    <button mat-icon-button (click)="openDetailDialog(element)">
+      <mat-icon>info_outline</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #classesTemplate let-column="column" let-element="element">
+  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
+<h2>Feats</h2>
+
+<div *ngIf="data && data.length > 0">
+  <custom-table
+    [tableData]="data"
+    [tableColumns]="tableColumns"
+    [isFilterable]="true"
+    [isPageable]="true">
+  </custom-table>
+</div>

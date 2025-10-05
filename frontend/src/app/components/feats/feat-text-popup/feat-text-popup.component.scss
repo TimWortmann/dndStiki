@@ -1,0 +1,35 @@
+h1 {
+  margin-bottom: 2%;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 2%;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.text {
+  white-space: pre-line;
+  margin: 0 0 1em 0;
+  line-height: 1.5;
+  font-size: 1.0rem;
+}
+
+.infos > div {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
