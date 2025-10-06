@@ -23,7 +23,7 @@ public class CompendiumXmlService {
     RaceXmlService raceXmlService;
 
     @Autowired
-    CharacterClassXmlService characterClassXmlService;
+    DndClassXmlService dndClassXmlService;
 
     @Autowired
     SpellXmlService spellXmlService;
@@ -42,7 +42,7 @@ public class CompendiumXmlService {
             document = parseXmlToNormalizedDocument(compendiumEntity.getXmlContent());
             backgroundXmlService.readAndCreateData(document);
             raceXmlService.readAndCreateData(document);
-            characterClassXmlService.readAndCreateData(document);
+            dndClassXmlService.readAndCreateData(document);
             spellXmlService.readAndCreateData(document);
             itemXmlService.readAndCreateData(document);
             featXmlService.readAndCreateData(document);

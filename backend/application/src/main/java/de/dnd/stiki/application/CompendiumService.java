@@ -2,7 +2,7 @@ package de.dnd.stiki.application;
 
 import de.dnd.stiki.application.xml.CompendiumXmlService;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import de.dnd.stiki.domain.characterClass.CharacterClassRepository;
+import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.compendium.CompendiumEntity;
 import de.dnd.stiki.domain.compendium.CompendiumRepository;
 import de.dnd.stiki.domain.feat.FeatRepository;
@@ -32,7 +32,7 @@ public class CompendiumService {
     private RaceRepository raceRepository;
 
     @Autowired
-    private CharacterClassRepository characterClassRepository;
+    private DndClassRepository dndClassRepository;
 
     @Autowired
     SpellRepository spellRepository;
@@ -63,7 +63,7 @@ public class CompendiumService {
     public void deleteCompendium(){
         backgroundRepository.deleteAll();
         raceRepository.deleteAll();
-        characterClassRepository.deleteAll();
+        dndClassRepository.deleteAll();
         spellRepository.deleteAll();
         itemRepository.deleteAll();
         featRepository.deleteAll();
