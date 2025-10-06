@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { CharacterClassValue } from '../../../models/character-class-value';
+import { DndClassValue } from '../../../models/dnd-class-value';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TraitPopupComponent } from '../../trait-popup/trait-popup.component';
 import { ClassLevelValue } from '../../../models/class-level-value';
@@ -12,13 +12,13 @@ import { ClassLevelValue } from '../../../models/class-level-value';
 })
 export class ClassDetailsPopupComponent {
 
-  characterClass! : CharacterClassValue;
+  dndClass! : DndClassValue;
 
   constructor(
     public dialogRef: MatDialogRef<ClassDetailsPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){
-    this.characterClass = data;
+    this.dndClass = data;
   }
 
   close(): void {

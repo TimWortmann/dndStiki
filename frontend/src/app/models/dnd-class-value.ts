@@ -1,7 +1,7 @@
 import { ClassLevelValue } from "./class-level-value";
 import { TraitValue } from "./trait-value";
 
-export interface CharacterClassValue {
+export interface DndClassValue {
   name: string;
   hitDice: number;
   savingThrowProficiencies: string[];

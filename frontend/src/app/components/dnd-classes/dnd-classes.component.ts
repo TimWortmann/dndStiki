@@ -1,30 +1,28 @@
 import { AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BackgroundValue } from '../../models/background-value';
 import { TableColumnValue } from '../../models/table-column-value';
-import { BackgroundService } from '../../services/background/background.service';
 import { TableService } from '../../services/table/table.service';
-import { CharacterClassValue } from '../../models/character-class-value';
-import { CharacterClassesService } from '../../services/character-classes/character-classes.service';
+import { DndClassValue } from '../../models/dnd-class-value';
+import { DndClassService } from '../../services/dnd-class/dnd-class.service';
 import { ClassDetailsPopupComponent } from './class-details-popup/class-details-popup.component';
 
 @Component({
-  selector: 'app-character-classes',
+  selector: 'app-dnd-classes',
   standalone: false,
-  templateUrl: './character-classes.component.html',
-  styleUrl: './character-classes.component.scss'
+  templateUrl: './dnd-classes.component.html',
+  styleUrl: './dnd-classes.component.scss'
 })
-export class CharacterClassesComponent implements AfterViewInit {
+export class DndClassesComponent implements AfterViewInit {
 
   @ViewChild('proficiencyTemplate') proficiencyTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
 
-  data?: CharacterClassValue[];
+  data?: DndClassValue[];
   tableColumns: TableColumnValue[] = [];
 
   constructor(
     private tableService: TableService,
-    private characterClassService: CharacterClassesService, 
+    private dndClassService: DndClassService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ){}
@@ -73,7 +71,7 @@ export class CharacterClassesComponent implements AfterViewInit {
   }
 
   pullDataFromBackend() {
-    this.characterClassService.getAllCharacterClasses().subscribe((response) => {
+    this.dndClassService.getAllDndClasses().subscribe((response) => {
         this.data = response;
         this.cdr.detectChanges();
       });

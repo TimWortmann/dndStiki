@@ -24,8 +24,6 @@ import { TraitPopupComponent } from './components/trait-popup/trait-popup.compon
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BackgroundsComponent } from './components/backgrounds/backgrounds.component';
 import { RacesComponent } from './components/races/races.component';
-import { CharacterClassesComponent } from './components/character-classes/character-classes.component';
-import { ClassDetailsPopupComponent } from './components/character-classes/class-details-popup/class-details-popup.component';
 import { SpellsComponent } from './components/spells/spells.component';
 import { SpellDetailsPopupComponent } from './components/spells/spell-details-popup/spell-details-popup.component';
 import { ItemsComponent } from './components/items/items.component';
@@ -34,6 +32,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { FeatsComponent } from './components/feats/feats.component';
 import { FeatTextPopupComponent } from './components/feats/feat-text-popup/feat-text-popup.component';
+import { DndClassesComponent } from './components/dnd-classes/dnd-classes.component';
+import { ClassDetailsPopupComponent } from './components/dnd-classes/class-details-popup/class-details-popup.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { FeatTextPopupComponent } from './components/feats/feat-text-popup/feat-
     TraitPopupComponent,
     BackgroundsComponent,
     RacesComponent,
-    CharacterClassesComponent,
+    DndClassesComponent,
     ClassDetailsPopupComponent,
     SpellsComponent,
     SpellDetailsPopupComponent,

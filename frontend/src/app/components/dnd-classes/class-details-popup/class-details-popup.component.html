@@ -1,27 +1,27 @@
 <div mat-dialog-content class="dialog-content">
-    <h1 mat-dialog-title>Class Details ({{characterClass.name}})</h1>
+    <h1 mat-dialog-title>Class Details ({{dndClass.name}})</h1>
     
     <div class="infos">
         <div>
             <h2> Basic Infos </h2>
-             <div class="flex" *ngIf="characterClass.hitDice">
+             <div class="flex" *ngIf="dndClass.hitDice">
                  <h3>Hit Dice:</h3>
-                 <p>{{characterClass.hitDice}}</p>
+                 <p>{{dndClass.hitDice}}</p>
             </div>
 
-            <div class="flex" *ngIf="characterClass.spellAbility">
+            <div class="flex" *ngIf="dndClass.spellAbility">
                 <h3>Spell Ability:</h3>
-                <p>{{characterClass.spellAbility}}</p>
+                <p>{{dndClass.spellAbility}}</p>
             </div>
             
-            <div class="flex" *ngIf="characterClass.wealth">
+            <div class="flex" *ngIf="dndClass.wealth">
                 <h3>Wealth:</h3>
-                <p>{{characterClass.wealth}}</p>
+                <p>{{dndClass.wealth}}</p>
             </div>
 
-             <div class="flex" *ngIf="characterClass.numberOfSkillProficiencies">
+             <div class="flex" *ngIf="dndClass.numberOfSkillProficiencies">
                  <h3>Number of Skill Proficiencies:</h3>
-                 <p>{{characterClass.numberOfSkillProficiencies}}</p>
+                 <p>{{dndClass.numberOfSkillProficiencies}}</p>
              </div>
         </div>
 
@@ -29,34 +29,34 @@
 
         <div>  
             <h2> Proficiencies </h2>
-            <div class="flex" *ngIf="characterClass.savingThrowProficiencies[0] !== 'none'">
+            <div class="flex" *ngIf="dndClass.savingThrowProficiencies[0] !== 'none'">
                  <h3>Saving Throws:</h3>
-                 <p>{{getFancyListString(characterClass.savingThrowProficiencies)}}</p>
+                 <p>{{getFancyListString(dndClass.savingThrowProficiencies)}}</p>
              </div>
-             <div class="flex" *ngIf="characterClass.skillProficiencies[0] !== 'none'">
+             <div class="flex" *ngIf="dndClass.skillProficiencies[0] !== 'none'">
                  <h3>Skills:</h3>
-                 <p>{{getFancyListString(characterClass.skillProficiencies)}}</p>
+                 <p>{{getFancyListString(dndClass.skillProficiencies)}}</p>
              </div>
-             <div class="flex" *ngIf="characterClass.weaponProficiencies[0] !== 'none'">
+             <div class="flex" *ngIf="dndClass.weaponProficiencies[0] !== 'none'">
                  <h3>Weapons:</h3>
-                 <p>{{getFancyListString(characterClass.weaponProficiencies)}}</p>
+                 <p>{{getFancyListString(dndClass.weaponProficiencies)}}</p>
              </div>
-             <div class="flex" *ngIf="characterClass.armorProficiencies[0] !== 'none'">
+             <div class="flex" *ngIf="dndClass.armorProficiencies[0] !== 'none'">
                  <h3>Armor:</h3>
-                 <p>{{getFancyListString(characterClass.armorProficiencies)}}</p>
+                 <p>{{getFancyListString(dndClass.armorProficiencies)}}</p>
              </div>
-            <div class="flex" *ngIf="characterClass.toolProficiencies[0] !== 'none'">
+            <div class="flex" *ngIf="dndClass.toolProficiencies[0] !== 'none'">
                 <h3>Tools:</h3>
-                <p>{{getFancyListString(characterClass.toolProficiencies)}}</p>
+                <p>{{getFancyListString(dndClass.toolProficiencies)}}</p>
              </div>
         </div>
 
-        <p *ngIf="characterClass.traits && characterClass.traits.length > 0"></p>
+        <p *ngIf="dndClass.traits && dndClass.traits.length > 0"></p>
 
-        <div *ngIf="characterClass.traits && characterClass.traits.length > 0">
+        <div *ngIf="dndClass.traits && dndClass.traits.length > 0">
              <h2> Traits </h2>
              <mat-accordion>
-                <mat-expansion-panel *ngFor="let trait of characterClass.traits">
+                <mat-expansion-panel *ngFor="let trait of dndClass.traits">
                 <mat-expansion-panel-header>
                     <mat-panel-title>{{ trait.name }}</mat-panel-title>
                 </mat-expansion-panel-header>
@@ -70,7 +70,7 @@
         <div>
             <h2> Levels </h2>
             <mat-accordion>
-                <mat-expansion-panel *ngFor="let classLevel of characterClass.classLevels">
+                <mat-expansion-panel *ngFor="let classLevel of dndClass.classLevels">
                     <mat-expansion-panel-header>
                         <mat-panel-title *ngIf="classLevel.scoreImprovement == undefined || classLevel.scoreImprovement == false">Level {{ classLevel.level}} </mat-panel-title>
                         <mat-panel-title *ngIf="classLevel.scoreImprovement == true">Level {{ classLevel.level}} (Score Improvement) </mat-panel-title>
