@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "CHARACTER_CLASS", schema = "DND_STIKI")
+@Table(name = "DND_CLASS", schema = "DND_STIKI")
 public class DndClassJpa {
 
     @Id
@@ -23,9 +23,9 @@ public class DndClassJpa {
     @JoinTable(
             name = "CLASS_ABILITY",
             schema = "DND_STIKI",
-            joinColumns = @JoinColumn(name = "CHARACTER_CLASS_NAME"),
+            joinColumns = @JoinColumn(name = "DND_CLASS_NAME"),
             inverseJoinColumns = @JoinColumn(name = "ABILITY_NAME"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"CHARACTER_CLASS_NAME", "ABILITY_NAME"})
+            uniqueConstraints = @UniqueConstraint(columnNames = {"DND_CLASS_NAME", "ABILITY_NAME"})
     )
     private List<AbilityJpa> savingThrowProficiencies;
 
@@ -33,9 +33,9 @@ public class DndClassJpa {
     @JoinTable(
             name = "CLASS_SKILL",
             schema = "DND_STIKI",
-            joinColumns = @JoinColumn(name = "CHARACTER_CLASS_NAME"),
+            joinColumns = @JoinColumn(name = "DND_CLASS_NAME"),
             inverseJoinColumns = @JoinColumn(name = "SKILL_NAME"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"CHARACTER_CLASS_NAME", "SKILL_NAME"})
+            uniqueConstraints = @UniqueConstraint(columnNames = {"DND_CLASS_NAME", "SKILL_NAME"})
     )
     private  List<SkillJpa> skillProficiencies;
 
@@ -59,7 +59,7 @@ public class DndClassJpa {
     private AbilityJpa spellAbility;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "CHARACTER_CLASS", referencedColumnName = "NAME")
+    @JoinColumn(name = "DND_CLASS", referencedColumnName = "NAME")
     private List <ClassLevelJpa> classLevels;
 
     @OneToMany(cascade = CascadeType.ALL)
