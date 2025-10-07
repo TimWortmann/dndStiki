@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="header vertical-flex">
     <ng-container *ngIf="!characterNameChangeActive">
       <h1> {{characterName}} </h1>
@@ -19,7 +18,6 @@
       </mat-form-field>
     </ng-container>
   </div>
-
 
   <div class="vertical-flex">
 
@@ -85,5 +83,9 @@
              </button>
          </div>
     </div>
+  </div>
+
+  <div>
+    <button mat-raised-button color="primary" [routerLink]="['/']"> Main Page </button>
   </div>
 </div>
