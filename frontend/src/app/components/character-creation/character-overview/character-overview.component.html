@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="header vertical-flex">
-    <ng-container *ngIf="!characterNameChangeIsActive">
+    <ng-container *ngIf="!characterNameChangeActive">
       <h1> {{characterName}} </h1>
       <button mat-icon-button color="primary" (click)="changeNameState()">
         <mat-icon>edit</mat-icon>
       </button>
     </ng-container>
 
-    <ng-container *ngIf="characterNameChangeIsActive">
+    <ng-container *ngIf="characterNameChangeActive">
       <mat-form-field appearance="outline">
         <mat-label>Character Name</mat-label>
         <input matInput placeholder="Enter your character's name" [(ngModel)]="characterName" (keydown.enter)="changeNameState()">
@@ -23,24 +23,67 @@
 
   <div class="vertical-flex">
 
-    <mat-form-field>
-        <mat-label>Class</mat-label>
-        <mat-select required [(ngModel)]="selectedClass">
-            <mat-option [value]="selectedClass">{{ selectedClass }} </mat-option>
-            <ng-container *ngFor="let class of allClasses"> 
-                <mat-option *ngIf="class.name !== selectedClass" [value]="class.name"> {{class.name}} </mat-option>
-            </ng-container>
-        </mat-select>
-    </mat-form-field>
+    <div>
+        <mat-checkbox [(ngModel)]="classesSorted" [disabled]="!classChangeActive">Sort alphabetically</mat-checkbox>
+         <div class="vertical-flex">
+             <mat-form-field>
+                 <mat-label>Class</mat-label>
+                 <mat-select required [(ngModel)]="selectedClass" [disabled]="!classChangeActive">
+                     <mat-option [value]="selectedClass">{{ selectedClass }} </mat-option>
+                     <ng-container *ngFor="let class of getPotentiallySortedData(allClasses, classesSorted)"> 
+                         <mat-option *ngIf="class.name !== selectedClass" [value]="class.name"> {{class.name}} </mat-option>
+                     </ng-container>
+                 </mat-select>
+             </mat-form-field>
+             <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="!classChangeActive">
+                 <mat-icon>edit</mat-icon>
+             </button>
+             <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="classChangeActive">
+                 <mat-icon>save</mat-icon>
+             </button>
+         </div>
+    </div>
 
-    <mat-form-field>
-        <mat-label>Background</mat-label>
-        <mat-select required [(ngModel)]="selectedBackground">
-            <mat-option [value]="selectedBackground">{{ selectedBackground }} </mat-option>
-            <ng-container *ngFor="let Background of allBackgrounds"> 
-                <mat-option *ngIf="Background.name !== selectedBackground" [value]="Background.name"> {{Background.name}} </mat-option>
-            </ng-container>
-        </mat-select>
-    </mat-form-field>
+    <div>
+        <mat-checkbox [(ngModel)]="backgroundsSorted" [disabled]="!backgroundChangeActive">Sort alphabetically</mat-checkbox>
+        <div class="vertical-flex">
+            <mat-form-field>
+                <mat-label>Background</mat-label>
+                <mat-select required [(ngModel)]="selectedBackground" [disabled]="!backgroundChangeActive">
+                    <mat-option [value]="selectedBackground">{{ selectedBackground }} </mat-option>
+                    <ng-container *ngFor="let Background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)"> 
+                        <mat-option *ngIf="Background.name !== selectedBackground" [value]="Background.name"> {{Background.name}} </mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+            <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="!backgroundChangeActive">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="backgroundChangeActive">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <mat-checkbox [(ngModel)]="racesSorted" [disabled]="!raceChangeActive">Sort alphabetically</mat-checkbox>
+         <div class="vertical-flex">
+             <mat-form-field>
+                 <mat-label>Races</mat-label>
+                 <mat-select required [(ngModel)]="selectedRace" [disabled]="!raceChangeActive">
+                     <mat-option [value]="selectedRace">{{ selectedRace }} </mat-option>
+                     <ng-container *ngFor="let Race of getPotentiallySortedData(allRaces, racesSorted)"> 
+                         <mat-option *ngIf="Race.name !== selectedRace" [value]="Race.name"> {{Race.name}} </mat-option>
+                     </ng-container>
+                 </mat-select>
+             </mat-form-field>
+             <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="!raceChangeActive">
+                 <mat-icon>edit</mat-icon>
+             </button>
+             <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="raceChangeActive">
+                 <mat-icon>save</mat-icon>
+             </button>
+         </div>
+    </div>
   </div>
 </div>

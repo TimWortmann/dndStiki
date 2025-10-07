@@ -4,6 +4,8 @@ import { response } from 'express';
 import { DndClassValue } from '../../../models/dnd-class-value';
 import { BackgroundService } from '../../../services/background/background.service';
 import { BackgroundValue } from '../../../models/background-value';
+import { RaceService } from '../../../services/race/race.service';
+import { RaceValue } from '../../../models/race-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -12,46 +14,82 @@ import { BackgroundValue } from '../../../models/background-value';
   styleUrl: './character-overview.component.scss'
 })
 export class CharacterOverviewComponent implements OnInit {
+onClassSelected(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
   characterName : string = "Togil";
-  characterNameChangeIsActive : boolean = false;
+  characterNameChangeActive : boolean = false;
   
-  selectedClass: string = 'Class';
-  selectedBackground: string = 'Background';
-
+  
+  selectedClass: string = 'Old Class';
   allClasses! : DndClassValue[];
+  classesSorted: boolean = false;
+  classChangeActive : boolean = false;
+  
+  selectedBackground: string = 'Old Background';
   allBackgrounds! : BackgroundValue[];
+  backgroundsSorted: boolean = false;
+  backgroundChangeActive : boolean = false;
+  
+  selectedRace: string = 'Old Race/Species'
+  allRaces! : RaceValue[];
+  racesSorted: boolean = false;
+  raceChangeActive : boolean = false;
 
   constructor(
     private dndClassService: DndClassService, 
     private backgroundService: BackgroundService,
+    private raceService: RaceService,
   ){}
 
   ngOnInit(): void {
-    this.getAllClasses();
-    this.getAllBackgrounds();
+    this.readAllClasses();
+    this.readAllBackgrounds();
+    this.readAllRaces();
   }
 
   changeNameState() {
     if (this.characterName !== "") {
-      this.characterNameChangeIsActive = ! this.characterNameChangeIsActive;
+      this.characterNameChangeActive = ! this.characterNameChangeActive;
     }
   }
 
-  getAllClasses() {
+  readAllClasses() {
     this.dndClassService.getAllDndClasses().subscribe((response) => {
       this.allClasses = response;
     })
   }
 
- showDefaultClass(): boolean {
-    if (!this.allClasses) return true; // still loading
-    return !this.allClasses.some(c => c.name === this.selectedClass);
-  }
-
-  getAllBackgrounds() {
+  readAllBackgrounds() {
     this.backgroundService.getAllBackgrounds().subscribe((response) => {
       this.allBackgrounds = response;
     })
+  }
+
+  readAllRaces() {
+    this.raceService.getAllRaces().subscribe((response) => {
+      this.allRaces = response;
+    })
+  }
+
+  getPotentiallySortedData(data : any[], sorted : boolean) : DndClassValue[] {
+    if (sorted) {
+      return [...data].sort((a, b) => a.name.localeCompare(b.name));  
+    }
+
+    return data;
+  }
+
+  changeClassState() {
+    this.classChangeActive = !this.classChangeActive;
+  }
+
+  changeBackgroundState() {
+    this.backgroundChangeActive = !this.backgroundChangeActive;
+  }
+
+  changeRaceState() {
+    this.raceChangeActive = !this.raceChangeActive;
   }
 }
