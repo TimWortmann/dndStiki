@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { CharacterOverviewComponent } from './components/character-creation/character-overview/character-overview.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }, // default route (start page)
-  { path: '**', redirectTo: '' }          // fallback for unknown routes
+  { path: '', component: HomeComponent }, 
+  { path: 'character', component: CharacterOverviewComponent},
+  { path: '**', redirectTo: '' }   
 ];
 
 @NgModule({

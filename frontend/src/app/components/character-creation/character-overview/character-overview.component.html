@@ -1,0 +1,46 @@
+<div class="container">
+
+  <div class="header vertical-flex">
+    <ng-container *ngIf="!characterNameChangeIsActive">
+      <h1> {{characterName}} </h1>
+      <button mat-icon-button color="primary" (click)="changeNameState()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="characterNameChangeIsActive">
+      <mat-form-field appearance="outline">
+        <mat-label>Character Name</mat-label>
+        <input matInput placeholder="Enter your character's name" [(ngModel)]="characterName" (keydown.enter)="changeNameState()">
+        <button mat-icon-button matSuffix color="primary" 
+        (click)="changeNameState(); $event.stopPropagation(); $event.preventDefault();">
+          <mat-icon>save</mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+  </div>
+
+
+  <div class="vertical-flex">
+
+    <mat-form-field>
+        <mat-label>Class</mat-label>
+        <mat-select required [(ngModel)]="selectedClass">
+            <mat-option [value]="selectedClass">{{ selectedClass }} </mat-option>
+            <ng-container *ngFor="let class of allClasses"> 
+                <mat-option *ngIf="class.name !== selectedClass" [value]="class.name"> {{class.name}} </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Background</mat-label>
+        <mat-select required [(ngModel)]="selectedBackground">
+            <mat-option [value]="selectedBackground">{{ selectedBackground }} </mat-option>
+            <ng-container *ngFor="let Background of allBackgrounds"> 
+                <mat-option *ngIf="Background.name !== selectedBackground" [value]="Background.name"> {{Background.name}} </mat-option>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+  </div>
+</div>

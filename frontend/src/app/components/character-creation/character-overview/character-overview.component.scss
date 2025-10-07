@@ -1,0 +1,22 @@
+.container {
+  margin-top: 1em;
+  margin-left: 10em;
+  margin-right: 10em;
+  padding-bottom: 3em; /* gives space below spells accordion */
+}
+
+.header {
+    margin-bottom: 2em;
+}
+
+.vertical-flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vertical-flex mat-form-field {
+  width: 500px; /* adjust as needed */
+}
+
+

@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSelectModule} from '@angular/material/select';
 
 
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
@@ -34,6 +35,7 @@ import { FeatsComponent } from './components/feats/feats.component';
 import { FeatTextPopupComponent } from './components/feats/feat-text-popup/feat-text-popup.component';
 import { DndClassesComponent } from './components/dnd-classes/dnd-classes.component';
 import { ClassDetailsPopupComponent } from './components/dnd-classes/class-details-popup/class-details-popup.component';
+import { CharacterOverviewComponent } from './components/character-creation/character-overview/character-overview.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ClassDetailsPopupComponent } from './components/dnd-classes/class-detai
     ItemDetailsPopupComponent,
     FeatsComponent,
     FeatTextPopupComponent,
+    CharacterOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { ClassDetailsPopupComponent } from './components/dnd-classes/class-detai
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatSelectModule,
     FormsModule,    
 ],
   providers: [
