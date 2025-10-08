@@ -104,11 +104,11 @@
          </div>
         <div class="vertical-flex">
           <button mat-icon-button color="primary">
-            <mat-icon>settings</mat-icon>
+            <mat-icon>edit</mat-icon>
           </button>
           <p> {{character.currentHealth}} / {{character.maxHealth}}</p>
           <button mat-icon-button color="primary">
-            <mat-icon>edit</mat-icon>
+            <mat-icon>settings</mat-icon>
           </button>
         </div>
         <mat-progress-bar mode="determinate"  class="health-progress" [value]="getProcentualHealth()"></mat-progress-bar>
@@ -118,11 +118,11 @@
         <h3> Hit Dice </h3>
         <div class="vertical-flex">
           <button mat-icon-button color="primary">
-            <mat-icon>settings</mat-icon>
+            <mat-icon>edit</mat-icon>
           </button>
           <p>{{character.currentHitDice}} / {{character.maxHitDice}}d{{character.hitDice}}</p>
           <button mat-icon-button color="primary">
-            <mat-icon>edit</mat-icon>
+            <mat-icon>settings</mat-icon>
           </button>
         </div>
         <mat-progress-bar mode="determinate" [value]="getProcentualHitDice()"></mat-progress-bar>
