@@ -35,7 +35,7 @@
          <div class="vertical-flex">
              <mat-form-field>
                  <mat-label>Class</mat-label>
-                 <mat-select required [(ngModel)]="character.dndClass" [disabled]="!classChangeActive">
+                 <mat-select [(ngModel)]="character.dndClass" [disabled]="!classChangeActive">
                      <mat-option [value]="character.dndClass">{{ character.dndClass }} </mat-option>
                      <ng-container *ngFor="let class of getPotentiallySortedData(allClasses, classesSorted)"> 
                          <mat-option *ngIf="class.name !== character.dndClass" [value]="class.name"> {{class.name}} </mat-option>
