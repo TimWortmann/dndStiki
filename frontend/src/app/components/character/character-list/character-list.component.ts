@@ -4,6 +4,8 @@ import { CharacterService } from '../../../services/character/character.service'
 import { TableColumnValue } from '../../../models/table-column-value';
 import { TableService } from '../../../services/table/table.service';
 import { Router } from '@angular/router';
+import { CharacterCreationComponent } from '../character-creation/character-creation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-character-list',
@@ -19,10 +21,10 @@ export class CharacterListComponent {
   tableColumns: TableColumnValue[] = [];
 
   constructor(
-    private tableService: TableService,
     private characterService: CharacterService, 
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private dialog: MatDialog,
   ){}
 
   ngAfterViewInit(): void {
@@ -75,6 +77,13 @@ export class CharacterListComponent {
   }
 
   openCharacterCreationDialog() {
+    const dialogRef = this.dialog.open(CharacterCreationComponent, {
+        width: '60vw',     
+        height: '60vh',     
+        maxWidth: '60vw',  
+        maxHeight: '60vh',  
+        autoFocus: false,
+      });
 
   }
 }

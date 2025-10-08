@@ -23,7 +23,7 @@ export class DndClassesComponent implements AfterViewInit {
   constructor(
     private tableService: TableService,
     private dndClassService: DndClassService, 
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ){}
 

@@ -38,8 +38,9 @@ import { FeatsComponent } from './components/feats/feats.component';
 import { FeatTextPopupComponent } from './components/feats/feat-text-popup/feat-text-popup.component';
 import { DndClassesComponent } from './components/dnd-classes/dnd-classes.component';
 import { ClassDetailsPopupComponent } from './components/dnd-classes/class-details-popup/class-details-popup.component';
-import { CharacterOverviewComponent } from './components/character-creation/character-overview/character-overview.component';
-import { CharacterListComponent } from './components/character-creation/character-list/character-list.component';
+import { CharacterOverviewComponent } from './components/character/character-overview/character-overview.component';
+import { CharacterListComponent } from './components/character/character-list/character-list.component';
+import { CharacterCreationComponent } from './components/character/character-creation/character-creation.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CharacterListComponent } from './components/character-creation/characte
     FeatTextPopupComponent,
     CharacterOverviewComponent,
     CharacterListComponent,
+    CharacterCreationComponent,
   ],
   imports: [
     BrowserModule,

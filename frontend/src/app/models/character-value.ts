@@ -1,5 +1,5 @@
 export interface CharacterValue {
-    id: number;
+    id: number | undefined;
     name: string; 
     level: number;
     dndClass: string;

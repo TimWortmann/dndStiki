@@ -1,0 +1,70 @@
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Create Character</h1>
+    
+    <div class="infos">
+        <div>
+            <h2> Name </h2>
+            <mat-form-field appearance="outline">
+               <input matInput [(ngModel)]="characterValue.name" placeholder="Enter your character's name">
+            </mat-form-field>
+        </div>
+
+        <p></p>
+
+        <div>
+            <h2> Class </h2>
+            <mat-checkbox [(ngModel)]="classesSorted">Sort alphabetically</mat-checkbox>
+            <p></p>
+            <mat-form-field appearance="fill">
+                <mat-select required [(ngModel)]="characterValue.dndClass">
+                    <mat-option *ngFor="let dndClass of getPotentiallySortedData(allClasses, classesSorted)" [value]="dndClass.name">
+                    {{ dndClass.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <p></p>
+
+        <div>
+            <h2> Background </h2>
+            <mat-checkbox [(ngModel)]="backgroundsSorted">Sort alphabetically</mat-checkbox>
+            <p></p>
+            <mat-form-field appearance="fill">
+                <mat-select required [(ngModel)]="characterValue.background">
+                    <mat-option *ngFor="let background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)" [value]="background.name">
+                    {{ background.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <p></p>
+
+        <div>
+            <h2> Race </h2>
+            <mat-checkbox [(ngModel)]="racesSorted">Sort alphabetically</mat-checkbox>
+            <p></p>
+            <mat-form-field appearance="fill">
+                <mat-select required [(ngModel)]="characterValue.race">
+                    <mat-option *ngFor="let race of getPotentiallySortedData(allRaces, racesSorted)" [value]="race.name">
+                    {{ race.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+    <button mat-flat-button color="primary" (click)="create()">Create</button>
+</div>
+
+
+
+
+
+
+
+
