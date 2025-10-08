@@ -16,6 +16,9 @@ public class CharacterJpa {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "LEVEL")
+    private Integer level;
+
     @Column(name = "DND_CLASS")
     private String dndClass;
 
@@ -75,6 +78,14 @@ public class CharacterJpa {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getDndClass() {

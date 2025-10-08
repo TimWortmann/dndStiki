@@ -23,6 +23,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
 
         entity.setId(jpa.getId());
         entity.setName(jpa.getName());
+        entity.setLevel(jpa.getLevel());
         entity.setDndClass(jpa.getDndClass());
         entity.setBackground(jpa.getBackground());
         entity.setRace(jpa.getRace());

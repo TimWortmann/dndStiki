@@ -1,0 +1,18 @@
+<ng-template #detailsTemplate let-column="column" let-element="element">
+  <button mat-icon-button (click)="openCharacterDetails(element.id)">
+    <mat-icon>info_outline</mat-icon>
+  </button>
+</ng-template>
+
+<h2>Characters</h2>
+
+<div *ngIf="data && data.length > 0">
+  <custom-table
+    [tableData]="data"
+    [tableColumns]="tableColumns"
+    [isFilterable]="true"
+    [isPageable]="true">
+  </custom-table>
+</div>
+
+<button mat-flat-button color="primary" (click)="openCharacterCreationDialog()"> Create Character</button>

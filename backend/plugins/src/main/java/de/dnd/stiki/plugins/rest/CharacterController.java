@@ -15,7 +15,7 @@ public class CharacterController {
     @Autowired
     CharacterService service;
 
-    @GetMapping("/all")
+    @GetMapping()
     public ResponseEntity<List<CharacterDto>> getAll() {
         return ResponseEntity.ok().body(service.getAll());
     }
@@ -35,8 +35,8 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.save(characterDto));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> create(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> create(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }

@@ -5,7 +5,11 @@ import { CharacterOverviewComponent } from './components/character-creation/char
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, 
-  { path: 'character', component: CharacterOverviewComponent},
+  { 
+    path: 'character/:id', 
+    component: CharacterOverviewComponent,
+    data: { renderMode: 'client' } // ⬅️ Disable prerendering for dynamic route
+  },
   { path: '**', redirectTo: '' }   
 ];
 

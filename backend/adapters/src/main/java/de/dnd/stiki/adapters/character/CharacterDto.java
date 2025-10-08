@@ -10,6 +10,8 @@ public class CharacterDto {
 
     private String name;
 
+    private Integer level;
+
     private String dndClass;
 
     private String background;
@@ -53,6 +55,14 @@ public class CharacterDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getDndClass() {

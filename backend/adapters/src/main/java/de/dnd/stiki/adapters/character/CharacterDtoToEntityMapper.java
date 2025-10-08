@@ -13,6 +13,7 @@ public class CharacterDtoToEntityMapper extends AbstractDtoToEntityMapper<Charac
 
         entity.setId(dto.getId());
         entity.setName(dto.getName());
+        entity.setLevel(dto.getLevel());
         entity.setDndClass(dto.getDndClass());
         entity.setBackground(dto.getBackground());
         entity.setRace(dto.getRace());
