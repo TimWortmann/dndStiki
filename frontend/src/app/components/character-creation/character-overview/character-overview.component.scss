@@ -1,4 +1,4 @@
-h2 {
+.subsection {
     margin-top: 3em;
 }
 
@@ -7,10 +7,6 @@ h2 {
   margin-left: 10em;
   margin-right: 10em;
   padding-bottom: 3em; /* gives space below spells accordion */
-}
-
-.header {
-    margin-bottom: 2em;
 }
 
 .vertical-flex {
@@ -22,5 +18,32 @@ h2 {
 .vertical-flex mat-form-field {
   width: 500px; /* adjust as needed */
 }
+
+.panel-container {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.panel {
+  width: calc((100% - 32px) / 3); /* 3 per row */
+  box-sizing: border-box;
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 250px;
+  
+  /* 👇 Center content inside */
+  display: flex;
+  flex-direction: column;    /* stack elements vertically */
+  align-items: center;       /* horizontal centering */
+  justify-content: center;   /* vertical centering */
+  text-align: center;        /* optional, for centered text */
+}
+
+
+
 
 

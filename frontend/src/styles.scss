@@ -37,3 +37,11 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* styles.scss */
+.health-progress {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: green,
+    track-color: red,
+  ));
+}

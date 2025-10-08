@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
@@ -74,6 +76,8 @@ import { CharacterOverviewComponent } from './components/character-creation/char
     MatCheckboxModule,
     MatSelectModule,
     MatTabsModule,
+    MatProgressBarModule,
+    MatTooltipModule,
     FormsModule,    
 ],
   providers: [

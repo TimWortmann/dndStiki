@@ -6,6 +6,7 @@ import { BackgroundService } from '../../../services/background/background.servi
 import { BackgroundValue } from '../../../models/background-value';
 import { RaceService } from '../../../services/race/race.service';
 import { RaceValue } from '../../../models/race-value';
+import { CharacterValue } from '../../../models/character-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -18,21 +19,33 @@ onClassSelected(arg0: any) {
 throw new Error('Method not implemented.');
 }
 
-  characterName : string = "Togil";
-  characterNameChangeActive : boolean = false;
-  
-  
-  selectedClass: string = 'Old Class';
+  character : CharacterValue = {
+    id: 0,
+    name: "Togil",
+    level: 1,
+    dndClass: 'Old Class',
+    background: 'Old Background',
+    race: 'Old Race/Species',
+    maxHealth: 10,
+    currentHealth: 7,
+    hitDice: '8',
+    maxHitDice: 5,
+    currentHitDice: 1,
+    armorClass: 16,
+    speed: 35,
+    passivePerception: 13,
+    proficiencyBonus: 2
+  };
+  characterNameChangeActive : boolean = false;  
+
   allClasses! : DndClassValue[];
   classesSorted: boolean = false;
   classChangeActive : boolean = false;
   
-  selectedBackground: string = 'Old Background';
   allBackgrounds! : BackgroundValue[];
   backgroundsSorted: boolean = false;
   backgroundChangeActive : boolean = false;
-  
-  selectedRace: string = 'Old Race/Species'
+
   allRaces! : RaceValue[];
   racesSorted: boolean = false;
   raceChangeActive : boolean = false;
@@ -50,7 +63,7 @@ throw new Error('Method not implemented.');
   }
 
   changeNameState() {
-    if (this.characterName !== "") {
+    if (this.character.name !== "") {
       this.characterNameChangeActive = ! this.characterNameChangeActive;
     }
   }
@@ -91,5 +104,25 @@ throw new Error('Method not implemented.');
 
   changeRaceState() {
     this.raceChangeActive = !this.raceChangeActive;
+  }
+
+  increaseLevel() {
+    if (this.character.level < 20) {
+      this.character.level++;
+    }
+  }
+
+  reduceLevel() {
+    if (this.character.level > 1) {
+      this.character.level--;
+    }
+  }
+
+  getProcentualHealth() : number {
+    return (this.character.currentHealth / this.character.maxHealth) * 100;
+  }
+
+  getProcentualHitDice() : number {
+    return (this.character.currentHitDice / this.character.maxHitDice) * 100;
   }
 }

@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="header vertical-flex">
+  <div class="vertical-flex">
     <ng-container *ngIf="!characterNameChangeActive">
-      <h1> {{characterName}} </h1>
+      <h1> {{character.name}} </h1>
       <button mat-icon-button color="primary" (click)="changeNameState()">
         <mat-icon>edit</mat-icon>
       </button>
@@ -10,26 +10,35 @@
     <ng-container *ngIf="characterNameChangeActive">
       <mat-form-field appearance="outline">
         <mat-label>Character Name</mat-label>
-        <input matInput placeholder="Enter your character's name" [(ngModel)]="characterName" (keydown.enter)="changeNameState()">
+        <input matInput placeholder="Enter your character's name" [(ngModel)]="character.name" (keydown.enter)="changeNameState()">
         <button mat-icon-button matSuffix color="primary" 
         (click)="changeNameState(); $event.stopPropagation(); $event.preventDefault();">
           <mat-icon>save</mat-icon>
         </button>
       </mat-form-field>
-    </ng-container>
+    </ng-container>   
   </div>
 
   <div class="vertical-flex">
+    <button mat-icon-button color="primary" (click)="reduceLevel()">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <h2> Level {{character.level}}</h2>
+    <button mat-icon-button color="primary" (click)="increaseLevel()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 
+  <div class="vertical-flex">
     <div>
         <mat-checkbox [(ngModel)]="classesSorted" [disabled]="!classChangeActive">Sort alphabetically</mat-checkbox>
          <div class="vertical-flex">
              <mat-form-field>
                  <mat-label>Class</mat-label>
-                 <mat-select required [(ngModel)]="selectedClass" [disabled]="!classChangeActive">
-                     <mat-option [value]="selectedClass">{{ selectedClass }} </mat-option>
+                 <mat-select required [(ngModel)]="character.dndClass" [disabled]="!classChangeActive">
+                     <mat-option [value]="character.dndClass">{{ character.dndClass }} </mat-option>
                      <ng-container *ngFor="let class of getPotentiallySortedData(allClasses, classesSorted)"> 
-                         <mat-option *ngIf="class.name !== selectedClass" [value]="class.name"> {{class.name}} </mat-option>
+                         <mat-option *ngIf="class.name !== character.dndClass" [value]="class.name"> {{class.name}} </mat-option>
                      </ng-container>
                  </mat-select>
              </mat-form-field>
@@ -47,10 +56,10 @@
         <div class="vertical-flex">
             <mat-form-field>
                 <mat-label>Background</mat-label>
-                <mat-select required [(ngModel)]="selectedBackground" [disabled]="!backgroundChangeActive">
-                    <mat-option [value]="selectedBackground">{{ selectedBackground }} </mat-option>
+                <mat-select required [(ngModel)]="character.background" [disabled]="!backgroundChangeActive">
+                    <mat-option [value]="character.background">{{ character.background }} </mat-option>
                     <ng-container *ngFor="let Background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)"> 
-                        <mat-option *ngIf="Background.name !== selectedBackground" [value]="Background.name"> {{Background.name}} </mat-option>
+                        <mat-option *ngIf="Background.name !== character.background" [value]="Background.name"> {{Background.name}} </mat-option>
                     </ng-container>
                 </mat-select>
             </mat-form-field>
@@ -68,10 +77,10 @@
          <div class="vertical-flex">
              <mat-form-field>
                  <mat-label>Races</mat-label>
-                 <mat-select required [(ngModel)]="selectedRace" [disabled]="!raceChangeActive">
-                     <mat-option [value]="selectedRace">{{ selectedRace }} </mat-option>
+                 <mat-select required [(ngModel)]="character.race" [disabled]="!raceChangeActive">
+                     <mat-option [value]="character.race">{{ character.race }} </mat-option>
                      <ng-container *ngFor="let Race of getPotentiallySortedData(allRaces, racesSorted)"> 
-                         <mat-option *ngIf="Race.name !== selectedRace" [value]="Race.name"> {{Race.name}} </mat-option>
+                         <mat-option *ngIf="Race.name !== character.race" [value]="Race.name"> {{Race.name}} </mat-option>
                      </ng-container>
                  </mat-select>
              </mat-form-field>
@@ -86,21 +95,271 @@
   </div>
 
   <div>
+    <h2> Basic Information </h2>
+    <div class="panel-container">
+      <div class="panel">
+         <div class="vertical-flex">
+           <h3>Health</h3>
+            
+         </div>
+        <div class="vertical-flex">
+          <button mat-icon-button color="primary">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <p> {{character.currentHealth}} / {{character.maxHealth}}</p>
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <mat-progress-bar mode="determinate"  class="health-progress" [value]="getProcentualHealth()"></mat-progress-bar>
+      </div>
+
+      <div class="panel">
+        <h3> Hit Dice </h3>
+        <div class="vertical-flex">
+          <button mat-icon-button color="primary">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <p>{{character.currentHitDice}} / {{character.maxHitDice}}d{{character.hitDice}}</p>
+          <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="getProcentualHitDice()"></mat-progress-bar>
+      </div>
+
+      <div class="panel">
+        <h3> Armor Class </h3>
+        <p> {{character.armorClass}} </p>
+      </div>
+
+      <div class="panel">
+        <h3> Speed </h3>
+        <p> {{character.speed}} feet </p>
+      </div>
+
+      <div class="panel">
+        <h3> Passive Perception </h3>
+        <p> {{character.passivePerception}} </p>
+      </div>
+
+      <div class="panel">
+        <h3> Proficiency Bonus </h3>
+        <p> +{{character.proficiencyBonus}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
       <h2>Checks</h2>
       <mat-tab-group>
-        <mat-tab label="Abilities"> 
-          
+        <mat-tab label="Abilities">
+          <div class="panel-container">
+            <div class="panel">
+              <h3>Strength</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+
+            <div class="panel">
+              <h3>Dexterity</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+
+            <div class="panel">
+              <h3>Constitution</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+
+            <div class="panel">
+              <h3>Intelligence</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+
+            <div class="panel">
+              <h3>Wisdom</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+
+            <div class="panel">
+              <h3>Charisma</h3>
+              <p> 12</p>
+              <p>Modifier: <b>+1</b></p>
+            </div> 
+          </div>
         </mat-tab>
         <mat-tab label="Saving Throws"> 
-           
+          <div class="panel-container">
+            <div class="panel">
+              <h3>Strength</h3>
+              <p> +1 </p>
+            </div> 
+
+            <div class="panel">
+              <h3>Dexterity</h3>
+              <p> +1 </p>
+            </div> 
+
+            <div class="panel">
+              <h3>Constitution</h3>
+              <p> +1 </p>
+            </div> 
+
+            <div class="panel">
+              <h3>Intelligence</h3>
+              <p> +1 </p>
+            </div> 
+
+            <div class="panel">
+              <h3>Wisdom</h3>
+              <p> +1 </p>
+            </div> 
+
+            <div class="panel">
+              <h3>Charisma</h3>
+              <p> +1 </p>
+            </div> 
+          </div>
         </mat-tab>
         <mat-tab label="Skills">
-            
+          <div class="panel-container">
+            <div class="panel">
+              <h3>Acrobatics (Dex)</h3>
+              <div class="vertical-flex">
+                <p> +3 </p>
+                <mat-icon matTooltip="Proficient" aria-label="Info">check</mat-icon>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Animal Handling (Wis)</h3>
+              <div class="vertical-flex">
+                <p> +5 </p>
+                <mat-icon matTooltip="Expertise" aria-label="Info">done_all</mat-icon>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Arcana (Int)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Athletics (Str)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Deception (Cha)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>History (Int)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Insight (Wis)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Intimidation (Cha)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Investigation (Int)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Medicine (Wis)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Nature (Int)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Perception (Wis)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Performance (Cha)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Persuation (Cha)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Religion (Int)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Sleight of Hand (Dex)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Stealth (Dex)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Survival (Wis)</h3>
+              <div class="vertical-flex">
+                <p> +1 </p>
+              </div>
+            </div>
+          </div>
         </mat-tab>
       </mat-tab-group>
   </div>
 
-  <div>
+  <div class="subsection">
     <h2>Attacks & Spells</h2>
     <mat-tab-group>
         <mat-tab label="Weapons"> 
@@ -112,11 +371,11 @@
       </mat-tab-group>
   </div>
 
-  <div>
+  <div class="subsection">
     <h2>Equipment</h2>
   </div>
 
-  <div>
+  <div class="subsection">
       <h2>Features & Traits</h2>
       <mat-tab-group>
         <mat-tab label="Class Features"> 
@@ -126,6 +385,9 @@
           
         </mat-tab>
         <mat-tab label="Race Traits"> 
+            
+        </mat-tab>
+        <mat-tab label="Feats"> 
             
         </mat-tab>
       </mat-tab-group>
