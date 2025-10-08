@@ -7,6 +7,8 @@ import { BackgroundValue } from '../../../models/background-value';
 import { RaceService } from '../../../services/race/race.service';
 import { RaceValue } from '../../../models/race-value';
 import { CharacterValue } from '../../../models/character-value';
+import { ActivatedRoute } from '@angular/router';
+import { CharacterService } from '../../../services/character/character.service';
 
 @Component({
   selector: 'app-character-overview',
@@ -19,23 +21,7 @@ onClassSelected(arg0: any) {
 throw new Error('Method not implemented.');
 }
 
-  character : CharacterValue = {
-    id: 0,
-    name: "Togil",
-    level: 1,
-    dndClass: 'Old Class',
-    background: 'Old Background',
-    race: 'Old Race/Species',
-    maxHealth: 10,
-    currentHealth: 7,
-    hitDice: '8',
-    maxHitDice: 5,
-    currentHitDice: 1,
-    armorClass: 16,
-    speed: 35,
-    passivePerception: 13,
-    proficiencyBonus: 2
-  };
+  characterValue! : CharacterValue;
   characterNameChangeActive : boolean = false;  
 
   allClasses! : DndClassValue[];
@@ -54,18 +40,34 @@ throw new Error('Method not implemented.');
     private dndClassService: DndClassService, 
     private backgroundService: BackgroundService,
     private raceService: RaceService,
+    private route: ActivatedRoute,
+    private characterService : CharacterService,
   ){}
 
   ngOnInit(): void {
+    this.readCharacter();
     this.readAllClasses();
     this.readAllBackgrounds();
     this.readAllRaces();
   }
 
   changeNameState() {
-    if (this.character.name !== "") {
+    if (this.characterValue.name !== "") {
       this.characterNameChangeActive = ! this.characterNameChangeActive;
     }
+  }
+
+  readCharacter() {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (!idParam) {
+      throw new Error('No ID provided in route');        
+    }
+
+    const id: number = +idParam; // safe, guaranteed to be a number now
+
+    this.characterService.getCharacterById(id).subscribe((response) => {
+      this.characterValue = response;  
+    });
   }
 
   readAllClasses() {
@@ -107,22 +109,22 @@ throw new Error('Method not implemented.');
   }
 
   increaseLevel() {
-    if (this.character.level < 20) {
-      this.character.level++;
+    if (this.characterValue.level < 20) {
+      this.characterValue.level++;
     }
   }
 
   reduceLevel() {
-    if (this.character.level > 1) {
-      this.character.level--;
+    if (this.characterValue.level > 1) {
+      this.characterValue.level--;
     }
   }
 
   getProcentualHealth() : number {
-    return (this.character.currentHealth / this.character.maxHealth) * 100;
+    return (this.characterValue.currentHealth / this.characterValue.maxHealth) * 100;
   }
 
   getProcentualHitDice() : number {
-    return (this.character.currentHitDice / this.character.maxHitDice) * 100;
+    return (this.characterValue.currentHitDice / this.characterValue.maxHitDice) * 100;
   }
 }

@@ -16,7 +16,7 @@ export class CharacterService {
     return this.http.get<CharacterValue[]>(this.baseUrl);
   }
 
-  getCharacterById(id : number) : Observable<CharacterValue[]> {
-    return this.http.get<CharacterValue[]>(this.baseUrl + "/" + id);
+  getCharacterById(id : number) : Observable<CharacterValue> {
+    return this.http.get<CharacterValue>(this.baseUrl + "/" + id);
   }
 }

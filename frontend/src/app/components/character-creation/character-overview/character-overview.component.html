@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="characterValue">
   <div class="vertical-flex">
     <ng-container *ngIf="!characterNameChangeActive">
-      <h1> {{character.name}} </h1>
+      <h1> {{characterValue.name}} </h1>
       <button mat-icon-button color="primary" (click)="changeNameState()">
         <mat-icon>edit</mat-icon>
       </button>
@@ -10,7 +10,7 @@
     <ng-container *ngIf="characterNameChangeActive">
       <mat-form-field appearance="outline">
         <mat-label>Character Name</mat-label>
-        <input matInput placeholder="Enter your character's name" [(ngModel)]="character.name" (keydown.enter)="changeNameState()">
+        <input matInput placeholder="Enter your character's name" [(ngModel)]="characterValue.name" (keydown.enter)="changeNameState()">
         <button mat-icon-button matSuffix color="primary" 
         (click)="changeNameState(); $event.stopPropagation(); $event.preventDefault();">
           <mat-icon>save</mat-icon>
@@ -23,7 +23,7 @@
     <button mat-icon-button color="primary" (click)="reduceLevel()">
       <mat-icon>remove</mat-icon>
     </button>
-    <h2> Level {{character.level}}</h2>
+    <h2> Level {{characterValue.level}}</h2>
     <button mat-icon-button color="primary" (click)="increaseLevel()">
       <mat-icon>add</mat-icon>
     </button>
@@ -35,10 +35,10 @@
          <div class="vertical-flex">
              <mat-form-field>
                  <mat-label>Class</mat-label>
-                 <mat-select [(ngModel)]="character.dndClass" [disabled]="!classChangeActive">
-                     <mat-option [value]="character.dndClass">{{ character.dndClass }} </mat-option>
+                 <mat-select required [(ngModel)]="characterValue.dndClass" [disabled]="!classChangeActive">
+                     <mat-option [value]="characterValue.dndClass">{{ characterValue.dndClass }} </mat-option>
                      <ng-container *ngFor="let class of getPotentiallySortedData(allClasses, classesSorted)"> 
-                         <mat-option *ngIf="class.name !== character.dndClass" [value]="class.name"> {{class.name}} </mat-option>
+                         <mat-option *ngIf="class.name !== characterValue.dndClass" [value]="class.name"> {{class.name}} </mat-option>
                      </ng-container>
                  </mat-select>
              </mat-form-field>
@@ -56,10 +56,10 @@
         <div class="vertical-flex">
             <mat-form-field>
                 <mat-label>Background</mat-label>
-                <mat-select required [(ngModel)]="character.background" [disabled]="!backgroundChangeActive">
-                    <mat-option [value]="character.background">{{ character.background }} </mat-option>
+                <mat-select required [(ngModel)]="characterValue.background" [disabled]="!backgroundChangeActive">
+                    <mat-option [value]="characterValue.background">{{ characterValue.background }} </mat-option>
                     <ng-container *ngFor="let Background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)"> 
-                        <mat-option *ngIf="Background.name !== character.background" [value]="Background.name"> {{Background.name}} </mat-option>
+                        <mat-option *ngIf="Background.name !== characterValue.background" [value]="Background.name"> {{Background.name}} </mat-option>
                     </ng-container>
                 </mat-select>
             </mat-form-field>
@@ -77,10 +77,10 @@
          <div class="vertical-flex">
              <mat-form-field>
                  <mat-label>Races</mat-label>
-                 <mat-select required [(ngModel)]="character.race" [disabled]="!raceChangeActive">
-                     <mat-option [value]="character.race">{{ character.race }} </mat-option>
+                 <mat-select required [(ngModel)]="characterValue.race" [disabled]="!raceChangeActive">
+                     <mat-option [value]="characterValue.race">{{ characterValue.race }} </mat-option>
                      <ng-container *ngFor="let Race of getPotentiallySortedData(allRaces, racesSorted)"> 
-                         <mat-option *ngIf="Race.name !== character.race" [value]="Race.name"> {{Race.name}} </mat-option>
+                         <mat-option *ngIf="Race.name !== characterValue.race" [value]="Race.name"> {{Race.name}} </mat-option>
                      </ng-container>
                  </mat-select>
              </mat-form-field>
@@ -106,7 +106,7 @@
           <button mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>
-          <p> {{character.currentHealth}} / {{character.maxHealth}}</p>
+          <p> {{characterValue.currentHealth}} / {{characterValue.maxHealth}}</p>
           <button mat-icon-button color="primary">
             <mat-icon>settings</mat-icon>
           </button>
@@ -120,7 +120,7 @@
           <button mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>
-          <p>{{character.currentHitDice}} / {{character.maxHitDice}}d{{character.hitDice}}</p>
+          <p>{{characterValue.currentHitDice}} / {{characterValue.maxHitDice}}d{{characterValue.hitDice}}</p>
           <button mat-icon-button color="primary">
             <mat-icon>settings</mat-icon>
           </button>
@@ -130,22 +130,22 @@
 
       <div class="panel">
         <h3> Armor Class </h3>
-        <p> {{character.armorClass}} </p>
+        <p> {{characterValue.armorClass}} </p>
       </div>
 
       <div class="panel">
         <h3> Speed </h3>
-        <p> {{character.speed}} feet </p>
+        <p> {{characterValue.speed}} feet </p>
       </div>
 
       <div class="panel">
         <h3> Passive Perception </h3>
-        <p> {{character.passivePerception}} </p>
+        <p> {{characterValue.passivePerception}} </p>
       </div>
 
       <div class="panel">
         <h3> Proficiency Bonus </h3>
-        <p> +{{character.proficiencyBonus}} </p>
+        <p> +{{characterValue.proficiencyBonus}} </p>
       </div>
     </div>
   </div>
