@@ -26,6 +26,10 @@ public class CharacterService {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
 
+    public CharacterDto get(Long id) {
+        return entityToDtoMapper.mapEntityToDto(repository.get(id));
+    }
+
     public CharacterDto create(String name) {
         return entityToDtoMapper.mapEntityToDto(repository.create(name));
     }

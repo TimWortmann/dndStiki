@@ -15,13 +15,18 @@ public class CharacterController {
     @Autowired
     CharacterService service;
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<List<CharacterDto>> getAll() {
         return ResponseEntity.ok().body(service.getAll());
     }
 
-    @PostMapping()
-    public ResponseEntity<CharacterDto> create(@RequestParam String name) {
+    @GetMapping("/{id}")
+    public ResponseEntity<CharacterDto> get(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.get(id));
+    }
+
+    @PostMapping("/{name}")
+    public ResponseEntity<CharacterDto> create(@PathVariable String name) {
         return ResponseEntity.ok().body(service.create(name));
     }
 

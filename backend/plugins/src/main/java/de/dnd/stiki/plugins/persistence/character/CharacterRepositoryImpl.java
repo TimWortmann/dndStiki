@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class CharacterRepositoryImpl implements CharacterRepository {
@@ -22,6 +23,13 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     @Override
     public List<CharacterEntity> getAll() {
         return jpaToEntityMapper.mapJpasToEntities(jpaRepository.findAll());
+    }
+
+    @Override
+    public CharacterEntity get(Long id) {
+        Optional<CharacterJpa> jpa = jpaRepository.findById(id);
+        return jpa.map(characterJpa -> jpaToEntityMapper.mapJpaToEntity(characterJpa)).orElse(null);
+
     }
 
     @Override

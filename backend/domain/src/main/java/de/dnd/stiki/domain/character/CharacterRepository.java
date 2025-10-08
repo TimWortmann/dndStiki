@@ -6,6 +6,8 @@ public interface CharacterRepository {
 
     public List<CharacterEntity> getAll();
 
+    public CharacterEntity get(Long id);
+
     public CharacterEntity create(String name);
 
     public CharacterEntity save(CharacterEntity character);
