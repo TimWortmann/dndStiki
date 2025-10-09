@@ -1,5 +1,6 @@
 package de.dnd.stiki.plugins.persistence.character;
 
+import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -63,6 +64,10 @@ public class CharacterJpa {
             inverseJoinColumns = @JoinColumn(name = "ID")
     )
     private List<CharacterTraitJpa> traits;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "CHARACTER_ID", referencedColumnName = "ID")
+    private List<CharacterAbilityJpa> abilities;
 
     public Long getId() {
         return id;
@@ -190,5 +195,13 @@ public class CharacterJpa {
 
     public void setTraits(List<CharacterTraitJpa> traits) {
         this.traits = traits;
+    }
+
+    public List<CharacterAbilityJpa> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<CharacterAbilityJpa> abilities) {
+        this.abilities = abilities;
     }
 }

@@ -4,6 +4,7 @@ import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
+import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpaToEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Component
 public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<CharacterJpa, CharacterEntity> {
+
+    @Autowired
+    private CharacterAbilityJpaToEntityMapper  abilityJpaToEntityMapper;
 
     @Autowired
     private TraitJpaToEntityMapper traitJpaToEntityMapper;
@@ -36,6 +40,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setSpeed(jpa.getSpeed());
         entity.setPassivePerception(jpa.getPassivePerception());
         entity.setProficiencyBonus(jpa.getProficiencyBonus());
+        entity.setAbilities(abilityJpaToEntityMapper.mapJpasToEntities(jpa.getAbilities()));
 
         setEntityTraits(jpa, entity);
 

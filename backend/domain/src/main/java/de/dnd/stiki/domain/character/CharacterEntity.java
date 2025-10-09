@@ -36,6 +36,8 @@ public class CharacterEntity {
 
     private Integer proficiencyBonus;
 
+    private List<CharacterAbilityEntity> abilities;
+
     private List<TraitEntity> classFeatures;
     private List<TraitEntity> backgroundTraits;
     private List<TraitEntity> raceTraits;
@@ -159,6 +161,14 @@ public class CharacterEntity {
 
     public void setProficiencyBonus(Integer proficiencyBonus) {
         this.proficiencyBonus = proficiencyBonus;
+    }
+
+    public List<CharacterAbilityEntity> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<CharacterAbilityEntity> abilities) {
+        this.abilities = abilities;
     }
 
     public List<TraitEntity> getClassFeatures() {

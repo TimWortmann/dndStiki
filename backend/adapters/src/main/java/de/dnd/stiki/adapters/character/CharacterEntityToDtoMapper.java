@@ -1,11 +1,16 @@
 package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<CharacterEntity, CharacterDto> {
+
+    @Autowired
+    private CharacterAbilityEntityToDtoMapper abilityEntityToDtoMapper;
 
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
@@ -29,6 +34,8 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setBackgroundTraits(entity.getBackgroundTraits());
         dto.setRaceTraits(entity.getRaceTraits());
         dto.setFeats(entity.getFeats());
+        dto.setAbilities(abilityEntityToDtoMapper.mapEntitiesToDtos(entity.getAbilities()));
+
         return dto;
     }
 }

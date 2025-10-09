@@ -1,5 +1,6 @@
 package de.dnd.stiki.adapters.character;
 
+import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.domain.trait.TraitEntity;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public class CharacterDto {
     private Integer passivePerception;
 
     private Integer proficiencyBonus;
+
+    private List<CharacterAbilityDto> abilities;
 
     private List<TraitEntity> classFeatures;
     private List<TraitEntity> backgroundTraits;
@@ -159,6 +162,14 @@ public class CharacterDto {
 
     public void setProficiencyBonus(Integer proficiencyBonus) {
         this.proficiencyBonus = proficiencyBonus;
+    }
+
+    public List<CharacterAbilityDto> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<CharacterAbilityDto> abilities) {
+        this.abilities = abilities;
     }
 
     public List<TraitEntity> getClassFeatures() {
