@@ -5,7 +5,7 @@
         <div>
             <h2> Name </h2>
             <mat-form-field appearance="outline">
-               <input matInput [(ngModel)]="characterValue.name" placeholder="Enter your character's name">
+               <input matInput [(ngModel)]="creationValue.name" placeholder="Enter your character's name">
             </mat-form-field>
         </div>
 
@@ -16,7 +16,7 @@
             <mat-checkbox [(ngModel)]="classesSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="characterValue.dndClass">
+                <mat-select required [(ngModel)]="creationValue.dndClass">
                     <mat-option *ngFor="let dndClass of getPotentiallySortedData(allClasses, classesSorted)" [value]="dndClass.name">
                     {{ dndClass.name }}
                     </mat-option>
@@ -31,7 +31,7 @@
             <mat-checkbox [(ngModel)]="backgroundsSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="characterValue.background">
+                <mat-select required [(ngModel)]="creationValue.background">
                     <mat-option *ngFor="let background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)" [value]="background.name">
                     {{ background.name }}
                     </mat-option>
@@ -46,12 +46,52 @@
             <mat-checkbox [(ngModel)]="racesSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="characterValue.race">
+                <mat-select required [(ngModel)]="creationValue.race">
                     <mat-option *ngFor="let race of getPotentiallySortedData(allRaces, racesSorted)" [value]="race.name">
                     {{ race.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+        </div>
+
+        <p></p>
+
+        <div>
+            <h2>Abilities</h2>
+
+            <div class="flex" *ngFor="let ability of creationValue.abilities">
+                
+                <div class="control-set">
+                <h3>{{ ability.ability }}:</h3>
+                <button mat-icon-button color="primary" (click)="changeBasicScore(ability, -1)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+                <p>{{ ability.basicScore }}</p>
+                <button mat-icon-button color="primary" (click)="changeBasicScore(ability, 1)">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </button>
+                </div>
+
+                <div class="control-set">
+                    <span>(</span>
+                    <span>Bonus:</span>
+                    <button mat-icon-button color="primary" (click)="changeBonus(ability, -1)">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                    <p [class.bold]="ability.bonus > 0"> {{ getBonus(ability.bonus) }} </p>
+                    <button mat-icon-button color="primary" (click)="changeBonus(ability, 1)">
+                        <mat-icon>add_circle_outline</mat-icon>
+                    </button>
+                    <span>)</span>
+                </div>
+
+                <div class="control-set">
+                    <span> => Modifier: </span>
+                    <p> <b> {{getModifier(ability.basicScore + ability.bonus)}} </b> </p>
+                    <p> ({{ability.basicScore + ability.bonus}}) </p>
+                </div>
+            </div>
+            <p>Point Buy: {{pointBuySum}} / 27</p>
         </div>
     </div>
 </div>

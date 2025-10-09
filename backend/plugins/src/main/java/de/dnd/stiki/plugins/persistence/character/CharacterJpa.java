@@ -65,8 +65,7 @@ public class CharacterJpa {
     )
     private List<CharacterTraitJpa> traits;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "CHARACTER_ID", referencedColumnName = "ID")
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterAbilityJpa> abilities;
 
     public Long getId() {

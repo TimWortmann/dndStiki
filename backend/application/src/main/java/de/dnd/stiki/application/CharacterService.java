@@ -36,7 +36,7 @@ public class CharacterService {
     }
 
     public CharacterDto create(CharacterCreationDto creationDto) {
-        CharacterEntity entity = repository.save(creationDtoToEntityMapper.mapDtoToEntity(creationDto));
+        CharacterEntity entity = repository.create(creationDtoToEntityMapper.mapDtoToEntity(creationDto));
         return entityToDtoMapper.mapEntityToDto(entity);
     }
 

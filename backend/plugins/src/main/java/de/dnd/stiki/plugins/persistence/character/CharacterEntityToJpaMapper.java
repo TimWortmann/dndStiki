@@ -51,18 +51,31 @@ public class CharacterEntityToJpaMapper extends AbstractEntityToJpaMapper<Charac
 
     private void setCharacterTraits(CharacterEntity entity, CharacterJpa jpa) {
         List<CharacterTraitJpa> characterTraitJpaList = new ArrayList<>();
-        for (TraitEntity trait : entity.getClassFeatures()) {
-            characterTraitJpaList.add(createCharacterTraitJpa(trait, DND_CLASS));
+
+        if (entity.getClassFeatures() != null) {
+            for (TraitEntity trait : entity.getClassFeatures()) {
+                characterTraitJpaList.add(createCharacterTraitJpa(trait, DND_CLASS));
+            }
         }
-        for (TraitEntity trait : entity.getBackgroundTraits()) {
-            characterTraitJpaList.add(createCharacterTraitJpa(trait, BACKGROUND));
+
+        if (entity.getBackgroundTraits() != null) {
+            for (TraitEntity trait : entity.getBackgroundTraits()) {
+                characterTraitJpaList.add(createCharacterTraitJpa(trait, BACKGROUND));
+            }
         }
-        for (TraitEntity trait : entity.getRaceTraits()) {
-            characterTraitJpaList.add(createCharacterTraitJpa(trait, RACE));
+
+        if (entity.getRaceTraits() != null) {
+            for (TraitEntity trait : entity.getRaceTraits()) {
+                characterTraitJpaList.add(createCharacterTraitJpa(trait, RACE));
+            }
         }
-        for (TraitEntity trait : entity.getFeats()) {
-            characterTraitJpaList.add(createCharacterTraitJpa(trait, FEAT));
+
+        if (entity.getFeats() != null) {
+            for (TraitEntity trait : entity.getFeats()) {
+                characterTraitJpaList.add(createCharacterTraitJpa(trait, FEAT));
+            }
         }
+
         jpa.setTraits(characterTraitJpaList);
     }
 

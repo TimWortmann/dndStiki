@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
+import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +36,17 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     @Override
     public CharacterEntity create(CharacterEntity character) {
 
-        CharacterJpa jpa = jpaRepository.save(entityToJpaMapper.mapEntityToJpa(character));
+        CharacterJpa jpa = entityToJpaMapper.mapEntityToJpa(character);
+
+        List<CharacterAbilityJpa> abilities = jpa.getAbilities();
+
+        jpa.setAbilities(null);
+        jpa = jpaRepository.save(jpa);
+
+        jpa.setAbilities(abilities);
+        for (CharacterAbilityJpa abilityJpa : abilities) {
+            abilityJpa.setCharacter(jpa);
+        }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
     }

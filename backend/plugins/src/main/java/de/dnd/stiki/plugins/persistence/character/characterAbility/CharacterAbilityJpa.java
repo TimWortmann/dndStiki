@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.persistence.character.characterAbility;
 
 import de.dnd.stiki.domain.character.AbilityType;
+import de.dnd.stiki.plugins.persistence.character.CharacterJpa;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +22,10 @@ public class CharacterAbilityJpa {
 
     @Column(name = "BONUS")
     private int bonus;
+
+    @ManyToOne
+    @JoinColumn(name = "CHARACTER_ID", nullable = false)
+    private CharacterJpa character;
 
     public Long getId() {
         return id;
@@ -52,5 +57,13 @@ public class CharacterAbilityJpa {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public CharacterJpa getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(CharacterJpa character) {
+        this.character = character;
     }
 }

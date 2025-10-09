@@ -1,12 +1,10 @@
 package de.dnd.stiki.adapters.character.characterAbility;
 
-import de.dnd.stiki.domain.character.AbilityType;
-
 public class CharacterAbilityDto {
 
     private Long id;
 
-    private AbilityType ability;
+    private String ability;
 
     private int basicScore;
 
@@ -20,11 +18,11 @@ public class CharacterAbilityDto {
         this.id = id;
     }
 
-    public AbilityType getAbility() {
+    public String getAbility() {
         return ability;
     }
 
-    public void setAbility(AbilityType ability) {
+    public void setAbility(String ability) {
         this.ability = ability;
     }
 

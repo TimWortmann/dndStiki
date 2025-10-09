@@ -18,11 +18,41 @@ h1 {
 }
 
 .flex {
-    display: flex;
-    justify-content: flex-start;
-    gap: 5px;
-    align-items: baseline; 
+  display: flex;
+  gap: 100px;
+  align-items: center;
 }
+
+.flex h3 {
+  width: 100px;
+  margin: 0;
+}
+
+.control-set {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-set button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.control-set p {
+  margin: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.control-set span {
+  margin-right: 5px;
+}
+
 
 .infos > div {
   flex: 1;                 /* optional: make them equal width */
@@ -35,4 +65,14 @@ h1 {
 
 mat-form-field {
     width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.modifier-set {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

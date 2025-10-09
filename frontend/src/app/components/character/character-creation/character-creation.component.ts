@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CharacterValue } from '../../../models/character-value';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DndClassValue } from '../../../models/dnd-class-value';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BackgroundService } from '../../../services/background/background.service';
 import { CharacterService } from '../../../services/character/character.service';
 import { DndClassService } from '../../../services/dnd-class/dnd-class.service';
@@ -10,6 +10,8 @@ import { RaceService } from '../../../services/race/race.service';
 import { BackgroundValue } from '../../../models/background-value';
 import { RaceValue } from '../../../models/race-value';
 import { CharacterCreationValue } from '../../../models/character-creation-value';
+import { subscribe } from 'diagnostics_channel';
+import id from '@angular/common/locales/id';
 
 @Component({
   selector: 'app-character-creation',
@@ -19,12 +21,18 @@ import { CharacterCreationValue } from '../../../models/character-creation-value
 })
 export class CharacterCreationComponent implements OnInit {
 
-  characterValue : CharacterCreationValue = {
+  creationValue : CharacterCreationValue = {
     name: '',
     dndClass: '',
     background: '',
     race: '',
-    abilities: []
+    abilities: [
+    { id: null, ability: 'Strength', basicScore: 8, bonus: 0 },
+    { id: null, ability: 'Dexterity', basicScore: 8, bonus: 0 },
+    { id: null, ability: 'Constitution', basicScore: 8, bonus: 0 },
+    { id: null, ability: 'Intelligence', basicScore: 8, bonus: 0 },
+    { id: null, ability: 'Wisdom', basicScore: 8, bonus: 0 },
+    { id: null, ability: 'Charisma', basicScore: 8, bonus: 0 },],
   }
 
   allClasses! : DndClassValue[];
@@ -36,13 +44,15 @@ export class CharacterCreationComponent implements OnInit {
   allRaces! : RaceValue[];
   racesSorted: boolean = false;
 
+  pointBuySum : number = 0;
+
   constructor(
     public dialogRef: MatDialogRef<CharacterCreationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dndClassService: DndClassService, 
     private backgroundService: BackgroundService,
     private raceService: RaceService,
-    private route: ActivatedRoute,
+    private router: Router,
     private characterService : CharacterService,
   ){}
 
@@ -57,6 +67,17 @@ export class CharacterCreationComponent implements OnInit {
   }
 
   create(): void {
+    if (this.creationValue.name !== '' 
+      && this.creationValue.dndClass !== '' 
+      && this.creationValue.background !== '' 
+      && this.creationValue.race !== ''
+      && this.pointBuySum === 27
+    ) {
+      this.characterService.createCharacter(this.creationValue).subscribe(response => {
+        this.dialogRef.close();
+        this.router.navigate(['/character', response.id]); 
+      })
+      }
   }
 
   readAllClasses() {
@@ -83,5 +104,55 @@ export class CharacterCreationComponent implements OnInit {
       }
   
       return data;
+  }
+
+  changeBasicScore(ability: any, delta: number) {
+    
+    let newScore = ability.basicScore + delta; 
+
+    if (newScore > 7 && newScore < 16 && this.isAllowedAccordingToPointBuy(newScore, delta)) {
+      ability.basicScore = newScore;
+    }
+
+  }
+
+  isAllowedAccordingToPointBuy(newScore: any, delta: number) : boolean {
+    if (delta > 0) {
+      if (newScore < 14 && this.pointBuySum < 27) {
+        this.pointBuySum += 1;
+        return true;
+      }
+  
+      if (newScore >= 14 && this.pointBuySum < 26) {
+        this.pointBuySum += 2;
+        return true;  
+      }
+  
+      return false;
+    }
+    else {
+      if (newScore < 13) {
+        this.pointBuySum -= 1;  
+      }
+      else {
+        this.pointBuySum -= 2;   
+      }
+      return true;
+    }
+  }
+
+  changeBonus(ability: any, delta: number) {
+    if (ability.bonus + delta > -1) {
+      ability.bonus += delta;
+    }
+  }
+
+  getBonus(bonus: number) {
+    return bonus > 0 ? `+${bonus}` : `${bonus}`;
+  }
+
+  getModifier(score : number) : string  {
+    const result = Math.floor((score - 10) / 2);
+    return result > 0 ? `+${result}` : `${result}`;
   }
 }

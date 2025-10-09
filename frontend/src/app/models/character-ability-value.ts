@@ -1,5 +1,5 @@
 export interface CharacterAbilityValue {
-    id: number | undefined;
+    id: number | null;
     ability : string;
     basicScore: number;
     bonus: number;
