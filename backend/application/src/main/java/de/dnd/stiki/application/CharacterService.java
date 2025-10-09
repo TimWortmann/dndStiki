@@ -3,6 +3,8 @@ package de.dnd.stiki.application;
 import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.CharacterDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.CharacterEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
+import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class CharacterService {
     @Autowired
     private CharacterDtoToEntityMapper dtoToEntityMapper;
 
+    @Autowired
+    private CharacterCreationDtoToEntityMapper creationDtoToEntityMapper;
+
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
     }
@@ -30,8 +35,9 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(repository.get(id));
     }
 
-    public CharacterDto create(String name) {
-        return entityToDtoMapper.mapEntityToDto(repository.create(name));
+    public CharacterDto create(CharacterCreationDto creationDto) {
+        CharacterEntity entity = repository.save(creationDtoToEntityMapper.mapDtoToEntity(creationDto));
+        return entityToDtoMapper.mapEntityToDto(entity);
     }
 
     public CharacterDto save(CharacterDto characterDto) {

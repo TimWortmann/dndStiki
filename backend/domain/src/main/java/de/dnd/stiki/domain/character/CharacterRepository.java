@@ -8,7 +8,7 @@ public interface CharacterRepository {
 
     public CharacterEntity get(Long id);
 
-    public CharacterEntity create(String name);
+    public CharacterEntity create(CharacterEntity character);
 
     public CharacterEntity save(CharacterEntity character);
 

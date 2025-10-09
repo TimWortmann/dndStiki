@@ -9,6 +9,7 @@ import { DndClassService } from '../../../services/dnd-class/dnd-class.service';
 import { RaceService } from '../../../services/race/race.service';
 import { BackgroundValue } from '../../../models/background-value';
 import { RaceValue } from '../../../models/race-value';
+import { CharacterCreationValue } from '../../../models/character-creation-value';
 
 @Component({
   selector: 'app-character-creation',
@@ -18,23 +19,13 @@ import { RaceValue } from '../../../models/race-value';
 })
 export class CharacterCreationComponent implements OnInit {
 
-  characterValue : CharacterValue = {
-    id: undefined,
+  characterValue : CharacterCreationValue = {
     name: '',
-    level: 0,
     dndClass: '',
     background: '',
     race: '',
-    maxHealth: 0,
-    currentHealth: 0,
-    hitDice: '',
-    maxHitDice: 0,
-    currentHitDice: 0,
-    armorClass: 0,
-    speed: 0,
-    passivePerception: 0,
-    proficiencyBonus: 0
-  };
+    abilities: []
+  }
 
   allClasses! : DndClassValue[];
   classesSorted: boolean = false;

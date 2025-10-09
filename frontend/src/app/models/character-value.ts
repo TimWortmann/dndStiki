@@ -1,5 +1,7 @@
+import { CharacterAbilityValue } from "./character-ability-value";
+
 export interface CharacterValue {
-    id: number | undefined;
+    id: number;
     name: string; 
     level: number;
     dndClass: string;
@@ -14,4 +16,5 @@ export interface CharacterValue {
     speed: number;
     passivePerception: number;
     proficiencyBonus: number;
+    abilities: CharacterAbilityValue[];
 }

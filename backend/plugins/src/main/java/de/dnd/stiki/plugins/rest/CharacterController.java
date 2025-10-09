@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.rest;
 
 import de.dnd.stiki.adapters.character.CharacterDto;
+import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.application.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,9 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.get(id));
     }
 
-    @PostMapping("/{name}")
-    public ResponseEntity<CharacterDto> create(@PathVariable String name) {
-        return ResponseEntity.ok().body(service.create(name));
+    @PostMapping()
+    public ResponseEntity<CharacterDto> create(@RequestBody CharacterCreationDto creationDto) {
+        return ResponseEntity.ok().body(service.create(creationDto));
     }
 
     @PutMapping()

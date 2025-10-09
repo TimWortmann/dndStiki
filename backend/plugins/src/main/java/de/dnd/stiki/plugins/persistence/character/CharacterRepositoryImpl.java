@@ -33,10 +33,9 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public CharacterEntity create(String name) {
+    public CharacterEntity create(CharacterEntity character) {
 
-        CharacterJpa jpa = new CharacterJpa();
-        jpa.setName(name);
+        CharacterJpa jpa = jpaRepository.save(entityToJpaMapper.mapEntityToJpa(character));
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
     }
