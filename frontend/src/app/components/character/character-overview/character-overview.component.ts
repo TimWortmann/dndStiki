@@ -127,4 +127,26 @@ throw new Error('Method not implemented.');
   getProcentualHitDice() : number {
     return (this.characterValue.currentHitDice / this.characterValue.maxHitDice) * 100;
   }
+
+  getModifier(score : number) : string  {
+    const result = Math.floor((score - 10) / 2);
+    return result > 0 ? `+${result}` : `${result}`;
+  }
+
+  isFeatureVisible(featureName : string) : boolean {
+    const match = featureName.match(/Level (\d+)/);  
+
+    if (match) {
+      const levelNumber = parseInt(match[1], 10);
+      if (levelNumber > this.characterValue.level) {
+          return false;
+      }
+    }
+    
+    if (this.characterValue.level < 3 && featureName.toLowerCase().includes("subclass")) {
+      return false;
+    }
+
+    return true;
+  }
 }

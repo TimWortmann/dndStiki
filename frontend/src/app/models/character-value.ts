@@ -1,4 +1,5 @@
 import { CharacterAbilityValue } from "./character-ability-value";
+import { TraitValue } from "./trait-value";
 
 export interface CharacterValue {
     id: number;
@@ -17,4 +18,8 @@ export interface CharacterValue {
     passivePerception: number;
     proficiencyBonus: number;
     abilities: CharacterAbilityValue[];
+    classFeatures: TraitValue[];
+    backgroundTraits: TraitValue[];
+    raceTraits: TraitValue[];
+    feats: TraitValue[];
 }

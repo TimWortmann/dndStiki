@@ -155,40 +155,10 @@
       <mat-tab-group>
         <mat-tab label="Abilities">
           <div class="panel-container">
-            <div class="panel">
-              <h3>Strength</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
-            </div> 
-
-            <div class="panel">
-              <h3>Dexterity</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
-            </div> 
-
-            <div class="panel">
-              <h3>Constitution</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
-            </div> 
-
-            <div class="panel">
-              <h3>Intelligence</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
-            </div> 
-
-            <div class="panel">
-              <h3>Wisdom</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
-            </div> 
-
-            <div class="panel">
-              <h3>Charisma</h3>
-              <p> 12</p>
-              <p>Modifier: <b>+1</b></p>
+            <div class="panel" *ngFor="let ability of characterValue.abilities">
+              <h3> {{ability.ability}} </h3>
+              <p> {{ability.basicScore + ability.bonus}} </p>
+              <p>Modifier: <b>{{getModifier(ability.basicScore + ability.bonus)}}</b></p>
             </div> 
           </div>
         </mat-tab>
@@ -378,16 +348,62 @@
   <div class="subsection">
       <h2>Features & Traits</h2>
       <mat-tab-group>
-        <mat-tab label="Class Features"> 
+        <mat-tab label="Class Features">
+          <p></p>
+          <mat-accordion>
+            <ng-container *ngFor="let feature of characterValue.classFeatures">
+              <ng-container *ngIf="isFeatureVisible(feature.name)">
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> {{feature.name}} </mat-panel-title>
+                  </mat-expansion-panel-header>
+                    <div class="trait-text">{{feature.text}}</div>
+                </mat-expansion-panel>
+              </ng-container>
+            </ng-container>
+          </mat-accordion> 
+        </mat-tab>
 
+        <mat-tab label="Background Traits">
+          <p></p>
+          <mat-accordion>
+            <ng-container *ngFor="let trait of characterValue.backgroundTraits">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title> {{trait.name}} </mat-panel-title>
+                </mat-expansion-panel-header>
+                  <div class="trait-text">{{trait.text}}</div>
+              </mat-expansion-panel>
+            </ng-container>
+          </mat-accordion>  
         </mat-tab>
-        <mat-tab label="Background Traits"> 
-          
-        </mat-tab>
+
         <mat-tab label="Race Traits"> 
-            
+          <p></p>
+          <mat-accordion>
+            <ng-container *ngFor="let trait of characterValue.raceTraits">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title> {{trait.name}} </mat-panel-title>
+                </mat-expansion-panel-header>
+                  <div class="trait-text">{{trait.text}}</div>
+              </mat-expansion-panel>
+            </ng-container>
+          </mat-accordion> 
         </mat-tab>
-        <mat-tab label="Feats"> 
+
+        <mat-tab label="Feats">
+          <p></p>
+          <mat-accordion>
+            <ng-container *ngFor="let feat of characterValue.feats">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title> {{feat.name}} </mat-panel-title>
+                </mat-expansion-panel-header>
+                  <div class="trait-text">{{feat.text}}</div>
+              </mat-expansion-panel>
+            </ng-container>
+          </mat-accordion>  
             
         </mat-tab>
       </mat-tab-group>

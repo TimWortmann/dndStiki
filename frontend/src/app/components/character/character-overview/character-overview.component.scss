@@ -43,7 +43,16 @@
   text-align: center;        /* optional, for centered text */
 }
 
+.trait-text {
+  white-space: pre-line;   /* erhält Zeilenumbrüche + Leerzeilen */
+  margin: 0 0 1em 0;       /* sieht aus wie <p> */
+  line-height: 1.5;        /* bessere Lesbarkeit */
+}
 
-
+:host ::ng-deep .mat-expansion-panel {
+  background-color: #f0f0f0 !important; /* light grey */
+  border-radius: 8px;
+  box-shadow: none !important;
+}
 
 

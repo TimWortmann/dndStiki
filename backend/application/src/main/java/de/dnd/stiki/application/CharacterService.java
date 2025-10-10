@@ -62,7 +62,7 @@ public class CharacterService {
         characterEntity.setLevel(1);
         characterEntity.setMaxHitDice(1);
         characterEntity.setCurrentHitDice(1);
-        characterEntity.setArmorClass(10 + characterEntity.getAbilityScore(DEXTERITY));
+        characterEntity.setArmorClass(10 + characterEntity.getAbilityModifier(DEXTERITY));
         characterEntity.setPassivePerception(10 + characterEntity.getAbilityModifier(WISDOM));
         characterEntity.setProficiencyBonus(2);
 
@@ -70,7 +70,7 @@ public class CharacterService {
         if (dndClass != null) {
             characterEntity.setHitDice(dndClass.getHitDice());
 
-            int health = characterEntity.getHitDice()+ characterEntity.getAbilityScore(CONSTITUTION);
+            int health = characterEntity.getHitDice()+ characterEntity.getAbilityModifier(CONSTITUTION);
             characterEntity.setMaxHealth(health);
             characterEntity.setCurrentHealth(health);
             characterEntity.setClassFeatures(getClassFeatures(dndClass));
