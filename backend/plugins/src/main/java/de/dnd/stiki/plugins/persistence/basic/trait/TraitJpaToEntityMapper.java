@@ -10,11 +10,8 @@ public class TraitJpaToEntityMapper extends AbstractJpaToEntityMapper<TraitJpa, 
     @Override
     public TraitEntity mapJpaToEntity(TraitJpa jpa) {
         TraitEntity entity = new TraitEntity();
-
-        entity.setId(jpa.getId());
         entity.setName(jpa.getName());
         entity.setText(jpa.getText());
-
         return entity;
     }
 }

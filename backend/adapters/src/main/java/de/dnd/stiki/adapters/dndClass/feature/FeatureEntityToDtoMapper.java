@@ -9,13 +9,10 @@ public class FeatureEntityToDtoMapper extends AbstractEntityToDtoMapper<FeatureE
 
     @Override
     public FeatureDto mapEntityToDto(FeatureEntity entity) {
-
         FeatureDto dto = new FeatureDto();
-        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setText(entity.getText());
         dto.setOptional(entity.isOptional());
-
         return dto;
     }
 }

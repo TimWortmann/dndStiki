@@ -157,8 +157,8 @@
           <div class="panel-container">
             <div class="panel" *ngFor="let ability of characterValue.abilities">
               <h3> {{ability.ability}} </h3>
-              <p> {{ability.basicScore + ability.bonus}} </p>
-              <p>Modifier: <b>{{getModifier(ability.basicScore + ability.bonus)}}</b></p>
+              <p> {{getModifier(ability.basicScore + ability.bonus)}} </p>
+              <p>Score: <b>{{ability.basicScore + ability.bonus}}</b></p>
             </div> 
           </div>
         </mat-tab>

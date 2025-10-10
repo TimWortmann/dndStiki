@@ -2,17 +2,8 @@ package de.dnd.stiki.domain.trait;
 
 public class TraitEntity {
 
-    private Long id;
     private String name;
     private String text;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

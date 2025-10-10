@@ -9,13 +9,10 @@ public class FeatureJpaToEntityMapper extends AbstractJpaToEntityMapper<FeatureJ
 
     @Override
     public FeatureEntity mapJpaToEntity(FeatureJpa jpa) {
-
         FeatureEntity entity = new FeatureEntity();
-        entity.setId(jpa.getId());
         entity.setName(jpa.getTrait().getName());
         entity.setText(jpa.getTrait().getText());
         entity.setOptional(jpa.isOptional());
-
         return entity;
     }
 }

@@ -10,7 +10,6 @@ public class TraitEntityToDtoMapper extends AbstractEntityToDtoMapper<TraitEntit
     @Override
     public TraitDto mapEntityToDto(TraitEntity entity) {
         TraitDto dto = new TraitDto();
-        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setText(entity.getText());
         return dto;

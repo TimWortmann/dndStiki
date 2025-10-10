@@ -103,7 +103,11 @@ public class CharacterService {
 
     private List<TraitEntity> getClassFeatures(DndClassEntity dndClass) {
 
-        List<TraitEntity> classFeatures = new ArrayList<>(dndClass.getTraits());
+        List<TraitEntity> classFeatures = new ArrayList<>();
+
+        if (dndClass.getTraits() != null) {
+            classFeatures.addAll(dndClass.getTraits());
+        }
 
         for (ClassLevelEntity level : dndClass.getClassLevels()) {
             if (level.getFeatures() != null) {

@@ -2,6 +2,10 @@ h1 {
   margin-bottom: 2em;
 }
 
+h2 {
+  margin-top: 3em; 
+}
+
 .compendium-upload {
   display: flex;
   align-items: center; /* vertically center span and button */
@@ -22,4 +26,13 @@ h1 {
   margin-left: 10em;
   margin-right: 10em;
   padding-bottom: 3em; /* gives space below spells accordion */
+}
+
+.box {
+  border: 1px solid rgba(0, 0, 0, 0.12); /* same as mat-expansion-panel border */
+  border-radius: 4px;
+  background-color: #fff; /* default panel background */
+  box-shadow: 0 2px 2px -2px rgba(0,0,0,0.2);
+  padding: 16px; /* similar spacing inside the panel */
+  margin-bottom: 16px;
 }

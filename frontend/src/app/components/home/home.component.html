@@ -1,8 +1,18 @@
 <div class="container">
   <h1>DND Stiki</h1>
   
-  <h2>Compendium</h2>
+  <mat-accordion>
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Characters </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-character-list></app-character-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 
+  <p></p>
+
+  <h2>Compendium</h2>
   <div class="compendium-upload">
     <ng-container *ngIf="!compendiumFileName">
       <app-single-file-upload 
@@ -79,17 +89,6 @@
         <mat-panel-title> Feats </mat-panel-title>
       </mat-expansion-panel-header>
       <app-feats></app-feats>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <p></p>
-
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Characters </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-character-list></app-character-list>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
