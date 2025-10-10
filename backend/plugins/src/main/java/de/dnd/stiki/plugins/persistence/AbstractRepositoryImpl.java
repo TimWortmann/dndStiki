@@ -18,13 +18,13 @@ public abstract class AbstractRepositoryImpl<
         > implements AbstractRepository<ENTITY> {
 
     @Autowired
-    private JPA_REPOSITORY jpaRepository;
+    protected JPA_REPOSITORY jpaRepository;
 
     @Autowired
-    private JPA_TO_ENTITY_MAPPER jpaToEntityMapper;
+    protected JPA_TO_ENTITY_MAPPER jpaToEntityMapper;
 
     @Autowired
-    private ENTITY_TO_JPA_MAPPER entityToJpaMapper;
+    protected ENTITY_TO_JPA_MAPPER entityToJpaMapper;
 
 
     @Override

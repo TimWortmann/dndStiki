@@ -167,6 +167,26 @@ public class CharacterEntity {
         return abilities;
     }
 
+    public Integer getAbilityScore(AbilityType ability) {
+        for (CharacterAbilityEntity characterAbility : abilities) {
+            if (characterAbility.getAbility() == ability) {
+                return characterAbility.getBasicScore() + characterAbility.getBonus();
+            }
+        }
+        return null;
+    }
+
+    public Integer getAbilityModifier(AbilityType ability) {
+        Integer score = getAbilityScore(ability);
+
+        if (score == null) {
+            return null;
+        }
+
+        return (int) Math.floor((score - 10) / 2.0);
+
+    }
+
     public void setAbilities(List<CharacterAbilityEntity> abilities) {
         this.abilities = abilities;
     }

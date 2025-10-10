@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DndClassRepositoryImpl extends AbstractRepositoryImpl<
@@ -24,6 +25,13 @@ public class DndClassRepositoryImpl extends AbstractRepositoryImpl<
 
     @Autowired
     private SkillJpaRepository skillJpaRepository;
+
+    @Override
+    public DndClassEntity getByName(String name) {
+        Optional<DndClassJpa> jpaOptional = jpaRepository.findById(name);
+
+        return jpaOptional.map(backgroundJpa -> jpaToEntityMapper.mapJpaToEntity(backgroundJpa)).orElse(null);
+    }
 
     @Override
     public List<String> getSavingThrowProficiencies(List<String> mixedProficiencies) {

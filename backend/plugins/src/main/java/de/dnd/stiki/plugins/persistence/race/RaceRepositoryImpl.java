@@ -5,6 +5,8 @@ import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.plugins.persistence.AbstractRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class RaceRepositoryImpl extends AbstractRepositoryImpl<
         RaceEntity,
@@ -12,4 +14,11 @@ public class RaceRepositoryImpl extends AbstractRepositoryImpl<
         RaceJpaRepository,
         RaceJpaToEntityMapper,
         RaceEntityToJpaMapper> implements RaceRepository {
+
+    @Override
+    public RaceEntity getByName(String name) {
+        Optional<RaceJpa> jpaOptional = jpaRepository.findById(name);
+
+        return jpaOptional.map(backgroundJpa -> jpaToEntityMapper.mapJpaToEntity(backgroundJpa)).orElse(null);
+    }
 }

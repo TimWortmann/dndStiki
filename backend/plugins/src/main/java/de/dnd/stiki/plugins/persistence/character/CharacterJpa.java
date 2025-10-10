@@ -56,13 +56,7 @@ public class CharacterJpa {
     @Column(name = "PROFICIENCY_BONUS")
     private Integer proficiencyBonus;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "CHARACTER_TRAIT",
-            schema = "DND_STIKI",
-            joinColumns = @JoinColumn(name = "CHARACTER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ID")
-    )
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterTraitJpa> traits;
 
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)

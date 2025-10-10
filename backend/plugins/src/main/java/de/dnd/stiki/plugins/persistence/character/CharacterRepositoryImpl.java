@@ -39,13 +39,20 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         CharacterJpa jpa = entityToJpaMapper.mapEntityToJpa(character);
 
         List<CharacterAbilityJpa> abilities = jpa.getAbilities();
+        List<CharacterTraitJpa> traits = jpa.getTraits();
 
         jpa.setAbilities(null);
+        jpa.setTraits(null);
         jpa = jpaRepository.save(jpa);
 
         jpa.setAbilities(abilities);
         for (CharacterAbilityJpa abilityJpa : abilities) {
             abilityJpa.setCharacter(jpa);
+        }
+
+        jpa.setTraits(traits);
+        for (CharacterTraitJpa traitJpa : traits) {
+            traitJpa.setCharacter(jpa);
         }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
