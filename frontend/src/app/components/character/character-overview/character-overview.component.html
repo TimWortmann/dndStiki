@@ -21,11 +21,11 @@
 
   <div class="vertical-flex">
     <button mat-icon-button color="primary" (click)="reduceLevel()">
-      <mat-icon>remove</mat-icon>
+      <mat-icon>remove_circle_outline</mat-icon>
     </button>
     <h2> Level {{characterValue.level}}</h2>
     <button mat-icon-button color="primary" (click)="increaseLevel()">
-      <mat-icon>add</mat-icon>
+      <mat-icon>add_circle_outline</mat-icon>
     </button>
   </div>
 
@@ -177,15 +177,13 @@
         <mat-tab label="Skills">
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
-              <div>
-                <h3> {{skill.name}} </h3>
-                <p>({{skill.ability}})</p>
-              </div>
-               <div class="vertical-flex">
-                 <p> {{getSkillModifier(skill)}} </p>
-                 <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="skill.proficiency == 1">check</mat-icon>
-                 <mat-icon matTooltip="Expertise" aria-label="Info" *ngIf="skill.proficiency == 2">done_all</mat-icon>
-               </div>
+              <h3> {{skill.name}} </h3>
+              <p>({{skill.ability}})</p>
+             <div class="vertical-flex">
+               <p> {{getSkillModifier(skill)}} </p>
+               <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="skill.proficiency == 1">check</mat-icon>
+               <mat-icon matTooltip="Expertise" aria-label="Info" *ngIf="skill.proficiency == 2">done_all</mat-icon>
+             </div>
             </div> 
           </div>
         </mat-tab>
