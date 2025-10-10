@@ -62,7 +62,7 @@
             <div class="flex" *ngFor="let ability of creationValue.abilities">
                 
                 <div class="control-set">
-                <h3>{{ ability.ability }}:</h3>
+                <h3>{{ ability.name }}:</h3>
                 <button mat-icon-button color="primary" (click)="changeBasicScore(ability, -1)">
                     <mat-icon>remove_circle_outline</mat-icon>
                 </button>

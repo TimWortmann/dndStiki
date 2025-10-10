@@ -1,6 +1,7 @@
 package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
+import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.domain.trait.TraitEntity;
 
 import java.util.List;
@@ -38,6 +39,8 @@ public class CharacterDto {
     private Integer proficiencyBonus;
 
     private List<CharacterAbilityDto> abilities;
+
+    private List<CharacterSkillDto> skills;
 
     private List<TraitEntity> classFeatures;
     private List<TraitEntity> backgroundTraits;
@@ -170,6 +173,14 @@ public class CharacterDto {
 
     public void setAbilities(List<CharacterAbilityDto> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<CharacterSkillDto> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<CharacterSkillDto> skills) {
+        this.skills = skills;
     }
 
     public List<TraitEntity> getClassFeatures() {

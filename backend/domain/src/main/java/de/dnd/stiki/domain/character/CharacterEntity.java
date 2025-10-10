@@ -1,7 +1,10 @@
 package de.dnd.stiki.domain.character;
 
+import de.dnd.stiki.domain.enums.AbilityType;
+import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.trait.TraitEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterEntity {
@@ -37,6 +40,7 @@ public class CharacterEntity {
     private Integer proficiencyBonus;
 
     private List<CharacterAbilityEntity> abilities;
+    private List<CharacterSkillEntity> skills;
 
     private List<TraitEntity> classFeatures;
     private List<TraitEntity> backgroundTraits;
@@ -167,28 +171,44 @@ public class CharacterEntity {
         return abilities;
     }
 
-    public Integer getAbilityScore(AbilityType ability) {
-        for (CharacterAbilityEntity characterAbility : abilities) {
-            if (characterAbility.getAbility() == ability) {
-                return characterAbility.getBasicScore() + characterAbility.getBonus();
+    public CharacterAbilityEntity getAbility(AbilityType abilityType) {
+        for (CharacterAbilityEntity ability : abilities) {
+            if (ability.getName() == abilityType) {
+                return ability;
             }
         }
         return null;
     }
 
-    public Integer getAbilityModifier(AbilityType ability) {
-        Integer score = getAbilityScore(ability);
-
-        if (score == null) {
-            return null;
-        }
-
-        return (int) Math.floor((score - 10) / 2.0);
-
-    }
-
     public void setAbilities(List<CharacterAbilityEntity> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<CharacterSkillEntity> getSkills() {
+        return skills;
+    }
+
+    public CharacterSkillEntity getSkill(SkillType skillType) {
+        for (CharacterSkillEntity skill : skills) {
+            if (skill.getName() == skillType) {
+                return skill;
+            }
+        }
+        return null;
+    }
+
+    public List<CharacterSkillEntity> getSkillsByAbility(AbilityType abilityType) {
+        List<CharacterSkillEntity> skillEntities = new ArrayList<>();
+        for (CharacterSkillEntity skill : skills) {
+            if (skill.getAbility() == abilityType) {
+                skillEntities.add(skill);
+            }
+        }
+        return skillEntities;
+    }
+
+    public void setSkills(List<CharacterSkillEntity> skills) {
+        this.skills = skills;
     }
 
     public List<TraitEntity> getClassFeatures() {

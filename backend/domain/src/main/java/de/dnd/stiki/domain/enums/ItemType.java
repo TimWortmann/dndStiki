@@ -1,4 +1,4 @@
-package de.dnd.stiki.domain.item;
+package de.dnd.stiki.domain.enums;
 
 public enum ItemType {
     CURRENCY("Currency", "$"),

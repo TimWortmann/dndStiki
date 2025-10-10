@@ -4,7 +4,7 @@ public class CharacterAbilityDto {
 
     private Long id;
 
-    private String ability;
+    private String name;
 
     private int basicScore;
 
@@ -20,12 +20,12 @@ public class CharacterAbilityDto {
         this.id = id;
     }
 
-    public String getAbility() {
-        return ability;
+    public String getName() {
+        return name;
     }
 
-    public void setAbility(String ability) {
-        this.ability = ability;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getBasicScore() {

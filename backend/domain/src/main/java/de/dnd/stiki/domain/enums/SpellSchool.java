@@ -1,4 +1,4 @@
-package de.dnd.stiki.domain.spell;
+package de.dnd.stiki.domain.enums;
 
 public enum SpellSchool {
     ABJURATION("Abjuration", "A"),

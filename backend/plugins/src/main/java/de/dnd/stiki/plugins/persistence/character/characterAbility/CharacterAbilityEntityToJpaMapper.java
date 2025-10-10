@@ -11,7 +11,7 @@ public class CharacterAbilityEntityToJpaMapper extends AbstractEntityToJpaMapper
     public CharacterAbilityJpa mapEntityToJpa(CharacterAbilityEntity entity) {
         CharacterAbilityJpa jpa = new CharacterAbilityJpa();
         jpa.setId(entity.getId());
-        jpa.setAbility(entity.getAbility());
+        jpa.setName(entity.getName().toString());
         jpa.setBasicScore(entity.getBasicScore());
         jpa.setBonus(entity.getBonus());
         jpa.setSavingThrowProficiency(entity.getSavingThrowProficiency());

@@ -1,4 +1,4 @@
-package de.dnd.stiki.domain.character;
+package de.dnd.stiki.domain.enums;
 
 public enum AbilityType {
     STRENGTH("Strength"),

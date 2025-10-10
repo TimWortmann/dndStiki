@@ -156,7 +156,7 @@
         <mat-tab label="Abilities">
           <div class="panel-container">
             <div class="panel" *ngFor="let ability of characterValue.abilities">
-              <h3> {{ability.ability}} </h3>
+              <h3> {{ability.name}} </h3>
               <p> {{getModifier(ability)}} </p>
               <p>Score: <b>{{ability.basicScore + ability.bonus}}</b></p>
             </div> 
@@ -165,144 +165,28 @@
         <mat-tab label="Saving Throws"> 
           <div class="panel-container">
             <div class="panel" *ngFor="let ability of characterValue.abilities">
-              <h3> {{ability.ability}} </h3>
+              <h3> {{ability.name}} </h3>
                <div class="vertical-flex">
                  <p> {{getSavingThrowModifier(ability)}} </p>
                  <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="ability.savingThrowProficiency == 1">check</mat-icon>
-                 <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="ability.savingThrowProficiency == 2">done_all</mat-icon>
+                 <mat-icon matTooltip="Expertise" aria-label="Info" *ngIf="ability.savingThrowProficiency == 2">done_all</mat-icon>
                </div>
             </div> 
           </div>
         </mat-tab>
         <mat-tab label="Skills">
           <div class="panel-container">
-            <div class="panel">
-              <h3>Acrobatics (Dex)</h3>
-              <div class="vertical-flex">
-                <p> +3 </p>
-                <mat-icon matTooltip="Proficient" aria-label="Info">check</mat-icon>
+            <div class="panel" *ngFor="let skill of characterValue.skills">
+              <div>
+                <h3> {{skill.name}} </h3>
+                <p>({{skill.ability}})</p>
               </div>
-            </div>
-
-            <div class="panel">
-              <h3>Animal Handling (Wis)</h3>
-              <div class="vertical-flex">
-                <p> +5 </p>
-                <mat-icon matTooltip="Expertise" aria-label="Info">done_all</mat-icon>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Arcana (Int)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Athletics (Str)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Deception (Cha)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>History (Int)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Insight (Wis)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Intimidation (Cha)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Investigation (Int)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Medicine (Wis)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Nature (Int)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Perception (Wis)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Performance (Cha)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Persuation (Cha)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Religion (Int)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Sleight of Hand (Dex)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Stealth (Dex)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>Survival (Wis)</h3>
-              <div class="vertical-flex">
-                <p> +1 </p>
-              </div>
-            </div>
+               <div class="vertical-flex">
+                 <p> {{getSkillModifier(skill)}} </p>
+                 <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="skill.proficiency == 1">check</mat-icon>
+                 <mat-icon matTooltip="Expertise" aria-label="Info" *ngIf="skill.proficiency == 2">done_all</mat-icon>
+               </div>
+            </div> 
           </div>
         </mat-tab>
       </mat-tab-group>

@@ -28,13 +28,13 @@ export class CharacterCreationComponent implements OnInit {
     race: '',
     abilities: [
     {
-      id: null, ability: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0
+      id: null, name: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0
     },
-    { id: null, ability: 'Dexterity', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, ability: 'Constitution', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, ability: 'Intelligence', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, ability: 'Wisdom', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, ability: 'Charisma', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },],
+    { id: null, name: 'Dexterity', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+    { id: null, name: 'Constitution', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+    { id: null, name: 'Intelligence', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+    { id: null, name: 'Wisdom', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+    { id: null, name: 'Charisma', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },],
   }
 
   allClasses! : DndClassValue[];

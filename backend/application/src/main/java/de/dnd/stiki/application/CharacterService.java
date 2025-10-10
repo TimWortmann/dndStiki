@@ -7,12 +7,15 @@ import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
+import de.dnd.stiki.domain.character.CharacterAbilityEntity;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
+import de.dnd.stiki.domain.character.CharacterSkillEntity;
 import de.dnd.stiki.domain.dndClass.DndClassEntity;
 import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
+import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.domain.trait.TraitEntity;
@@ -22,7 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.dnd.stiki.domain.character.AbilityType.*;
+import static de.dnd.stiki.domain.enums.AbilityType.*;
 
 @Service
 public class CharacterService {
@@ -62,15 +65,28 @@ public class CharacterService {
         characterEntity.setLevel(1);
         characterEntity.setMaxHitDice(1);
         characterEntity.setCurrentHitDice(1);
-        characterEntity.setArmorClass(10 + characterEntity.getAbilityModifier(DEXTERITY));
-        characterEntity.setPassivePerception(10 + characterEntity.getAbilityModifier(WISDOM));
+        characterEntity.setArmorClass(10 + characterEntity.getAbility(DEXTERITY).getModifier());
         characterEntity.setProficiencyBonus(2);
+
+        List<CharacterSkillEntity> skills = new ArrayList<>();
+        for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
+            List<SkillType> skillTypes = SkillType.fromAbility(ability.getName().toString());
+            for (SkillType skillType : skillTypes) {
+                CharacterSkillEntity skill = new CharacterSkillEntity();
+                skill.setName(skillType);
+                skill.setAbility(ability.getName());
+                skill.setBasicModifier(ability.getModifier());
+                skills.add(skill);
+            }
+        }
+        characterEntity.setSkills(skills);
+        characterEntity.setPassivePerception(10 + characterEntity.getSkill(SkillType.PERCEPTION).getModifierWithProficiency(characterEntity.getProficiencyBonus()));
 
         DndClassEntity dndClass = dndClassRepository.getByName(characterEntity.getDndClass());
         if (dndClass != null) {
             characterEntity.setHitDice(dndClass.getHitDice());
 
-            int health = characterEntity.getHitDice()+ characterEntity.getAbilityModifier(CONSTITUTION);
+            int health = characterEntity.getHitDice()+ characterEntity.getAbility(CONSTITUTION).getModifier();
             characterEntity.setMaxHealth(health);
             characterEntity.setCurrentHealth(health);
             characterEntity.setClassFeatures(getClassFeatures(dndClass));
@@ -88,7 +104,7 @@ public class CharacterService {
             characterEntity.setRaceTraits(race.getTraits());
         }
 
-        CharacterEntity entity = repository.create(characterEntity);
+        CharacterEntity entity = repository.save(characterEntity);
         return entityToDtoMapper.mapEntityToDto(entity);
     }
 

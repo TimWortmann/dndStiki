@@ -1,6 +1,6 @@
 export interface CharacterAbilityValue {
     id: number | null;
-    ability : string;
+    name : string;
     basicScore: number;
     bonus: number;
     savingThrowProficiency: number;

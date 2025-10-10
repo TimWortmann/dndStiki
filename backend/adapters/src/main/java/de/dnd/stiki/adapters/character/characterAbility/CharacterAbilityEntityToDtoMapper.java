@@ -11,7 +11,7 @@ public class CharacterAbilityEntityToDtoMapper extends AbstractEntityToDtoMapper
     public CharacterAbilityDto mapEntityToDto(CharacterAbilityEntity entity) {
         CharacterAbilityDto dto = new CharacterAbilityDto();
         dto.setId(entity.getId());
-        dto.setAbility(entity.getAbility().toString());
+        dto.setName(entity.getName().toString());
         dto.setBasicScore(entity.getBasicScore());
         dto.setBonus(entity.getBonus());
         dto.setSavingThrowProficiency(entity.getSavingThrowProficiency());

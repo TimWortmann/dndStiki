@@ -1,6 +1,5 @@
 package de.dnd.stiki.plugins.persistence.character.characterAbility;
 
-import de.dnd.stiki.domain.character.AbilityType;
 import de.dnd.stiki.plugins.persistence.character.CharacterJpa;
 import jakarta.persistence.*;
 
@@ -13,9 +12,8 @@ public class CharacterAbilityJpa {
     @Column(name = "ID")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ABILITY")
-    private AbilityType ability;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "BASIC_SCORE")
     private int basicScore;
@@ -38,12 +36,12 @@ public class CharacterAbilityJpa {
         this.id = id;
     }
 
-    public AbilityType getAbility() {
-        return ability;
+    public String getName() {
+        return name;
     }
 
-    public void setAbility(AbilityType ability) {
-        this.ability = ability;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getBasicScore() {

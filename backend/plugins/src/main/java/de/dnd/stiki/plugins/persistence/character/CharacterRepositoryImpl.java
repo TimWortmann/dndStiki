@@ -3,6 +3,7 @@ package de.dnd.stiki.plugins.persistence.character;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
+import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,14 +35,16 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public CharacterEntity create(CharacterEntity character) {
+    public CharacterEntity save(CharacterEntity character) {
 
         CharacterJpa jpa = entityToJpaMapper.mapEntityToJpa(character);
 
         List<CharacterAbilityJpa> abilities = jpa.getAbilities();
+        List<CharacterSkillJpa> skills = jpa.getSkills();
         List<CharacterTraitJpa> traits = jpa.getTraits();
 
         jpa.setAbilities(null);
+        jpa.setSkills(null);
         jpa.setTraits(null);
         jpa = jpaRepository.save(jpa);
 
@@ -55,15 +58,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
             traitJpa.setCharacter(jpa);
         }
 
+        jpa.setSkills(skills);
+        for (CharacterSkillJpa skillJpa : skills) {
+            skillJpa.setCharacter(jpa);
+        }
+
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
-    }
-
-    @Override
-    public CharacterEntity save(CharacterEntity character) {
-
-        CharacterJpa jpa = jpaRepository.save(entityToJpaMapper.mapEntityToJpa(character));
-
-        return jpaToEntityMapper.mapJpaToEntity(jpa);
     }
 
     @Override

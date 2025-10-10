@@ -1,5 +1,8 @@
 package de.dnd.stiki.application.xml;
 
+import de.dnd.stiki.domain.enums.DamageType;
+import de.dnd.stiki.domain.enums.ItemProperty;
+import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.item.*;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;

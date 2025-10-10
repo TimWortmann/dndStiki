@@ -8,8 +8,6 @@ public interface CharacterRepository {
 
     public CharacterEntity get(Long id);
 
-    public CharacterEntity create(CharacterEntity character);
-
     public CharacterEntity save(CharacterEntity character);
 
     public void delete(Long id);

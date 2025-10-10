@@ -1,10 +1,12 @@
 package de.dnd.stiki.domain.character;
 
+import de.dnd.stiki.domain.enums.AbilityType;
+
 public class CharacterAbilityEntity {
 
     private Long id;
 
-    private AbilityType ability;
+    private AbilityType name;
 
     private int basicScore;
 
@@ -20,12 +22,12 @@ public class CharacterAbilityEntity {
         this.id = id;
     }
 
-    public AbilityType getAbility() {
-        return ability;
+    public AbilityType getName() {
+        return name;
     }
 
-    public void setAbility(AbilityType ability) {
-        this.ability = ability;
+    public void setName(AbilityType name) {
+        this.name = name;
     }
 
     public int getBasicScore() {
@@ -50,5 +52,13 @@ public class CharacterAbilityEntity {
 
     public void setSavingThrowProficiency(int savingThrowProficiency) {
         this.savingThrowProficiency = savingThrowProficiency;
+    }
+
+    public Integer getScore() {
+        return basicScore + bonus;
+    }
+
+    public Integer getModifier() {
+        return (int) Math.floor((getScore() - 10) / 2.0);
     }
 }

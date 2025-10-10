@@ -2,7 +2,7 @@ package de.dnd.stiki.application.xml;
 
 import de.dnd.stiki.domain.spell.SpellEntity;
 import de.dnd.stiki.domain.spell.SpellRepository;
-import de.dnd.stiki.domain.spell.SpellSchool;
+import de.dnd.stiki.domain.enums.SpellSchool;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Element;
 

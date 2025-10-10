@@ -10,6 +10,7 @@ import { CharacterValue } from '../../../models/character-value';
 import { ActivatedRoute } from '@angular/router';
 import { CharacterService } from '../../../services/character/character.service';
 import { CharacterAbilityValue } from '../../../models/character-ability-value';
+import { CharacterSkillValue } from '../../../models/character-skill-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -68,6 +69,7 @@ throw new Error('Method not implemented.');
 
     this.characterService.getCharacterById(id).subscribe((response) => {
       this.characterValue = response;  
+      this.characterValue.skills = this.sortSkills();
     });
   }
 
@@ -141,6 +143,12 @@ throw new Error('Method not implemented.');
     return savingThrowModifier > 0 ? `+${savingThrowModifier}` : `${savingThrowModifier}`;
   } 
 
+  getSkillModifier(skill : CharacterSkillValue) {
+    const savingThrowModifier = skill.basicModifier + (skill.proficiency * this.characterValue.proficiencyBonus)
+
+    return savingThrowModifier > 0 ? `+${savingThrowModifier}` : `${savingThrowModifier}`;
+  } 
+
   isFeatureVisible(featureName : string) : boolean {
     const match = featureName.match(/Level (\d+)/);  
 
@@ -156,5 +164,9 @@ throw new Error('Method not implemented.');
     }
 
     return true;
+  }
+
+  sortSkills(): CharacterSkillValue[] {
+    return this.characterValue.skills.sort((a, b) => a.name.localeCompare(b.name));
   }
 }

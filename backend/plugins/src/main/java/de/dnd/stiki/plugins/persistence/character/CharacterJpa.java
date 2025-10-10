@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
+import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -61,6 +62,9 @@ public class CharacterJpa {
 
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterAbilityJpa> abilities;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CharacterSkillJpa> skills;
 
     public Long getId() {
         return id;
@@ -196,5 +200,13 @@ public class CharacterJpa {
 
     public void setAbilities(List<CharacterAbilityJpa> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<CharacterSkillJpa> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<CharacterSkillJpa> skills) {
+        this.skills = skills;
     }
 }

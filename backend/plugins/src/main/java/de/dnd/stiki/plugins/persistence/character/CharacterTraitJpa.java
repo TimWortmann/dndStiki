@@ -1,6 +1,6 @@
 package de.dnd.stiki.plugins.persistence.character;
 
-import de.dnd.stiki.domain.character.CharacterTraitType;
+import de.dnd.stiki.domain.enums.CharacterTraitType;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpa;
 import jakarta.persistence.*;
 
