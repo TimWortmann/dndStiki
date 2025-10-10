@@ -24,4 +24,8 @@ export class CharacterService {
   createCharacter(creationValue : CharacterCreationValue) : Observable<CharacterValue> {
     return this.http.post<CharacterValue>(this.baseUrl, creationValue);
   }
+
+  deleteCharacter(id : number) : Observable<CharacterValue> {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/" + id);
+  }
 }

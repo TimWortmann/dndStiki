@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CharacterListComponent {
 
-  @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
+  @ViewChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
 
   data?: CharacterValue[];
   tableColumns: TableColumnValue[] = [];
@@ -54,11 +54,11 @@ export class CharacterListComponent {
         isSortable: true
       },
       {
-        name: 'Details',
-        dataKey: 'details',
+        name: 'Actions',
+        dataKey: 'actions',
         position: 'left',
         isSortable: true,
-        template: this.detailsTemplate
+        template: this.actionsTemplate
       },
     ];
     this.pullDataFromBackend();
@@ -85,5 +85,11 @@ export class CharacterListComponent {
         autoFocus: false,
       });
 
+  }
+
+  deleteCharacter(id : number) {
+    this.characterService.deleteCharacter(id).subscribe((response) => {
+      this.pullDataFromBackend();
+    })
   }
 }

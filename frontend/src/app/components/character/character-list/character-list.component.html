@@ -1,7 +1,12 @@
-<ng-template #detailsTemplate let-column="column" let-element="element">
-  <button mat-icon-button (click)="openCharacterDetails(element.id)">
-    <mat-icon>info_outline</mat-icon>
-  </button>
+<ng-template #actionsTemplate let-column="column" let-element="element">
+  <div class="ertical-flex">
+    <button mat-icon-button (click)="openCharacterDetails(element.id)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteCharacter(element.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </ng-template>
 
 <h2>Characters</h2>
