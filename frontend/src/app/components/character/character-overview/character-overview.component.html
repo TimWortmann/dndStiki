@@ -157,41 +157,20 @@
           <div class="panel-container">
             <div class="panel" *ngFor="let ability of characterValue.abilities">
               <h3> {{ability.ability}} </h3>
-              <p> {{getModifier(ability.basicScore + ability.bonus)}} </p>
+              <p> {{getModifier(ability)}} </p>
               <p>Score: <b>{{ability.basicScore + ability.bonus}}</b></p>
             </div> 
           </div>
         </mat-tab>
         <mat-tab label="Saving Throws"> 
           <div class="panel-container">
-            <div class="panel">
-              <h3>Strength</h3>
-              <p> +1 </p>
-            </div> 
-
-            <div class="panel">
-              <h3>Dexterity</h3>
-              <p> +1 </p>
-            </div> 
-
-            <div class="panel">
-              <h3>Constitution</h3>
-              <p> +1 </p>
-            </div> 
-
-            <div class="panel">
-              <h3>Intelligence</h3>
-              <p> +1 </p>
-            </div> 
-
-            <div class="panel">
-              <h3>Wisdom</h3>
-              <p> +1 </p>
-            </div> 
-
-            <div class="panel">
-              <h3>Charisma</h3>
-              <p> +1 </p>
+            <div class="panel" *ngFor="let ability of characterValue.abilities">
+              <h3> {{ability.ability}} </h3>
+               <div class="vertical-flex">
+                 <p> {{getSavingThrowModifier(ability)}} </p>
+                 <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="ability.savingThrowProficiency == 1">check</mat-icon>
+                 <mat-icon matTooltip="Proficient" aria-label="Info" *ngIf="ability.savingThrowProficiency == 2">done_all</mat-icon>
+               </div>
             </div> 
           </div>
         </mat-tab>

@@ -16,6 +16,7 @@ public class CharacterAbilityDtoToEntityMapper extends AbstractDtoToEntityMapper
         entity.setAbility(AbilityType.fromName(dto.getAbility()));
         entity.setBasicScore(dto.getBasicScore());
         entity.setBonus(dto.getBonus());
+        entity.setSavingThrowProficiency(dto.getSavingThrowProficiency());
         return entity;
     }
 }

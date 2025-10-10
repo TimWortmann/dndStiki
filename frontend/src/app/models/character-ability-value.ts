@@ -3,4 +3,5 @@ export interface CharacterAbilityValue {
     ability : string;
     basicScore: number;
     bonus: number;
+    savingThrowProficiency: number;
 }

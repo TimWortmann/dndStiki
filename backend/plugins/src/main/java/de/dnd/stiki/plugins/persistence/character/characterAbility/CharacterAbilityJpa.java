@@ -23,6 +23,9 @@ public class CharacterAbilityJpa {
     @Column(name = "BONUS")
     private int bonus;
 
+    @Column(name = "SAVING_THROW_PROFICIENCY")
+    private int savingThrowProficiency;
+
     @ManyToOne
     @JoinColumn(name = "CHARACTER_ID", nullable = false)
     private CharacterJpa character;
@@ -57,6 +60,14 @@ public class CharacterAbilityJpa {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public int getSavingThrowProficiency() {
+        return savingThrowProficiency;
+    }
+
+    public void setSavingThrowProficiency(int savingThrowProficiency) {
+        this.savingThrowProficiency = savingThrowProficiency;
     }
 
     public CharacterJpa getCharacter() {

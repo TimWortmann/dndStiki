@@ -9,6 +9,7 @@ import { RaceValue } from '../../../models/race-value';
 import { CharacterValue } from '../../../models/character-value';
 import { ActivatedRoute } from '@angular/router';
 import { CharacterService } from '../../../services/character/character.service';
+import { CharacterAbilityValue } from '../../../models/character-ability-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -128,10 +129,17 @@ throw new Error('Method not implemented.');
     return (this.characterValue.currentHitDice / this.characterValue.maxHitDice) * 100;
   }
 
-  getModifier(score : number) : string  {
-    const result = Math.floor((score - 10) / 2);
-    return result > 0 ? `+${result}` : `${result}`;
+  getModifier(ability : CharacterAbilityValue) : string  {
+    const modifier = Math.floor((ability.basicScore + ability.bonus - 10) / 2);
+    return modifier > 0 ? `+${modifier}` : `${modifier}`;
   }
+
+  getSavingThrowModifier(ability : CharacterAbilityValue) {
+    const modifier = Math.floor((ability.basicScore + ability.bonus - 10) / 2);
+    const savingThrowModifier = modifier + (ability.savingThrowProficiency * this.characterValue.proficiencyBonus)
+
+    return savingThrowModifier > 0 ? `+${savingThrowModifier}` : `${savingThrowModifier}`;
+  } 
 
   isFeatureVisible(featureName : string) : boolean {
     const match = featureName.match(/Level (\d+)/);  

@@ -10,6 +10,8 @@ public class CharacterAbilityDto {
 
     private int bonus;
 
+    private int savingThrowProficiency;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class CharacterAbilityDto {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public int getSavingThrowProficiency() {
+        return savingThrowProficiency;
+    }
+
+    public void setSavingThrowProficiency(int savingThrowProficiency) {
+        this.savingThrowProficiency = savingThrowProficiency;
     }
 }
