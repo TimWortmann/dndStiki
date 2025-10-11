@@ -26,9 +26,7 @@ export class CharacterCreationComponent implements OnInit {
     background: '',
     race: '',
     abilities: [
-      {
-        id: null, name: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0
-      },
+      { id: null, name: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
       { id: null, name: 'Dexterity', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
       { id: null, name: 'Constitution', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
       { id: null, name: 'Intelligence', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
@@ -175,15 +173,16 @@ export class CharacterCreationComponent implements OnInit {
 
   selectClass() {
     this.selectedClass = this.allClasses.find(c => c.name === this.creationValue.dndClass);
+    this.setSavingThrowProficiencies();
   }
 
   selectBackground() {
     this.selectedBackground = this.allBackgrounds.find(b => b.name === this.creationValue.background);
+    this.setCharacterSkillProficiencies();
   }
 
   selectRace() {
     this.selectedRace = this.allRaces.find(r => r.name === this.creationValue.race);
-    this.updateCharacterProficiencies();
   }
 
   getFancyListString(list : string[] | undefined) : string {
@@ -201,7 +200,7 @@ export class CharacterCreationComponent implements OnInit {
     return fancyString;
   }
 
-  onSelectionChange(event: MatSelectionListChange) {
+  onSkillSelectionChange(event: MatSelectionListChange) {
     const changedOption = event.options[0];
 
     if (this.selectedClassSkills.length > this.selectedClass!.numberOfSkillProficiencies) {
@@ -210,7 +209,7 @@ export class CharacterCreationComponent implements OnInit {
       this.selectedClassSkills.pop();
     }
 
-    this.updateCharacterProficiencies();
+    this.setCharacterSkillProficiencies();
   }
 
   // Return only visible skills based on current selection
@@ -228,7 +227,17 @@ export class CharacterCreationComponent implements OnInit {
     }
   }
 
-  updateCharacterProficiencies() {
+  setSavingThrowProficiencies() {
+    this.creationValue.abilities.forEach(ability => {
+      if (this.selectedClass?.savingThrowProficiencies.includes(ability.name)) {
+        ability.savingThrowProficiency = 1;
+      } else {
+        ability.savingThrowProficiency = 0; 
+      }
+    });
+  }
+
+  setCharacterSkillProficiencies() {
     this.creationValue.skillProficiencies = Array.from(
       new Set([
         ...this.selectedClassSkills,

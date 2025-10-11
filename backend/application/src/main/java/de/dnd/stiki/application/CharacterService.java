@@ -77,6 +77,11 @@ public class CharacterService {
                 skill.setName(skillType);
                 skill.setAbility(ability.getName());
                 skill.setBasicModifier(ability.getModifier());
+
+                if (creationDto.getSkillProficiencies() != null && creationDto.getSkillProficiencies().contains(skillType.getName())) {
+                    skill.setProficiency(1);
+                }
+
                 skills.add(skill);
             }
         }

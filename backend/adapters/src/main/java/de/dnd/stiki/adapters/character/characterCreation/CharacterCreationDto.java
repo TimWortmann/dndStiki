@@ -14,6 +14,8 @@ public class CharacterCreationDto {
 
     private String race;
 
+    private List<String> skillProficiencies;
+
     private List<CharacterAbilityDto> abilities;
 
     public String getName() {
@@ -54,5 +56,13 @@ public class CharacterCreationDto {
 
     public void setAbilities(List<CharacterAbilityDto> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<String> getSkillProficiencies() {
+        return skillProficiencies;
+    }
+
+    public void setSkillProficiencies(List<String> skillProficiencies) {
+        this.skillProficiencies = skillProficiencies;
     }
 }
