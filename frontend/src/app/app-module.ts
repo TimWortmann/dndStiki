@@ -41,6 +41,7 @@ import { ClassDetailsPopupComponent } from './components/dnd-classes/class-detai
 import { CharacterOverviewComponent } from './components/character/character-overview/character-overview.component';
 import { CharacterListComponent } from './components/character/character-list/character-list.component';
 import { CharacterCreationComponent } from './components/character/character-creation/character-creation.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { CharacterCreationComponent } from './components/character/character-cre
     MatTabsModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatListModule,
     FormsModule,    
 ],
   providers: [

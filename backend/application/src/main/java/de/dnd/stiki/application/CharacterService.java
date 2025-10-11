@@ -15,6 +15,7 @@ import de.dnd.stiki.domain.dndClass.DndClassEntity;
 import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
+import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
@@ -90,6 +91,14 @@ public class CharacterService {
             characterEntity.setMaxHealth(health);
             characterEntity.setCurrentHealth(health);
             characterEntity.setClassFeatures(getClassFeatures(dndClass));
+
+            for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
+                for (String classSavingThrowProficiency : dndClass.getSavingThrowProficiencies()) {
+                    if (ability.getName() == AbilityType.fromName(classSavingThrowProficiency)) {
+                        ability.setSavingThrowProficiency(1);
+                    }
+                }
+            }
         }
 
 

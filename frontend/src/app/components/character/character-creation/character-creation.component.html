@@ -16,12 +16,57 @@
             <mat-checkbox [(ngModel)]="classesSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="creationValue.dndClass">
+                <mat-select required [(ngModel)]="creationValue.dndClass" (selectionChange)="selectClass()">
                     <mat-option *ngFor="let dndClass of getPotentiallySortedData(allClasses, classesSorted)" [value]="dndClass.name">
                     {{ dndClass.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <div *ngIf="selectedClass">
+                <div class="flex" *ngIf="selectedClass.spellAbility">
+                    <span><b>Spellcasting Ability:</b></span>
+                    <span > {{selectedClass.spellAbility}}</span>
+                </div>
+                <p></p>
+                <div class="flex">
+                    <span><b>Saving Throw Proficiencies:</b></span>
+                    <span> {{getFancyListString((selectedClass.savingThrowProficiencies))}}</span>
+                </div>
+                <p></p>
+                <div class="flex">
+                    <span><b>Possible Skill Proficiencies:</b></span>
+                    <span> {{getFancyListString((selectedClass.skillProficiencies))}}</span>
+                </div>
+                <p></p>
+                <div class="flex">
+                    <span><b>Number of Skill Proficiencies:</b></span>
+                    <span> {{selectedClass.numberOfSkillProficiencies}}</span>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+
+        <div *ngIf="selectedClass">
+            <h2> Class Skill Proficiencies </h2>
+            <p></p>
+
+           <mat-selection-list
+            [(ngModel)]="selectedClassSkills"
+            (selectionChange)="onSelectionChange($event)">
+            
+            <mat-list-option
+                class="mat-list-option"
+                *ngFor="let skill of getVisibleSkills()"
+                [value]="skill">
+                {{ skill }}
+            </mat-list-option>
+
+            </mat-selection-list>
+
+            <p *ngIf="classSkillsAreChoosen()" class="hint">
+              Maximum reached ({{selectedClass.numberOfSkillProficiencies}}) — you can’t select more.
+            </p>
         </div>
 
         <p></p>
@@ -31,12 +76,18 @@
             <mat-checkbox [(ngModel)]="backgroundsSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="creationValue.background">
+                <mat-select required [(ngModel)]="creationValue.background" (selectionChange)="selectBackground()">
                     <mat-option *ngFor="let background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)" [value]="background.name">
                     {{ background.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <div *ngIf="selectedBackground">
+                <div class="flex">
+                    <span><b>Skill Proficiencies:</b></span>
+                    <span> {{getFancyListString((selectedBackground.proficiencies))}}</span>
+                </div>
+            </div>
         </div>
 
         <p></p>
@@ -46,12 +97,18 @@
             <mat-checkbox [(ngModel)]="racesSorted">Sort alphabetically</mat-checkbox>
             <p></p>
             <mat-form-field appearance="fill">
-                <mat-select required [(ngModel)]="creationValue.race">
+                <mat-select required [(ngModel)]="creationValue.race" (selectionChange)="selectRace()">
                     <mat-option *ngFor="let race of getPotentiallySortedData(allRaces, racesSorted)" [value]="race.name">
                     {{ race.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+             <div *ngIf="selectedRace">
+                <div class="flex">
+                    <span><b>Speed:</b></span>
+                    <span> {{selectedRace.speed}}</span>
+                </div>
+            </div>
         </div>
 
         <p></p>
@@ -59,7 +116,7 @@
         <div>
             <h2>Abilities</h2>
 
-            <div class="flex" *ngFor="let ability of creationValue.abilities">
+            <div class="flex big-gap" *ngFor="let ability of creationValue.abilities">
                 
                 <div class="control-set">
                 <h3>{{ ability.name }}:</h3>
@@ -98,7 +155,7 @@
 
 <div mat-dialog-actions class="dialog-actions">
     <button mat-flat-button color="primary" (click)="close()">Close</button>
-    <button mat-flat-button color="primary" (click)="create()">Create</button>
+    <button mat-flat-button color="primary" (click)="create()" [disabled]="!isEveryCreationInformationFilled()">Create</button>
 </div>
 
 

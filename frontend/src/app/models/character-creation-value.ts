@@ -6,4 +6,5 @@ export interface CharacterCreationValue {
     background: string;
     race: string;
     abilities: CharacterAbilityValue[];
+    skillProficiencies: string[];
 }

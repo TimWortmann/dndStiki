@@ -10,8 +10,7 @@ import { RaceService } from '../../../services/race/race.service';
 import { BackgroundValue } from '../../../models/background-value';
 import { RaceValue } from '../../../models/race-value';
 import { CharacterCreationValue } from '../../../models/character-creation-value';
-import { subscribe } from 'diagnostics_channel';
-import id from '@angular/common/locales/id';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-character-creation',
@@ -27,24 +26,30 @@ export class CharacterCreationComponent implements OnInit {
     background: '',
     race: '',
     abilities: [
-    {
-      id: null, name: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0
-    },
-    { id: null, name: 'Dexterity', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, name: 'Constitution', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, name: 'Intelligence', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, name: 'Wisdom', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
-    { id: null, name: 'Charisma', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },],
+      {
+        id: null, name: 'Strength', basicScore: 8, bonus: 0, savingThrowProficiency: 0
+      },
+      { id: null, name: 'Dexterity', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+      { id: null, name: 'Constitution', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+      { id: null, name: 'Intelligence', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+      { id: null, name: 'Wisdom', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+      { id: null, name: 'Charisma', basicScore: 8, bonus: 0, savingThrowProficiency: 0 },
+    ],
+    skillProficiencies: []
   }
 
   allClasses! : DndClassValue[];
   classesSorted: boolean = false;
+  selectedClass? : DndClassValue;
+  selectedClassSkills : string[] = [];
     
   allBackgrounds! : BackgroundValue[];
   backgroundsSorted: boolean = false;
+  selectedBackground? : BackgroundValue;
   
   allRaces! : RaceValue[];
   racesSorted: boolean = false;
+  selectedRace? : RaceValue; 
 
   pointBuySum : number = 0;
 
@@ -69,17 +74,21 @@ export class CharacterCreationComponent implements OnInit {
   }
 
   create(): void {
-    if (this.creationValue.name !== '' 
-      && this.creationValue.dndClass !== '' 
-      && this.creationValue.background !== '' 
-      && this.creationValue.race !== ''
-      && this.pointBuySum === 27
-    ) {
+    if (this.isEveryCreationInformationFilled()) {
       this.characterService.createCharacter(this.creationValue).subscribe(response => {
         this.dialogRef.close();
         this.router.navigate(['/character', response.id]); 
       })
       }
+  }
+
+  isEveryCreationInformationFilled() : boolean {
+    return this.creationValue.name !== '' 
+      && this.creationValue.dndClass !== '' 
+      && this.classSkillsAreChoosen()
+      && this.creationValue.background !== '' 
+      && this.creationValue.race !== ''
+      && this.pointBuySum === 27
   }
 
   readAllClasses() {
@@ -149,6 +158,12 @@ export class CharacterCreationComponent implements OnInit {
     }
   }
 
+  changeSavingThrowProficiency(ability: any, delta: number) {
+    if (ability.bonus + delta > -1) {
+      ability.bonus += delta;
+    }
+  }
+
   getBonus(bonus: number) {
     return bonus > 0 ? `+${bonus}` : `${bonus}`;
   }
@@ -156,5 +171,73 @@ export class CharacterCreationComponent implements OnInit {
   getModifier(score : number) : string  {
     const result = Math.floor((score - 10) / 2);
     return result > 0 ? `+${result}` : `${result}`;
+  }
+
+  selectClass() {
+    this.selectedClass = this.allClasses.find(c => c.name === this.creationValue.dndClass);
+  }
+
+  selectBackground() {
+    this.selectedBackground = this.allBackgrounds.find(b => b.name === this.creationValue.background);
+  }
+
+  selectRace() {
+    this.selectedRace = this.allRaces.find(r => r.name === this.creationValue.race);
+    this.updateCharacterProficiencies();
+  }
+
+  getFancyListString(list : string[] | undefined) : string {
+    let fancyString : string = "";
+
+    list?.forEach((element: string) => {
+      if (fancyString === "") {
+        fancyString += element;
+      }
+      else {
+        fancyString += " | " + element;
+      }
+    });
+
+    return fancyString;
+  }
+
+  onSelectionChange(event: MatSelectionListChange) {
+    const changedOption = event.options[0];
+
+    if (this.selectedClassSkills.length > this.selectedClass!.numberOfSkillProficiencies) {
+      // Undo last selection if limit exceeded
+      changedOption.selected = false;
+      this.selectedClassSkills.pop();
+    }
+
+    this.updateCharacterProficiencies();
+  }
+
+  // Return only visible skills based on current selection
+  getVisibleSkills(): string[] {
+    if (!this.selectedClass) return [];
+
+    const max = this.selectedClass.numberOfSkillProficiencies;
+
+    if (this.selectedClassSkills.length >= max) {
+      // Show only already selected skills
+      return this.selectedClassSkills;
+    } else {
+      // Show all skills
+      return this.selectedClass.skillProficiencies;
+    }
+  }
+
+  updateCharacterProficiencies() {
+    this.creationValue.skillProficiencies = Array.from(
+      new Set([
+        ...this.selectedClassSkills,
+        ...(this.selectedBackground?.proficiencies ?? [])
+      ])
+    );
+  }
+
+  classSkillsAreChoosen() : boolean {
+    return this.selectedClassSkills.length === this.selectedClass?.numberOfSkillProficiencies;
   }
 }

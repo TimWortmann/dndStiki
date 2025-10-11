@@ -19,8 +19,12 @@ h1 {
 
 .flex {
   display: flex;
-  gap: 100px;
+  gap: 10px;
   align-items: center;
+}
+
+.big-gap {
+  gap: 100px;
 }
 
 .flex h3 {
@@ -76,3 +80,10 @@ mat-form-field {
   align-items: center;
   gap: 5px;
 }
+
+.mat-list-option {
+  background: transparent;
+}
+
+
+
