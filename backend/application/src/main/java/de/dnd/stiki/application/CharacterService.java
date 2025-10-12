@@ -92,7 +92,7 @@ public class CharacterService {
         if (dndClass != null) {
             characterEntity.setHitDice(dndClass.getHitDice());
 
-            int health = characterEntity.getHitDice()+ characterEntity.getAbility(CONSTITUTION).getModifier();
+            int health = getBeginnerHealth(characterEntity);
             characterEntity.setMaxHealth(health);
             characterEntity.setCurrentHealth(health);
             characterEntity.setClassFeatures(getClassFeatures(dndClass));
@@ -153,4 +153,38 @@ public class CharacterService {
         return classFeatures;
     }
 
+    private Integer getBeginnerHealth(CharacterEntity characterEntity) {
+        return characterEntity.getHitDice()+ characterEntity.getAbility(CONSTITUTION).getModifier();
+    }
+
+    public CharacterDto changeLevel(Long id, Integer level) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        characterEntity.setLevel(level);
+        characterEntity.setMaxHitDice(level);
+        if (characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
+            characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
+        }
+
+        characterEntity.setMaxHealth(getLevelHealth(characterEntity));
+        if (characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
+            characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
+        }
+
+        characterEntity.setProficiencyBonus(level);
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private Integer getLevelHealth(CharacterEntity characterEntity) {
+        int fixedHitpoints = (characterEntity.getHitDice() + 1) / 2;
+
+        int healthIncreasePerLevel = fixedHitpoints + characterEntity.getAbility(CONSTITUTION).getModifier();
+
+        return getBeginnerHealth(characterEntity) + (characterEntity.getLevel() * healthIncreasePerLevel);
+    }
+
+    public Integer getProficiencyBonus(Integer level) {
+        return (int) Math.ceil(level / 4.0) + 1;
+    }
 }

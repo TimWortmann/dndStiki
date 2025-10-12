@@ -28,4 +28,8 @@ export class CharacterService {
   deleteCharacter(id : number) : Observable<CharacterValue> {
     return this.http.delete<CharacterValue>(this.baseUrl + "/" + id);
   }
+
+  changeLevel(id : number, level : number) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/" + id + "/" + level, undefined)
+  }
 }

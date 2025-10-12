@@ -31,14 +31,15 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.create(creationDto));
     }
 
-    @PutMapping()
-    public ResponseEntity<CharacterDto> save(@RequestBody CharacterDto characterDto) {
-        return ResponseEntity.ok().body(service.save(characterDto));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/{id}/{level}")
+    public ResponseEntity<CharacterDto> changeLevel(@PathVariable Long id, @PathVariable Integer level) {
+        return ResponseEntity.ok().body(service.changeLevel(id, level));
+    }
+
 }

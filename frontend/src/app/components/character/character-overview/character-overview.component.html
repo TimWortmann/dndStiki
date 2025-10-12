@@ -20,11 +20,11 @@
   </div>
 
   <div class="vertical-flex">
-    <button mat-icon-button color="primary" (click)="reduceLevel()">
+    <button mat-icon-button color="primary" (click)="changeLevel(-1)">
       <mat-icon>remove_circle_outline</mat-icon>
     </button>
     <h2> Level {{characterValue.level}}</h2>
-    <button mat-icon-button color="primary" (click)="increaseLevel()">
+    <button mat-icon-button color="primary" (click)="changeLevel(+1)">
       <mat-icon>add_circle_outline</mat-icon>
     </button>
   </div>

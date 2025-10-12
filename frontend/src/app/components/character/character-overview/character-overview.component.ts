@@ -80,11 +80,13 @@ throw new Error('Method not implemented.');
     const id: number = +idParam; // safe, guaranteed to be a number now
 
     this.characterService.getCharacterById(id).subscribe((response) => {
-      this.characterValue = response;  
-      this.characterValue.skills = this.sortSkills();
+      this.setCharacter(response);
     });
+  }
 
-    console.log(this.characterValue.dndSubclass)
+  setCharacter(character : CharacterValue) {
+    this.characterValue = character;  
+    this.characterValue.skills = this.sortSkills();  
   }
 
   readAllClasses() {
@@ -125,16 +127,15 @@ throw new Error('Method not implemented.');
     this.raceChangeActive = !this.raceChangeActive;
   }
 
-  increaseLevel() {
-    if (this.characterValue.level < 20) {
-      this.characterValue.level++;
-    }
-  }
-
-  reduceLevel() {
-    if (this.characterValue.level > 1) {
-      this.characterValue.level--;
-    }
+  changeLevel(delta : number) {
+    if (delta === 1 && this.characterValue.level < 20
+      || delta === -1 && this.characterValue.level > 1
+    ) {
+      this.characterService.changeLevel(this.characterValue.id, this.characterValue.level + delta).subscribe(response => {
+        this.setCharacter(response);  
+      });
+    } 
+    
   }
 
   getProcentualHealth() : number {

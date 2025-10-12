@@ -182,6 +182,10 @@ public class CharacterEntity {
     }
 
     public CharacterAbilityEntity getAbility(AbilityType abilityType) {
+        if (abilities == null) {
+            return null;
+        }
+
         for (CharacterAbilityEntity ability : abilities) {
             if (ability.getName() == abilityType) {
                 return ability;

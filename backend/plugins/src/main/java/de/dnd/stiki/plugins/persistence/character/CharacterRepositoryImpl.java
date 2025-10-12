@@ -36,7 +36,13 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public CharacterEntity save(CharacterEntity character) {
+        if (character.getId() == null) {
+            return saveNewCharacter(character);
+        }
+        return saveExistingCharacter(character);
+    }
 
+    private CharacterEntity saveNewCharacter(CharacterEntity character) {
         CharacterJpa jpa = entityToJpaMapper.mapEntityToJpa(character);
 
         List<CharacterAbilityJpa> abilities = jpa.getAbilities();
@@ -60,6 +66,24 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
         jpa.setSkills(skills);
         for (CharacterSkillJpa skillJpa : skills) {
+            skillJpa.setCharacter(jpa);
+        }
+
+        return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
+    }
+
+    private CharacterEntity saveExistingCharacter(CharacterEntity character) {
+        CharacterJpa jpa = entityToJpaMapper.mapEntityToJpa(character);
+
+        for (CharacterAbilityJpa abilityJpa : jpa.getAbilities()) {
+            abilityJpa.setCharacter(jpa);
+        }
+
+        for (CharacterTraitJpa traitJpa : jpa.getTraits()) {
+            traitJpa.setCharacter(jpa);
+        }
+
+        for (CharacterSkillJpa skillJpa : jpa.getSkills()) {
             skillJpa.setCharacter(jpa);
         }
 
