@@ -55,4 +55,20 @@
   box-shadow: none !important;
 }
 
+.edit-buttons {
+  display: flex;
+  gap: 4px; /* space between buttons */
+}
+
+.edit-buttons button {
+  width: 50px;       /* fixed width for all buttons */
+  height: 32px;      /* fixed height */
+  font-size: 0.75rem; /* smaller text */
+  padding: 0;         /* optional, remove extra padding */
+  text-align: center; /* center the text inside */
+}
+
+
+
+
 

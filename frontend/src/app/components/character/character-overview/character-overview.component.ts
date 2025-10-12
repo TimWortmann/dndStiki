@@ -38,7 +38,13 @@ throw new Error('Method not implemented.');
   racesSorted: boolean = false;
   raceChangeActive : boolean = false;
 
-  skillEditorActive : boolean = false;
+  currentHealthChangeActive : boolean = false;
+  maxHealthChangeActive : boolean = false;
+
+  currentHitDiceChangeActive : boolean = false;
+  maxHitDiceChangeActive : boolean = false;
+
+  skillChangeActive : boolean = false;
 
   constructor(
     private dndClassService: DndClassService, 
@@ -185,6 +191,108 @@ throw new Error('Method not implemented.');
   }
 
   changeSkillEditorState() {
-    this.skillEditorActive = ! this.skillEditorActive;
+    this.skillChangeActive = ! this.skillChangeActive;
+  }
+
+  isHealthChangeActive() {
+    return this.currentHealthChangeActive || this.maxHealthChangeActive;
+  }
+
+  activateCurrentHealthChange() {
+    this.maxHealthChangeActive = false;
+    this.currentHealthChangeActive = true;
+  }
+
+  activateMaxHealthChange() {
+    this.currentHealthChangeActive = false;
+    this.maxHealthChangeActive = true;
+  }
+
+  discardHealthChange() {
+    this.readCharacter();
+    
+    this.currentHealthChangeActive = false;
+    this.maxHealthChangeActive = false;
+  }
+
+  saveHealthChange() {
+    if (this.currentHealthChangeActive) {
+
+    }
+    else {
+
+    }
+    this.currentHealthChangeActive = false;
+    this.maxHealthChangeActive = false;
+  }
+
+  changeHealth(delta : number) {
+    if (this.currentHealthChangeActive) {
+      let newHealth = this.characterValue.currentHealth + delta;
+      if (newHealth >= 0 && newHealth <= this.characterValue.maxHealth) {
+        this.characterValue.currentHealth = newHealth;
+      }
+    }
+    else {
+      let newHealth = this.characterValue.maxHealth + delta;
+      if (newHealth > 0) {
+        this.characterValue.maxHealth = newHealth;
+        
+        if (this.characterValue.currentHealth > newHealth) {
+          this.characterValue.currentHealth = newHealth;
+        }
+      }
+    }  
+  }
+
+  isHitDiceChangeActive() {
+    return this.currentHitDiceChangeActive || this.maxHitDiceChangeActive;
+  }
+
+  activateCurrentHitDiceChange() {
+    this.maxHitDiceChangeActive = false;
+    this.currentHitDiceChangeActive = true;
+  }
+
+  activateMaxHitDiceChange() {
+    this.currentHitDiceChangeActive = false;
+    this.maxHitDiceChangeActive = true;
+  }
+
+  discardHitDiceChange() {
+    this.readCharacter();
+    
+    this.currentHitDiceChangeActive = false;
+    this.maxHitDiceChangeActive = false;
+  }
+
+  saveHitDiceChange() {
+    if (this.currentHitDiceChangeActive) {
+
+    }
+    else {
+
+    }
+    this.currentHitDiceChangeActive = false;
+    this.maxHitDiceChangeActive = false;
+  }
+
+  changeHitDice(delta : number) {
+    if (this.currentHitDiceChangeActive) {
+      let newHitDice = this.characterValue.currentHitDice + delta;
+      if (newHitDice >= 0 && newHitDice <= this.characterValue.maxHitDice) {
+        this.characterValue.currentHitDice = newHitDice;
+      }
+    }
+    else {
+      let newHitDice = this.characterValue.maxHitDice + delta;
+      if (newHitDice > 0) {
+        this.characterValue.maxHitDice = newHitDice;
+        
+        if (this.characterValue.currentHitDice > newHitDice) {
+          this.characterValue.currentHitDice = newHitDice;
+        }
+      }
+    }  
   }
 }

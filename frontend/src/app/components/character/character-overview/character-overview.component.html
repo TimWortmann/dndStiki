@@ -99,15 +99,30 @@
     <div class="panel-container">
       <div class="panel">
          <div class="vertical-flex">
-           <h3>Health</h3>
-            
+            <button mat-icon-button color="primary" matTooltip="Discard" (click)="discardHealthChange()" *ngIf="isHealthChangeActive()">
+              <mat-icon>refresh</mat-icon>
+            </button>
+            <h3>Health</h3>
+            <button mat-icon-button color="primary" matTooltip="Save" (click)="saveHealthChange()" *ngIf="isHealthChangeActive()">
+              <mat-icon>save</mat-icon>
+            </button>
          </div>
         <div class="vertical-flex">
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" matTooltip="Change Current Health" (click)="activateCurrentHealthChange()" *ngIf="!isHealthChangeActive()">
             <mat-icon>edit</mat-icon>
           </button>
+          <div class="edit-buttons">
+            <button mat-flat-button color="primary" (click)="changeHealth(-100)" *ngIf="isHealthChangeActive()"> - 100 </button>
+            <button mat-flat-button color="primary" (click)="changeHealth(-10)" *ngIf="isHealthChangeActive()"> - 10 </button>
+            <button mat-flat-button color="primary" (click)="changeHealth(-1)" *ngIf="isHealthChangeActive()"> - 1 </button>
+          </div>
           <p> {{characterValue.currentHealth}} / {{characterValue.maxHealth}}</p>
-          <button mat-icon-button color="primary">
+          <div class="edit-buttons">
+            <button mat-flat-button color="primary" (click)="changeHealth(+1)" *ngIf="isHealthChangeActive()"> + 1 </button>
+            <button mat-flat-button color="primary" (click)="changeHealth(+10)" *ngIf="isHealthChangeActive()"> + 10 </button>
+            <button mat-flat-button color="primary" (click)="changeHealth(+100)" *ngIf="isHealthChangeActive()"> + 100 </button>
+          </div>
+          <button mat-icon-button color="primary" matTooltip="Edit Health Maximum " (click)="activateMaxHealthChange()" *ngIf="!isHealthChangeActive()">
             <mat-icon>settings</mat-icon>
           </button>
         </div>
@@ -115,13 +130,27 @@
       </div>
 
       <div class="panel">
-        <h3> Hit Dice </h3>
         <div class="vertical-flex">
-          <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" matTooltip="Discard" (click)="discardHitDiceChange()" *ngIf="isHitDiceChangeActive()">
+              <mat-icon>refresh</mat-icon>
+            </button>
+            <h3>Hit Dice</h3>
+            <button mat-icon-button color="primary" matTooltip="Save" (click)="saveHitDiceChange()" *ngIf="isHitDiceChangeActive()">
+              <mat-icon>save</mat-icon>
+            </button>
+         </div>
+        <div class="vertical-flex">
+          <button mat-icon-button color="primary" matTooltip="Change Current Hit Dice" (click)="activateCurrentHitDiceChange()" *ngIf="!isHitDiceChangeActive()">
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-icon-button color="primary" (click)="changeHitDice(-1)" *ngIf="isHitDiceChangeActive()">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
           <p>{{characterValue.currentHitDice}} / {{characterValue.maxHitDice}}d{{characterValue.hitDice}}</p>
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" (click)="changeHitDice(+1)" *ngIf="isHitDiceChangeActive()">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Edit Hit Dice Maximum " (click)="activateMaxHitDiceChange()" *ngIf="!isHitDiceChangeActive()">
             <mat-icon>settings</mat-icon>
           </button>
         </div>
@@ -178,10 +207,10 @@
           <ng-template mat-tab-label>
             <div class="vertical-flex">
               <span>Skills</span>
-              <button mat-icon-button matTooltip="Edit Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="!skillEditorActive">
+              <button mat-icon-button matTooltip="Edit Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="!skillChangeActive">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button matTooltip="Save Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="skillEditorActive">
+              <button mat-icon-button matTooltip="Save Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="skillChangeActive">
                 <mat-icon>save</mat-icon>
               </button>
             </div>
@@ -189,11 +218,11 @@
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
               <div class="vertical-flex">
-                <button mat-icon-button color="primary" matTooltip="Remove Expertise" (click)="removeProficiency(skill)" *ngIf="skillEditorActive">
+                <button mat-icon-button color="primary" matTooltip="Remove Expertise" (click)="removeProficiency(skill)" *ngIf="skillChangeActive">
                   <mat-icon>remove_circle_outline</mat-icon>
                 </button>
                 <h3> {{skill.name}} </h3>
-                <button mat-icon-button color="primary" matTooltip="Add Expertise" (click)="addProficiency(skill)" *ngIf="skillEditorActive">
+                <button mat-icon-button color="primary" matTooltip="Add Expertise" (click)="addProficiency(skill)" *ngIf="skillChangeActive">
                   <mat-icon>add_circle_outline</mat-icon>
                 </button>
               </div>
