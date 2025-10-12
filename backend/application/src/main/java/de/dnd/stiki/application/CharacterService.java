@@ -113,7 +113,7 @@ public class CharacterService {
         if (dndClass != null) {
             characterEntity.setHitDice(dndClass.getHitDice());
 
-            int health = getBeginnerHealth(characterEntity);
+            int health = getLevelHealth(characterEntity);
             setMaxHealth(characterEntity, health);
             characterEntity.setClassFeatures(getClassFeatures(dndClass));
 
