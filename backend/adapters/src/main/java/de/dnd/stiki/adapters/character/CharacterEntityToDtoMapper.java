@@ -4,8 +4,13 @@ import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
+import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<CharacterEntity, CharacterDto> {
@@ -24,6 +29,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setName(entity.getName());
         dto.setLevel(entity.getLevel());
         dto.setDndClass(entity.getDndClass());
+        dto.setDndSubclasses(getDndSubclasses(entity.getClassFeatures()));
         dto.setBackground(entity.getBackground());
         dto.setRace(entity.getRace());
         dto.setMaxHealth(entity.getMaxHealth());
@@ -43,5 +49,26 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setSkills(skillEntityToDtoMapper.mapEntitiesToDtos(entity.getSkills()));
 
         return dto;
+    }
+
+    private List<String> getDndSubclasses(List<TraitEntity> classFeatures) {
+        return classFeatures.stream()
+                .map(TraitEntity::getName)
+                .map(name -> {
+                    String prefix = null;
+                    if (name.contains("Subclass: ")) {
+                        prefix = "Subclass: ";
+                    } else if (name.contains("Archetype: ")) {
+                        prefix = "Archetype: ";
+                    }
+
+                    if (prefix != null) {
+                        return name.substring(name.indexOf(prefix) + prefix.length()).trim();
+                    } else {
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 }

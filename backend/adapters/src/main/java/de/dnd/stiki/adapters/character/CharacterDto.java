@@ -16,6 +16,8 @@ public class CharacterDto {
 
     private String dndClass;
 
+    private List<String> dndSubclasses;
+
     private String background;
 
     private String race;
@@ -77,6 +79,14 @@ public class CharacterDto {
 
     public void setDndClass(String dndClass) {
         this.dndClass = dndClass;
+    }
+
+    public List<String> getDndSubclasses() {
+        return dndSubclasses;
+    }
+
+    public void setDndSubclasses(List<String> dndSubclasses) {
+        this.dndSubclasses = dndSubclasses;
     }
 
     public String getBackground() {

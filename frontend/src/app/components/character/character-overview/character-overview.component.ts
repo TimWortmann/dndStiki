@@ -29,6 +29,7 @@ throw new Error('Method not implemented.');
   allClasses! : DndClassValue[];
   classesSorted: boolean = false;
   classChangeActive : boolean = false;
+  selectedSubclass? : string = "No Subclass"
   
   allBackgrounds! : BackgroundValue[];
   backgroundsSorted: boolean = false;
@@ -128,6 +129,9 @@ throw new Error('Method not implemented.');
   reduceLevel() {
     if (this.characterValue.level > 1) {
       this.characterValue.level--;
+      if (this.characterValue.level === 2) {
+        this.selectedSubclass = "No Subclass";
+      }
     }
   }
 
@@ -157,22 +161,34 @@ throw new Error('Method not implemented.');
     return savingThrowModifier > 0 ? `+${savingThrowModifier}` : `${savingThrowModifier}`;
   } 
 
-  isFeatureVisible(featureName : string) : boolean {
-    const match = featureName.match(/Level (\d+)/);  
-
-    if (match) {
-      const levelNumber = parseInt(match[1], 10);
+  isFeatureVisible(featureName: string): boolean {
+    const levelMatch = featureName.match(/Level (\d+)/);
+    if (levelMatch) {
+      const levelNumber = parseInt(levelMatch[1], 10);
       if (levelNumber > this.characterValue.level) {
-          return false;
+        return false;
       }
     }
-    
+
+    // Hide subclass-related features before level 3
     if (this.characterValue.level < 3 && featureName.toLowerCase().includes("subclass")) {
       return false;
     }
 
-    return true;
+    // Only filter by subclass if one is selected and level >= 3
+    if (this.characterValue.level >= 3 && this.selectedSubclass && this.selectedSubclass !== "No Subclass") {
+      for (const subclass of this.characterValue.dndSubclasses) {
+        if (featureName.includes(subclass) && subclass !== this.selectedSubclass) {
+          // Feature belongs to a different subclass → hide it
+          return false;
+        }
+      }
+    }
+
+    return true; // visible by default
   }
+
+
 
   sortSkills(): CharacterSkillValue[] {
     return this.characterValue.skills.sort((a, b) => a.name.localeCompare(b.name));

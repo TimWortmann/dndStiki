@@ -94,6 +94,18 @@
     </div>
   </div>
 
+  <div class="vertical-flex" *ngIf="characterValue.level >= 3">
+    <mat-form-field>
+        <mat-label>Subclass</mat-label>
+        <mat-select required [(ngModel)]="selectedSubclass">
+          <mat-option value="No Subclass"> No Subclass </mat-option>
+          <ng-container *ngFor="let subclass of characterValue.dndSubclasses"> 
+              <mat-option [value]="subclass"> {{subclass}} </mat-option>
+          </ng-container>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
   <div>
     <h2> Basic Information </h2>
     <div class="panel-container">
