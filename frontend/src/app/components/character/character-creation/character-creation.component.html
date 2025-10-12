@@ -13,13 +13,21 @@
 
         <div>
             <h2> Class </h2>
-            <mat-checkbox [(ngModel)]="classesSorted">Sort alphabetically</mat-checkbox>
-            <p></p>
             <mat-form-field appearance="fill">
                 <mat-select required [(ngModel)]="creationValue.dndClass" (selectionChange)="selectClass()">
-                    <mat-option *ngFor="let dndClass of getPotentiallySortedData(allClasses, classesSorted)" [value]="dndClass.name">
+
+                    <!-- 🔍 Search field -->
+                    <ngx-mat-select-search
+                    placeholderLabel="Search classes..."
+                    noEntriesFoundLabel="No classes found"
+                    [(ngModel)]="classFilter">
+                    </ngx-mat-select-search>
+
+                    <!-- 🧙 Filtered options -->
+                    <mat-option *ngFor="let dndClass of getFilteredClasses()" [value]="dndClass.name">
                     {{ dndClass.name }}
                     </mat-option>
+
                 </mat-select>
             </mat-form-field>
             <div *ngIf="selectedClass">
@@ -73,13 +81,21 @@
 
         <div>
             <h2> Background </h2>
-            <mat-checkbox [(ngModel)]="backgroundsSorted">Sort alphabetically</mat-checkbox>
-            <p></p>
             <mat-form-field appearance="fill">
                 <mat-select required [(ngModel)]="creationValue.background" (selectionChange)="selectBackground()">
-                    <mat-option *ngFor="let background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)" [value]="background.name">
+
+                    <!-- 🔍 Search field -->
+                    <ngx-mat-select-search
+                    placeholderLabel="Search backgrounds..."
+                    noEntriesFoundLabel="No backgrounds found"
+                    [(ngModel)]="backgroundFilter">
+                    </ngx-mat-select-search>
+
+                    <!-- 🧩 Filtered options -->
+                    <mat-option *ngFor="let background of getFilteredBackgrounds()" [value]="background.name">
                     {{ background.name }}
                     </mat-option>
+
                 </mat-select>
             </mat-form-field>
             <div *ngIf="selectedBackground">
@@ -94,13 +110,21 @@
 
         <div>
             <h2> Race </h2>
-            <mat-checkbox [(ngModel)]="racesSorted">Sort alphabetically</mat-checkbox>
-            <p></p>
             <mat-form-field appearance="fill">
                 <mat-select required [(ngModel)]="creationValue.race" (selectionChange)="selectRace()">
-                    <mat-option *ngFor="let race of getPotentiallySortedData(allRaces, racesSorted)" [value]="race.name">
+
+                    <!-- 🔍 Search field -->
+                    <ngx-mat-select-search
+                    placeholderLabel="Search races..."
+                    noEntriesFoundLabel="No races found"
+                    [(ngModel)]="raceFilter">
+                    </ngx-mat-select-search>
+
+                    <!-- 🧬 Filtered options -->
+                    <mat-option *ngFor="let race of getFilteredRaces()" [value]="race.name">
                     {{ race.name }}
                     </mat-option>
+
                 </mat-select>
             </mat-form-field>
              <div *ngIf="selectedRace">

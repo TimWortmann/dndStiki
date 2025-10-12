@@ -37,16 +37,16 @@ export class CharacterCreationComponent implements OnInit {
   }
 
   allClasses! : DndClassValue[];
-  classesSorted: boolean = false;
   selectedClass? : DndClassValue;
+  classFilter: string = '';
   selectedClassSkills : string[] = [];
-    
+
   allBackgrounds! : BackgroundValue[];
-  backgroundsSorted: boolean = false;
+  backgroundFilter: string = '';
   selectedBackground? : BackgroundValue;
   
   allRaces! : RaceValue[];
-  racesSorted: boolean = false;
+  raceFilter: string = '';
   selectedRace? : RaceValue; 
 
   pointBuySum : number = 0;
@@ -198,5 +198,27 @@ export class CharacterCreationComponent implements OnInit {
 
   classSkillsAreChoosen() : boolean {
     return this.selectedClassSkills.length === this.selectedClass?.numberOfSkillProficiencies;
+  }
+
+  
+  getFilteredClasses(): DndClassValue[] {
+    const list = this.allClasses;
+    if (!this.classFilter) return list;
+    const filterValue = this.classFilter.toLowerCase();
+    return list.filter(c => c.name.toLowerCase().includes(filterValue));
+  }
+
+  getFilteredBackgrounds(): BackgroundValue[] {
+    const list = this.allBackgrounds;
+    if (!this.backgroundFilter) return list;
+    const filterValue = this.backgroundFilter.toLowerCase();
+    return list.filter(b => b.name.toLowerCase().includes(filterValue));
+  }
+
+  getFilteredRaces(): RaceValue[] {
+    const list = this.allRaces;
+    if (!this.raceFilter) return list;
+    const filterValue = this.raceFilter.toLowerCase();
+    return list.filter(r => r.name.toLowerCase().includes(filterValue));
   }
 }
