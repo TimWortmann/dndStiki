@@ -44,4 +44,12 @@ export class CharacterService {
   changeMaxHealth(id : number, maxHealth : number) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/maxHealth/" + id + "/" + maxHealth, undefined)
   }
+
+  changeCurrentHitDice(id : number, currentHitDice : number) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/currentHitDice/" + id + "/" + currentHitDice, undefined)
+  }
+
+  changeMaxHitDice(id : number, maxHitDice : number) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/maxHitDice/" + id + "/" + maxHitDice, undefined)
+  }
 }

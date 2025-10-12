@@ -298,10 +298,14 @@ throw new Error('Method not implemented.');
 
   saveHitDiceChange() {
     if (this.currentHitDiceChangeActive) {
-
+      this.characterService.changeCurrentHitDice(this.characterValue.id, this.characterValue.currentHitDice).subscribe((response) => {
+        this.setCharacter(response);
+      });
     }
     else {
-
+      this.characterService.changeMaxHitDice(this.characterValue.id, this.characterValue.maxHitDice).subscribe((response) => {
+        this.setCharacter(response);
+      });
     }
     this.currentHitDiceChangeActive = false;
     this.maxHitDiceChangeActive = false;
@@ -347,6 +351,5 @@ throw new Error('Method not implemented.');
     this.characterService.changeSubclass(this.characterValue.id, this.characterValue.dndSubclass).subscribe((response) => {
         this.setCharacter(response);
       });
-    
   }
 }

@@ -147,7 +147,7 @@
             <button mat-icon-button color="primary" matTooltip="Discard" (click)="discardHitDiceChange()" *ngIf="isHitDiceChangeActive()">
               <mat-icon>refresh</mat-icon>
             </button>
-            <h3>Hit Dice</h3>
+            <h3>Hit Dice (d{{characterValue.hitDice}})</h3>
             <button mat-icon-button color="primary" matTooltip="Save" (click)="saveHitDiceChange()" *ngIf="isHitDiceChangeActive()">
               <mat-icon>save</mat-icon>
             </button>
@@ -159,7 +159,13 @@
           <button mat-icon-button color="primary" (click)="changeHitDice(-1)" *ngIf="isHitDiceChangeActive()">
             <mat-icon>remove_circle_outline</mat-icon>
           </button>
-          <p>{{characterValue.currentHitDice}} / {{characterValue.maxHitDice}}d{{characterValue.hitDice}}</p>
+          <div class="vertical-flex">
+            <p [class.changing]="currentHitDiceChangeActive">{{characterValue.currentHitDice}}</p>
+            <p>/</p>
+            <div class="flex-without-gap">
+              <p [class.changing]="maxHitDiceChangeActive">{{characterValue.maxHitDice}}</p>
+            </div>
+          </div>
           <button mat-icon-button color="primary" (click)="changeHitDice(+1)" *ngIf="isHitDiceChangeActive()">
             <mat-icon>add_circle_outline</mat-icon>
           </button>

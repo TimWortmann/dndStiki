@@ -73,5 +73,11 @@
   color: blue;
 }
 
+.flex-without-gap {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
 
 

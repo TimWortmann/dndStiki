@@ -57,4 +57,14 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.changeMaxHealth(id, maxHealth));
     }
 
+    @PutMapping("/currentHitDice/{id}/{currentHitDice}")
+    public ResponseEntity<CharacterDto> changeCurrentHitDice(@PathVariable Long id, @PathVariable Integer currentHitDice) {
+        return ResponseEntity.ok().body(service.changeCurrentHitDice(id, currentHitDice));
+    }
+
+    @PutMapping("/maxHitDice/{id}/{maxHitDice}")
+    public ResponseEntity<CharacterDto> changeMaxHitDice(@PathVariable Long id, @PathVariable Integer maxHitDice) {
+        return ResponseEntity.ok().body(service.changeMaxHitDice(id, maxHitDice));
+    }
+
 }

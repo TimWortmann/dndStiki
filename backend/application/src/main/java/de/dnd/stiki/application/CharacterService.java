@@ -166,15 +166,8 @@ public class CharacterService {
             characterEntity.setDndSubclass("No Subclass");
         }
 
-        characterEntity.setMaxHitDice(level);
-        if (characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
-            characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
-        }
-
-        characterEntity.setMaxHealth(getLevelHealth(characterEntity));
-        if (characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
-            characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
-        }
+        setMaxHitDice(characterEntity, level);
+        setMaxHealth(characterEntity, getLevelHealth(characterEntity));
 
         characterEntity.setProficiencyBonus(getProficiencyBonus(level));
 
@@ -211,12 +204,35 @@ public class CharacterService {
 
     public CharacterDto changeMaxHealth(Long id, Integer maxHealth) {
         CharacterEntity characterEntity = repository.get(id);
+        setMaxHealth(characterEntity, maxHealth);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private void setMaxHealth(CharacterEntity characterEntity, Integer maxHealth) {
         characterEntity.setMaxHealth(maxHealth);
 
         if (characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
             characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
         }
+    }
 
+    public CharacterDto changeCurrentHitDice(Long id, Integer currentHitDice) {
+        CharacterEntity characterEntity = repository.get(id);
+        characterEntity.setCurrentHitDice(currentHitDice);
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto changeMaxHitDice(Long id, Integer maxHitDice) {
+        CharacterEntity characterEntity = repository.get(id);
+        setMaxHitDice(characterEntity, maxHitDice);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private void setMaxHitDice(CharacterEntity characterEntity, Integer maxHitDice) {
+        characterEntity.setMaxHitDice(maxHitDice);
+
+        if (characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
+            characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
+        }
     }
 }
