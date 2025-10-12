@@ -68,7 +68,6 @@ public class DndClassEntityToDtoMapper extends AbstractEntityToDtoMapper<DndClas
                 .distinct()
                 .collect(Collectors.toList());
 
-        // Add "No Subclass" at the beginning
         subclasses.addFirst("No Subclass");
 
         return subclasses;

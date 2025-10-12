@@ -33,6 +33,10 @@ export class CharacterService {
     return this.http.put<CharacterValue>(this.baseUrl + "/level/" + id + "/" + level, undefined)
   }
 
+  changeDndClass(id : number, dndClass : string) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/class/" + id, dndClass)
+  }
+
   changeSubclass(id : number, subclass : string) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/subclass/" + id + "/" + subclass, undefined)
   }

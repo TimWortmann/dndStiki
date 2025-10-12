@@ -42,6 +42,11 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.changeLevel(id, level));
     }
 
+    @PutMapping("/class/{id}")
+    public ResponseEntity<CharacterDto> changeDndClass(@PathVariable Long id, @RequestBody String dndClass) {
+        return ResponseEntity.ok().body(service.changeDndClass(id, dndClass));
+    }
+
     @PutMapping("/subclass/{id}/{subclass}")
     public ResponseEntity<CharacterDto> changeSubclass(@PathVariable Long id, @PathVariable String subclass) {
         return ResponseEntity.ok().body(service.changeSubclass(id, subclass));

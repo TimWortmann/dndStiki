@@ -107,6 +107,11 @@ throw new Error('Method not implemented.');
   }
 
   changeClassState() {
+    if (this.classChangeActive) {
+      this.characterService.changeDndClass(this.characterValue.id, this.characterValue.dndClass).subscribe(response => {
+        this.setCharacter(response);  
+      });
+    }
     this.classChangeActive = !this.classChangeActive;
   }
 

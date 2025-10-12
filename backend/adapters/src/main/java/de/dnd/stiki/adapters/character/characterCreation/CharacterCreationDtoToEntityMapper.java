@@ -17,7 +17,6 @@ public class CharacterCreationDtoToEntityMapper extends AbstractDtoToEntityMappe
         CharacterEntity entity = new CharacterEntity();
         entity.setName(dto.getName());
         entity.setDndClass(dto.getDndClass());
-        entity.setDndSubclass("No Subclass");
         entity.setBackground(dto.getBackground());
         entity.setRace(dto.getRace());
         entity.setAbilities(abilityDtoToEntityMapper.mapDtosToEntities(dto.getAbilities()));

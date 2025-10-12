@@ -36,11 +36,13 @@
           <mat-select required [(ngModel)]="characterValue.dndClass" [disabled]="!classChangeActive">
 
             <!-- 🔍 Search field -->
-            <ngx-mat-select-search
-              placeholderLabel="Search classes..."
-              noEntriesFoundLabel="No classes found"
-              [(ngModel)]="classFilter">
-            </ngx-mat-select-search>
+            <mat-option>
+              <ngx-mat-select-search
+                placeholderLabel="Search classes..."
+                noEntriesFoundLabel="No classes found"
+                [(ngModel)]="classFilter">
+              </ngx-mat-select-search>
+            </mat-option>
 
             <ng-container *ngFor="let class of getFilteredClasses()">
               <mat-option [value]="class.name">
@@ -65,11 +67,13 @@
             <mat-select required [(ngModel)]="characterValue.background" [disabled]="!backgroundChangeActive">
               
               <!-- 🔍 Search field -->
-              <ngx-mat-select-search
-                placeholderLabel="Search backgrounds..."
-                noEntriesFoundLabel="No backgrounds found"
-                [(ngModel)]="backgroundFilter">
-              </ngx-mat-select-search>
+              <mat-option>
+                <ngx-mat-select-search
+                  placeholderLabel="Search backgrounds..."
+                  noEntriesFoundLabel="No backgrounds found"
+                  [(ngModel)]="backgroundFilter">
+                </ngx-mat-select-search>
+              </mat-option>
 
               <ng-container *ngFor="let background of getFilteredBackgrounds()">
                 <mat-option [value]="background.name">{{ background.name }}</mat-option>
@@ -93,11 +97,13 @@
             <mat-select required [(ngModel)]="characterValue.race" [disabled]="!raceChangeActive">
 
               <!-- 🔍 Search field -->
-              <ngx-mat-select-search
-                placeholderLabel="Search races..."
-                noEntriesFoundLabel="No races found"
-                [(ngModel)]="raceFilter">
-              </ngx-mat-select-search>
+              <mat-option>
+                <ngx-mat-select-search
+                  placeholderLabel="Search races..."
+                  noEntriesFoundLabel="No races found"
+                  [(ngModel)]="raceFilter">
+                </ngx-mat-select-search>
+              </mat-option>
 
               <ng-container *ngFor="let race of getFilteredRaces()">
                 <mat-option [value]="race.name">{{ race.name }}</mat-option>
@@ -115,7 +121,7 @@
     </div>
   </div>
 
-  <div class="vertical-flex" *ngIf="characterValue.level >= 3">
+  <div class="vertical-flex" *ngIf="characterValue.level >= 3 && !classChangeActive">
     <mat-form-field>
         <mat-label>Subclass</mat-label>
         <mat-select required [(ngModel)]="characterValue.dndSubclass"  (selectionChange)="changeSubclass()">
