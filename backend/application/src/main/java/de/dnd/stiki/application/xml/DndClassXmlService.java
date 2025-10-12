@@ -60,13 +60,39 @@ public class DndClassXmlService extends AbstractXmlService<DndClassEntity, DndCl
     }
 
     private List<ClassLevelEntity> getLevelEntities(NodeList levelNodes) {
-
         List<ClassLevelEntity> levelEntities = new ArrayList<>();
+
         for (int i = 0; i < levelNodes.getLength(); i++) {
-            if (levelNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                levelEntities.add(getLevelEntity((Element) levelNodes.item(i)));
+            Node node = levelNodes.item(i);
+            if (node.getNodeType() != Node.ELEMENT_NODE) continue;
+
+            Element levelElement = (Element) node;
+            String levelAttribute = levelElement.getAttribute("level");
+            if (levelAttribute.isBlank()) continue;
+
+            int level = Integer.parseInt(levelAttribute);
+
+            // Check if entity for this level already exists
+            ClassLevelEntity existing = levelEntities.stream()
+                    .filter(e -> e.getLevel() == level)
+                    .findFirst()
+                    .orElse(null);
+
+            if (existing != null) {
+                // Merge new data into existing entity
+                existing.getFeatures().addAll(
+                        getFeatureEntities(levelElement.getElementsByTagName("feature"))
+                );
+                existing.getCounters().addAll(
+                        getCounterEntities(levelElement.getElementsByTagName("counter"))
+                );
+            } else {
+                // Create a new one if none exists
+                ClassLevelEntity newEntity = getLevelEntity(levelElement);
+                levelEntities.add(newEntity);
             }
         }
+
         return levelEntities;
     }
 
