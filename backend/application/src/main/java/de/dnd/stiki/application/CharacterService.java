@@ -161,6 +161,11 @@ public class CharacterService {
         CharacterEntity characterEntity = repository.get(id);
 
         characterEntity.setLevel(level);
+
+        if (level < 3) {
+            characterEntity.setDndSubclass("No Subclass");
+        }
+
         characterEntity.setMaxHitDice(level);
         if (characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
             characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
@@ -186,6 +191,16 @@ public class CharacterService {
 
     private Integer getProficiencyBonus(Integer level) {
         return (int) Math.ceil(level / 4.0) + 1;
+    }
+
+    public CharacterDto changeSubclass(Long id, String subclass) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        if(characterEntity.getLevel() >= 3) {
+            characterEntity.setDndSubclass(subclass);
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
     public CharacterDto changeCurrentHealth(Long id, Integer currentHealth) {

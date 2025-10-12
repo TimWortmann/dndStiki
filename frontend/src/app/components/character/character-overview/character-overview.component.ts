@@ -344,6 +344,9 @@ throw new Error('Method not implemented.');
   }
 
   changeSubclass() {
+    this.characterService.changeSubclass(this.characterValue.id, this.characterValue.dndSubclass).subscribe((response) => {
+        this.setCharacter(response);
+      });
     
   }
 }
