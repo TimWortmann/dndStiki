@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CharacterListComponent {
 
+   @ViewChild('subclassTemplate') subclassTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
 
   data?: CharacterValue[];
@@ -46,6 +47,13 @@ export class CharacterListComponent {
         dataKey: 'dndClass',
         position: 'left',
         isSortable: true
+      },
+      {
+        name: 'Subclass',
+        dataKey: 'dndSubclass',
+        position: 'left',
+        isSortable: true,
+        template: this.subclassTemplate
       },
       {
         name: 'Level',

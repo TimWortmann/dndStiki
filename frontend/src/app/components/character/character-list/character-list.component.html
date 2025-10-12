@@ -1,5 +1,9 @@
+<ng-template #subclassTemplate let-column="column" let-element="element">
+  <span *ngIf="element[column.dataKey] !== 'No Subclass'"> {{element[column.dataKey]}}</span>
+</ng-template>
+
 <ng-template #actionsTemplate let-column="column" let-element="element">
-  <div class="ertical-flex">
+  <div class="vertical-flex">
     <button mat-icon-button (click)="openCharacterDetails(element.id)">
       <mat-icon>edit</mat-icon>
     </button>
