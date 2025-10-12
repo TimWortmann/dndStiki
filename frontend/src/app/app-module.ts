@@ -21,6 +21,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 import { loadingInterceptor } from './services/loading/LoadingInterceptor';
@@ -73,6 +74,7 @@ import { PointBuyPopupComponent } from './components/character/point-buy-popup/p
     AppRoutingModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule, 
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -88,7 +90,7 @@ import { PointBuyPopupComponent } from './components/character/point-buy-popup/p
     MatProgressBarModule,
     MatTooltipModule,
     MatListModule,
-    FormsModule,    
+    NgxMatSelectSearchModule,   
 ],
   providers: [
     provideBrowserGlobalErrorListeners(),

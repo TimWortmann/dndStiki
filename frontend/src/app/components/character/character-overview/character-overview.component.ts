@@ -12,7 +12,6 @@ import { CharacterService } from '../../../services/character/character.service'
 import { CharacterAbilityValue } from '../../../models/character-ability-value';
 import { CharacterSkillValue } from '../../../models/character-skill-value';
 import { MatDialog } from '@angular/material/dialog';
-import { ClassDetailsPopupComponent } from '../../dnd-classes/class-details-popup/class-details-popup.component';
 import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.component';
 
 @Component({
@@ -30,16 +29,16 @@ throw new Error('Method not implemented.');
   characterNameChangeActive : boolean = false;  
 
   allClasses! : DndClassValue[];
-  classesSorted: boolean = false;
   classChangeActive : boolean = false;
-  
-  allBackgrounds! : BackgroundValue[];
-  backgroundsSorted: boolean = false;
-  backgroundChangeActive : boolean = false;
+  classFilter: string = '';
 
+  allBackgrounds! : BackgroundValue[];
+  backgroundChangeActive : boolean = false;
+  backgroundFilter: string = '';
+  
   allRaces! : RaceValue[];
-  racesSorted: boolean = false;
   raceChangeActive : boolean = false;
+  raceFilter: string = '';  
 
   currentHealthChangeActive : boolean = false;
   maxHealthChangeActive : boolean = false;
@@ -105,14 +104,6 @@ throw new Error('Method not implemented.');
     this.raceService.getAllRaces().subscribe((response) => {
       this.allRaces = response;
     })
-  }
-
-  getPotentiallySortedData(data : any[], sorted : boolean) : DndClassValue[] {
-    if (sorted) {
-      return [...data].sort((a, b) => a.name.localeCompare(b.name));  
-    }
-
-    return data;
   }
 
   changeClassState() {
@@ -352,4 +343,25 @@ throw new Error('Method not implemented.');
         this.setCharacter(response);
       });
   }
+
+  getFilteredClasses(): DndClassValue[] {
+    const list = this.allClasses;
+    if (!this.classFilter) return list;
+    const filterValue = this.classFilter.toLowerCase();
+    return list.filter(c => c.name.toLowerCase().includes(filterValue));
+  }
+
+  getFilteredBackgrounds(): BackgroundValue[] {
+  const list = this.allBackgrounds;
+  if (!this.backgroundFilter) return list;
+  const filterValue = this.backgroundFilter.toLowerCase();
+  return list.filter(b => b.name.toLowerCase().includes(filterValue));
+}
+
+getFilteredRaces(): RaceValue[] {
+  const list = this.allRaces;
+  if (!this.raceFilter) return list;
+  const filterValue = this.raceFilter.toLowerCase();
+  return list.filter(r => r.name.toLowerCase().includes(filterValue));
+}
 }

@@ -29,68 +29,89 @@
     </button>
   </div>
 
-  <div class="vertical-flex">
-    <div>
-        <mat-checkbox [(ngModel)]="classesSorted" [disabled]="!classChangeActive">Sort alphabetically</mat-checkbox>
-         <div class="vertical-flex">
-             <mat-form-field>
-                 <mat-label>Class</mat-label>
-                 <mat-select required [(ngModel)]="characterValue.dndClass" [disabled]="!classChangeActive">
-                     <mat-option [value]="characterValue.dndClass">{{ characterValue.dndClass }} </mat-option>
-                     <ng-container *ngFor="let class of getPotentiallySortedData(allClasses, classesSorted)"> 
-                         <mat-option *ngIf="class.name !== characterValue.dndClass" [value]="class.name"> {{class.name}} </mat-option>
-                     </ng-container>
-                 </mat-select>
-             </mat-form-field>
-             <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="!classChangeActive">
-                 <mat-icon>edit</mat-icon>
-             </button>
-             <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="classChangeActive">
-                 <mat-icon>save</mat-icon>
-             </button>
-         </div>
+  <div class="vertical-flex" style="margin-top: 5px;">
+    <div class="vertical-flex">
+        <mat-form-field>
+          <mat-label>Class</mat-label>
+          <mat-select required [(ngModel)]="characterValue.dndClass" [disabled]="!classChangeActive">
+
+            <!-- 🔍 Search field -->
+            <ngx-mat-select-search
+              placeholderLabel="Search classes..."
+              noEntriesFoundLabel="No classes found"
+              [(ngModel)]="classFilter">
+            </ngx-mat-select-search>
+
+            <ng-container *ngFor="let class of getFilteredClasses()">
+              <mat-option [value]="class.name">
+                {{ class.name }}
+              </mat-option>
+            </ng-container>
+
+          </mat-select>
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="!classChangeActive">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="changeClassState()" *ngIf="classChangeActive">
+            <mat-icon>save</mat-icon>
+        </button>
     </div>
 
     <div>
-        <mat-checkbox [(ngModel)]="backgroundsSorted" [disabled]="!backgroundChangeActive">Sort alphabetically</mat-checkbox>
         <div class="vertical-flex">
-            <mat-form-field>
-                <mat-label>Background</mat-label>
-                <mat-select required [(ngModel)]="characterValue.background" [disabled]="!backgroundChangeActive">
-                    <mat-option [value]="characterValue.background">{{ characterValue.background }} </mat-option>
-                    <ng-container *ngFor="let Background of getPotentiallySortedData(allBackgrounds, backgroundsSorted)"> 
-                        <mat-option *ngIf="Background.name !== characterValue.background" [value]="Background.name"> {{Background.name}} </mat-option>
-                    </ng-container>
-                </mat-select>
-            </mat-form-field>
-            <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="!backgroundChangeActive">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="backgroundChangeActive">
-                <mat-icon>save</mat-icon>
-            </button>
+          <mat-form-field>
+            <mat-label>Background</mat-label>
+            <mat-select required [(ngModel)]="characterValue.background" [disabled]="!backgroundChangeActive">
+              
+              <!-- 🔍 Search field -->
+              <ngx-mat-select-search
+                placeholderLabel="Search backgrounds..."
+                noEntriesFoundLabel="No backgrounds found"
+                [(ngModel)]="backgroundFilter">
+              </ngx-mat-select-search>
+
+              <ng-container *ngFor="let background of getFilteredBackgrounds()">
+                <mat-option [value]="background.name">{{ background.name }}</mat-option>
+              </ng-container>
+
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="!backgroundChangeActive">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="changeBackgroundState()" *ngIf="backgroundChangeActive">
+            <mat-icon>save</mat-icon>
+          </button>
         </div>
     </div>
 
     <div>
-        <mat-checkbox [(ngModel)]="racesSorted" [disabled]="!raceChangeActive">Sort alphabetically</mat-checkbox>
-         <div class="vertical-flex">
-             <mat-form-field>
-                 <mat-label>Races</mat-label>
-                 <mat-select required [(ngModel)]="characterValue.race" [disabled]="!raceChangeActive">
-                     <mat-option [value]="characterValue.race">{{ characterValue.race }} </mat-option>
-                     <ng-container *ngFor="let Race of getPotentiallySortedData(allRaces, racesSorted)"> 
-                         <mat-option *ngIf="Race.name !== characterValue.race" [value]="Race.name"> {{Race.name}} </mat-option>
-                     </ng-container>
-                 </mat-select>
-             </mat-form-field>
-             <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="!raceChangeActive">
-                 <mat-icon>edit</mat-icon>
-             </button>
-             <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="raceChangeActive">
-                 <mat-icon>save</mat-icon>
-             </button>
-         </div>
+        <div class="vertical-flex">
+          <mat-form-field>
+            <mat-label>Race</mat-label>
+            <mat-select required [(ngModel)]="characterValue.race" [disabled]="!raceChangeActive">
+
+              <!-- 🔍 Search field -->
+              <ngx-mat-select-search
+                placeholderLabel="Search races..."
+                noEntriesFoundLabel="No races found"
+                [(ngModel)]="raceFilter">
+              </ngx-mat-select-search>
+
+              <ng-container *ngFor="let race of getFilteredRaces()">
+                <mat-option [value]="race.name">{{ race.name }}</mat-option>
+              </ng-container>
+
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="!raceChangeActive">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="changeRaceState()" *ngIf="raceChangeActive">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
     </div>
   </div>
 
