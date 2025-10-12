@@ -69,6 +69,14 @@
 
         <div>
             <h2> Levels </h2>
+            <mat-form-field style="width: 500px;">
+                <mat-label>Subclass</mat-label>
+                <mat-select required [(ngModel)]="selectedSubclass"  (selectionChange)="changeSubclass()">
+                <ng-container *ngFor="let subclass of dndClass.subclasses"> 
+                    <mat-option [value]="subclass"> {{subclass}} </mat-option>
+                </ng-container>
+                </mat-select>
+            </mat-form-field>
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let classLevel of dndClass.classLevels">
                     <mat-expansion-panel-header>
@@ -112,10 +120,9 @@
 </ng-template>
 
 <ng-template #featureExpansionPanel let-feature>
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="isFeatureVisible(feature.name)">
         <mat-expansion-panel-header>
-            <mat-panel-title *ngIf="feature.optional === false">Feature {{ feature.name }} </mat-panel-title>
-            <mat-panel-title *ngIf="feature.optional === true">(Optional) Feature {{ feature.name }} </mat-panel-title>
+            <mat-panel-title>Feature {{ feature.name }} </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="text"> {{feature.text}} </div>
     </mat-expansion-panel>

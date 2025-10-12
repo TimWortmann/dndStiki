@@ -13,6 +13,7 @@ import { ClassLevelValue } from '../../../models/class-level-value';
 export class ClassDetailsPopupComponent {
 
   dndClass! : DndClassValue;
+  selectedSubclass : string = "No Subclass"; 
 
   constructor(
     public dialogRef: MatDialogRef<ClassDetailsPopupComponent>,
@@ -49,6 +50,24 @@ export class ClassDetailsPopupComponent {
 
   getSpellSlotsHeaderArray() : string[] {
     return ["Known Cantrips", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"];  
+  }
+
+  changeSubclass() {
+
+  }
+
+  isFeatureVisible(featureName: string): boolean {
+    // Only filter by subclass if one is selected 
+    if (this.selectedSubclass && this.selectedSubclass !== "No Subclass") {
+      for (const subclass of this.dndClass.subclasses) {
+        if (featureName.includes(subclass) && subclass !== this.selectedSubclass) {
+          // Feature belongs to a different subclass → hide it
+          return false;
+        }
+      }
+    }
+
+    return true; // visible by default
   }
 
 }

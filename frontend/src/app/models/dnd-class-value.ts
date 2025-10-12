@@ -3,6 +3,7 @@ import { TraitValue } from "./trait-value";
 
 export interface DndClassValue {
   name: string;
+  subclasses: string[];
   hitDice: number;
   savingThrowProficiencies: string[];
   skillProficiencies: string[];

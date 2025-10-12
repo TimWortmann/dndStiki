@@ -9,6 +9,8 @@ public class DndClassDto {
 
     private String name;
 
+    private List<String> subclasses;
+
     private Integer hitDice;
 
     private List<String> savingThrowProficiencies;
@@ -31,76 +33,20 @@ public class DndClassDto {
 
     private List <TraitDto> traits;
 
-    public List<ClassLevelDto> getClassLevels() {
-        return classLevels;
+    public String getName() {
+        return name;
     }
 
-    public void setClassLevels(List<ClassLevelDto> classLevels) {
-        this.classLevels = classLevels;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSpellAbility() {
-        return spellAbility;
+    public List<String> getSubclasses() {
+        return subclasses;
     }
 
-    public void setSpellAbility(String spellAbility) {
-        this.spellAbility = spellAbility;
-    }
-
-    public String getWealth() {
-        return wealth;
-    }
-
-    public void setWealth(String wealth) {
-        this.wealth = wealth;
-    }
-
-    public List<String> getToolProficiencies() {
-        return toolProficiencies;
-    }
-
-    public void setToolProficiencies(List<String> toolProficiencies) {
-        this.toolProficiencies = toolProficiencies;
-    }
-
-    public List<String> getWeaponProficiencies() {
-        return weaponProficiencies;
-    }
-
-    public void setWeaponProficiencies(List<String> weaponProficiencies) {
-        this.weaponProficiencies = weaponProficiencies;
-    }
-
-    public List<String> getArmorProficiencies() {
-        return armorProficiencies;
-    }
-
-    public void setArmorProficiencies(List<String> armorProficiencies) {
-        this.armorProficiencies = armorProficiencies;
-    }
-
-    public Integer getNumberOfSkillProficiencies() {
-        return numberOfSkillProficiencies;
-    }
-
-    public void setNumberOfSkillProficiencies(Integer numberOfSkillProficiencies) {
-        this.numberOfSkillProficiencies = numberOfSkillProficiencies;
-    }
-
-    public List<String> getSkillProficiencies() {
-        return skillProficiencies;
-    }
-
-    public void setSkillProficiencies(List<String> skillProficiencies) {
-        this.skillProficiencies = skillProficiencies;
-    }
-
-    public List<String> getSavingThrowProficiencies() {
-        return savingThrowProficiencies;
-    }
-
-    public void setSavingThrowProficiencies(List<String> savingThrowProficiencies) {
-        this.savingThrowProficiencies = savingThrowProficiencies;
+    public void setSubclasses(List<String> subclasses) {
+        this.subclasses = subclasses;
     }
 
     public Integer getHitDice() {
@@ -111,12 +57,76 @@ public class DndClassDto {
         this.hitDice = hitDice;
     }
 
-    public String getName() {
-        return name;
+    public List<String> getSavingThrowProficiencies() {
+        return savingThrowProficiencies;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSavingThrowProficiencies(List<String> savingThrowProficiencies) {
+        this.savingThrowProficiencies = savingThrowProficiencies;
+    }
+
+    public List<String> getSkillProficiencies() {
+        return skillProficiencies;
+    }
+
+    public void setSkillProficiencies(List<String> skillProficiencies) {
+        this.skillProficiencies = skillProficiencies;
+    }
+
+    public Integer getNumberOfSkillProficiencies() {
+        return numberOfSkillProficiencies;
+    }
+
+    public void setNumberOfSkillProficiencies(Integer numberOfSkillProficiencies) {
+        this.numberOfSkillProficiencies = numberOfSkillProficiencies;
+    }
+
+    public List<String> getArmorProficiencies() {
+        return armorProficiencies;
+    }
+
+    public void setArmorProficiencies(List<String> armorProficiencies) {
+        this.armorProficiencies = armorProficiencies;
+    }
+
+    public List<String> getWeaponProficiencies() {
+        return weaponProficiencies;
+    }
+
+    public void setWeaponProficiencies(List<String> weaponProficiencies) {
+        this.weaponProficiencies = weaponProficiencies;
+    }
+
+    public List<String> getToolProficiencies() {
+        return toolProficiencies;
+    }
+
+    public void setToolProficiencies(List<String> toolProficiencies) {
+        this.toolProficiencies = toolProficiencies;
+    }
+
+    public String getWealth() {
+        return wealth;
+    }
+
+    public void setWealth(String wealth) {
+        this.wealth = wealth;
+    }
+
+    public String getSpellAbility() {
+        return spellAbility;
+    }
+
+    public void setSpellAbility(String spellAbility) {
+        this.spellAbility = spellAbility;
+    }
+
+    public List<ClassLevelDto> getClassLevels() {
+        return classLevels;
+    }
+
+    public void setClassLevels(List<ClassLevelDto> classLevels) {
+        this.classLevels = classLevels;
     }
 
     public List<TraitDto> getTraits() {
