@@ -1,0 +1,43 @@
+.control-set {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-set button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+.control-set p {
+  margin: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.control-set span {
+  margin-right: 5px;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.flex h3 {
+  width: 100px;
+  margin: 0;
+}
+
+.big-gap {
+  gap: 100px;
+}
+
+.bold {
+  font-weight: bold;
+}

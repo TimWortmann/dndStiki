@@ -1,0 +1,12 @@
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title>Edit Ability Scores</h1>
+    <app-point-buy
+        [(abilities)]="abilities"
+        [(pointBuySum)]="pointBuySum">
+    </app-point-buy>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Discard</button>
+    <button mat-flat-button color="primary" (click)="save()" [disabled]="isSavingDisabled()">Save</button>
+</div>

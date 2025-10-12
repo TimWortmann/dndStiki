@@ -42,6 +42,8 @@ import { CharacterOverviewComponent } from './components/character/character-ove
 import { CharacterListComponent } from './components/character/character-list/character-list.component';
 import { CharacterCreationComponent } from './components/character/character-creation/character-creation.component';
 import { MatListModule } from '@angular/material/list';
+import { PointBuyComponent } from './components/character/point-buy/point-buy.component';
+import { PointBuyPopupComponent } from './components/character/point-buy-popup/point-buy-popup.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { MatListModule } from '@angular/material/list';
     CharacterOverviewComponent,
     CharacterListComponent,
     CharacterCreationComponent,
+    PointBuyComponent,
+    PointBuyPopupComponent,
   ],
   imports: [
     BrowserModule,

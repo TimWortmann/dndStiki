@@ -194,7 +194,15 @@
   <div class="subsection">
       <h2>Checks</h2>
       <mat-tab-group>
-        <mat-tab label="Abilities">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="vertical-flex">
+              <span>Abilities</span>
+              <button mat-icon-button matTooltip="Edit Ability Scores" (click)="openPointBuyDialog()">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </ng-template>
           <div class="panel-container">
             <div class="panel" *ngFor="let ability of characterValue.abilities">
               <h3> {{ability.name}} </h3>
@@ -226,7 +234,7 @@
                 <mat-icon>save</mat-icon>
               </button>
             </div>
-    </ng-template>
+          </ng-template>
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
               <div class="vertical-flex">

@@ -1,0 +1,33 @@
+<div class="flex big-gap" *ngFor="let ability of abilities">
+    <div class="control-set">
+    <h3>{{ ability.name }}:</h3>
+    <button mat-icon-button color="primary" (click)="changeBasicScore(ability, -1)">
+        <mat-icon>remove_circle_outline</mat-icon>
+    </button>
+    <p>{{ ability.basicScore }}</p>
+    <button mat-icon-button color="primary" (click)="changeBasicScore(ability, 1)">
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    </div>
+
+    <div class="control-set">
+        <span>(</span>
+        <span>Bonus:</span>
+        <button mat-icon-button color="primary" (click)="changeBonus(ability, -1)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <p [class.bold]="ability.bonus > 0"> {{ getBonus(ability.bonus) }} </p>
+        <button mat-icon-button color="primary" (click)="changeBonus(ability, 1)">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+        <span>)</span>
+    </div>
+
+    <div class="control-set">
+        <span> => Modifier: </span>
+        <p> <b> {{getModifier(ability.basicScore + ability.bonus)}} </b> </p>
+        <p> ({{ability.basicScore + ability.bonus}}) </p>
+    </div>
+</div>
+<p>Point Buy: {{pointBuySum}} / 27</p>
+                

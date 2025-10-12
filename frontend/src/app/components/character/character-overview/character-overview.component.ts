@@ -11,6 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CharacterService } from '../../../services/character/character.service';
 import { CharacterAbilityValue } from '../../../models/character-ability-value';
 import { CharacterSkillValue } from '../../../models/character-skill-value';
+import { MatDialog } from '@angular/material/dialog';
+import { ClassDetailsPopupComponent } from '../../dnd-classes/class-details-popup/class-details-popup.component';
+import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -53,6 +56,7 @@ throw new Error('Method not implemented.');
     private raceService: RaceService,
     private route: ActivatedRoute,
     private characterService : CharacterService,
+    private dialog: MatDialog,
   ){}
 
   ngOnInit(): void {
@@ -310,5 +314,22 @@ throw new Error('Method not implemented.');
         }
       }
     }  
+  }
+
+  openPointBuyDialog() {
+    const dialogRef = this.dialog.open(PointBuyPopupComponent, {
+          data: this.characterValue.abilities,
+          width: '60vw',     
+          height: '46vh',     
+          maxWidth: '60vw',  
+          maxHeight: '46vh',  
+          autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result: CharacterAbilityValue[] | undefined) => {
+      if (result) {
+        this.characterValue.abilities = result;
+      }
+    });
   }
 }
