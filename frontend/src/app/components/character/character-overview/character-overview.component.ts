@@ -32,7 +32,6 @@ throw new Error('Method not implemented.');
   allClasses! : DndClassValue[];
   classesSorted: boolean = false;
   classChangeActive : boolean = false;
-  selectedSubclass? : string = "No Subclass"
   
   allBackgrounds! : BackgroundValue[];
   backgroundsSorted: boolean = false;
@@ -84,6 +83,8 @@ throw new Error('Method not implemented.');
       this.characterValue = response;  
       this.characterValue.skills = this.sortSkills();
     });
+
+    console.log(this.characterValue.dndSubclass)
   }
 
   readAllClasses() {
@@ -133,9 +134,6 @@ throw new Error('Method not implemented.');
   reduceLevel() {
     if (this.characterValue.level > 1) {
       this.characterValue.level--;
-      if (this.characterValue.level === 2) {
-        this.selectedSubclass = "No Subclass";
-      }
     }
   }
 
@@ -180,9 +178,9 @@ throw new Error('Method not implemented.');
     }
 
     // Only filter by subclass if one is selected and level >= 3
-    if (this.characterValue.level >= 3 && this.selectedSubclass && this.selectedSubclass !== "No Subclass") {
+    if (this.characterValue.level >= 3 && this.characterValue.dndSubclass && this.characterValue.dndSubclass !== "No Subclass") {
       for (const subclass of this.characterValue.dndSubclasses) {
-        if (featureName.includes(subclass) && subclass !== this.selectedSubclass) {
+        if (featureName.includes(subclass) && subclass !== this.characterValue.dndSubclass) {
           // Feature belongs to a different subclass → hide it
           return false;
         }
@@ -331,5 +329,9 @@ throw new Error('Method not implemented.');
         this.characterValue.abilities = result;
       }
     });
+  }
+
+  changeSubclass() {
+    
   }
 }

@@ -29,6 +29,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setName(entity.getName());
         dto.setLevel(entity.getLevel());
         dto.setDndClass(entity.getDndClass());
+        dto.setDndSubclass(entity.getDndSubclass());
         dto.setDndSubclasses(getDndSubclasses(entity.getClassFeatures()));
         dto.setBackground(entity.getBackground());
         dto.setRace(entity.getRace());
@@ -52,7 +53,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     }
 
     private List<String> getDndSubclasses(List<TraitEntity> classFeatures) {
-        return classFeatures.stream()
+        List<String> subclasses = classFeatures.stream()
                 .map(TraitEntity::getName)
                 .map(name -> {
                     String prefix = null;
@@ -69,6 +70,11 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
                     }
                 })
                 .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList());
+
+        subclasses.addFirst("No Subclass");
+
+        return subclasses;
     }
 }

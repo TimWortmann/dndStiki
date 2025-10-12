@@ -17,6 +17,8 @@ public class CharacterEntity {
 
     private String dndClass;
 
+    private String dndSubclass;
+
     private String background;
 
     private String race;
@@ -77,6 +79,14 @@ public class CharacterEntity {
 
     public void setDndClass(String dndClass) {
         this.dndClass = dndClass;
+    }
+
+    public String getDndSubclass() {
+        return dndSubclass;
+    }
+
+    public void setDndSubclass(String dndSubclass) {
+        this.dndSubclass = dndSubclass;
     }
 
     public String getBackground() {

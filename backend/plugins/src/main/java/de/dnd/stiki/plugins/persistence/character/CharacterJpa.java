@@ -24,6 +24,9 @@ public class CharacterJpa {
     @Column(name = "DND_CLASS")
     private String dndClass;
 
+    @Column(name = "DND_SUBCLASS")
+    private String dndSubclass;
+
     @Column(name = "BACKGROUND")
     private String background;
 
@@ -96,6 +99,14 @@ public class CharacterJpa {
 
     public void setDndClass(String dndClass) {
         this.dndClass = dndClass;
+    }
+
+    public String getDndSubclass() {
+        return dndSubclass;
+    }
+
+    public void setDndSubclass(String dndSubclass) {
+        this.dndSubclass = dndSubclass;
     }
 
     public String getBackground() {

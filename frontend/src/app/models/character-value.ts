@@ -7,6 +7,7 @@ export interface CharacterValue {
     name: string; 
     level: number;
     dndClass: string;
+    dndSubclass: string;
     dndSubclasses: string[];
     background: string;
     race: string;

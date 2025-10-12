@@ -97,8 +97,7 @@
   <div class="vertical-flex" *ngIf="characterValue.level >= 3">
     <mat-form-field>
         <mat-label>Subclass</mat-label>
-        <mat-select required [(ngModel)]="selectedSubclass">
-          <mat-option value="No Subclass"> No Subclass </mat-option>
+        <mat-select required [(ngModel)]="characterValue.dndSubclass"  (selectionChange)="changeSubclass()">
           <ng-container *ngFor="let subclass of characterValue.dndSubclasses"> 
               <mat-option [value]="subclass"> {{subclass}} </mat-option>
           </ng-container>
@@ -124,7 +123,6 @@
             <mat-icon>edit</mat-icon>
           </button>
           <div class="edit-buttons">
-            <button mat-flat-button color="primary" (click)="changeHealth(-100)" *ngIf="isHealthChangeActive()"> - 100 </button>
             <button mat-flat-button color="primary" (click)="changeHealth(-10)" *ngIf="isHealthChangeActive()"> - 10 </button>
             <button mat-flat-button color="primary" (click)="changeHealth(-1)" *ngIf="isHealthChangeActive()"> - 1 </button>
           </div>
@@ -132,7 +130,6 @@
           <div class="edit-buttons">
             <button mat-flat-button color="primary" (click)="changeHealth(+1)" *ngIf="isHealthChangeActive()"> + 1 </button>
             <button mat-flat-button color="primary" (click)="changeHealth(+10)" *ngIf="isHealthChangeActive()"> + 10 </button>
-            <button mat-flat-button color="primary" (click)="changeHealth(+100)" *ngIf="isHealthChangeActive()"> + 100 </button>
           </div>
           <button mat-icon-button color="primary" matTooltip="Edit Health Maximum " (click)="activateMaxHealthChange()" *ngIf="!isHealthChangeActive()">
             <mat-icon>settings</mat-icon>
