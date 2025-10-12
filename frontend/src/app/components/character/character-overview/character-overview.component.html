@@ -174,10 +174,29 @@
             </div> 
           </div>
         </mat-tab>
-        <mat-tab label="Skills">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="vertical-flex">
+              <span>Skills</span>
+              <button mat-icon-button matTooltip="Edit Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="!skillEditorActive">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Save Skill Proficiencies" (click)="changeSkillEditorState()" *ngIf="skillEditorActive">
+                <mat-icon>save</mat-icon>
+              </button>
+            </div>
+    </ng-template>
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
-              <h3> {{skill.name}} </h3>
+              <div class="vertical-flex">
+                <button mat-icon-button color="primary" matTooltip="Remove Expertise" (click)="removeProficiency(skill)" *ngIf="skillEditorActive">
+                  <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+                <h3> {{skill.name}} </h3>
+                <button mat-icon-button color="primary" matTooltip="Add Expertise" (click)="addProficiency(skill)" *ngIf="skillEditorActive">
+                  <mat-icon>add_circle_outline</mat-icon>
+                </button>
+              </div>
               <p>({{skill.ability}})</p>
              <div class="vertical-flex">
                <p> {{getSkillModifier(skill)}} </p>

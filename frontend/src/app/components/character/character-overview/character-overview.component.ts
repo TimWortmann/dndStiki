@@ -38,6 +38,8 @@ throw new Error('Method not implemented.');
   racesSorted: boolean = false;
   raceChangeActive : boolean = false;
 
+  skillEditorActive : boolean = false;
+
   constructor(
     private dndClassService: DndClassService, 
     private backgroundService: BackgroundService,
@@ -168,5 +170,21 @@ throw new Error('Method not implemented.');
 
   sortSkills(): CharacterSkillValue[] {
     return this.characterValue.skills.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  addProficiency(skill : CharacterSkillValue) {
+    if (skill.proficiency < 2) {
+      skill.proficiency++;
+    }
+  }
+
+  removeProficiency(skill : CharacterSkillValue) {
+    if (skill.proficiency > 0) {
+      skill.proficiency--;
+    }
+  }
+
+  changeSkillEditorState() {
+    this.skillEditorActive = ! this.skillEditorActive;
   }
 }
