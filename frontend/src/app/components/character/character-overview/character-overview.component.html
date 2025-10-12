@@ -126,7 +126,11 @@
             <button mat-flat-button color="primary" (click)="changeHealth(-10)" *ngIf="isHealthChangeActive()"> - 10 </button>
             <button mat-flat-button color="primary" (click)="changeHealth(-1)" *ngIf="isHealthChangeActive()"> - 1 </button>
           </div>
-          <p> {{characterValue.currentHealth}} / {{characterValue.maxHealth}}</p>
+          <div class="vertical-flex">
+            <p [class.changing]="currentHealthChangeActive">{{characterValue.currentHealth}}</p>
+            <p>/</p>
+            <p [class.changing]="maxHealthChangeActive">{{characterValue.maxHealth}}</p>
+          </div>
           <div class="edit-buttons">
             <button mat-flat-button color="primary" (click)="changeHealth(+1)" *ngIf="isHealthChangeActive()"> + 1 </button>
             <button mat-flat-button color="primary" (click)="changeHealth(+10)" *ngIf="isHealthChangeActive()"> + 10 </button>

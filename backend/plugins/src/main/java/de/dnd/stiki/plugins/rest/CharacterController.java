@@ -37,9 +37,19 @@ public class CharacterController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}/{level}")
+    @PutMapping("/level/{id}/{level}")
     public ResponseEntity<CharacterDto> changeLevel(@PathVariable Long id, @PathVariable Integer level) {
         return ResponseEntity.ok().body(service.changeLevel(id, level));
+    }
+
+    @PutMapping("/currentHealth/{id}/{currentHealth}")
+    public ResponseEntity<CharacterDto> changeCurrentHealth(@PathVariable Long id, @PathVariable Integer currentHealth) {
+        return ResponseEntity.ok().body(service.changeCurrentHealth(id, currentHealth));
+    }
+
+    @PutMapping("/maxHealth/{id}/{maxHealth}")
+    public ResponseEntity<CharacterDto> changeMaxHealth(@PathVariable Long id, @PathVariable Integer maxHealth) {
+        return ResponseEntity.ok().body(service.changeMaxHealth(id, maxHealth));
     }
 
 }

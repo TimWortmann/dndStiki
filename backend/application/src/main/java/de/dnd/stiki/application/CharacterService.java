@@ -67,7 +67,7 @@ public class CharacterService {
         characterEntity.setMaxHitDice(1);
         characterEntity.setCurrentHitDice(1);
         characterEntity.setArmorClass(10 + characterEntity.getAbility(DEXTERITY).getModifier());
-        characterEntity.setProficiencyBonus(2);
+        characterEntity.setProficiencyBonus(getProficiencyBonus(1));
 
         List<CharacterSkillEntity> skills = new ArrayList<>();
         for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
@@ -171,7 +171,7 @@ public class CharacterService {
             characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
         }
 
-        characterEntity.setProficiencyBonus(level);
+        characterEntity.setProficiencyBonus(getProficiencyBonus(level));
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
@@ -184,7 +184,24 @@ public class CharacterService {
         return getBeginnerHealth(characterEntity) + (characterEntity.getLevel() * healthIncreasePerLevel);
     }
 
-    public Integer getProficiencyBonus(Integer level) {
+    private Integer getProficiencyBonus(Integer level) {
         return (int) Math.ceil(level / 4.0) + 1;
+    }
+
+    public CharacterDto changeCurrentHealth(Long id, Integer currentHealth) {
+        CharacterEntity characterEntity = repository.get(id);
+        characterEntity.setCurrentHealth(currentHealth);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto changeMaxHealth(Long id, Integer maxHealth) {
+        CharacterEntity characterEntity = repository.get(id);
+        characterEntity.setMaxHealth(maxHealth);
+
+        if (characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
+            characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 }

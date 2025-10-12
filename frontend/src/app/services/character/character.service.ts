@@ -30,6 +30,14 @@ export class CharacterService {
   }
 
   changeLevel(id : number, level : number) : Observable<CharacterValue> {
-    return this.http.put<CharacterValue>(this.baseUrl + "/" + id + "/" + level, undefined)
+    return this.http.put<CharacterValue>(this.baseUrl + "/level/" + id + "/" + level, undefined)
+  }
+
+  changeCurrentHealth(id : number, currentHealth : number) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/currentHealth/" + id + "/" + currentHealth, undefined)
+  }
+
+  changeMaxHealth(id : number, maxHealth : number) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/maxHealth/" + id + "/" + maxHealth, undefined)
   }
 }

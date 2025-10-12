@@ -191,8 +191,6 @@ throw new Error('Method not implemented.');
     return true; // visible by default
   }
 
-
-
   sortSkills(): CharacterSkillValue[] {
     return this.characterValue.skills.sort((a, b) => a.name.localeCompare(b.name));
   }
@@ -236,10 +234,14 @@ throw new Error('Method not implemented.');
 
   saveHealthChange() {
     if (this.currentHealthChangeActive) {
-
+      this.characterService.changeCurrentHealth(this.characterValue.id, this.characterValue.currentHealth).subscribe((response) => {
+        this.setCharacter(response);
+      });
     }
     else {
-
+      this.characterService.changeMaxHealth(this.characterValue.id, this.characterValue.maxHealth).subscribe((response) => {
+        this.setCharacter(response);
+      });
     }
     this.currentHealthChangeActive = false;
     this.maxHealthChangeActive = false;
@@ -251,6 +253,12 @@ throw new Error('Method not implemented.');
       if (newHealth >= 0 && newHealth <= this.characterValue.maxHealth) {
         this.characterValue.currentHealth = newHealth;
       }
+      else if (newHealth < 0) {
+        this.characterValue.currentHealth = 0;
+      }
+      else if (newHealth > this.characterValue.maxHealth) {
+        this.characterValue.currentHealth = this.characterValue.maxHealth;
+      }
     }
     else {
       let newHealth = this.characterValue.maxHealth + delta;
@@ -260,6 +268,9 @@ throw new Error('Method not implemented.');
         if (this.characterValue.currentHealth > newHealth) {
           this.characterValue.currentHealth = newHealth;
         }
+      }
+      else {
+        this.characterValue.maxHealth = 1;
       }
     }  
   }
