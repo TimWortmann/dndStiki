@@ -38,6 +38,7 @@ export class CharacterService {
   }
 
   changeSubclass(id : number, subclass : string) : Observable<CharacterValue> {
+    console.log("Subclass CHange")
     return this.http.put<CharacterValue>(this.baseUrl + "/subclass/" + id, subclass)
   }
 
