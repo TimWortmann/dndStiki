@@ -41,6 +41,10 @@ export class CharacterService {
     return this.http.put<CharacterValue>(this.baseUrl + "/subclass/" + id + "/" + subclass, undefined)
   }
 
+  changeBackground(id : number, background : string) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/background/" + id, background)
+  }
+
   changeCurrentHealth(id : number, currentHealth : number) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/currentHealth/" + id + "/" + currentHealth, undefined)
   }

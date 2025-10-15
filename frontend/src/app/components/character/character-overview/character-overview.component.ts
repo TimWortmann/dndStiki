@@ -110,13 +110,24 @@ throw new Error('Method not implemented.');
     if (this.classChangeActive) {
       this.characterService.changeDndClass(this.characterValue.id, this.characterValue.dndClass).subscribe(response => {
         this.setCharacter(response);  
+        this.backgroundChangeActive = !this.backgroundChangeActive;
       });
     }
-    this.classChangeActive = !this.classChangeActive;
+    else {
+      this.backgroundChangeActive = !this.backgroundChangeActive;
+    }
   }
 
   changeBackgroundState() {
-    this.backgroundChangeActive = !this.backgroundChangeActive;
+    if (this.backgroundChangeActive) {
+      this.characterService.changeBackground(this.characterValue.id, this.characterValue.background).subscribe(response => {
+        this.setCharacter(response);  
+        this.backgroundChangeActive = !this.backgroundChangeActive;
+      });
+    }
+    else {
+      this.backgroundChangeActive = !this.backgroundChangeActive;
+    }
   }
 
   changeRaceState() {

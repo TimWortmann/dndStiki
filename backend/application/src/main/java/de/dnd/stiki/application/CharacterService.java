@@ -91,10 +91,7 @@ public class CharacterService {
         setDndClass(characterEntity, characterEntity.getDndClass());
         characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
 
-        BackgroundEntity background = backgroundRepository.getByName(characterEntity.getBackground());
-        if (background != null) {
-            characterEntity.setBackgroundTraits(background.getTraits());
-        }
+        setBackground(characterEntity, characterEntity.getBackground());
 
         RaceEntity race = raceRepository.getByName(characterEntity.getRace());
         if (race != null) {
@@ -106,10 +103,18 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(entity);
     }
 
+    private void setBackground(CharacterEntity characterEntity, String backgroundName) {
+        characterEntity.setBackground(backgroundName);
+        BackgroundEntity background = backgroundRepository.getByName(backgroundName);
+        if (background != null) {
+            characterEntity.setBackgroundTraits(background.getTraits());
+        }
+    }
+
     private void setDndClass(CharacterEntity characterEntity, String dndClassName) {
         characterEntity.setDndClass(dndClassName);
         characterEntity.setDndSubclass("No Subclass");
-        DndClassEntity dndClass = dndClassRepository.getByName(characterEntity.getDndClass());
+        DndClassEntity dndClass = dndClassRepository.getByName(dndClassName);
         if (dndClass != null) {
             characterEntity.setHitDice(dndClass.getHitDice());
 
@@ -211,6 +216,15 @@ public class CharacterService {
             characterEntity.setDndSubclass(subclass);
         }
 
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto changeBackground(Long id, String background) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        characterEntity.setBackgroundTraits(null);
+
+        setBackground(characterEntity, background);
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 

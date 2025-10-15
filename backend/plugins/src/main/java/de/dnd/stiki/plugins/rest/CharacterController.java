@@ -52,6 +52,11 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.changeSubclass(id, subclass));
     }
 
+    @PutMapping("/background/{id}")
+    public ResponseEntity<CharacterDto> changeBackground(@PathVariable Long id, @RequestBody String background) {
+        return ResponseEntity.ok().body(service.changeBackground(id, background));
+    }
+
     @PutMapping("/currentHealth/{id}/{currentHealth}")
     public ResponseEntity<CharacterDto> changeCurrentHealth(@PathVariable Long id, @PathVariable Integer currentHealth) {
         return ResponseEntity.ok().body(service.changeCurrentHealth(id, currentHealth));
