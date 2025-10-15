@@ -3,14 +3,13 @@ package de.dnd.stiki.adapters.character;
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
+import de.dnd.stiki.adapters.reader.SubclassReader;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Component
 public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<CharacterEntity, CharacterDto> {
@@ -20,6 +19,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
     @Autowired
     private CharacterSkillEntityToDtoMapper skillEntityToDtoMapper;
+
+    @Autowired
+    private SubclassReader subclassReader;
 
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
@@ -53,28 +55,13 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     }
 
     private List<String> getDndSubclasses(List<TraitEntity> classFeatures) {
-        List<String> subclasses = classFeatures.stream()
+        // Extract all feature names
+        List<String> featureNames = classFeatures.stream()
                 .map(TraitEntity::getName)
-                .map(name -> {
-                    String prefix = null;
-                    if (name.contains("Subclass: ")) {
-                        prefix = "Subclass: ";
-                    } else if (name.contains("Archetype: ")) {
-                        prefix = "Archetype: ";
-                    }
+                .toList();
 
-                    if (prefix != null) {
-                        return name.substring(name.indexOf(prefix) + prefix.length()).trim();
-                    } else {
-                        return null;
-                    }
-                })
-                .filter(Objects::nonNull)
-                .distinct()
-                .collect(Collectors.toList());
-
-        subclasses.addFirst("No Subclass");
-
-        return subclasses;
+        // Delegate parsing to the shared method
+        return subclassReader.getDndSubclasses(featureNames);
     }
+
 }

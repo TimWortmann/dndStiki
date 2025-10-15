@@ -56,6 +56,18 @@ export class CharacterListComponent {
         template: this.subclassTemplate
       },
       {
+        name: 'Background',
+        dataKey: 'background',
+        position: 'left',
+        isSortable: true
+      },
+      {
+        name: 'Race',
+        dataKey: 'race',
+        position: 'left',
+        isSortable: true
+      },
+      {
         name: 'Level',
         dataKey: 'level',
         position: 'left',

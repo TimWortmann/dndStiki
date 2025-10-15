@@ -189,7 +189,7 @@ throw new Error('Method not implemented.');
     }
 
     // Hide subclass-related features before level 3
-    if (this.characterValue.level < 3 && featureName.toLowerCase().includes("subclass")) {
+    if (this.characterValue.level < 3 && this.featuresIncludesSubclassPrefix(featureName)) {
       return false;
     }
 
@@ -204,6 +204,12 @@ throw new Error('Method not implemented.');
     }
 
     return true; // visible by default
+  }
+
+  featuresIncludesSubclassPrefix(featureName : string) : boolean {
+    return featureName.toLowerCase().includes("subclass") 
+      || featureName.toLowerCase().includes("archetype") 
+      || featureName.toLowerCase().includes("college") 
   }
 
   sortSkills(): CharacterSkillValue[] {

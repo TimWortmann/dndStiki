@@ -91,7 +91,6 @@ public class CharacterService {
         DndClassEntity dndClass = dndClassRepository.getByName(characterEntity.getDndClass());
         if (dndClass != null) {
             setDndClass(characterEntity,dndClass);
-            characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
         }
 
         BackgroundEntity background = backgroundRepository.getByName(characterEntity.getBackground());
@@ -262,7 +261,7 @@ public class CharacterService {
     private void setMaxHealth(CharacterEntity characterEntity, Integer maxHealth) {
         characterEntity.setMaxHealth(maxHealth);
 
-        if (characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
+        if (characterEntity.getCurrentHealth() == null || characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
             characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
         }
     }
@@ -282,7 +281,7 @@ public class CharacterService {
     private void setMaxHitDice(CharacterEntity characterEntity, Integer maxHitDice) {
         characterEntity.setMaxHitDice(maxHitDice);
 
-        if (characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
+        if (characterEntity.getCurrentHitDice() == null || characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
             characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
         }
     }
