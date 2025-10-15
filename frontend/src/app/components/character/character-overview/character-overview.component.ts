@@ -110,11 +110,11 @@ throw new Error('Method not implemented.');
     if (this.classChangeActive) {
       this.characterService.changeDndClass(this.characterValue.id, this.characterValue.dndClass).subscribe(response => {
         this.setCharacter(response);  
-        this.backgroundChangeActive = !this.backgroundChangeActive;
+        this.classChangeActive = !this.classChangeActive;
       });
     }
     else {
-      this.backgroundChangeActive = !this.backgroundChangeActive;
+      this.classChangeActive = !this.classChangeActive;
     }
   }
 
@@ -131,7 +131,15 @@ throw new Error('Method not implemented.');
   }
 
   changeRaceState() {
-    this.raceChangeActive = !this.raceChangeActive;
+    if (this.raceChangeActive) {
+      this.characterService.changeRace(this.characterValue.id, this.characterValue.race).subscribe(response => {
+        this.setCharacter(response);  
+        this.raceChangeActive = !this.raceChangeActive;
+      });
+    }
+    else {
+      this.raceChangeActive = !this.raceChangeActive;
+    }
   }
 
   changeLevel(delta : number) {

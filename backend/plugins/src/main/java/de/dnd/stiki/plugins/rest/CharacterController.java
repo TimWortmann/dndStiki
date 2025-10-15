@@ -48,13 +48,18 @@ public class CharacterController {
     }
 
     @PutMapping("/subclass/{id}/{subclass}")
-    public ResponseEntity<CharacterDto> changeSubclass(@PathVariable Long id, @PathVariable String subclass) {
+    public ResponseEntity<CharacterDto> changeSubclass(@PathVariable Long id, @RequestBody String subclass) {
         return ResponseEntity.ok().body(service.changeSubclass(id, subclass));
     }
 
     @PutMapping("/background/{id}")
     public ResponseEntity<CharacterDto> changeBackground(@PathVariable Long id, @RequestBody String background) {
         return ResponseEntity.ok().body(service.changeBackground(id, background));
+    }
+
+    @PutMapping("/race/{id}")
+    public ResponseEntity<CharacterDto> changeRace(@PathVariable Long id, @RequestBody String race) {
+        return ResponseEntity.ok().body(service.changeRace(id, race));
     }
 
     @PutMapping("/currentHealth/{id}/{currentHealth}")

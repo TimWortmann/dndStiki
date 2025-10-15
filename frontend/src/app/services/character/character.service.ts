@@ -38,11 +38,15 @@ export class CharacterService {
   }
 
   changeSubclass(id : number, subclass : string) : Observable<CharacterValue> {
-    return this.http.put<CharacterValue>(this.baseUrl + "/subclass/" + id + "/" + subclass, undefined)
+    return this.http.put<CharacterValue>(this.baseUrl + "/subclass/" + id, subclass)
   }
 
   changeBackground(id : number, background : string) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/background/" + id, background)
+  }
+
+  changeRace(id : number, race : string) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/race/" + id, race)
   }
 
   changeCurrentHealth(id : number, currentHealth : number) : Observable<CharacterValue> {

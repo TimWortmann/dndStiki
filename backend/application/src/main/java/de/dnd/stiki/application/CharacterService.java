@@ -88,45 +88,50 @@ public class CharacterService {
         characterEntity.setSkills(skills);
         characterEntity.setPassivePerception(10 + characterEntity.getSkill(SkillType.PERCEPTION).getModifierWithProficiency(characterEntity.getProficiencyBonus()));
 
-        setDndClass(characterEntity, characterEntity.getDndClass());
-        characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
+        DndClassEntity dndClass = dndClassRepository.getByName(characterEntity.getDndClass());
+        if (dndClass != null) {
+            setDndClass(characterEntity,dndClass);
+            characterEntity.setCurrentHealth(characterEntity.getMaxHealth());
+        }
 
-        setBackground(characterEntity, characterEntity.getBackground());
+        BackgroundEntity background = backgroundRepository.getByName(characterEntity.getBackground());
+        if (background != null) {
+            setBackground(characterEntity, background);
+        }
 
         RaceEntity race = raceRepository.getByName(characterEntity.getRace());
         if (race != null) {
-            characterEntity.setSpeed(race.getSpeed());
-            characterEntity.setRaceTraits(race.getTraits());
+            setRace(characterEntity, race);
         }
 
         CharacterEntity entity = repository.save(characterEntity);
         return entityToDtoMapper.mapEntityToDto(entity);
     }
 
-    private void setBackground(CharacterEntity characterEntity, String backgroundName) {
-        characterEntity.setBackground(backgroundName);
-        BackgroundEntity background = backgroundRepository.getByName(backgroundName);
-        if (background != null) {
-            characterEntity.setBackgroundTraits(background.getTraits());
-        }
+    private void setRace(CharacterEntity characterEntity, RaceEntity race) {
+        characterEntity.setRace(race.getName());
+        characterEntity.setSpeed(race.getSpeed());
+        characterEntity.setRaceTraits(race.getTraits());
     }
 
-    private void setDndClass(CharacterEntity characterEntity, String dndClassName) {
-        characterEntity.setDndClass(dndClassName);
+    private void setBackground(CharacterEntity characterEntity, BackgroundEntity background) {
+        characterEntity.setBackground(background.getName());
+        characterEntity.setBackgroundTraits(background.getTraits());
+    }
+
+    private void setDndClass(CharacterEntity characterEntity, DndClassEntity dndClass) {
+        characterEntity.setDndClass(dndClass.getName());
         characterEntity.setDndSubclass("No Subclass");
-        DndClassEntity dndClass = dndClassRepository.getByName(dndClassName);
-        if (dndClass != null) {
-            characterEntity.setHitDice(dndClass.getHitDice());
+        characterEntity.setHitDice(dndClass.getHitDice());
 
-            int health = getLevelHealth(characterEntity);
-            setMaxHealth(characterEntity, health);
-            characterEntity.setClassFeatures(getClassFeatures(dndClass));
+        int health = getLevelHealth(characterEntity);
+        setMaxHealth(characterEntity, health);
+        characterEntity.setClassFeatures(getClassFeatures(dndClass));
 
-            for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
-                for (String classSavingThrowProficiency : dndClass.getSavingThrowProficiencies()) {
-                    if (ability.getName() == AbilityType.fromName(classSavingThrowProficiency)) {
-                        ability.setSavingThrowProficiency(1);
-                    }
+        for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
+            for (String classSavingThrowProficiency : dndClass.getSavingThrowProficiencies()) {
+                if (ability.getName() == AbilityType.fromName(classSavingThrowProficiency)) {
+                    ability.setSavingThrowProficiency(1);
                 }
             }
         }
@@ -196,15 +201,16 @@ public class CharacterService {
         return (int) Math.ceil(level / 4.0) + 1;
     }
 
-    public CharacterDto changeDndClass(Long id, String dndClass) {
+    public CharacterDto changeDndClass(Long id, String dndClassName) {
         CharacterEntity characterEntity = repository.get(id);
 
-        for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
-            ability.setSavingThrowProficiency(0);
+        DndClassEntity dndClass = dndClassRepository.getByName(dndClassName);
+        if (dndClass != null) {
+            for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
+                ability.setSavingThrowProficiency(0);
+            }
+            setDndClass(characterEntity, dndClass);
         }
-        characterEntity.setClassFeatures(null);
-
-        setDndClass(characterEntity, dndClass);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
@@ -219,12 +225,25 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
-    public CharacterDto changeBackground(Long id, String background) {
+    public CharacterDto changeBackground(Long id, String backgroundName) {
         CharacterEntity characterEntity = repository.get(id);
 
-        characterEntity.setBackgroundTraits(null);
+        BackgroundEntity background = backgroundRepository.getByName(backgroundName);
+        if (background != null) {
+            setBackground(characterEntity, background);
+        }
 
-        setBackground(characterEntity, background);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto changeRace(Long id, String raceName) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        RaceEntity race = raceRepository.getByName(raceName);
+        if (race != null) {
+            setRace(characterEntity, race);
+        }
+
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
