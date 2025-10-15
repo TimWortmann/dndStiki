@@ -79,5 +79,20 @@
   gap: 0px;
 }
 
+.info-box {
+  margin-top: 16px;
+  flex: 1;                 /* optional: make them equal width */
+  padding: 1rem;           /* inner spacing */
+  border: 1px solid #ccc;  /* light gray border */
+  border-radius: 10px;     /* rounded edges */
+  background-color: #f9f9f9; /* optional: light background */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* optional: subtle shadow */
+}
 
+.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #ccc; /* thin grey line */
+  margin: 8px 0; /* spacing above/below */
+}
 

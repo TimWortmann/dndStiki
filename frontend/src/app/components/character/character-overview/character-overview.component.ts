@@ -386,12 +386,28 @@ throw new Error('Method not implemented.');
   if (!this.backgroundFilter) return list;
   const filterValue = this.backgroundFilter.toLowerCase();
   return list.filter(b => b.name.toLowerCase().includes(filterValue));
-}
+  }
 
-getFilteredRaces(): RaceValue[] {
-  const list = this.allRaces;
-  if (!this.raceFilter) return list;
-  const filterValue = this.raceFilter.toLowerCase();
-  return list.filter(r => r.name.toLowerCase().includes(filterValue));
-}
+  getFilteredRaces(): RaceValue[] {
+    const list = this.allRaces;
+    if (!this.raceFilter) return list;
+    const filterValue = this.raceFilter.toLowerCase();
+    return list.filter(r => r.name.toLowerCase().includes(filterValue));
+  }
+
+  getFancyListString(list : string[] | undefined) : string {
+    let fancyString : string = "";
+
+    list?.forEach((element: string) => {
+      if (fancyString === "") {
+        fancyString += element;
+      }
+      else {
+        fancyString += " | " + element;
+      }
+    });
+
+    return fancyString;
+  }
+
 }
