@@ -15,5 +15,9 @@ export class BackgroundService {
   getAllBackgrounds() : Observable<BackgroundValue[]> {
     return this.http.get<BackgroundValue[]>(this.baseUrl)
   }
+
+  getBackground(name : string) : Observable<BackgroundValue> {
+      return this.http.get<BackgroundValue>(this.baseUrl + "/" + encodeURIComponent(name))
+  }
   
 }

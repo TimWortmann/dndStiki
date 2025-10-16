@@ -16,10 +16,10 @@ public abstract class AbstractService<
         > {
 
     @Autowired
-    private REPOSITORY repository;
+    protected REPOSITORY repository;
 
     @Autowired
-    private ENTITY_TO_DTO_MAPPER entityToDtoMapper;
+    protected ENTITY_TO_DTO_MAPPER entityToDtoMapper;
 
     public List<DTO> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());

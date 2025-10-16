@@ -31,10 +31,12 @@ throw new Error('Method not implemented.');
   allClasses! : DndClassValue[];
   classChangeActive : boolean = false;
   classFilter: string = '';
+  currentClass? : DndClassValue;
 
   allBackgrounds! : BackgroundValue[];
   backgroundChangeActive : boolean = false;
   backgroundFilter: string = '';
+  currentBackground? : BackgroundValue;
   
   allRaces! : RaceValue[];
   raceChangeActive : boolean = false;
@@ -83,9 +85,23 @@ throw new Error('Method not implemented.');
     });
   }
 
+  readCurrentClass() {
+    this.dndClassService.getDndClass(this.characterValue.dndClass).subscribe((response) => {
+      this.currentClass = response;
+    }) 
+  }
+
+  readCurrentBackground() {
+    this.backgroundService.getBackground(this.characterValue.background).subscribe((response) => {
+      this.currentBackground = response;
+    })   
+  }
+
   setCharacter(character : CharacterValue) {
     this.characterValue = character;  
     this.characterValue.skills = this.sortSkills();  
+    this.readCurrentClass();
+    this.readCurrentBackground();
   }
 
   readAllClasses() {

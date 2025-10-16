@@ -269,23 +269,7 @@
               </button>
             </div>
           </ng-template>
-          <div class="info-box">
-            <div class="flex">
-              <div class="flex"></div>    
-              <span><b>Class Proficiencies:</b></span>
-              <span> {{getFancyListString(([]))}}</span>
-            </div>
-            <p></p>
-            <div class="flex">
-              <span><b>Number of Class Proficiencies:</b></span>
-              <span> </span>
-            </div>
-            <hr class="divider">
-            <div class="flex">
-                <span><b>Background Proficiencies:</b></span>
-                <span> {{getFancyListString(([]))}} </span>
-            </div>
-          </div> 
+          
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
               <div class="vertical-flex">
@@ -305,6 +289,25 @@
              </div>
             </div> 
           </div>
+          <div class="info-box" *ngIf="currentClass || currentBackground">
+            <div *ngIf="currentClass">
+              <div class="flex">
+                <div class="flex"></div>    
+                <span><b>Class Proficiencies:</b></span>
+                <span> {{getFancyListString((currentClass.skillProficiencies))}}</span>
+              </div>
+              <p></p>
+              <div class="flex">
+                <span><b>Number of Class Proficiencies:</b></span>
+                <span> {{currentClass.numberOfSkillProficiencies}} </span>
+              </div>
+            </div>
+            <hr class="divider" *ngIf="currentClass && currentBackground">
+            <div class="flex" *ngIf="currentBackground">
+                <span><b>Background Proficiencies:</b></span>
+                <span> {{getFancyListString((currentBackground.proficiencies))}} </span>
+            </div>
+          </div> 
         </mat-tab>
       </mat-tab-group>
   </div>

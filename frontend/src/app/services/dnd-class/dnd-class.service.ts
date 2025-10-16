@@ -15,5 +15,9 @@ export class DndClassService {
   getAllDndClasses() : Observable<DndClassValue[]> {
     return this.http.get<DndClassValue[]>(this.baseUrl)
   }
+
+  getDndClass(name : string) : Observable<DndClassValue> {
+    return this.http.get<DndClassValue>(this.baseUrl + "/" + encodeURIComponent(name))
+  }
   
 }

@@ -12,4 +12,8 @@ public class DndClassService extends AbstractService<
         DndClassDto,
         DndClassRepository,
         DndClassEntityToDtoMapper> {
+
+    public DndClassDto getByName(String name) {
+        return entityToDtoMapper.mapEntityToDto(repository.getByName(name));
+    }
 }
