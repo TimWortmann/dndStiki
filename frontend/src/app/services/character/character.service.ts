@@ -3,6 +3,7 @@ import { CharacterValue } from '../../models/character-value';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CharacterCreationValue } from '../../models/character-creation-value';
+import { CharacterAbilityValue } from '../../models/character-ability-value';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,9 @@ export class CharacterService {
 
   changeMaxHitDice(id : number, maxHitDice : number) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/maxHitDice/" + id + "/" + maxHitDice, undefined)
+  }
+
+  changeAbilities(id : number, abilities : CharacterAbilityValue[]) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/ability/" + id, abilities)
   }
 }

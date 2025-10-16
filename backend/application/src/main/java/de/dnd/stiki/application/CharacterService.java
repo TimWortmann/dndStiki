@@ -3,6 +3,8 @@ package de.dnd.stiki.application;
 import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.CharacterDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.CharacterEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
+import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
@@ -26,7 +28,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.dnd.stiki.domain.enums.AbilityType.*;
+import static de.dnd.stiki.domain.enums.AbilityType.CONSTITUTION;
+import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
 
 @Service
 public class CharacterService {
@@ -51,6 +54,9 @@ public class CharacterService {
 
     @Autowired
     private RaceRepository raceRepository;
+
+    @Autowired
+    private CharacterAbilityDtoToEntityMapper abilityDtoToEntityMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -123,8 +129,7 @@ public class CharacterService {
         characterEntity.setDndSubclass("No Subclass");
         characterEntity.setHitDice(dndClass.getHitDice());
 
-        int health = getLevelHealth(characterEntity);
-        setMaxHealth(characterEntity, health);
+        setMaxHealth(characterEntity, getLevelHealth(characterEntity));
         characterEntity.setClassFeatures(getClassFeatures(dndClass));
 
         for (CharacterAbilityEntity ability : characterEntity.getAbilities()) {
@@ -283,6 +288,42 @@ public class CharacterService {
 
         if (characterEntity.getCurrentHitDice() == null || characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {
             characterEntity.setCurrentHitDice(characterEntity.getMaxHitDice());
+        }
+    }
+
+    public CharacterDto changeAbilities(Long id, List<CharacterAbilityDto> abilities) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        List<CharacterAbilityEntity> abilityEntities = abilityDtoToEntityMapper.mapDtosToEntities(abilities);
+        keepSavingThrowProficiencies(characterEntity, abilityEntities);
+        characterEntity.setAbilities(abilityEntities);
+
+        characterEntity.setArmorClass(10 + characterEntity.getAbility(DEXTERITY).getModifier());
+        setMaxHealth(characterEntity, getLevelHealth(characterEntity));
+
+        updateSkillBasicModifiers(abilityEntities, characterEntity);
+        characterEntity.setPassivePerception(10 + characterEntity.getSkill(SkillType.PERCEPTION).getModifierWithProficiency(characterEntity.getProficiencyBonus()));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private static void updateSkillBasicModifiers(List<CharacterAbilityEntity> abilityEntities, CharacterEntity characterEntity) {
+        for (CharacterAbilityEntity ability : abilityEntities) {
+            for (CharacterSkillEntity skill : characterEntity.getSkills()) {
+                if (ability.getName().equals(skill.getAbility())) {
+                    skill.setBasicModifier(ability.getModifier());
+                }
+            }
+        }
+    }
+
+    private static void keepSavingThrowProficiencies(CharacterEntity characterEntity, List<CharacterAbilityEntity> abilityEntities) {
+        for (CharacterAbilityEntity oldAbility : characterEntity.getAbilities()) {
+            for (CharacterAbilityEntity newAbility : abilityEntities) {
+                if (oldAbility.getName().equals(newAbility.getName())) {
+                    newAbility.setSavingThrowProficiency(oldAbility.getSavingThrowProficiency());
+                }
+            }
         }
     }
 }

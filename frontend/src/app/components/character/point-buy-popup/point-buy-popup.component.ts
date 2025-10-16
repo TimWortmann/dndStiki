@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { CharacterAbilityValue } from '../../../models/character-ability-value';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CharacterService } from '../../../services/character/character.service';
 
 @Component({
   selector: 'app-point-buy-popup',
@@ -15,7 +16,7 @@ export class PointBuyPopupComponent {
 
   constructor(
     public dialogRef: MatDialogRef<PointBuyPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ){
     this.abilities = data.map((a: any) => ({ ...a }));
   }

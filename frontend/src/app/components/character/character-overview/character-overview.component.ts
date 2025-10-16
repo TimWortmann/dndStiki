@@ -379,7 +379,9 @@ throw new Error('Method not implemented.');
 
     dialogRef.afterClosed().subscribe((result: CharacterAbilityValue[] | undefined) => {
       if (result) {
-        this.characterValue.abilities = result;
+        this.characterService.changeAbilities(this.characterValue.id, result).subscribe((response) => {
+          this.setCharacter(response);  
+        })
       }
     });
   }

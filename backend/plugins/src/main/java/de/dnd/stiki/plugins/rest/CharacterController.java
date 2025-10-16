@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.rest;
 
 import de.dnd.stiki.adapters.character.CharacterDto;
+import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.application.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,4 +83,8 @@ public class CharacterController {
         return ResponseEntity.ok().body(service.changeMaxHitDice(id, maxHitDice));
     }
 
+    @PutMapping("/ability/{id}")
+    public ResponseEntity<CharacterDto> changeAbilities(@PathVariable Long id, @RequestBody List<CharacterAbilityDto> abilities) {
+        return ResponseEntity.ok().body(service.changeAbilities(id, abilities));
+    }
 }
