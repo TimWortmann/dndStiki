@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DndClassService } from '../../../services/dnd-class/dnd-class.service';
 import { response } from 'express';
 import { DndClassValue } from '../../../models/dnd-class-value';
@@ -28,17 +28,17 @@ throw new Error('Method not implemented.');
   characterValue! : CharacterValue;
   characterNameChangeActive : boolean = false;  
 
-  allClasses! : DndClassValue[];
+  allClasses? : DndClassValue[];
   classChangeActive : boolean = false;
   classFilter: string = '';
   currentClass? : DndClassValue;
 
-  allBackgrounds! : BackgroundValue[];
+  allBackgrounds? : BackgroundValue[];
   backgroundChangeActive : boolean = false;
   backgroundFilter: string = '';
   currentBackground? : BackgroundValue;
   
-  allRaces! : RaceValue[];
+  allRaces? : RaceValue[];
   raceChangeActive : boolean = false;
   raceFilter: string = '';  
 
@@ -61,9 +61,6 @@ throw new Error('Method not implemented.');
 
   ngOnInit(): void {
     this.readCharacter();
-    this.readAllClasses();
-    this.readAllBackgrounds();
-    this.readAllRaces();
   }
 
   changeNameState() {
@@ -130,6 +127,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
+      this.readAllClasses();
       this.classChangeActive = !this.classChangeActive;
     }
   }
@@ -142,6 +140,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
+      this.readAllBackgrounds();
       this.backgroundChangeActive = !this.backgroundChangeActive;
     }
   }
@@ -154,6 +153,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
+      this.readAllRaces();
       this.raceChangeActive = !this.raceChangeActive;
     }
   }
@@ -390,25 +390,64 @@ throw new Error('Method not implemented.');
       });
   }
 
-  getFilteredClasses(): DndClassValue[] {
-    const list = this.allClasses;
+  getAllClassNames(): string[] {
+    if (!this.allClasses) return [this.characterValue.dndClass];
+      
+    let result = this.allClasses.map(c => c.name);
+
+    if (!result.includes(this.characterValue.dndClass)) {
+      result = [this.characterValue.dndClass, ...result];
+    }
+
+    return result;
+  }
+
+  getFilteredClasses(): string[] {
+    const list = this.getAllClassNames();
     if (!this.classFilter) return list;
+
     const filterValue = this.classFilter.toLowerCase();
-    return list.filter(c => c.name.toLowerCase().includes(filterValue));
+    return list.filter(name => name.toLowerCase().includes(filterValue));
   }
 
-  getFilteredBackgrounds(): BackgroundValue[] {
-  const list = this.allBackgrounds;
-  if (!this.backgroundFilter) return list;
-  const filterValue = this.backgroundFilter.toLowerCase();
-  return list.filter(b => b.name.toLowerCase().includes(filterValue));
+  getAllBackgroundNames(): string[] {
+  if (!this.allBackgrounds) return [this.characterValue.background];
+
+  let result = this.allBackgrounds.map(b => b.name);
+
+  if (!result.includes(this.characterValue.background)) {
+    result = [this.characterValue.background, ...result];
   }
 
-  getFilteredRaces(): RaceValue[] {
-    const list = this.allRaces;
+  return result;
+}
+
+  getFilteredBackgrounds(): string[] {
+    const list = this.getAllBackgroundNames();
+    if (!this.backgroundFilter) return list;
+
+    const filterValue = this.backgroundFilter.toLowerCase();
+    return list.filter(name => name.toLowerCase().includes(filterValue));
+  }
+
+  getAllRaceNames(): string[] {
+    if (!this.allRaces) return [this.characterValue.race];
+
+    let result = this.allRaces.map(r => r.name);
+
+    if (!result.includes(this.characterValue.race)) {
+      result = [this.characterValue.race, ...result];
+    }
+
+    return result;
+  }
+
+  getFilteredRaces(): string[] {
+    const list = this.getAllRaceNames();
     if (!this.raceFilter) return list;
+
     const filterValue = this.raceFilter.toLowerCase();
-    return list.filter(r => r.name.toLowerCase().includes(filterValue));
+    return list.filter(name => name.toLowerCase().includes(filterValue));
   }
 
   getFancyListString(list : string[] | undefined) : string {

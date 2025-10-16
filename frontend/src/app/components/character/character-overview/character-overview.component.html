@@ -34,7 +34,7 @@
         <mat-form-field>
           <mat-label>Class</mat-label>
           <mat-select required [(ngModel)]="characterValue.dndClass" [disabled]="!classChangeActive">
-
+            
             <!-- 🔍 Search field -->
             <mat-option>
               <ngx-mat-select-search
@@ -43,10 +43,10 @@
                 [(ngModel)]="classFilter">
               </ngx-mat-select-search>
             </mat-option>
-
+            
             <ng-container *ngFor="let class of getFilteredClasses()">
-              <mat-option [value]="class.name">
-                {{ class.name }}
+              <mat-option [value]="class">
+                {{ class }}
               </mat-option>
             </ng-container>
 
@@ -76,7 +76,7 @@
               </mat-option>
 
               <ng-container *ngFor="let background of getFilteredBackgrounds()">
-                <mat-option [value]="background.name">{{ background.name }}</mat-option>
+                <mat-option [value]="background">{{ background }}</mat-option>
               </ng-container>
 
             </mat-select>
@@ -106,7 +106,7 @@
               </mat-option>
 
               <ng-container *ngFor="let race of getFilteredRaces()">
-                <mat-option [value]="race.name">{{ race.name }}</mat-option>
+                <mat-option [value]="race">{{ race }}</mat-option>
               </ng-container>
 
             </mat-select>
