@@ -386,8 +386,8 @@
         <mat-tab label="Feats">
           <p></p>
           <div class="vertical-flex">
-            <button mat-flat-button color="primary" (click)="openAddFeatDialog()"> Add Feat</button>
-            <button mat-flat-button color="primary" disabled="disabled"> Create Feat</button>
+            <button mat-flat-button color="primary" (click)="openAddFeatDialog()"> Add </button>
+            <button mat-flat-button color="primary" disabled="disabled"> Create </button>
           </div>
           <p></p>
           <mat-accordion>
@@ -397,6 +397,9 @@
                   <mat-panel-title> {{feat.name}} </mat-panel-title>
                 </mat-expansion-panel-header>
                   <div class="trait-text">{{feat.text}}</div>
+                  <button mat-icon-button (click)="removeFeat(feat)" style="float: right;">
+                    <mat-icon>delete</mat-icon>
+                  </button>
               </mat-expansion-panel>
             </ng-container>
           </mat-accordion>  

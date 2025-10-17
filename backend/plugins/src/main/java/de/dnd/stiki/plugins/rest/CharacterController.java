@@ -96,7 +96,12 @@ public class CharacterController {
     }
 
     @PutMapping("/feat/{id}")
-    public ResponseEntity<CharacterDto> addFeat (@PathVariable Long id, @RequestBody FeatDto feat) {
+    public ResponseEntity<CharacterDto> addFeat(@PathVariable Long id, @RequestBody FeatDto feat) {
         return ResponseEntity.ok().body(service.addFeat(id, feat));
+    }
+
+    @DeleteMapping("/feat/{id}/{featName}")
+    public ResponseEntity<CharacterDto> removeFeat(@PathVariable Long id, @PathVariable String featName) {
+        return ResponseEntity.ok().body(service.removeFeat(id, featName));
     }
 }

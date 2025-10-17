@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.component';
 import { FeatListPopupComponent } from '../feat-list-popup/feat-list-popup.component';
 import { FeatValue } from '../../../models/feat-value';
+import { TraitValue } from '../../../models/trait-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -494,4 +495,9 @@ throw new Error('Method not implemented.');
     });
   }
 
+  removeFeat(feat : TraitValue) {
+    this.characterService.removeFeat(this.characterValue.id, feat.name).subscribe((response) => {
+      this.setCharacter(response)
+    }) 
+  }
 }

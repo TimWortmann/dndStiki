@@ -77,6 +77,10 @@ export class CharacterService {
   }
 
   addFeat(id : number, feat : FeatValue) : Observable<CharacterValue> {
-    return this.http.put<CharacterValue>(this.baseUrl + "/feat/" + id,feat)
+    return this.http.put<CharacterValue>(this.baseUrl + "/feat/" + id, feat)
+  }
+
+  removeFeat(id : number, featName : string) : Observable<CharacterValue> {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/feat/" + id + "/" + encodeURIComponent(featName))
   }
 }

@@ -367,4 +367,12 @@ public class CharacterService {
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
+
+    public CharacterDto removeFeat(Long id, String featName) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        characterEntity.getFeats().removeIf(trait -> trait.getName().equals(featName));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
 }
