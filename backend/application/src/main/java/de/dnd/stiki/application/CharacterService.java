@@ -7,6 +7,8 @@ import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
+import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
+import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.character.CharacterAbilityEntity;
@@ -57,6 +59,9 @@ public class CharacterService {
 
     @Autowired
     private CharacterAbilityDtoToEntityMapper abilityDtoToEntityMapper;
+
+    @Autowired
+    private CharacterSkillDtoToEntityMapper skillDtoToEntityMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -325,5 +330,22 @@ public class CharacterService {
                 }
             }
         }
+    }
+
+    public CharacterDto changeSkillProficiencies(Long id, List<CharacterSkillDto> skillDtos) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        List<CharacterSkillEntity> skillEntities = skillDtoToEntityMapper.mapDtosToEntities(skillDtos);
+
+        for (CharacterSkillEntity oldSkill : characterEntity.getSkills()) {
+            for (CharacterSkillEntity newSkill : skillEntities) {
+                if (oldSkill.getName().equals(newSkill.getName())) {
+                    oldSkill.setProficiency(newSkill.getProficiency());
+                }
+            }
+        }
+        characterEntity.setPassivePerception(10 + characterEntity.getSkill(SkillType.PERCEPTION).getModifierWithProficiency(characterEntity.getProficiencyBonus()));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 }

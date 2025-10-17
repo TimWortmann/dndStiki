@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CharacterCreationValue } from '../../models/character-creation-value';
 import { CharacterAbilityValue } from '../../models/character-ability-value';
+import { CharacterSkillValue } from '../../models/character-skill-value';
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,9 @@ export class CharacterService {
 
   changeAbilities(id : number, abilities : CharacterAbilityValue[]) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/ability/" + id, abilities)
+  }
+
+  changeSkillProficiencies(id : number, skills : CharacterSkillValue[]) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/skill/" + id, skills)
   }
 }

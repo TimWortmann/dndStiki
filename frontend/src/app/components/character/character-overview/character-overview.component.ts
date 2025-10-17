@@ -245,7 +245,14 @@ throw new Error('Method not implemented.');
   }
 
   changeSkillEditorState() {
-    this.skillChangeActive = ! this.skillChangeActive;
+    if (this.skillChangeActive) {
+      this.characterService.changeSkillProficiencies(this.characterValue.id, this.characterValue.skills).subscribe((response) => {
+        this.setCharacter(response);
+        this.skillChangeActive = false;   
+      })
+    } else {
+      this.skillChangeActive = true;
+    }
   }
 
   isHealthChangeActive() {
