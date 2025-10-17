@@ -68,7 +68,15 @@ throw new Error('Method not implemented.');
 
   changeNameState() {
     if (this.characterValue.name !== "") {
-      this.characterNameChangeActive = ! this.characterNameChangeActive;
+      if (this.characterNameChangeActive) {
+        this.characterService.changeName(this.characterValue.id, this.characterValue.name).subscribe((response) => {
+          this.setCharacter(response)
+          this.characterNameChangeActive = false;
+        })
+      } 
+      else {
+        this.characterNameChangeActive = true;
+      }
     }
   }
 

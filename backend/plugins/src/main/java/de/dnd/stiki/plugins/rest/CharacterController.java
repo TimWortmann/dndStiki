@@ -40,6 +40,11 @@ public class CharacterController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/name/{id}/{name}")
+    public ResponseEntity<CharacterDto> changeName(@PathVariable Long id, @PathVariable String name) {
+        return ResponseEntity.ok().body(service.changeName(id, name));
+    }
+
     @PutMapping("/level/{id}/{level}")
     public ResponseEntity<CharacterDto> changeLevel(@PathVariable Long id, @PathVariable Integer level) {
         return ResponseEntity.ok().body(service.changeLevel(id, level));

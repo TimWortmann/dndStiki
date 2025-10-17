@@ -147,9 +147,10 @@ public class CharacterService {
         }
     }
 
-    public CharacterDto save(CharacterDto characterDto) {
-        CharacterEntity entity = repository.save(dtoToEntityMapper.mapDtoToEntity(characterDto));
-        return entityToDtoMapper.mapEntityToDto(entity);
+    public CharacterDto changeName (Long id, String name) {
+        CharacterEntity characterEntity = repository.get(id);
+        characterEntity.setName(name);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
     public void delete(Long id) {
