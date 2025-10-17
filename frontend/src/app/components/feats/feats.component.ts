@@ -22,7 +22,6 @@ export class FeatsComponent {
   tableColumns: TableColumnValue[] = [];
 
   constructor(
-    private tableService: TableService,
     private featService: FeatService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
@@ -66,10 +65,6 @@ export class FeatsComponent {
         this.data = response;
         this.cdr.detectChanges();
       });
-  }
-
-  getPaginationSizes() : number[] {
-    return this.tableService.getPaginationSizes(this.data!);
   }
 
   openDetailDialog(element: any): void {

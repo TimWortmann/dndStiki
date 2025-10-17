@@ -4,6 +4,7 @@ import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
+import de.dnd.stiki.adapters.feat.FeatDto;
 import de.dnd.stiki.application.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -92,5 +93,10 @@ public class CharacterController {
     @PutMapping("/skill/{id}")
     public ResponseEntity<CharacterDto> changeSkillProficiencies(@PathVariable Long id, @RequestBody List<CharacterSkillDto> skills) {
         return ResponseEntity.ok().body(service.changeSkillProficiencies(id, skills));
+    }
+
+    @PutMapping("/feat/{id}")
+    public ResponseEntity<CharacterDto> addFeat (@PathVariable Long id, @RequestBody FeatDto feat) {
+        return ResponseEntity.ok().body(service.addFeat(id, feat));
     }
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CharacterCreationValue } from '../../models/character-creation-value';
 import { CharacterAbilityValue } from '../../models/character-ability-value';
 import { CharacterSkillValue } from '../../models/character-skill-value';
+import { FeatValue } from '../../models/feat-value';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +74,9 @@ export class CharacterService {
 
   changeSkillProficiencies(id : number, skills : CharacterSkillValue[]) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/skill/" + id, skills)
+  }
+
+  addFeat(id : number, feat : FeatValue) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/feat/" + id,feat)
   }
 }

@@ -9,6 +9,7 @@ import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
+import de.dnd.stiki.adapters.feat.FeatDto;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.character.CharacterAbilityEntity;
@@ -345,6 +346,24 @@ public class CharacterService {
             }
         }
         characterEntity.setPassivePerception(10 + characterEntity.getSkill(SkillType.PERCEPTION).getModifierWithProficiency(characterEntity.getProficiencyBonus()));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto addFeat(Long id, FeatDto featDto) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        TraitEntity trait = new TraitEntity();
+        trait.setName(featDto.getName());
+
+        String text = featDto.getText();
+        if (featDto.getPrerequisites() != null && !featDto.getPrerequisites().isEmpty()) {
+            String joinedPrerequisites = String.join(", ", featDto.getPrerequisites());
+            text =  "[Prerequisites: " + joinedPrerequisites + "]\n\n" + text;
+        }
+        trait.setText(text);
+
+        characterEntity.getFeats().add(trait);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }

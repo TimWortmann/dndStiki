@@ -196,7 +196,7 @@
           <button mat-icon-button color="primary" (click)="changeHitDice(+1)" *ngIf="isHitDiceChangeActive()">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
-          <button mat-icon-button color="primary" matTooltip="Edit Hit Dice Maximum " (click)="activateMaxHitDiceChange()" *ngIf="!isHitDiceChangeActive()">
+          <button mat-icon-button color="primary" matTooltip="Edit Hit Dice Maximum" (click)="activateMaxHitDiceChange()" *ngIf="!isHitDiceChangeActive()">
             <mat-icon>settings</mat-icon>
           </button>
         </div>
@@ -384,6 +384,11 @@
         </mat-tab>
 
         <mat-tab label="Feats">
+          <p></p>
+          <div class="vertical-flex">
+            <button mat-flat-button color="primary" (click)="openAddFeatDialog()"> Add Feat</button>
+            <button mat-flat-button color="primary" disabled="disabled"> Create Feat</button>
+          </div>
           <p></p>
           <mat-accordion>
             <ng-container *ngFor="let feat of characterValue.feats">

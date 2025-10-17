@@ -10,10 +10,6 @@
   </div>
 </ng-template>
 
-<ng-template #classesTemplate let-column="column" let-element="element">
-  <span>{{ element[column.dataKey]?.join(', ') }}</span>
-</ng-template>
-
 <h2>Feats</h2>
 
 <div *ngIf="data && data.length > 0">

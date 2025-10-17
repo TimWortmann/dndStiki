@@ -13,6 +13,8 @@ import { CharacterAbilityValue } from '../../../models/character-ability-value';
 import { CharacterSkillValue } from '../../../models/character-skill-value';
 import { MatDialog } from '@angular/material/dialog';
 import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.component';
+import { FeatListPopupComponent } from '../feat-list-popup/feat-list-popup.component';
+import { FeatValue } from '../../../models/feat-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -472,6 +474,24 @@ throw new Error('Method not implemented.');
     });
 
     return fancyString;
+  }
+
+  openAddFeatDialog() {
+    const dialogRef = this.dialog.open(FeatListPopupComponent, {
+          width: '60vw',     
+          height: '76vh',     
+          maxWidth: '60vw',  
+          maxHeight: '76vh',  
+          autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result: FeatValue | undefined) => {
+      if (result) {
+        this.characterService.addFeat(this.characterValue.id, result).subscribe((response) => {
+          this.setCharacter(response)
+        })  
+      }
+    });
   }
 
 }
