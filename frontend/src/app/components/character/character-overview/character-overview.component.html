@@ -385,11 +385,6 @@
 
         <mat-tab label="Feats">
           <p></p>
-          <div class="vertical-flex">
-            <button mat-flat-button color="primary" (click)="openAddFeatDialog()"> Add </button>
-            <button mat-flat-button color="primary" disabled="disabled"> Create </button>
-          </div>
-          <p></p>
           <mat-accordion>
             <ng-container *ngFor="let feat of characterValue.feats">
               <mat-expansion-panel>
@@ -402,7 +397,13 @@
                   </button>
               </mat-expansion-panel>
             </ng-container>
-          </mat-accordion>  
+          </mat-accordion> 
+          
+          <p></p>
+          <button mat-icon-button (click)="openAddFeatDialog()">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <p></p>
             
         </mat-tab>
       </mat-tab-group>
