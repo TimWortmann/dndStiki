@@ -27,6 +27,9 @@ public class CharacterJpa {
     @Column(name = "DND_SUBCLASS")
     private String dndSubclass;
 
+    @Column(name = "SPELLCASTING_ABILITY")
+    private String spellcastingAbility;
+
     @Column(name = "BACKGROUND")
     private String background;
 
@@ -107,6 +110,14 @@ public class CharacterJpa {
 
     public void setDndSubclass(String dndSubclass) {
         this.dndSubclass = dndSubclass;
+    }
+
+    public String getSpellcastingAbility() {
+        return spellcastingAbility;
+    }
+
+    public void setSpellcastingAbility(String spellcastingAbility) {
+        this.spellcastingAbility = spellcastingAbility;
     }
 
     public String getBackground() {

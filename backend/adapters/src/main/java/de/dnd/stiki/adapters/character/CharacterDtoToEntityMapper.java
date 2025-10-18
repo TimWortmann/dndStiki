@@ -4,6 +4,7 @@ import de.dnd.stiki.adapters.AbstractDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
+import de.dnd.stiki.domain.enums.AbilityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class CharacterDtoToEntityMapper extends AbstractDtoToEntityMapper<Charac
         entity.setLevel(dto.getLevel());
         entity.setDndClass(dto.getDndClass());
         entity.setDndSubclass(dto.getDndSubclass());
+        entity.setSpellcastingAbility(AbilityType.fromName(dto.getSpellcastingAbility()));
         entity.setBackground(dto.getBackground());
         entity.setRace(dto.getRace());
         entity.setCurrentHealth(dto.getCurrentHealth());

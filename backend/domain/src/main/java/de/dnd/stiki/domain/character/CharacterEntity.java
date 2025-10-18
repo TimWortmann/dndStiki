@@ -19,6 +19,8 @@ public class CharacterEntity {
 
     private String dndSubclass;
 
+    private AbilityType spellcastingAbility;
+
     private String background;
 
     private String race;
@@ -87,6 +89,14 @@ public class CharacterEntity {
 
     public void setDndSubclass(String dndSubclass) {
         this.dndSubclass = dndSubclass;
+    }
+
+    public AbilityType getSpellcastingAbility() {
+        return spellcastingAbility;
+    }
+
+    public void setSpellcastingAbility(AbilityType spellcastingAbility) {
+        this.spellcastingAbility = spellcastingAbility;
     }
 
     public String getBackground() {

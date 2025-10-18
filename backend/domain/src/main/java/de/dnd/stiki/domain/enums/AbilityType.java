@@ -24,6 +24,10 @@ public enum AbilityType {
     }
 
     public static AbilityType fromName(String name) {
+        if (name == null) {
+            return null;
+        }
+
         for (AbilityType abilityType : values()) {
             if (abilityType.getName().equalsIgnoreCase(name)) {
                 return abilityType;

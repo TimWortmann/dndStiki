@@ -9,6 +9,7 @@ export interface CharacterValue {
     dndClass: string;
     dndSubclass: string;
     dndSubclasses: string[];
+    spellcastingAbility : string;
     background: string;
     race: string;
     maxHealth: number;

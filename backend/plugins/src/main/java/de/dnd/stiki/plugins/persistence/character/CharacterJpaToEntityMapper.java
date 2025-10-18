@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.domain.character.CharacterEntity;
+import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
@@ -35,6 +36,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setDndClass(jpa.getDndClass());
         entity.setDndSubclass(jpa.getDndSubclass());
         entity.setBackground(jpa.getBackground());
+        entity.setSpellcastingAbility(AbilityType.fromName(jpa.getSpellcastingAbility()));
         entity.setRace(jpa.getRace());
         entity.setMaxHealth(jpa.getMaxHealth());
         entity.setCurrentHealth(jpa.getCurrentHealth());

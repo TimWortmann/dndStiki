@@ -138,7 +138,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
-      this.readAllClasses();
+      if (!this.allClasses) this.readAllClasses();
       this.classChangeActive = !this.classChangeActive;
     }
   }
@@ -151,7 +151,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
-      this.readAllBackgrounds();
+      if (!this.allBackgrounds) this.readAllBackgrounds();
       this.backgroundChangeActive = !this.backgroundChangeActive;
     }
   }
@@ -164,7 +164,7 @@ throw new Error('Method not implemented.');
       });
     }
     else {
-      this.readAllRaces();
+      if (!this.allRaces) this.readAllRaces();
       this.raceChangeActive = !this.raceChangeActive;
     }
   }

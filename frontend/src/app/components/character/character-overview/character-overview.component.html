@@ -222,6 +222,11 @@
         <h3> Proficiency Bonus </h3>
         <p> +{{characterValue.proficiencyBonus}} </p>
       </div>
+
+      <div class="panel" *ngIf="characterValue.spellcastingAbility && characterValue.spellcastingAbility !== ''">
+        <h3> Spellcasting Ability </h3>
+        <p> {{characterValue.spellcastingAbility}} </p>
+      </div>
     </div>
   </div>
 

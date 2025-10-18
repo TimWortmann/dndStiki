@@ -18,6 +18,8 @@ public class CharacterDto {
 
     private String dndSubclass;
 
+    private String spellcastingAbility;
+
     private List<String> dndSubclasses;
 
     private String background;
@@ -97,6 +99,14 @@ public class CharacterDto {
 
     public void setDndSubclasses(List<String> dndSubclasses) {
         this.dndSubclasses = dndSubclasses;
+    }
+
+    public String getSpellcastingAbility() {
+        return spellcastingAbility;
+    }
+
+    public void setSpellcastingAbility(String spellcastingAbility) {
+        this.spellcastingAbility = spellcastingAbility;
     }
 
     public String getBackground() {

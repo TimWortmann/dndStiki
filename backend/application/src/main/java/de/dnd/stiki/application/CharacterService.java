@@ -133,6 +133,7 @@ public class CharacterService {
     private void setDndClass(CharacterEntity characterEntity, DndClassEntity dndClass) {
         characterEntity.setDndClass(dndClass.getName());
         characterEntity.setDndSubclass("No Subclass");
+        characterEntity.setSpellcastingAbility(AbilityType.fromName(dndClass.getSpellAbility()));
         characterEntity.setHitDice(dndClass.getHitDice());
 
         setMaxHealth(characterEntity, getLevelHealth(characterEntity));
