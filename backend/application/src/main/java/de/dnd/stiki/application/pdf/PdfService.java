@@ -93,10 +93,8 @@ public class PdfService {
         fieldValues.put("Passive", character.getPassivePerception().toString());
 
         fieldValues.put("HPMax", character.getMaxHealth().toString());
-        fieldValues.put("HPCurrent", character.getCurrentHealth().toString());
 
         fieldValues.put("HDTotal", character.getMaxHitDice().toString() + "d" + character.getHitDice().toString());
-        fieldValues.put("HD", character.getCurrentHitDice().toString());
 
         setSkillFieldValues(fieldValues, character, ACROBATICS, 23);
         setSkillFieldValues(fieldValues, character, ANIMAL_HANDLING, 24, true);
