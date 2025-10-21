@@ -11,6 +11,8 @@ import de.dnd.stiki.domain.character.CharacterRepository;
 import de.dnd.stiki.domain.character.CharacterSkillEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
+import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,9 @@ public class PdfService {
 
     @Autowired
     private CharacterRepository characterRepository;
+
+    @Autowired
+    private SubclassReader subclassReader;
 
     public File fillCharacterSheet(Long characterId) throws Exception {
 
@@ -112,6 +117,8 @@ public class PdfService {
         setSkillFieldValues(fieldValues, character, STEALTH, 39, true);
         setSkillFieldValues(fieldValues, character, SURVIVAL, 40);
 
+        setFeatureFieldValues(fieldValues, character);
+
         return fieldValues;
     }
 
@@ -174,5 +181,33 @@ public class PdfService {
             return "+" + modifier;
         }
         return modifier.toString();
+    }
+
+    private void setFeatureFieldValues(Map<String, String> fieldValues, CharacterEntity character) {
+        StringBuilder featureBuilder = new StringBuilder();
+
+        featureBuilder.append("Class Features:");
+        for (TraitEntity classFeature : subclassReader.getRelevantClassFeatures(character)) {
+            featureBuilder.append("\n- ");
+            featureBuilder.append(classFeature.getName());
+        }
+
+        featureBuilder.append("\n\n\n");
+
+        featureBuilder.append("Background Traits:");
+        for (TraitEntity backgroundTrait : character.getBackgroundTraits()) {
+            featureBuilder.append("\n- ");
+            featureBuilder.append(backgroundTrait.getName());
+        }
+
+        featureBuilder.append("\n\n\n");
+
+        featureBuilder.append("Race Traits:");
+        for (TraitEntity raceTrait : character.getRaceTraits()) {
+            featureBuilder.append("\n- ");
+            featureBuilder.append(raceTrait.getName());
+        }
+
+        fieldValues.put("Features and Traits", featureBuilder.toString());
     }
 }

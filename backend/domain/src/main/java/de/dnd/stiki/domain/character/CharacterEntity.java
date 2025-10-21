@@ -21,6 +21,8 @@ public class CharacterEntity {
 
     private AbilityType spellcastingAbility;
 
+    private List<String> dndSubclasses;
+
     private String background;
 
     private String race;
@@ -97,6 +99,14 @@ public class CharacterEntity {
 
     public void setSpellcastingAbility(AbilityType spellcastingAbility) {
         this.spellcastingAbility = spellcastingAbility;
+    }
+
+    public List<String> getDndSubclasses() {
+        return dndSubclasses;
+    }
+
+    public void setDndSubclasses(List<String> dndSubclasses) {
+        this.dndSubclasses = dndSubclasses;
     }
 
     public String getBackground() {

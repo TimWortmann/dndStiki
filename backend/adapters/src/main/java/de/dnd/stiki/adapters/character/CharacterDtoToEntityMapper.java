@@ -27,6 +27,7 @@ public class CharacterDtoToEntityMapper extends AbstractDtoToEntityMapper<Charac
         entity.setDndClass(dto.getDndClass());
         entity.setDndSubclass(dto.getDndSubclass());
         entity.setSpellcastingAbility(AbilityType.fromName(dto.getSpellcastingAbility()));
+        entity.setDndSubclasses(dto.getDndSubclasses());
         entity.setBackground(dto.getBackground());
         entity.setRace(dto.getRace());
         entity.setCurrentHealth(dto.getCurrentHealth());

@@ -225,7 +225,7 @@ throw new Error('Method not implemented.');
     // Only filter by subclass if one is selected and level >= 3
     if (this.characterValue.level >= 3 && this.characterValue.dndSubclass && this.characterValue.dndSubclass !== "No Subclass") {
       for (const subclass of this.characterValue.dndSubclasses) {
-        if (featureName.includes(subclass) && subclass !== this.characterValue.dndSubclass) {
+        if (featureName.toLowerCase().includes(subclass.toLowerCase()) && subclass.toLowerCase() !== this.characterValue.dndSubclass.toLowerCase()) {
           // Feature belongs to a different subclass → hide it
           return false;
         }
@@ -238,7 +238,8 @@ throw new Error('Method not implemented.');
   featuresIncludesSubclassPrefix(featureName : string) : boolean {
     return featureName.toLowerCase().includes("subclass") 
       || featureName.toLowerCase().includes("archetype") 
-      || featureName.toLowerCase().includes("college") 
+      || featureName.toLowerCase().includes("college")
+      || featureName.toLowerCase().includes("patron") 
   }
 
   sortSkills(): CharacterSkillValue[] {

@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
+import de.dnd.stiki.domain.reader.SubclassReader;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
@@ -25,6 +26,9 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
     @Autowired
     private TraitJpaToEntityMapper traitJpaToEntityMapper;
 
+    @Autowired
+    private SubclassReader subclassReader;
+
     @Override
     public CharacterEntity mapJpaToEntity(CharacterJpa jpa) {
 
@@ -35,8 +39,8 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setLevel(jpa.getLevel());
         entity.setDndClass(jpa.getDndClass());
         entity.setDndSubclass(jpa.getDndSubclass());
-        entity.setBackground(jpa.getBackground());
         entity.setSpellcastingAbility(AbilityType.fromName(jpa.getSpellcastingAbility()));
+        entity.setBackground(jpa.getBackground());
         entity.setRace(jpa.getRace());
         entity.setMaxHealth(jpa.getMaxHealth());
         entity.setCurrentHealth(jpa.getCurrentHealth());
@@ -50,6 +54,8 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setAbilities(abilityJpaToEntityMapper.mapJpasToEntities(jpa.getAbilities()));
         entity.setSkills(skillJpaToEntityMapper.mapJpasToEntities(jpa.getSkills()));
         setEntityTraits(jpa, entity);
+
+        entity.setDndSubclasses(getDndSubclasses(entity.getClassFeatures()));
 
         return entity;
     }
@@ -85,5 +91,15 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setBackgroundTraits(backgroundTraits);
         entity.setRaceTraits(raceTraits);
         entity.setFeats(feats);
+    }
+
+    private List<String> getDndSubclasses(List<TraitEntity> classFeatures) {
+        // Extract all feature names
+        List<String> featureNames = classFeatures.stream()
+                .map(TraitEntity::getName)
+                .toList();
+
+        // Delegate parsing to the shared method
+        return subclassReader.getDndSubclasses(featureNames);
     }
 }
