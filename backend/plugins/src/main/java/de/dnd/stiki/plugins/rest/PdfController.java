@@ -4,6 +4,7 @@ import de.dnd.stiki.application.pdf.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,13 +19,13 @@ public class PdfController {
     private PdfService pdfService;
 
     @GetMapping("/character/{id}")
-    public ResponseEntity<byte[]> getFilledCharacterSheet(Long id) throws Exception {
+    public ResponseEntity<byte[]> getFilledCharacterSheet(@PathVariable Long id) throws Exception {
         File filledPdf = pdfService.fillCharacterSheet(id);
         byte[] pdfBytes = Files.readAllBytes(filledPdf.toPath());
 
         return ResponseEntity.ok()
                 .header("Content-Type", "application/pdf")
-                .header("Content-Disposition", "attachment; filename=\"Character_Sheet_Filled.pdf\"")
+                .header("Content-Disposition", "attachment; filename=\"Character Sheet (Filled).pdf\"")
                 .body(pdfBytes);
     }
 }

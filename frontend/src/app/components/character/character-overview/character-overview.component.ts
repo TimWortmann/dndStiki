@@ -16,6 +16,7 @@ import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.compo
 import { FeatListPopupComponent } from '../feat-list-popup/feat-list-popup.component';
 import { FeatValue } from '../../../models/feat-value';
 import { TraitValue } from '../../../models/trait-value';
+import { PdfService } from '../../../services/pdf/pdf.service';
 
 @Component({
   selector: 'app-character-overview',
@@ -60,6 +61,7 @@ throw new Error('Method not implemented.');
     private route: ActivatedRoute,
     private characterService : CharacterService,
     private dialog: MatDialog,
+    private pdfService: PdfService,
   ){}
 
   ngOnInit(): void {
@@ -507,5 +509,19 @@ throw new Error('Method not implemented.');
     this.characterService.removeFeat(this.characterValue.id, feat.name).subscribe((response) => {
       this.setCharacter(response)
     }) 
+  }
+
+  downloadCharacterSheet() {
+    this.pdfService.downloadCharacterSheet(this.characterValue.id).subscribe((response) => {
+
+      const url = window.URL.createObjectURL(response);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Character Sheet (' + this.characterValue.name + ').pdf'; 
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+    });
   }
 }
