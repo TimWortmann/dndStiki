@@ -208,6 +208,15 @@ public class PdfService {
             featureBuilder.append(raceTrait.getName());
         }
 
+        if (character.getFeats() != null && !character.getFeats().isEmpty()) {
+            featureBuilder.append("\n\n\n");
+            featureBuilder.append("Feats:");
+            for (TraitEntity feat : character.getFeats()) {
+                featureBuilder.append("\n- ");
+                featureBuilder.append(feat.getName());
+            }
+        }
+
         fieldValues.put("Features and Traits", featureBuilder.toString());
     }
 }
