@@ -55,10 +55,7 @@ public class CharacterSkillEntity {
         this.proficiency = proficiency;
     }
 
-    public Integer getModifierWithProficiency(Integer proficiencyBonus) {
-        if (proficiencyBonus == null) {
-            return basicModifier ;
-        }
+    public Integer getModifierWithProficiency(int proficiencyBonus) {
 
         return basicModifier + (proficiency * proficiencyBonus);
     }

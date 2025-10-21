@@ -61,4 +61,8 @@ public class CharacterAbilityEntity {
     public Integer getModifier() {
         return (int) Math.floor((getScore() - 10) / 2.0);
     }
+
+    public Integer getSavingThrowModifier(int proficiencyBonus) {
+        return getModifier() + (savingThrowProficiency * proficiencyBonus);
+    }
 }
