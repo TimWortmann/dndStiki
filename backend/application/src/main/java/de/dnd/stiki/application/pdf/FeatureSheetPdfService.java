@@ -49,36 +49,35 @@ public class FeatureSheetPdfService {
              PdfDocument pdfDoc = new PdfDocument(writer);
              Document document = new Document(pdfDoc)) {
 
-            // 📝 Add content
             document.add(new Paragraph("Feature & Traits Sheet (" + character.getName() + ")")
                     .setFont(bold)
                     .setFontSize(20));
 
-            String classFeaturesHeader = "--- Class Features (" + character.getDndClass() + " | " + character.getDndSubclass() + " | Level ";
+            document.add(new Paragraph("Background Traits (" + character.getBackground() + ")").setFont(bold));
+            addTraitBoxes(document, character.getBackgroundTraits());
+
+            document.add(new AreaBreak());
+            document.add(new Paragraph("Race Traits (" + character.getRace() + ")").setFont(bold));
+            addTraitBoxes(document, character.getRaceTraits());
+
+            if (character.getFeats() != null && !character.getFeats().isEmpty()) {
+                document.add(new AreaBreak());
+                document.add(new Paragraph("Feats").setFont(bold));
+                addTraitBoxes(document, character.getFeats());
+            }
+
+            String classFeaturesHeader = "Class Features (" + character.getDndClass() + " | " + character.getDndSubclass() + " | Level ";
             if (filterLevelFeatures) {
                 classFeaturesHeader += character.getLevel().toString();
             }
             else {
                 classFeaturesHeader += "20";
             }
-            classFeaturesHeader += ") ---";
+            classFeaturesHeader += ")";
 
-            document.add(new Paragraph(classFeaturesHeader));
+            document.add(new AreaBreak());
+            document.add(new Paragraph(classFeaturesHeader).setFont(bold));
             addTraitBoxes(document, subclassReader.getRelevantClassFeatures(character, filterLevelFeatures));
-
-            document.add(new AreaBreak());
-            document.add(new Paragraph("--- Background Traits (" + character.getBackground() + ") ---").setFont(bold));
-            addTraitBoxes(document, character.getBackgroundTraits());
-
-            document.add(new AreaBreak());
-            document.add(new Paragraph("--- Race Traits (" + character.getRace() + ") ---").setFont(bold));
-            addTraitBoxes(document, character.getRaceTraits());
-
-            if (character.getFeats() != null && !character.getFeats().isEmpty()) {
-                document.add(new AreaBreak());
-                document.add(new Paragraph("--- Feats ---").setFont(bold));
-                addTraitBoxes(document, character.getFeats());
-            }
         }
 
         File file = tempOutput.toFile();
