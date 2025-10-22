@@ -45,7 +45,7 @@ public class SubclassReader {
         return null;
     }
 
-    public List<TraitEntity> getRelevantClassFeatures(CharacterEntity character) {
+    public List<TraitEntity> getRelevantClassFeatures(CharacterEntity character, boolean filterLevelFeatures) {
         List<TraitEntity> relevantClassFeatures = new ArrayList<>();
 
         for (TraitEntity classFeature : character.getClassFeatures()) {
@@ -55,20 +55,18 @@ public class SubclassReader {
             Matcher levelMatcher = Pattern.compile("Level (\\d+)").matcher(featureName);
             if (levelMatcher.find()) {
                 int levelNumber = Integer.parseInt(levelMatcher.group(1));
-                if (levelNumber > character.getLevel()) {
+                if (filterLevelFeatures && levelNumber > character.getLevel()) {
                     continue; // Skip this feature
                 }
             }
 
             // Hide subclass-related features before level 3
-            if (character.getLevel() < 3 && featuresIncludesSubclassPrefix(featureName)) {
+            if (filterLevelFeatures && character.getLevel() < 3 && featuresIncludesSubclassPrefix(featureName)) {
                 continue;
             }
 
             // Only filter by subclass if level >= 3 and subclass is selected
-            if (character.getLevel() >= 3
-                    && character.getDndSubclass() != null
-                    && !"No Subclass".equals(character.getDndSubclass())) {
+            if (character.getLevel() >= 3 && character.getDndSubclass() != null && !"No Subclass".equals(character.getDndSubclass())) {
 
                 boolean belongsToOtherSubclass = false;
                 for (String subclass : character.getDndSubclasses()) {
