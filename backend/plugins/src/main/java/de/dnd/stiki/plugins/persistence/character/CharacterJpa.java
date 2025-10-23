@@ -1,6 +1,7 @@
 package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
+import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import jakarta.persistence.*;
 
@@ -62,6 +63,9 @@ public class CharacterJpa {
 
     @Column(name = "PROFICIENCY_BONUS")
     private Integer proficiencyBonus;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CharacterItemJpa> items;
 
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterTraitJpa> traits;
@@ -206,6 +210,14 @@ public class CharacterJpa {
 
     public void setProficiencyBonus(Integer proficiencyBonus) {
         this.proficiencyBonus = proficiencyBonus;
+    }
+
+    public List<CharacterItemJpa> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CharacterItemJpa> items) {
+        this.items = items;
     }
 
     public List<CharacterTraitJpa> getTraits() {
