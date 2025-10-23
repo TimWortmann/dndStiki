@@ -15,5 +15,9 @@ export class PdfService {
   downloadCharacterSheet(id : number) : Observable<Blob> {
     return this.http.get(this.baseUrl + "/character/" + id, { responseType: 'blob', });
   }
+
+  downloadFeatureSheet(id : number, filterLevelFeatures : boolean) : Observable<Blob> {
+    return this.http.get(this.baseUrl + "/features/" + id + "?filterLevelFeatures=" + filterLevelFeatures, { responseType: 'blob', });
+  }
   
 }

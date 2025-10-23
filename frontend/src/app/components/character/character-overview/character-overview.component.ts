@@ -17,6 +17,7 @@ import { FeatListPopupComponent } from '../feat-list-popup/feat-list-popup.compo
 import { FeatValue } from '../../../models/feat-value';
 import { TraitValue } from '../../../models/trait-value';
 import { PdfService } from '../../../services/pdf/pdf.service';
+import { DownloadsPopupComponent } from '../downloads-popup/downloads-popup.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -61,7 +62,6 @@ throw new Error('Method not implemented.');
     private route: ActivatedRoute,
     private characterService : CharacterService,
     private dialog: MatDialog,
-    private pdfService: PdfService,
   ){}
 
   ngOnInit(): void {
@@ -512,17 +512,14 @@ throw new Error('Method not implemented.');
     }) 
   }
 
-  downloadCharacterSheet() {
-    this.pdfService.downloadCharacterSheet(this.characterValue.id).subscribe((response) => {
-
-      const url = window.URL.createObjectURL(response);
-
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'Character Sheet (' + this.characterValue.name + ').pdf'; 
-      a.click();
-
-      window.URL.revokeObjectURL(url);
+  openDownloadsDialog() {
+    this.dialog.open(DownloadsPopupComponent, {
+      data: this.characterValue,    
+      width: '40vw',     
+      height: '30vh',     
+      maxWidth: '40vw',  
+      maxHeight: '30vh',  
+      autoFocus: false,
     });
   }
 }

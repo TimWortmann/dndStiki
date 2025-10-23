@@ -1,0 +1,28 @@
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title> Downloads </h1>
+
+    <div class="vertical-flex">
+        <span> Character Sheet </span>
+        <button mat-icon-button color="primary" (click)="downloadCharacterSheet()">
+            <mat-icon>download</mat-icon>
+        </button>
+    </div>
+
+    <div class="vertical-flex">
+        <span> Features & Traits (Level {{characterValue.level}}) </span>
+        <button mat-icon-button color="primary" (click)="downloadFeatureSheet(true)">
+            <mat-icon>download</mat-icon>
+        </button>
+    </div>
+
+    <div class="vertical-flex">
+        <span> Features & Traits (Level 20) </span>
+        <button mat-icon-button color="primary" (click)="downloadFeatureSheet(false)">
+            <mat-icon>download</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-flat-button color="primary" (click)="close()">Close</button>
+</div>

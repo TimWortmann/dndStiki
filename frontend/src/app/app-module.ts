@@ -46,6 +46,7 @@ import { MatListModule } from '@angular/material/list';
 import { PointBuyComponent } from './components/character/point-buy/point-buy.component';
 import { PointBuyPopupComponent } from './components/character/point-buy-popup/point-buy-popup.component';
 import { FeatListPopupComponent } from './components/character/feat-list-popup/feat-list-popup.component';
+import { DownloadsPopupComponent } from './components/character/downloads-popup/downloads-popup.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { FeatListPopupComponent } from './components/character/feat-list-popup/f
     PointBuyComponent,
     PointBuyPopupComponent,
     FeatListPopupComponent,
+    DownloadsPopupComponent,
   ],
   imports: [
     BrowserModule,
