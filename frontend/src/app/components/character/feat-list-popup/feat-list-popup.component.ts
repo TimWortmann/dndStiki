@@ -78,7 +78,6 @@ export class FeatListPopupComponent {
      const dialogRef = this.dialog.open(FeatTextPopupComponent, {
        data: element,
        width: '50vw',     
-       height: '60vh',     
        maxWidth: '50vw',  
        maxHeight: '60vh',  
        autoFocus: false,

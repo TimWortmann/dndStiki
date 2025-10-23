@@ -47,11 +47,12 @@
 
             <div class="flex" *ngIf="item.ac">
                 <h3>Armor Class:</h3>
-                <p>{{item.ac}}</p>
+                <p> {{item.ac}} </p>
+                <p *ngIf="item.type === 'Light Armor'"> + Dexterity Modifier </p>
             </div>
 
             <div class="flex icon-row" *ngIf="item.stealth">
-                <h3>Stealth:</h3>
+                <h3>Stealth Disadvantage:</h3>
                 <mat-icon *ngIf="item.stealth === true">check</mat-icon>
                 <mat-icon *ngIf="item.stealth !== true">close</mat-icon>
             </div>
