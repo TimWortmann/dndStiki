@@ -1,3 +1,7 @@
+<div class="main-page-button">
+  <button mat-raised-button color="primary" [routerLink]="['/']"> Main Page </button>
+</div>
+
 <div class="container" *ngIf="characterValue">
   <div class="vertical-flex">
     <ng-container *ngIf="!characterNameChangeActive">
@@ -416,9 +420,4 @@
         </mat-tab>
       </mat-tab-group>
   </div>
-
-  <div style="margin-top: 5em;">
-    <button mat-raised-button color="primary" [routerLink]="['/']"> Main Page </button>
-  </div>
-
 </div>
