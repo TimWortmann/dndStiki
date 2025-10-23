@@ -49,10 +49,6 @@ public class FeatureSheetPdfService {
              PdfDocument pdfDoc = new PdfDocument(writer);
              Document document = new Document(pdfDoc)) {
 
-            document.add(new Paragraph("Feature & Traits Sheet (" + character.getName() + ")")
-                    .setFont(bold)
-                    .setFontSize(20));
-
             document.add(new Paragraph("Background Traits (" + character.getBackground() + ")").setFont(bold));
             addTraitBoxes(document, character.getBackgroundTraits());
 
