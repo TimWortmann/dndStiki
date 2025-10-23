@@ -17,6 +17,7 @@ public class CharacterTraitJpa {
     @JoinColumn(name = "TRAIT_ID")
     private TraitJpa trait;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TRAIT_TYPE")
     private CharacterTraitType traitType;
 
