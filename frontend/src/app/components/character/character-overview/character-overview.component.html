@@ -342,8 +342,12 @@
         <mat-tab label="Equipment"> 
 
         </mat-tab>
-        <mat-tab label="Items"> 
-          
+        <mat-tab label="Items">
+          <p></p>
+          <button mat-icon-button (click)="openItemDialog()">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <p></p> 
         </mat-tab>
       </mat-tab-group>
   </div>
@@ -412,7 +416,7 @@
           </mat-accordion> 
           
           <p></p>
-          <button mat-icon-button (click)="openAddFeatDialog()">
+          <button mat-icon-button (click)="openFeatDialog()">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
           <p></p>

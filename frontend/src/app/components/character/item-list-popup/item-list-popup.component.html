@@ -1,0 +1,31 @@
+<ng-template #propertiesTemplate let-column="column" let-element="element">
+  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
+<ng-template #actionsTemplate let-column="column" let-element="element">
+  <div class="vertical-flex">
+    <button mat-icon-button (click)="openDetailDialog(element)">
+      <mat-icon>info_outline</mat-icon>
+    </button>
+    <button mat-icon-button (click)="add(element)">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+<div mat-dialog-content class="dialog-content">
+    <h1 mat-dialog-title> Add Item </h1>
+    
+    <div *ngIf="data && data.length > 0">
+        <custom-table
+            [tableData]="data"
+            [tableColumns]="tableColumns"
+            [isFilterable]="true"
+            [isPageable]="true">
+        </custom-table>
+    </div> 
+</div>
+
+<button mat-icon-button class="close-button" (click)="close()">
+  <mat-icon>close</mat-icon>
+</button>

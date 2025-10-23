@@ -1,27 +1,26 @@
 import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ItemValue } from '../../models/item-value';
-import { TableColumnValue } from '../../models/table-column-value';
-import { ItemService } from '../../services/item/item.service';
-import { TableService } from '../../services/table/table.service';
-import { SpellDetailsPopupComponent } from '../spells/spell-details-popup/spell-details-popup.component';
-import { ItemDetailsPopupComponent } from './item-details-popup/item-details-popup.component';
+import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ItemValue } from '../../../models/item-value';
+import { TableColumnValue } from '../../../models/table-column-value';
+import { ItemService } from '../../../services/item/item.service';
 
 @Component({
-  selector: 'app-items',
+  selector: 'app-item-list-popup',
   standalone: false,
-  templateUrl: './items.component.html',
-  styleUrl: './items.component.scss'
+  templateUrl: './item-list-popup.component.html',
+  styleUrl: './item-list-popup.component.scss'
 })
-export class ItemsComponent {
+export class ItemListPopupComponent {
 
   @ViewChild('propertiesTemplate') propertiesTemplate!: TemplateRef<any>;
-  @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
+  @ViewChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
 
   data?: ItemValue[];
   tableColumns: TableColumnValue[] = [];
 
   constructor(
+    private dialogRef: MatDialogRef<ItemListPopupComponent>,
     private itemService: ItemService, 
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
@@ -59,7 +58,7 @@ export class ItemsComponent {
         dataKey: 'details',
         position: 'left',
         isSortable: false,
-        template: this.detailsTemplate,
+        template: this.actionsTemplate,
       },
     ];
     this.pullDataFromBackend();
@@ -82,4 +81,13 @@ export class ItemsComponent {
       autoFocus: false,
     });
   }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+    
+  add(item : ItemValue) {
+    this.dialogRef.close(item);   
+  }
+
 }

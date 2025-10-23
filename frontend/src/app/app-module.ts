@@ -47,6 +47,7 @@ import { PointBuyComponent } from './components/character/point-buy/point-buy.co
 import { PointBuyPopupComponent } from './components/character/point-buy-popup/point-buy-popup.component';
 import { FeatListPopupComponent } from './components/character/feat-list-popup/feat-list-popup.component';
 import { DownloadsPopupComponent } from './components/character/downloads-popup/downloads-popup.component';
+import { ItemListPopupComponent } from './components/character/item-list-popup/item-list-popup.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { DownloadsPopupComponent } from './components/character/downloads-popup/
     PointBuyPopupComponent,
     FeatListPopupComponent,
     DownloadsPopupComponent,
+    ItemListPopupComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,8 @@ import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToE
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.adapters.feat.FeatDto;
+import de.dnd.stiki.adapters.item.ItemDto;
+import de.dnd.stiki.adapters.item.ItemDtoToEnityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.character.CharacterAbilityEntity;
@@ -21,6 +23,7 @@ import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
+import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
 import de.dnd.stiki.domain.trait.TraitEntity;
@@ -59,6 +62,9 @@ public class CharacterService {
 
     @Autowired
     private CharacterSkillDtoToEntityMapper skillDtoToEntityMapper;
+
+    @Autowired
+    private ItemDtoToEnityMapper itemDtoToEnityMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -370,6 +376,16 @@ public class CharacterService {
         CharacterEntity characterEntity = repository.get(id);
 
         characterEntity.getFeats().removeIf(trait -> trait.getName().equals(featName));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto addItem(Long id, ItemDto itemDto) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        ItemEntity itemEntity = itemDtoToEnityMapper.mapDtoToEntity(itemDto);
+
+        characterEntity.getItems().add(itemEntity);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }

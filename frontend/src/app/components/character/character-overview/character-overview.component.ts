@@ -18,6 +18,8 @@ import { FeatValue } from '../../../models/feat-value';
 import { TraitValue } from '../../../models/trait-value';
 import { PdfService } from '../../../services/pdf/pdf.service';
 import { DownloadsPopupComponent } from '../downloads-popup/downloads-popup.component';
+import { ItemListPopupComponent } from '../item-list-popup/item-list-popup.component';
+import { ItemValue } from '../../../models/item-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -488,7 +490,7 @@ throw new Error('Method not implemented.');
     return fancyString;
   }
 
-  openAddFeatDialog() {
+  openFeatDialog() {
     const dialogRef = this.dialog.open(FeatListPopupComponent, {
           width: '1300px',        
           maxWidth: '1300px',  
@@ -519,6 +521,23 @@ throw new Error('Method not implemented.');
       maxWidth: '500px',  
       maxHeight: '200px',  
       autoFocus: false,
+    });
+  }
+
+  openItemDialog() {
+    const dialogRef = this.dialog.open(ItemListPopupComponent, {
+          width: '1300px',        
+          maxWidth: '1300px',  
+          maxHeight: '650px',  
+          autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result: ItemValue | undefined) => {
+      if (result) {
+        //this.characterService.addFeat(this.characterValue.id, result).subscribe((response) => {
+        //  this.setCharacter(response)
+        //})  
+      }
     });
   }
 }
