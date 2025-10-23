@@ -391,10 +391,10 @@ throw new Error('Method not implemented.');
   openPointBuyDialog() {
     const dialogRef = this.dialog.open(PointBuyPopupComponent, {
           data: this.characterValue.abilities,
-          width: '60vw',     
-          height: '46vh',     
-          maxWidth: '60vw',  
-          maxHeight: '46vh',  
+          width: '800px',     
+          height: '360px',     
+          maxWidth: '800px',  
+          maxHeight: '360px',
           autoFocus: false,
     });
 
