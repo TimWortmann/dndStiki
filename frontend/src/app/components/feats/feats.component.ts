@@ -70,8 +70,7 @@ export class FeatsComponent {
   openDetailDialog(element: any): void {
     const dialogRef = this.dialog.open(FeatTextPopupComponent, {
       data: element,
-      width: '60vw',     
-      height: '50vh',     
+      width: '60vw',         
       maxWidth: '60vw',  
       maxHeight: '50vh',  
       autoFocus: false,

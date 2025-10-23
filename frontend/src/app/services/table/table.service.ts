@@ -37,8 +37,7 @@ export class TableService {
         titleInfo: element.name,
         traits: element[column.dataKey]
       },
-      width: '60vw',     
-      height: '60vh',     
+      width: '60vw',        
       maxWidth: '60vw',  
       maxHeight: '60vh',  
       autoFocus: false,

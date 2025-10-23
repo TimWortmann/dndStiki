@@ -82,8 +82,7 @@ export class SpellsComponent {
   openDetailDialog(element: any): void {
     const dialogRef = this.dialog.open(SpellDetailsPopupComponent, {
       data: element,
-      width: '60vw',     
-      height: '60vh',     
+      width: '60vw',          
       maxWidth: '60vw',  
       maxHeight: '60vh',  
       autoFocus: false,

@@ -490,8 +490,7 @@ throw new Error('Method not implemented.');
 
   openAddFeatDialog() {
     const dialogRef = this.dialog.open(FeatListPopupComponent, {
-          width: '1300px',     
-          height: '650px',     
+          width: '1300px',        
           maxWidth: '1300px',  
           maxHeight: '650px',  
           autoFocus: false,
