@@ -1,7 +1,6 @@
 package de.dnd.stiki.application;
 
 import de.dnd.stiki.adapters.character.CharacterDto;
-import de.dnd.stiki.adapters.character.CharacterDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.CharacterEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
@@ -42,9 +41,6 @@ public class CharacterService {
 
     @Autowired
     private CharacterEntityToDtoMapper entityToDtoMapper;
-
-    @Autowired
-    private CharacterDtoToEntityMapper dtoToEntityMapper;
 
     @Autowired
     private CharacterCreationDtoToEntityMapper creationDtoToEntityMapper;

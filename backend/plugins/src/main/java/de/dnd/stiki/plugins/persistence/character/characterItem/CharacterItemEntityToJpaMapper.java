@@ -1,15 +1,15 @@
-package de.dnd.stiki.plugins.persistence.item;
+package de.dnd.stiki.plugins.persistence.character.characterItem;
 
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ItemEntityToJpaMapper extends AbstractEntityToJpaMapper<ItemEntity, ItemJpa> {
+public class CharacterItemEntityToJpaMapper extends AbstractEntityToJpaMapper<ItemEntity, CharacterItemJpa> {
 
     @Override
-    public ItemJpa mapEntityToJpa(ItemEntity entity) {
-        ItemJpa jpa = new ItemJpa();
+    public CharacterItemJpa mapEntityToJpa(ItemEntity entity) {
+        CharacterItemJpa jpa = new CharacterItemJpa();
         jpa.setName(entity.getName());
         jpa.setDetail(entity.getDetail());
         jpa.setType(entity.getType());

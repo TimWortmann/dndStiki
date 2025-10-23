@@ -7,6 +7,7 @@ import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpaToEntityMapper;
+import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpaToEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,9 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
 
     @Autowired
     private CharacterSkillJpaToEntityMapper skillJpaToEntityMapper;
+
+    @Autowired
+    private CharacterItemJpaToEntityMapper itemJpaToEntityMapper;
 
     @Autowired
     private TraitJpaToEntityMapper traitJpaToEntityMapper;
@@ -53,6 +57,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setProficiencyBonus(jpa.getProficiencyBonus());
         entity.setAbilities(abilityJpaToEntityMapper.mapJpasToEntities(jpa.getAbilities()));
         entity.setSkills(skillJpaToEntityMapper.mapJpasToEntities(jpa.getSkills()));
+        entity.setItems(itemJpaToEntityMapper.mapJpasToEntities(jpa.getItems()));
         setEntityTraits(jpa, entity);
 
         entity.setDndSubclasses(getDndSubclasses(entity.getClassFeatures()));

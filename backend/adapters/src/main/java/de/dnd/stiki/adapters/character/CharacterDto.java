@@ -2,7 +2,8 @@ package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
-import de.dnd.stiki.domain.trait.TraitEntity;
+import de.dnd.stiki.adapters.item.ItemDto;
+import de.dnd.stiki.adapters.trait.TraitDto;
 
 import java.util.List;
 
@@ -48,10 +49,12 @@ public class CharacterDto {
 
     private List<CharacterSkillDto> skills;
 
-    private List<TraitEntity> classFeatures;
-    private List<TraitEntity> backgroundTraits;
-    private List<TraitEntity> raceTraits;
-    private List<TraitEntity> feats;
+    private List<ItemDto> items;
+
+    private List<TraitDto> classFeatures;
+    private List<TraitDto> backgroundTraits;
+    private List<TraitDto> raceTraits;
+    private List<TraitDto> feats;
 
     public Long getId() {
         return id;
@@ -213,35 +216,43 @@ public class CharacterDto {
         this.skills = skills;
     }
 
-    public List<TraitEntity> getClassFeatures() {
+    public List<ItemDto> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemDto> items) {
+        this.items = items;
+    }
+
+    public List<TraitDto> getClassFeatures() {
         return classFeatures;
     }
 
-    public void setClassFeatures(List<TraitEntity> classFeatures) {
+    public void setClassFeatures(List<TraitDto> classFeatures) {
         this.classFeatures = classFeatures;
     }
 
-    public List<TraitEntity> getBackgroundTraits() {
+    public List<TraitDto> getBackgroundTraits() {
         return backgroundTraits;
     }
 
-    public void setBackgroundTraits(List<TraitEntity> backgroundTraits) {
+    public void setBackgroundTraits(List<TraitDto> backgroundTraits) {
         this.backgroundTraits = backgroundTraits;
     }
 
-    public List<TraitEntity> getRaceTraits() {
+    public List<TraitDto> getRaceTraits() {
         return raceTraits;
     }
 
-    public void setRaceTraits(List<TraitEntity> raceTraits) {
+    public void setRaceTraits(List<TraitDto> raceTraits) {
         this.raceTraits = raceTraits;
     }
 
-    public List<TraitEntity> getFeats() {
+    public List<TraitDto> getFeats() {
         return feats;
     }
 
-    public void setFeats(List<TraitEntity> feats) {
+    public void setFeats(List<TraitDto> feats) {
         this.feats = feats;
     }
 }
