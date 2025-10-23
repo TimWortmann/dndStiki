@@ -92,10 +92,6 @@
     <p></p>
 </div>
 
-<div mat-dialog-actions class="dialog-actions">
-    <button mat-flat-button color="primary" (click)="close()">Close</button>
-</div>
-
 <ng-template #classLevelContent let-classLevel>
     <div *ngIf="classLevel.spellSlots && classLevel.spellSlots != '0,0,0,0,0,0,0,0,0,0,'" class="spellSlotsSegment">
         <h3>Spell Slots</h3>
@@ -153,3 +149,7 @@
         </tbody>
     </table>
 </ng-template>
+
+<button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+</button>

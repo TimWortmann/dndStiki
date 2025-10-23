@@ -1,5 +1,6 @@
 <div mat-dialog-content class="dialog-content">
     <h1 mat-dialog-title>Traits ({{titleInfo}})</h1>
+
     <div>
         <mat-accordion>
             <mat-expansion-panel *ngFor="let trait of traits">
@@ -12,6 +13,6 @@
     </div>
 </div>
 
-<div mat-dialog-actions class="dialog-actions">
-    <button mat-flat-button color="primary" (click)="close()">Close</button>
-</div>
+<button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+</button>

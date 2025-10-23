@@ -9,13 +9,10 @@ h1 {
   margin: 2%;
 }
 
-.dialog-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: auto;
-  margin-bottom: 10px;
-  margin-right: 10px;
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .text {

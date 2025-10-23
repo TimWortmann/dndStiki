@@ -15,10 +15,6 @@
 
 <div mat-dialog-content class="dialog-content">
     <h1 mat-dialog-title> Add Feat </h1>
-
-    <button mat-icon-button class="close-button" (click)="close()">
-        <mat-icon>close</mat-icon>
-    </button>
     
     <div *ngIf="data && data.length > 0">
         <custom-table
@@ -30,3 +26,6 @@
     </div> 
 </div>
 
+<button mat-icon-button class="close-button" (click)="close()">
+  <mat-icon>close</mat-icon>
+</button>
