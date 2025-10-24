@@ -18,6 +18,7 @@ export class ItemListComponent implements AfterViewInit {
   
   @ViewChild('propertiesTemplate') propertiesTemplate!: TemplateRef<any>;
   @ViewChild('quantityTemplate') quantityTemplate!: TemplateRef<any>;
+  @ViewChild('bigQuantityTemplate') bigQuantityTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
   @ViewChild('equippedTemplate') equippedTemplate!: TemplateRef<any>;
   @ViewChild('addTemplate') addTemplate!: TemplateRef<any>;
@@ -29,6 +30,7 @@ export class ItemListComponent implements AfterViewInit {
   @Input() typeColumn: boolean = false;
   @Input() propertiesColumn: boolean = false;
   @Input() quantityColumn: boolean = false;
+  @Input() bigQuantityColumn: boolean = false;
   @Input() equippedColumn: boolean = false;
   @Input() addColumn: boolean = false;
 
@@ -87,6 +89,17 @@ export class ItemListComponent implements AfterViewInit {
           position: 'left',
           isSortable: true,
           template: this.quantityTemplate,
+        })  
+    }
+
+    if (this.bigQuantityColumn) {
+      this.tableColumns.push(
+        {
+          name: 'Quantity',
+          dataKey: 'quantity',
+          position: 'left',
+          isSortable: true,
+          template: this.bigQuantityTemplate,
         })  
     }
 

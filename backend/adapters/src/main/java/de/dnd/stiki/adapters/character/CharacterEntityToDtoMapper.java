@@ -83,6 +83,10 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setArmor(new ArrayList<>());
         dto.setShields(new ArrayList<>());
 
+        if (itemEntities == null) {
+            return;
+        }
+
         for (CharacterItemEntity itemEntity : itemEntities) {
             CharacterItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
 

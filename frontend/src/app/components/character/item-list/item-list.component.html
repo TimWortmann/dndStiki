@@ -14,6 +14,22 @@
     </div>
 </ng-template>
 
+<ng-template #bigQuantityTemplate let-column="column" let-element="element">
+    <div class="button-flex">
+        <div class="edit-buttons">
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -100)"> - 100 </button>
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -10)"> - 10 </button>
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -1)"> - 1 </button>
+        </div>
+        <span>{{element[column.dataKey]}}</span>
+        <div class="edit-buttons">
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +1)"> + 1 </button>
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +10)"> + 10 </button>
+            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +100)"> + 100 </button>
+        </div>
+    </div>
+</ng-template>
+
 <ng-template #detailsTemplate let-column="column" let-element="element">
     <button mat-icon-button (click)="openDetailDialog(element)">
       <mat-icon>info_outline</mat-icon>

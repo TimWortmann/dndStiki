@@ -6,3 +6,25 @@ h1 {
   display: flex;
   align-items: center;
 }
+
+.button-flex {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.edit-buttons button {
+  width: 26px;             /* same compact size */
+  height: 26px;
+  font-size: 0.6rem;       /* smaller text */
+  padding: 0;
+  min-width: 0;            /* override Material default */
+  display: flex;           /* center the text */
+  align-items: center;
+  justify-content: center;
+}
