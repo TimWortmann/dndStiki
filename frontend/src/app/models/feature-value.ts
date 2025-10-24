@@ -1,6 +1,5 @@
-export interface FeatureValue {
-  id: number
-  name: string; 
-  text: string; 
+import { TraitValue } from "./trait-value";
+
+export interface FeatureValue extends TraitValue {
   optional: boolean;
 }
