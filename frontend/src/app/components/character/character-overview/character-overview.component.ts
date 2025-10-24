@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DndClassService } from '../../../services/dnd-class/dnd-class.service';
 import { response } from 'express';
 import { DndClassValue } from '../../../models/dnd-class-value';
@@ -20,6 +20,7 @@ import { PdfService } from '../../../services/pdf/pdf.service';
 import { DownloadsPopupComponent } from '../downloads-popup/downloads-popup.component';
 import { ItemListPopupComponent } from '../item-list-popup/item-list-popup.component';
 import { ItemValue } from '../../../models/item-value';
+import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -64,6 +65,7 @@ throw new Error('Method not implemented.');
     private route: ActivatedRoute,
     private characterService : CharacterService,
     private dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
   ){}
 
   ngOnInit(): void {
@@ -114,6 +116,8 @@ throw new Error('Method not implemented.');
     this.characterValue.skills = this.sortSkills();  
     this.readCurrentClass();
     this.readCurrentBackground();
+    this.cdr.detectChanges();
+    console.log("Items", this.characterValue.items)
   }
 
   readAllClasses() {
@@ -526,18 +530,36 @@ throw new Error('Method not implemented.');
 
   openItemDialog() {
     const dialogRef = this.dialog.open(ItemListPopupComponent, {
-          width: '1300px',        
-          maxWidth: '1300px',  
-          maxHeight: '650px',  
-          autoFocus: false,
+      width: '1300px',        
+      maxWidth: '1300px',  
+      maxHeight: '650px',  
+      autoFocus: false,
     });
 
     dialogRef.afterClosed().subscribe((result: ItemValue | undefined) => {
       if (result) {
-        //this.characterService.addFeat(this.characterValue.id, result).subscribe((response) => {
-        //  this.setCharacter(response)
-        //})  
+        this.characterService.addItem(this.characterValue.id, result).subscribe((response) => {
+          this.setCharacter(response)
+        })  
       }
     });
+  }
+
+  removeItem(item : ItemValue) {
+  
+  }
+
+  openItemDetailDialog(element: any): void {
+    const dialogRef = this.dialog.open(ItemDetailsPopupComponent, {
+      data: element,
+      width: '60vw',          
+      maxWidth: '60vw',  
+      maxHeight: '60vh',  
+      autoFocus: false,
+    });
+  }
+
+  isEquipment(itemType : string) {
+    
   }
 }

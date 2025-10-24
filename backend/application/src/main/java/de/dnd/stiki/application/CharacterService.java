@@ -385,6 +385,9 @@ public class CharacterService {
 
         ItemEntity itemEntity = itemDtoToEnityMapper.mapDtoToEntity(itemDto);
 
+        if (characterEntity.getItems() == null) {
+            characterEntity.setItems(new ArrayList<>());
+        }
         characterEntity.getItems().add(itemEntity);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));

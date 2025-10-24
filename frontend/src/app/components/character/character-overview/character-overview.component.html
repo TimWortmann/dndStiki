@@ -1,3 +1,12 @@
+<ng-template #actionsTemplate let-column="column" let-element="element">
+  <div class="vertical-flex">
+    <button mat-icon-button (click)="openItemDetailDialog(element)">
+      <mat-icon>info_outline</mat-icon>
+    </button>
+
+  </div>
+</ng-template>
+
 <div class="main-page-button">
   <button mat-raised-button color="primary" [routerLink]="['/']"> Main Page </button>
 </div>
@@ -337,19 +346,42 @@
   </div>
 
   <div class="subsection">
-    <h2>Inventory</h2>
+    <div class="vertical-flex">
+      <h2>Inventory</h2>
+      <button mat-icon-button (click)="openItemDialog()">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
     <mat-tab-group>
-        <mat-tab label="Equipment"> 
+      <mat-tab label="Currency">
+        <div *ngIf="characterValue" class="item-list">
+          <app-item-list [data]="characterValue.items"></app-item-list>
+        </div>
+      </mat-tab>
+      <mat-tab label="Items">
+        <div *ngIf="characterValue" class="item-list">
+          <app-item-list [data]="characterValue.items" [typeColumn]="true"></app-item-list>
+        </div>
+      </mat-tab>
+      
+      <mat-tab label="Weapons">
+        <div *ngIf="characterValue" class="item-list">
+          <app-item-list [data]="characterValue.items" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+        </div>
+      </mat-tab>
+      
+      <mat-tab label="Armor">
+        <div *ngIf="characterValue" class="item-list">
+          <app-item-list [data]="characterValue.items" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+        </div>
+      </mat-tab>
 
-        </mat-tab>
-        <mat-tab label="Items">
-          <p></p>
-          <button mat-icon-button (click)="openItemDialog()">
-            <mat-icon>add_circle_outline</mat-icon>
-          </button>
-          <p></p> 
-        </mat-tab>
-      </mat-tab-group>
+      <mat-tab label="Shields">
+        <div *ngIf="characterValue" class="item-list">
+          <app-item-list [data]="characterValue.items" [equippedColumn]="true"></app-item-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 
   <div class="subsection">
@@ -399,7 +431,15 @@
           </mat-accordion> 
         </mat-tab>
 
-        <mat-tab label="Feats">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="vertical-flex">
+              <span>Feats</span>
+              <button mat-icon-button (click)="openFeatDialog()">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+            </div>
+          </ng-template>
           <p></p>
           <mat-accordion>
             <ng-container *ngFor="let feat of characterValue.feats">
@@ -408,19 +448,12 @@
                   <mat-panel-title> {{feat.name}} </mat-panel-title>
                 </mat-expansion-panel-header>
                   <div class="trait-text">{{feat.text}}</div>
-                  <button mat-icon-button (click)="removeFeat(feat)" style="float: right;">
+                  <button mat-icon-button (click)="removeFeat(feat)" class="bottom-right">
                     <mat-icon>delete</mat-icon>
                   </button>
               </mat-expansion-panel>
             </ng-container>
-          </mat-accordion> 
-          
-          <p></p>
-          <button mat-icon-button (click)="openFeatDialog()">
-            <mat-icon>add_circle_outline</mat-icon>
-          </button>
-          <p></p>
-            
+          </mat-accordion>  
         </mat-tab>
       </mat-tab-group>
   </div>

@@ -3,6 +3,7 @@ package de.dnd.stiki.plugins.persistence.character;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
+import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,10 +49,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         List<CharacterAbilityJpa> abilities = jpa.getAbilities();
         List<CharacterSkillJpa> skills = jpa.getSkills();
         List<CharacterTraitJpa> traits = jpa.getTraits();
+        List<CharacterItemJpa> items = jpa.getItems();
 
         jpa.setAbilities(null);
         jpa.setSkills(null);
         jpa.setTraits(null);
+        jpa.setItems(null);
         jpa = jpaRepository.save(jpa);
 
         jpa.setAbilities(abilities);
@@ -67,6 +70,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         jpa.setSkills(skills);
         for (CharacterSkillJpa skillJpa : skills) {
             skillJpa.setCharacter(jpa);
+        }
+
+        jpa.setItems(items);
+        for (CharacterItemJpa itemJpa : jpa.getItems()) {
+            itemJpa.setCharacter(jpa);
         }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
@@ -85,6 +93,10 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
         for (CharacterSkillJpa skillJpa : jpa.getSkills()) {
             skillJpa.setCharacter(jpa);
+        }
+
+        for (CharacterItemJpa itemJpa : jpa.getItems()) {
+            itemJpa.setCharacter(jpa);
         }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));

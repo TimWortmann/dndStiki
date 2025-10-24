@@ -6,6 +6,7 @@ import { CharacterCreationValue } from '../../models/character-creation-value';
 import { CharacterAbilityValue } from '../../models/character-ability-value';
 import { CharacterSkillValue } from '../../models/character-skill-value';
 import { FeatValue } from '../../models/feat-value';
+import { ItemValue } from '../../models/item-value';
 
 @Injectable({
   providedIn: 'root'
@@ -86,5 +87,9 @@ export class CharacterService {
 
   removeFeat(id : number, featName : string) : Observable<CharacterValue> {
     return this.http.delete<CharacterValue>(this.baseUrl + "/feat/" + id + "/" + encodeURIComponent(featName))
+  }
+
+  addItem(id : number, item : ItemValue) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/item/" + id, item)
   }
 }

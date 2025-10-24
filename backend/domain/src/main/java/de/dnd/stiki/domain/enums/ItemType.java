@@ -3,7 +3,7 @@ package de.dnd.stiki.domain.enums;
 public enum ItemType {
     CURRENCY("Currency", "$"),
     WEAPON("Weapon", "W"),
-    MAGIC("Melee Weapon", "M"),
+    MELEE_WEAPON("Melee Weapon", "M"),
     RANGED_WEAPON("Ranged Weapon", "R"),
     STAFF("Staff", "ST"),
     ROD("Rod", "RD"),

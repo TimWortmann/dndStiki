@@ -12,7 +12,7 @@ export class ItemService {
 
   constructor(private http: HttpClient) {}
 
-  getAllSpells() : Observable<ItemValue[]> {
+  getAllItems() : Observable<ItemValue[]> {
     return this.http.get<ItemValue[]>(this.baseUrl)
   }
   

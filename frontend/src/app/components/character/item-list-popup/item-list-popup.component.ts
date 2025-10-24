@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ItemValue } from '../../../models/item-value';
@@ -11,7 +11,7 @@ import { ItemService } from '../../../services/item/item.service';
   templateUrl: './item-list-popup.component.html',
   styleUrl: './item-list-popup.component.scss'
 })
-export class ItemListPopupComponent {
+export class ItemListPopupComponent implements AfterViewInit {
 
   @ViewChild('propertiesTemplate') propertiesTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
@@ -65,7 +65,7 @@ export class ItemListPopupComponent {
   }
 
   pullDataFromBackend() {
-    this.itemService.getAllSpells()
+    this.itemService.getAllItems()
       .subscribe((response) => {
         this.data = response;
         this.cdr.detectChanges();

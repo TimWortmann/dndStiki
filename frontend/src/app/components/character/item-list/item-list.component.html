@@ -1,0 +1,38 @@
+<ng-template #propertiesTemplate let-column="column" let-element="element">
+  <span>{{ element[column.dataKey]?.join(', ') }}</span>
+</ng-template>
+
+<ng-template #quantityTemplate let-column="column" let-element="element">
+    <div class="vertical-flex">
+        <button mat-icon-button color="primary">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <span>1{{element[column.dataKey]}}</span>
+        <button mat-icon-button color="primary">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #detailsTemplate let-column="column" let-element="element">
+    <button mat-icon-button (click)="openDetailDialog(element)">
+      <mat-icon>info_outline</mat-icon>
+    </button>
+</ng-template>
+
+<ng-template #equippedTemplate let-column="column" let-element="element">
+    <button mat-icon-button>
+        <mat-icon>radio_button_unchecked</mat-icon>
+    </button>
+</ng-template>
+
+<div>
+    <div *ngIf="data && data.length > 0">
+        <custom-table
+            [tableData]="data"
+            [tableColumns]="tableColumns"
+            [isFilterable]="true"
+            [isPageable]="true">
+        </custom-table>
+    </div> 
+</div>

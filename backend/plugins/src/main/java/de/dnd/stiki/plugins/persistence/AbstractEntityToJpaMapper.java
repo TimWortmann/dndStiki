@@ -26,7 +26,7 @@ public abstract class AbstractEntityToJpaMapper<E, J> {
 
     protected String getStringFromList(List<String> list) {
 
-        if (list == null) {
+        if (list == null || list.isEmpty()) {
             return null;
         }
 

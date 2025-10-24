@@ -66,7 +66,7 @@ export class ItemsComponent {
   }
 
   pullDataFromBackend() {
-    this.itemService.getAllSpells()
+    this.itemService.getAllItems()
       .subscribe((response) => {
         this.data = response;
         this.cdr.detectChanges();

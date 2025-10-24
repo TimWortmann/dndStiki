@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';  // ✅ fixed import order
@@ -27,6 +27,7 @@ export class TableComponent implements AfterViewInit {
   @Input() isFilterable = false;
   @Input() tableColumns: TableColumnValue[] = [];
   @Input() rowActionIcon!: string;
+  @Input() isFilterableOnlyVisible = false;
 
   @Output() sort: EventEmitter<Sort> = new EventEmitter();
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
@@ -38,8 +39,7 @@ export class TableComponent implements AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
-    const columnNames = this.tableColumns.map(col => col.name);
-    this.displayedColumns = this.rowActionIcon ? [this.rowActionIcon, ...columnNames] : columnNames;
+    this.updateDisplayedColumns();
   }
 
   ngAfterViewInit(): void {
@@ -47,6 +47,17 @@ export class TableComponent implements AfterViewInit {
     this.defaultPageSize = this.paginationSizes[0];
     this.tableDataSource.paginator = this.matPaginator;
     this.tableDataSource.sort = this.matSort;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['tableColumns'] && this.tableColumns?.length) {
+      this.updateDisplayedColumns();
+    }
+  }
+
+  private updateDisplayedColumns() {
+     const columnNames = this.tableColumns.map(col => col.name);
+    this.displayedColumns = this.rowActionIcon ? [this.rowActionIcon, ...columnNames] : columnNames;
   }
 
   setTableDataSource(data: any[]) {

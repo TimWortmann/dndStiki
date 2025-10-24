@@ -9,9 +9,11 @@
         <input matInput [(ngModel)]="filterValue" (ngModelChange)="applyFilter($event)">
       </mat-form-field>
 
-      <mat-checkbox [(ngModel)]="filterVisibleColumnsOnly" (change)="onFilterToggle()">
-        Filter only visible text
-      </mat-checkbox>
+      <ng-container *ngIf="isFilterableOnlyVisible">
+        <mat-checkbox [(ngModel)]="filterVisibleColumnsOnly" (change)="onFilterToggle()">
+          Filter only visible text
+        </mat-checkbox>
+      </ng-container>
 
     </div>
   </ng-container>
