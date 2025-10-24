@@ -18,7 +18,7 @@
       <button mat-icon-button color="primary" (click)="changeNameState()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="primary" matTooltip="Download Character Sheet" (click)="openDownloadsDialog()">
+      <button mat-icon-button color="primary" (click)="openDownloadsDialog()">
         <mat-icon>download</mat-icon>
       </button>
     </ng-container>
@@ -294,11 +294,11 @@
           <div class="panel-container">
             <div class="panel" *ngFor="let skill of characterValue.skills">
               <div class="vertical-flex">
-                <button mat-icon-button color="primary" matTooltip="Remove Expertise" (click)="removeProficiency(skill)" *ngIf="skillChangeActive">
+                <button mat-icon-button color="primary" (click)="removeProficiency(skill)" *ngIf="skillChangeActive">
                   <mat-icon>remove_circle_outline</mat-icon>
                 </button>
                 <h3> {{skill.name}} </h3>
-                <button mat-icon-button color="primary" matTooltip="Add Expertise" (click)="addProficiency(skill)" *ngIf="skillChangeActive">
+                <button mat-icon-button color="primary" (click)="addProficiency(skill)" *ngIf="skillChangeActive">
                   <mat-icon>add_circle_outline</mat-icon>
                 </button>
               </div>
