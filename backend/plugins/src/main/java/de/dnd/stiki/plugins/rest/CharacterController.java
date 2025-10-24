@@ -115,4 +115,9 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> addItem(@PathVariable Long id, @RequestBody ItemDto item) {
         return ResponseEntity.ok().body(service.addItem(id, item));
     }
+
+    @PutMapping("/item/{characterId}/{itemName}/{quantity}")
+    public ResponseEntity<CharacterDto> changeItemQuantity(@PathVariable Long characterId, @PathVariable String itemName, @PathVariable Integer quantity) {
+        return ResponseEntity.ok().body(service.changeItemQuantity(characterId, itemName, quantity));
+    }
 }

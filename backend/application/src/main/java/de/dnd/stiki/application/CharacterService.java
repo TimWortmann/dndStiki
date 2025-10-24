@@ -386,12 +386,7 @@ public class CharacterService {
             characterEntity.setItems(new ArrayList<>());
         }
 
-        CharacterItemEntity itemInInventory = null;
-        for (CharacterItemEntity characterItem : characterEntity.getItems()) {
-            if (characterItem.getName().equals(item.getName())) {
-                itemInInventory = characterItem;
-            }
-        }
+        CharacterItemEntity itemInInventory = getCharacterItemByName(characterEntity.getItems(), item.getName());
 
         if (itemInInventory != null) {
             itemInInventory.setQuantity(itemInInventory.getQuantity() + 1);
@@ -401,6 +396,15 @@ public class CharacterService {
         }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private static CharacterItemEntity getCharacterItemByName(List<CharacterItemEntity> characterItems, String name) {
+        for (CharacterItemEntity characterItem : characterItems) {
+            if (characterItem.getName().equals(name)) {
+                return characterItem;
+            }
+        }
+        return null;
     }
 
     private CharacterItemEntity getCharacterItemFromItem(ItemEntity itemEntity) {
@@ -422,5 +426,21 @@ public class CharacterService {
         characterItem.setText(itemEntity.getText());
         characterItem.setQuantity(1);
         return characterItem;
+    }
+
+    public CharacterDto changeItemQuantity(Long characterId, String itemName, Integer quantity) {
+        CharacterEntity characterEntity = repository.get(characterId);
+
+        CharacterItemEntity characterItem = getCharacterItemByName(characterEntity.getItems(), itemName);
+
+        if (characterItem != null) {
+            if (quantity < 1) {
+                characterEntity.getItems().remove(characterItem);
+            } else {
+                characterItem.setQuantity(quantity);
+            }
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 }

@@ -20,6 +20,7 @@ import { ItemListPopupComponent } from '../item-list-popup/item-list-popup.compo
 import { ItemValue } from '../../../models/item-value';
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
 import { ItemService } from '../../../services/item/item.service';
+import { CharacterItemValue } from '../../../models/character-item-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -524,8 +525,10 @@ throw new Error('Method not implemented.');
     });
   }
 
-  removeItem(item : ItemValue) {
-  
+  changeItemQuantity(item : CharacterItemValue) {
+    this.characterService.changeItemQuantity(this.characterValue.id, item.name, item.quantity).subscribe((response) => {
+      this.setCharacter(response);
+    })
   }
 
   openItemDetailDialog(element: any): void {

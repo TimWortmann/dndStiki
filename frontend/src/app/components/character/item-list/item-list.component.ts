@@ -4,6 +4,8 @@ import { ItemValue } from '../../../models/item-value';
 import { TableColumnValue } from '../../../models/table-column-value';
 
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
+import { CharacterItemValue } from '../../../models/character-item-value';
+import { it } from 'node:test';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class ItemListComponent implements AfterViewInit {
   @ViewChild('equippedTemplate') equippedTemplate!: TemplateRef<any>;
   @ViewChild('addTemplate') addTemplate!: TemplateRef<any>;
 
-  @Input() data!: ItemValue[];
+  @Input() data!: ItemValue[] | CharacterItemValue[];
 
   @Input() isFilterableOnlyVisible: boolean = false;;
 
@@ -31,6 +33,7 @@ export class ItemListComponent implements AfterViewInit {
   @Input() addColumn: boolean = false;
 
   @Output() addItemEvent = new EventEmitter<ItemValue>();
+  @Output() changeItemQuantityEvent = new EventEmitter<CharacterItemValue>();
 
   tableColumns: TableColumnValue[] = [];
 
@@ -134,5 +137,10 @@ export class ItemListComponent implements AfterViewInit {
 
   addItem(item : ItemValue) {
     this.addItemEvent.emit(item);
+  }
+
+  changeItemQuantity(item : CharacterItemValue, delta : number) {
+    item.quantity += delta;
+    this.changeItemQuantityEvent.emit(item);
   }
 }

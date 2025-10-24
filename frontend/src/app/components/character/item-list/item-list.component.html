@@ -4,11 +4,11 @@
 
 <ng-template #quantityTemplate let-column="column" let-element="element">
     <div class="vertical-flex">
-        <button mat-icon-button color="primary">
+        <button mat-icon-button color="primary" (click)="changeItemQuantity(element, -1)">
             <mat-icon>remove_circle_outline</mat-icon>
         </button>
         <span>{{element[column.dataKey]}}</span>
-        <button mat-icon-button color="primary">
+        <button mat-icon-button color="primary" (click)="changeItemQuantity(element, +1)">
             <mat-icon>add_circle_outline</mat-icon>
         </button>
     </div>

@@ -92,4 +92,8 @@ export class CharacterService {
   addItem(id : number, item : ItemValue) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/item/" + id, item)
   }
+
+  changeItemQuantity(characterId : number, itemName : string, quantity : number) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/item/" + characterId + "/" + encodeURIComponent(itemName) + "/" + quantity, undefined)  
+  }
 }
