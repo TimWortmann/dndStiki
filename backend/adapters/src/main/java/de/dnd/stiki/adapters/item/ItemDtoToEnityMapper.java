@@ -1,6 +1,7 @@
 package de.dnd.stiki.adapters.item;
 
 import de.dnd.stiki.adapters.AbstractDtoToEntityMapper;
+import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class ItemDtoToEnityMapper extends AbstractDtoToEntityMapper<ItemDto, Ite
         ItemEntity entity = new ItemEntity();
         entity.setName(dto.getName());
         entity.setDetail(dto.getDetail());
-        entity.setType(dto.getType());
+        entity.setType(ItemType.fromName(dto.getType()));
         entity.setWeight(dto.getWeight());
         entity.setValue(dto.getValue());
         entity.setProperties(dto.getProperties());

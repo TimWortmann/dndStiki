@@ -353,9 +353,9 @@
       </button>
     </div>
     <mat-tab-group>
-      <mat-tab label="Currency">
+      <mat-tab label="Currencies">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items"></app-item-list>
+          <app-item-list [data]="characterValue.currencies"></app-item-list>
         </div>
       </mat-tab>
       <mat-tab label="Items">
@@ -366,19 +366,19 @@
       
       <mat-tab label="Weapons">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.weapons" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
         </div>
       </mat-tab>
       
       <mat-tab label="Armor">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.armor" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
         </div>
       </mat-tab>
 
       <mat-tab label="Shields">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [equippedColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.shields" [equippedColumn]="true"></app-item-list>
         </div>
       </mat-tab>
     </mat-tab-group>

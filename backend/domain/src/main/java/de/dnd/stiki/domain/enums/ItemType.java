@@ -8,26 +8,26 @@ public enum ItemType {
     STAFF("Staff", "ST"),
     ROD("Rod", "RD"),
     WAND("Wand", "WD"),
+    ARMOR("Armor", "A"),
+    LIGHT_ARMOR("Light Armor", "LA"),
+    MEDIUM_ARMOR("Medium Armor", "MA"),
+    HEAVY_ARMOR("Heavy Armor", "HA"),
     SHIELD("Shield", "S"),
     POISON("Poison", "P"),
     SCROLL("Scroll", "SC"),
-    ARMOR("Armor", "A"),
     GEAR("Gear", "G"),
-    RING("Ring", "RG"),
-    LIGHT_ARMOR("Light Armor", "LA"),
-    MEDIUM_ARMOR("Medium Armor", "MA"),
-    HEAVY_ARMOR("Heavy Armor", "HA");
+    RING("Ring", "RG");
 
-    private final String displayName;
+    private final String name;
     private final String shortName;
 
-    ItemType(String displayName, String shortName) {
-        this.displayName = displayName;
+    ItemType(String name, String shortName) {
+        this.name = name;
         this.shortName = shortName;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getName() {
+        return name;
     }
 
     public String getShortName() {
@@ -36,7 +36,7 @@ public enum ItemType {
 
     @Override
     public String toString() {
-        return displayName;
+        return name;
     }
 
     public static ItemType fromShortName(String shortName) {
@@ -46,5 +46,14 @@ public enum ItemType {
             }
         }
         throw new IllegalArgumentException("Unknown shortName: " + shortName);
+    }
+
+    public static ItemType fromName(String name) {
+        for (ItemType type : values()) {
+            if (type.getName().equalsIgnoreCase(name)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Unknown shortName: " + name);
     }
 }

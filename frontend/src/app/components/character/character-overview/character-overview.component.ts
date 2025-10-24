@@ -117,7 +117,6 @@ throw new Error('Method not implemented.');
     this.readCurrentClass();
     this.readCurrentBackground();
     this.cdr.detectChanges();
-    console.log("Items", this.characterValue.items)
   }
 
   readAllClasses() {

@@ -3,11 +3,19 @@ package de.dnd.stiki.adapters.character;
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
+import de.dnd.stiki.adapters.item.ItemDto;
 import de.dnd.stiki.adapters.item.ItemEntityToDtoMapper;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
+import de.dnd.stiki.domain.enums.ItemType;
+import de.dnd.stiki.domain.item.ItemEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static de.dnd.stiki.domain.enums.ItemType.*;
 
 @Component
 public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<CharacterEntity, CharacterDto> {
@@ -50,12 +58,51 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setProficiencyBonus(entity.getProficiencyBonus());
         dto.setAbilities(abilityEntityToDtoMapper.mapEntitiesToDtos(entity.getAbilities()));
         dto.setSkills(skillEntityToDtoMapper.mapEntitiesToDtos(entity.getSkills()));
-        dto.setItems(itemEntityToDtoMapper.mapEntitiesToDtos(entity.getItems()));
+
+        setInventory(dto, entity.getItems());
+
         dto.setClassFeatures(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getClassFeatures()));
         dto.setBackgroundTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getBackgroundTraits()));
         dto.setRaceTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getRaceTraits()));
         dto.setFeats(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getFeats()));
 
         return dto;
+    }
+
+    private void setInventory(CharacterDto dto, List<ItemEntity> itemEntities) {
+
+        dto.setCurrencies(new ArrayList<>());
+        dto.setItems(new ArrayList<>());
+        dto.setWeapons(new ArrayList<>());
+        dto.setArmor(new ArrayList<>());
+        dto.setShields(new ArrayList<>());
+
+        for (ItemEntity itemEntity : itemEntities) {
+            ItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
+
+            if (CURRENCY.equals(itemEntity.getType())) {
+                dto.getCurrencies().add(itemDto);
+                continue;
+            }
+
+            List<ItemType> weaponItems = List.of(WEAPON, MELEE_WEAPON, RANGED_WEAPON);
+            if (weaponItems.contains(itemEntity.getType())) {
+                dto.getWeapons().add(itemDto);
+                continue;
+            }
+
+            List<ItemType> armorItems = List.of(ARMOR, LIGHT_ARMOR, MEDIUM_ARMOR, HEAVY_ARMOR);
+            if (armorItems.contains(itemEntity.getType())) {
+                dto.getArmor().add(itemDto);
+                continue;
+            }
+
+            if (SHIELD.equals(itemEntity.getType())) {
+                dto.getShields().add(itemDto);
+                continue;
+            }
+
+            dto.getItems().add(itemDto);
+        }
     }
 }

@@ -49,7 +49,11 @@ public class CharacterDto {
 
     private List<CharacterSkillDto> skills;
 
+    private List<ItemDto> currencies;
     private List<ItemDto> items;
+    private List<ItemDto> weapons;
+    private List<ItemDto> armor;
+    private List<ItemDto> shields;
 
     private List<TraitDto> classFeatures;
     private List<TraitDto> backgroundTraits;
@@ -216,12 +220,44 @@ public class CharacterDto {
         this.skills = skills;
     }
 
+    public List<ItemDto> getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(List<ItemDto> currencies) {
+        this.currencies = currencies;
+    }
+
     public List<ItemDto> getItems() {
         return items;
     }
 
     public void setItems(List<ItemDto> items) {
         this.items = items;
+    }
+
+    public List<ItemDto> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<ItemDto> weapons) {
+        this.weapons = weapons;
+    }
+
+    public List<ItemDto> getArmor() {
+        return armor;
+    }
+
+    public void setArmor(List<ItemDto> armor) {
+        this.armor = armor;
+    }
+
+    public List<ItemDto> getShields() {
+        return shields;
+    }
+
+    public void setShields(List<ItemDto> shields) {
+        this.shields = shields;
     }
 
     public List<TraitDto> getClassFeatures() {

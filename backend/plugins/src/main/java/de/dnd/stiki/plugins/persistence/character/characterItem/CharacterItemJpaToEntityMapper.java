@@ -1,5 +1,6 @@
 package de.dnd.stiki.plugins.persistence.character.characterItem;
 
+import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,7 @@ public class CharacterItemJpaToEntityMapper extends AbstractJpaToEntityMapper<Ch
         ItemEntity entity = new ItemEntity();
         entity.setName(jpa.getName());
         entity.setDetail(jpa.getDetail());
-        entity.setType(jpa.getType());
+        entity.setType(ItemType.fromName(jpa.getType()));
         entity.setWeight(jpa.getWeight());
         entity.setValue(jpa.getValue());
         entity.setProperties(getListFromString(jpa.getProperties()));

@@ -27,7 +27,7 @@ public class ItemXmlService extends AbstractXmlService<ItemEntity, ItemRepositor
 
         String type = getTextByTagName(itemElement, "type");
         if (type != null) {
-            itemEntity.setType(ItemType.fromShortName(type).toString());
+            itemEntity.setType(ItemType.fromShortName(type));
         }
 
         String weight = getTextByTagName(itemElement, "weight");

@@ -1,5 +1,7 @@
 package de.dnd.stiki.domain.item;
 
+import de.dnd.stiki.domain.enums.ItemType;
+
 import java.util.List;
 
 public class ItemEntity {
@@ -8,7 +10,7 @@ public class ItemEntity {
 
     private String detail;
 
-    private String type;
+    private ItemType type;
 
     private Double weight;
 
@@ -50,11 +52,11 @@ public class ItemEntity {
         this.detail = detail;
     }
 
-    public String getType() {
+    public ItemType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ItemType type) {
         this.type = type;
     }
 

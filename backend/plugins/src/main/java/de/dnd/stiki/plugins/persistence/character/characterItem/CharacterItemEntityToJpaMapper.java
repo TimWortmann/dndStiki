@@ -12,7 +12,7 @@ public class CharacterItemEntityToJpaMapper extends AbstractEntityToJpaMapper<It
         CharacterItemJpa jpa = new CharacterItemJpa();
         jpa.setName(entity.getName());
         jpa.setDetail(entity.getDetail());
-        jpa.setType(entity.getType());
+        jpa.setType(entity.getType().getName());
         jpa.setWeight(entity.getWeight());
         jpa.setValue(entity.getValue());
         jpa.setProperties(getStringFromList(entity.getProperties()));

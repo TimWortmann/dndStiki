@@ -12,7 +12,7 @@ public class ItemEntityToDtoMapper extends AbstractEntityToDtoMapper<ItemEntity,
         ItemDto dto = new ItemDto();
         dto.setName(entity.getName());
         dto.setDetail(entity.getDetail());
-        dto.setType(entity.getType());
+        dto.setType(entity.getType().getName());
         dto.setWeight(entity.getWeight());
         dto.setValue(entity.getValue());
         dto.setProperties(entity.getProperties());
