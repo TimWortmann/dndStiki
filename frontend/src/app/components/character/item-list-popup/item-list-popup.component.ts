@@ -22,4 +22,8 @@ export class ItemListPopupComponent {
     this.dialogRef.close();
   }
 
+  addItem(item : ItemValue) {
+    this.dialogRef.close(item);;
+  }
+
 }

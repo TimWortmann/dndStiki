@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemValue } from '../../../models/item-value';
 import { TableColumnValue } from '../../../models/table-column-value';
@@ -29,6 +29,8 @@ export class ItemListComponent implements AfterViewInit {
   @Input() quantityColumn: boolean = false;
   @Input() equippedColumn: boolean = false;
   @Input() addColumn: boolean = false;
+
+  @Output() addItemEvent = new EventEmitter<ItemValue>();
 
   tableColumns: TableColumnValue[] = [];
 
@@ -128,5 +130,9 @@ export class ItemListComponent implements AfterViewInit {
       maxHeight: '60vh',  
       autoFocus: false,
     });
+  }
+
+  addItem(item : ItemValue) {
+    this.addItemEvent.emit(item);
   }
 }

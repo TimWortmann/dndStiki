@@ -27,13 +27,13 @@
 </ng-template>
 
 <ng-template #addTemplate let-column="column" let-element="element">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="addItem(element)">
         <mat-icon>add_circle_outline</mat-icon>
     </button>
 </ng-template>
 
 <div>
-    <div *ngIf="data && data.length > 0">
+    <div>
         <custom-table
             [tableData]="data"
             [tableColumns]="tableColumns"
