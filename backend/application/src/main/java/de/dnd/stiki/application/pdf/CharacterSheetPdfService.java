@@ -5,10 +5,7 @@ import com.itextpdf.forms.fields.PdfFormField;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import de.dnd.stiki.domain.character.CharacterAbilityEntity;
-import de.dnd.stiki.domain.character.CharacterEntity;
-import de.dnd.stiki.domain.character.CharacterRepository;
-import de.dnd.stiki.domain.character.CharacterSkillEntity;
+import de.dnd.stiki.domain.character.*;
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.reader.SubclassReader;
@@ -120,6 +117,43 @@ public class CharacterSheetPdfService {
         setSkillFieldValues(fieldValues, character, SURVIVAL, 40);
 
         setFeatureFieldValues(fieldValues, character);
+
+        StringBuilder equipmentBuilder = new StringBuilder();
+        for (CharacterItemEntity item : character.getItems()) {
+
+            if (item.getName().contains("(CP)")) {
+                fieldValues.put("CP", String.valueOf(item.getQuantity()));
+                continue;
+            }
+            if (item.getName().contains("(SP)")) {
+                fieldValues.put("SP", String.valueOf(item.getQuantity()));
+                continue;
+            }
+            if (item.getName().contains("(EP)")) {
+                fieldValues.put("EP", String.valueOf(item.getQuantity()));
+                continue;
+            }
+            if (item.getName().contains("(GP)")) {
+                fieldValues.put("GP", String.valueOf(item.getQuantity()));
+                continue;
+            }
+            if (item.getName().contains("(PP)")) {
+                fieldValues.put("PP", String.valueOf(item.getQuantity()));
+                continue;
+            }
+
+            equipmentBuilder.append("- ");
+            equipmentBuilder.append(item.getName());
+
+            if (item.getQuantity() > 1) {
+                equipmentBuilder.append(" (");
+                equipmentBuilder.append(item.getQuantity());
+                equipmentBuilder.append(")");
+            }
+            equipmentBuilder.append("\n");
+        }
+
+        fieldValues.put("Equipment", equipmentBuilder.toString());
 
         return fieldValues;
     }

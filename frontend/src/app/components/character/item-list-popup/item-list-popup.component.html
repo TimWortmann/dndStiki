@@ -2,7 +2,7 @@
     <h1 mat-dialog-title> Add Item </h1>
     
     <div *ngIf="data && data.length > 0">
-        <app-item-list [isFilterableOnlyVisible]="true" [data]="data" [propertiesColumn]="true" [addColumn]="true" (addItemEvent)="addItem($event)"></app-item-list>
+        <app-item-list [isFilterableOnlyVisible]="true" [data]="data" [typeColumn]="true" [propertiesColumn]="true" [addColumn]="true" (addItemEvent)="addItem($event)"></app-item-list>
     </div> 
 </div>
 
