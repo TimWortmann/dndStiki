@@ -2,7 +2,6 @@ package de.dnd.stiki.domain.character;
 
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
-import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class CharacterEntity {
     private List<CharacterAbilityEntity> abilities;
     private List<CharacterSkillEntity> skills;
 
-    private List<ItemEntity> items;
+    private List<CharacterItemEntity> items;
 
     private List<TraitEntity> classFeatures;
     private List<TraitEntity> backgroundTraits;
@@ -248,11 +247,11 @@ public class CharacterEntity {
         this.skills = skills;
     }
 
-    public List<ItemEntity> getItems() {
+    public List<CharacterItemEntity> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemEntity> items) {
+    public void setItems(List<CharacterItemEntity> items) {
         this.items = items;
     }
 

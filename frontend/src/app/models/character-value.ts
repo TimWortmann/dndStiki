@@ -1,6 +1,6 @@
 import { CharacterAbilityValue } from "./character-ability-value";
+import { CharacterItemValue } from "./character-item-value";
 import { CharacterSkillValue } from "./character-skill-value";
-import { ItemValue } from "./item-value";
 import { TraitValue } from "./trait-value";
 
 export interface CharacterValue {
@@ -24,11 +24,11 @@ export interface CharacterValue {
     proficiencyBonus: number;
     abilities: CharacterAbilityValue[];
     skills: CharacterSkillValue[];
-    currencies: ItemValue[];
-    items: ItemValue[];
-    weapons: ItemValue[];
-    armor: ItemValue[];
-    shields: ItemValue[];
+    currencies: CharacterItemValue[];
+    items: CharacterItemValue[];
+    weapons: CharacterItemValue[];
+    armor: CharacterItemValue[];
+    shields: CharacterItemValue[];
     classFeatures: TraitValue[];
     backgroundTraits: TraitValue[];
     raceTraits: TraitValue[];

@@ -1,8 +1,8 @@
 package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
-import de.dnd.stiki.adapters.item.ItemDto;
 import de.dnd.stiki.adapters.trait.TraitDto;
 
 import java.util.List;
@@ -49,11 +49,11 @@ public class CharacterDto {
 
     private List<CharacterSkillDto> skills;
 
-    private List<ItemDto> currencies;
-    private List<ItemDto> items;
-    private List<ItemDto> weapons;
-    private List<ItemDto> armor;
-    private List<ItemDto> shields;
+    private List<CharacterItemDto> currencies;
+    private List<CharacterItemDto> items;
+    private List<CharacterItemDto> weapons;
+    private List<CharacterItemDto> armor;
+    private List<CharacterItemDto> shields;
 
     private List<TraitDto> classFeatures;
     private List<TraitDto> backgroundTraits;
@@ -220,43 +220,43 @@ public class CharacterDto {
         this.skills = skills;
     }
 
-    public List<ItemDto> getCurrencies() {
+    public List<CharacterItemDto> getCurrencies() {
         return currencies;
     }
 
-    public void setCurrencies(List<ItemDto> currencies) {
+    public void setCurrencies(List<CharacterItemDto> currencies) {
         this.currencies = currencies;
     }
 
-    public List<ItemDto> getItems() {
+    public List<CharacterItemDto> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemDto> items) {
+    public void setItems(List<CharacterItemDto> items) {
         this.items = items;
     }
 
-    public List<ItemDto> getWeapons() {
+    public List<CharacterItemDto> getWeapons() {
         return weapons;
     }
 
-    public void setWeapons(List<ItemDto> weapons) {
+    public void setWeapons(List<CharacterItemDto> weapons) {
         this.weapons = weapons;
     }
 
-    public List<ItemDto> getArmor() {
+    public List<CharacterItemDto> getArmor() {
         return armor;
     }
 
-    public void setArmor(List<ItemDto> armor) {
+    public void setArmor(List<CharacterItemDto> armor) {
         this.armor = armor;
     }
 
-    public List<ItemDto> getShields() {
+    public List<CharacterItemDto> getShields() {
         return shields;
     }
 
-    public void setShields(List<ItemDto> shields) {
+    public void setShields(List<CharacterItemDto> shields) {
         this.shields = shields;
     }
 

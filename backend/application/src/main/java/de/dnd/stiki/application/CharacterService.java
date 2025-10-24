@@ -13,10 +13,7 @@ import de.dnd.stiki.adapters.item.ItemDto;
 import de.dnd.stiki.adapters.item.ItemDtoToEnityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
-import de.dnd.stiki.domain.character.CharacterAbilityEntity;
-import de.dnd.stiki.domain.character.CharacterEntity;
-import de.dnd.stiki.domain.character.CharacterRepository;
-import de.dnd.stiki.domain.character.CharacterSkillEntity;
+import de.dnd.stiki.domain.character.*;
 import de.dnd.stiki.domain.dndClass.DndClassEntity;
 import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
@@ -383,13 +380,47 @@ public class CharacterService {
     public CharacterDto addItem(Long id, ItemDto itemDto) {
         CharacterEntity characterEntity = repository.get(id);
 
-        ItemEntity itemEntity = itemDtoToEnityMapper.mapDtoToEntity(itemDto);
+        ItemEntity item = itemDtoToEnityMapper.mapDtoToEntity(itemDto);
 
         if (characterEntity.getItems() == null) {
             characterEntity.setItems(new ArrayList<>());
         }
-        characterEntity.getItems().add(itemEntity);
+
+        CharacterItemEntity itemInInventory = null;
+        for (CharacterItemEntity characterItem : characterEntity.getItems()) {
+            if (characterItem.getName().equals(item.getName())) {
+                itemInInventory = characterItem;
+            }
+        }
+
+        if (itemInInventory != null) {
+            itemInInventory.setQuantity(itemInInventory.getQuantity() + 1);
+        }
+        else {
+            characterEntity.getItems().add(getCharacterItemFromItem(item));
+        }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private CharacterItemEntity getCharacterItemFromItem(ItemEntity itemEntity) {
+        CharacterItemEntity characterItem = new CharacterItemEntity();
+        characterItem.setName(itemEntity.getName());
+        characterItem.setDetail(itemEntity.getDetail());
+        characterItem.setType(itemEntity.getType());
+        characterItem.setWeight(itemEntity.getWeight());
+        characterItem.setValue(itemEntity.getValue());
+        characterItem.setProperties(itemEntity.getProperties());
+        characterItem.setDmg1(itemEntity.getDmg1());
+        characterItem.setDmg2(itemEntity.getDmg2());
+        characterItem.setDmgType(itemEntity.getDmgType());
+        characterItem.setRange(itemEntity.getRange());
+        characterItem.setAc(characterItem.getAc());
+        characterItem.setStealth(characterItem.getStealth());
+        characterItem.setMagic(characterItem.getMagic());
+        characterItem.setStrength(characterItem.getStrength());
+        characterItem.setText(itemEntity.getText());
+        characterItem.setQuantity(1);
+        return characterItem;
     }
 }

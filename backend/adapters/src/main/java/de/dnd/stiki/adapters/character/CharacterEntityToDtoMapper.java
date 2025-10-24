@@ -2,14 +2,14 @@ package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
-import de.dnd.stiki.adapters.item.ItemDto;
-import de.dnd.stiki.adapters.item.ItemEntityToDtoMapper;
 import de.dnd.stiki.adapters.trait.TraitDto;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
+import de.dnd.stiki.domain.character.CharacterItemEntity;
 import de.dnd.stiki.domain.enums.ItemType;
-import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.reader.SubclassReader;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     private CharacterSkillEntityToDtoMapper skillEntityToDtoMapper;
 
     @Autowired
-    private ItemEntityToDtoMapper itemEntityToDtoMapper;
+    private CharacterItemEntityToDtoMapper itemEntityToDtoMapper;
 
     @Autowired
     private TraitEntityToDtoMapper traitEntityToDtoMapper;
@@ -75,7 +75,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         return dto;
     }
 
-    private void setInventory(CharacterDto dto, List<ItemEntity> itemEntities) {
+    private void setInventory(CharacterDto dto, List<CharacterItemEntity> itemEntities) {
 
         dto.setCurrencies(new ArrayList<>());
         dto.setItems(new ArrayList<>());
@@ -83,8 +83,8 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setArmor(new ArrayList<>());
         dto.setShields(new ArrayList<>());
 
-        for (ItemEntity itemEntity : itemEntities) {
-            ItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
+        for (CharacterItemEntity itemEntity : itemEntities) {
+            CharacterItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
 
             if (CURRENCY.equals(itemEntity.getType())) {
                 dto.getCurrencies().add(itemDto);

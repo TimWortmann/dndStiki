@@ -61,6 +61,9 @@ public class CharacterItemJpa {
     @Column(name = "TEXT")
     private String text;
 
+    @Column(name = "QUANTITY")
+    private int quantity;
+
     public Long getId() {
         return id;
     }
@@ -195,5 +198,13 @@ public class CharacterItemJpa {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

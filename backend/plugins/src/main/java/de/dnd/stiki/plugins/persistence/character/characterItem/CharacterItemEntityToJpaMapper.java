@@ -1,14 +1,14 @@
 package de.dnd.stiki.plugins.persistence.character.characterItem;
 
-import de.dnd.stiki.domain.item.ItemEntity;
+import de.dnd.stiki.domain.character.CharacterItemEntity;
 import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CharacterItemEntityToJpaMapper extends AbstractEntityToJpaMapper<ItemEntity, CharacterItemJpa> {
+public class CharacterItemEntityToJpaMapper extends AbstractEntityToJpaMapper<CharacterItemEntity, CharacterItemJpa> {
 
     @Override
-    public CharacterItemJpa mapEntityToJpa(ItemEntity entity) {
+    public CharacterItemJpa mapEntityToJpa(CharacterItemEntity entity) {
         CharacterItemJpa jpa = new CharacterItemJpa();
         jpa.setName(entity.getName());
         jpa.setDetail(entity.getDetail());
@@ -25,6 +25,7 @@ public class CharacterItemEntityToJpaMapper extends AbstractEntityToJpaMapper<It
         jpa.setMagic(entity.getMagic());
         jpa.setStrength(entity.getStrength());
         jpa.setText(entity.getText());
+        jpa.setQuantity(entity.getQuantity());
         return jpa;
     }
 }
