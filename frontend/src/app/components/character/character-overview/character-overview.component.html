@@ -391,7 +391,7 @@
           <p></p>
           <mat-accordion>
             <ng-container *ngFor="let feature of characterValue.classFeatures">
-              <ng-container *ngIf="isFeatureVisible(feature.name)">
+              <ng-container>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
                     <mat-panel-title> {{feature.name}} </mat-panel-title>

@@ -5,10 +5,13 @@ import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityTo
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
 import de.dnd.stiki.adapters.item.ItemDto;
 import de.dnd.stiki.adapters.item.ItemEntityToDtoMapper;
+import de.dnd.stiki.adapters.trait.TraitDto;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.item.ItemEntity;
+import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +34,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
     @Autowired
     private TraitEntityToDtoMapper traitEntityToDtoMapper;
+
+    @Autowired
+    private SubclassReader subclassReader;
 
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
@@ -61,7 +67,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
         setInventory(dto, entity.getItems());
 
-        dto.setClassFeatures(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getClassFeatures()));
+        dto.setClassFeatures(getRelevantClassFeatures(entity));
         dto.setBackgroundTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getBackgroundTraits()));
         dto.setRaceTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getRaceTraits()));
         dto.setFeats(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getFeats()));
@@ -104,5 +110,12 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
             dto.getItems().add(itemDto);
         }
+    }
+
+    private List<TraitDto> getRelevantClassFeatures(CharacterEntity entity) {
+
+        List<TraitEntity> relevantClassFeatures = subclassReader.getRelevantClassFeatures(entity, true);
+
+        return traitEntityToDtoMapper.mapEntitiesToDtos(relevantClassFeatures);
     }
 }

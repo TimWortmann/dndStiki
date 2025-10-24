@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DndClassService } from '../../../services/dnd-class/dnd-class.service';
-import { response } from 'express';
 import { DndClassValue } from '../../../models/dnd-class-value';
 import { BackgroundService } from '../../../services/background/background.service';
 import { BackgroundValue } from '../../../models/background-value';
@@ -16,7 +15,6 @@ import { PointBuyPopupComponent } from '../point-buy-popup/point-buy-popup.compo
 import { FeatListPopupComponent } from '../feat-list-popup/feat-list-popup.component';
 import { FeatValue } from '../../../models/feat-value';
 import { TraitValue } from '../../../models/trait-value';
-import { PdfService } from '../../../services/pdf/pdf.service';
 import { DownloadsPopupComponent } from '../downloads-popup/downloads-popup.component';
 import { ItemListPopupComponent } from '../item-list-popup/item-list-popup.component';
 import { ItemValue } from '../../../models/item-value';
@@ -216,40 +214,6 @@ throw new Error('Method not implemented.');
 
     return savingThrowModifier > 0 ? `+${savingThrowModifier}` : `${savingThrowModifier}`;
   } 
-
-  isFeatureVisible(featureName: string): boolean {
-    const levelMatch = featureName.match(/Level (\d+)/);
-    if (levelMatch) {
-      const levelNumber = parseInt(levelMatch[1], 10);
-      if (levelNumber > this.characterValue.level) {
-        return false;
-      }
-    }
-
-    // Hide subclass-related features before level 3
-    if (this.characterValue.level < 3 && this.featuresIncludesSubclassPrefix(featureName)) {
-      return false;
-    }
-
-    // Only filter by subclass if one is selected and level >= 3
-    if (this.characterValue.level >= 3 && this.characterValue.dndSubclass && this.characterValue.dndSubclass !== "No Subclass") {
-      for (const subclass of this.characterValue.dndSubclasses) {
-        if (featureName.toLowerCase().includes(subclass.toLowerCase()) && subclass.toLowerCase() !== this.characterValue.dndSubclass.toLowerCase()) {
-          // Feature belongs to a different subclass → hide it
-          return false;
-        }
-      }
-    }
-
-    return true; // visible by default
-  }
-
-  featuresIncludesSubclassPrefix(featureName : string) : boolean {
-    return featureName.toLowerCase().includes("subclass") 
-      || featureName.toLowerCase().includes("archetype") 
-      || featureName.toLowerCase().includes("college")
-      || featureName.toLowerCase().includes("patron") 
-  }
 
   sortSkills(): CharacterSkillValue[] {
     return this.characterValue.skills.sort((a, b) => a.name.localeCompare(b.name));
