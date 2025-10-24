@@ -348,37 +348,37 @@
   <div class="subsection">
     <div class="vertical-flex">
       <h2>Inventory</h2>
-      <button mat-icon-button (click)="openItemDialog()">
+      <button mat-icon-button (click)="addItem()">
         <mat-icon>add_circle_outline</mat-icon>
       </button>
     </div>
     <mat-tab-group>
       <mat-tab label="Currencies">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.currencies"></app-item-list>
+          <app-item-list [data]="characterValue.currencies" [quantityColumn]="true"></app-item-list>
         </div>
       </mat-tab>
       <mat-tab label="Items">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [typeColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.items" [typeColumn]="true" [quantityColumn]="true"></app-item-list>
         </div>
       </mat-tab>
       
       <mat-tab label="Weapons">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.weapons" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.weapons" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true" [propertiesColumn]="true"></app-item-list>
         </div>
       </mat-tab>
       
       <mat-tab label="Armor">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.armor" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.armor" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true"></app-item-list>
         </div>
       </mat-tab>
 
       <mat-tab label="Shields">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.shields" [equippedColumn]="true"></app-item-list>
+          <app-item-list [data]="characterValue.shields" [quantityColumn]="true" [equippedColumn]="true"></app-item-list>
         </div>
       </mat-tab>
     </mat-tab-group>

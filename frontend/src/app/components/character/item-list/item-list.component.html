@@ -26,12 +26,19 @@
     </button>
 </ng-template>
 
+<ng-template #addTemplate let-column="column" let-element="element">
+    <button mat-icon-button>
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+</ng-template>
+
 <div>
     <div *ngIf="data && data.length > 0">
         <custom-table
             [tableData]="data"
             [tableColumns]="tableColumns"
             [isFilterable]="true"
+            [isFilterableOnlyVisible]="isFilterableOnlyVisible"
             [isPageable]="true">
         </custom-table>
     </div> 

@@ -21,6 +21,7 @@ import { DownloadsPopupComponent } from '../downloads-popup/downloads-popup.comp
 import { ItemListPopupComponent } from '../item-list-popup/item-list-popup.component';
 import { ItemValue } from '../../../models/item-value';
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
+import { ItemService } from '../../../services/item/item.service';
 
 @Component({
   selector: 'app-character-overview',
@@ -58,10 +59,13 @@ throw new Error('Method not implemented.');
 
   skillChangeActive : boolean = false;
 
+  allItems? : ItemValue[];
+
   constructor(
     private dndClassService: DndClassService, 
     private backgroundService: BackgroundService,
     private raceService: RaceService,
+    private itemService: ItemService,
     private route: ActivatedRoute,
     private characterService : CharacterService,
     private dialog: MatDialog,
@@ -527,8 +531,20 @@ throw new Error('Method not implemented.');
     });
   }
 
-  openItemDialog() {
+  addItem() {
+    if (this.allItems) {
+      this.openItemListDialog();
+    } else {
+      this.itemService.getAllItems().subscribe((response) => {
+        this.allItems = response;
+        this.openItemListDialog();
+      })
+    }
+  }
+
+  openItemListDialog() {
     const dialogRef = this.dialog.open(ItemListPopupComponent, {
+      data: this.allItems,
       width: '1300px',        
       maxWidth: '1300px',  
       maxHeight: '650px',  
@@ -556,9 +572,5 @@ throw new Error('Method not implemented.');
       maxHeight: '60vh',  
       autoFocus: false,
     });
-  }
-
-  isEquipment(itemType : string) {
-    
   }
 }

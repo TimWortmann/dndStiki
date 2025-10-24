@@ -18,10 +18,17 @@ export class ItemListComponent implements AfterViewInit {
   @ViewChild('quantityTemplate') quantityTemplate!: TemplateRef<any>;
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
   @ViewChild('equippedTemplate') equippedTemplate!: TemplateRef<any>;
+  @ViewChild('addTemplate') addTemplate!: TemplateRef<any>;
 
   @Input() data!: ItemValue[];
-  @Input() typeColumn?: boolean;
-  @Input() equippedColumn?: boolean;
+
+  @Input() isFilterableOnlyVisible: boolean = false;;
+
+  @Input() typeColumn: boolean = false;
+  @Input() propertiesColumn: boolean = false;
+  @Input() quantityColumn: boolean = false;
+  @Input() equippedColumn: boolean = false;
+  @Input() addColumn: boolean = false;
 
   tableColumns: TableColumnValue[] = [];
 
@@ -46,7 +53,7 @@ export class ItemListComponent implements AfterViewInit {
       },
     ];
 
-    if (this.typeColumn === true) {
+    if (this.typeColumn) {
       this.tableColumns.push(
         {
           name: 'Type',
@@ -56,14 +63,29 @@ export class ItemListComponent implements AfterViewInit {
         })   
     }
 
+    if (this.propertiesColumn) {
+      this.tableColumns.push(
+        {
+          name: 'Properties',
+          dataKey: 'properties',
+          position: 'left',
+          isSortable: true,
+          template: this.propertiesTemplate
+        })    
+    }
+
+    if (this.quantityColumn) {
+      this.tableColumns.push(
+        {
+          name: 'Quantity',
+          dataKey: 'quantity',
+          position: 'left',
+          isSortable: true,
+          template: this.quantityTemplate,
+        })  
+    }
+
     this.tableColumns.push(
-      {
-        name: 'Quantity',
-        dataKey: 'quantity',
-        position: 'left',
-        isSortable: true,
-        template: this.quantityTemplate,
-      },
       {
         name: 'Details',
         dataKey: 'details',
@@ -73,7 +95,7 @@ export class ItemListComponent implements AfterViewInit {
       }
     )
 
-    if (this.equippedColumn === true) {
+    if (this.equippedColumn) {
       this.tableColumns.push(
         {
           name: 'Equipped',
@@ -81,6 +103,17 @@ export class ItemListComponent implements AfterViewInit {
           position: 'left',
           isSortable: true,
           template: this.equippedTemplate,
+        })
+    }
+    
+    if (this.addColumn) {
+      this.tableColumns.push(
+        {
+          name: 'Actions',
+          dataKey: 'actions',
+          position: 'left',
+          isSortable: true,
+          template: this.addTemplate,
         })
     }
 
