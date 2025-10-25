@@ -467,7 +467,7 @@ throw new Error('Method not implemented.');
           width: '1300px',        
           maxWidth: '1300px',  
           maxHeight: '650px',  
-          autoFocus: false,
+          autoFocus: true,
     });
 
     dialogRef.afterClosed().subscribe((result: FeatValue | undefined) => {
@@ -513,7 +513,7 @@ throw new Error('Method not implemented.');
       width: '1300px',        
       maxWidth: '1300px',  
       maxHeight: '650px',  
-      autoFocus: false,
+      autoFocus: true,
     });
 
     dialogRef.afterClosed().subscribe((result: ItemValue | undefined) => {

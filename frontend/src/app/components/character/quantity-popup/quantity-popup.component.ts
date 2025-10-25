@@ -30,7 +30,9 @@ export class QuantityPopupComponent {
   }
 
   save(): void {
-    this.dialogRef.close(this.item);
+    if (!this.isSavingDisabled()) {
+      this.dialogRef.close(this.item);
+    }
   }
 
 }

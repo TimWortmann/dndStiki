@@ -88,8 +88,10 @@ public class CharacterRepositoryImpl implements CharacterRepository {
             skillJpa.setCharacter(jpa);
         }
 
-        for (CharacterItemJpa itemJpa : jpa.getItems()) {
-            itemJpa.setCharacter(jpa);
+        if (jpa.getItems() != null) {
+            for (CharacterItemJpa itemJpa : jpa.getItems()) {
+                itemJpa.setCharacter(jpa);
+            }
         }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));

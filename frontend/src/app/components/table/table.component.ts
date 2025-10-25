@@ -14,7 +14,7 @@ export class TableComponent implements AfterViewInit {
 
   public tableDataSource = new MatTableDataSource<any>([]);
   public displayedColumns: string[] = [];
-  public filterVisibleColumnsOnly = false;
+  public filterVisibleColumnsOnly = true;
   public filterValue = '';
   paginationSizes!: number[];
   defaultPageSize!: number;

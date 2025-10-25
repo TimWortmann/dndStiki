@@ -205,7 +205,7 @@ public class CharacterService {
 
         int healthIncreasePerLevel = fixedHitpoints + characterEntity.getAbility(CONSTITUTION).getModifier();
 
-        return getBeginnerHealth(characterEntity) + (characterEntity.getLevel() * healthIncreasePerLevel);
+        return getBeginnerHealth(characterEntity) + ((characterEntity.getLevel()-1) * healthIncreasePerLevel);
     }
 
     private Integer getProficiencyBonus(Integer level) {
@@ -271,6 +271,11 @@ public class CharacterService {
     }
 
     private void setMaxHealth(CharacterEntity characterEntity, Integer maxHealth) {
+
+        if (characterEntity.getCurrentHealth() != null && characterEntity.getCurrentHealth().equals(characterEntity.getMaxHealth())) {
+            characterEntity.setCurrentHealth(maxHealth);
+        }
+
         characterEntity.setMaxHealth(maxHealth);
 
         if (characterEntity.getCurrentHealth() == null || characterEntity.getCurrentHealth() > characterEntity.getMaxHealth()) {
@@ -291,6 +296,10 @@ public class CharacterService {
     }
 
     private void setMaxHitDice(CharacterEntity characterEntity, Integer maxHitDice) {
+        if (characterEntity.getCurrentHitDice() != null && characterEntity.getCurrentHitDice().equals(characterEntity.getMaxHitDice())) {
+            characterEntity.setCurrentHitDice(maxHitDice);
+        }
+
         characterEntity.setMaxHitDice(maxHitDice);
 
         if (characterEntity.getCurrentHitDice() == null || characterEntity.getCurrentHitDice() > characterEntity.getMaxHitDice()) {

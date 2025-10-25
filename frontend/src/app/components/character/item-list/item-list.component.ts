@@ -165,7 +165,7 @@ export class ItemListComponent implements AfterViewInit {
       height: '225px',     
       maxWidth: '750px',  
       maxHeight: '225px',   
-      autoFocus: false,
+      autoFocus: true,
     });
 
     dialogRef.afterClosed().subscribe((result: CharacterItemValue | undefined) => {

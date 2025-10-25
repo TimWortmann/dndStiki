@@ -4,7 +4,7 @@
     <p></p>
 
     <mat-form-field appearance="outline" style="width: 100%;">
-        <input matInput placeholder="Enter quantity" [(ngModel)]="item.quantity" type="number">
+        <input matInput placeholder="Enter quantity" [(ngModel)]="item.quantity" type="number" (keydown.enter)="save();">
     </mat-form-field>
 </div>
 
