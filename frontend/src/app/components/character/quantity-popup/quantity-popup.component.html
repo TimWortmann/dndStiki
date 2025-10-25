@@ -1,0 +1,15 @@
+<div class="dialog-content">
+    <h1 mat-dialog-title>Change Quantity ({{item.name}})</h1>
+
+    <p></p>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+        <input matInput placeholder="Enter quantity" [(ngModel)]="item.quantity" type="number">
+    </mat-form-field>
+</div>
+
+<button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+</button>
+
+<button mat-flat-button color="primary" class="save-button" (click)="save()" [disabled]="isSavingDisabled()">Save</button>

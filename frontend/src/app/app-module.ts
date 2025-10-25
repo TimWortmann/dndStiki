@@ -1,4 +1,4 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { LOCALE_ID, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
@@ -49,6 +49,11 @@ import { FeatListPopupComponent } from './components/character/feat-list-popup/f
 import { DownloadsPopupComponent } from './components/character/downloads-popup/downloads-popup.component';
 import { ItemListPopupComponent } from './components/character/item-list-popup/item-list-popup.component';
 import { ItemListComponent } from './components/character/item-list/item-list.component';
+import { QuantityPopupComponent } from './components/character/quantity-popup/quantity-popup.component';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -76,6 +81,7 @@ import { ItemListComponent } from './components/character/item-list/item-list.co
     DownloadsPopupComponent,
     ItemListPopupComponent,
     ItemListComponent,
+    QuantityPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,12 +104,13 @@ import { ItemListComponent } from './components/character/item-list/item-list.co
     MatProgressBarModule,
     MatTooltipModule,
     MatListModule,
-    NgxMatSelectSearchModule,   
+    NgxMatSelectSearchModule,  
 ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([loadingInterceptor])),
+     { provide: LOCALE_ID, useValue: 'de-DE' },
   ],
   bootstrap: [App]
 })

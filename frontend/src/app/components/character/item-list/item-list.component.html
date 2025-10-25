@@ -7,7 +7,7 @@
         <button mat-icon-button color="primary" (click)="changeItemQuantity(element, -1)">
             <mat-icon>remove_circle_outline</mat-icon>
         </button>
-        <span>{{element[column.dataKey]}}</span>
+        <span>{{ element[column.dataKey] | number:'1.0-0':'de-DE' }}</span>
         <button mat-icon-button color="primary" (click)="changeItemQuantity(element, +1)">
             <mat-icon>add_circle_outline</mat-icon>
         </button>
@@ -16,17 +16,10 @@
 
 <ng-template #bigQuantityTemplate let-column="column" let-element="element">
     <div class="button-flex">
-        <div class="edit-buttons">
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -100)"> - 100 </button>
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -10)"> - 10 </button>
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, -1)"> - 1 </button>
-        </div>
-        <span>{{element[column.dataKey]}}</span>
-        <div class="edit-buttons">
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +1)"> + 1 </button>
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +10)"> + 10 </button>
-            <button mat-flat-button color="primary" (click)="changeItemQuantity(element, +100)"> + 100 </button>
-        </div>
+        <span>{{ element[column.dataKey] | number:'1.0-0':'de-DE' }}</span>
+        <button mat-icon-button color="primary" (click)="openQuantityDialog(element)">
+            <mat-icon>edit</mat-icon>
+        </button>
     </div>
 </ng-template>
 

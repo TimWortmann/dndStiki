@@ -6,6 +6,7 @@ import { TableColumnValue } from '../../../models/table-column-value';
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
 import { CharacterItemValue } from '../../../models/character-item-value';
 import { it } from 'node:test';
+import { QuantityPopupComponent } from '../quantity-popup/quantity-popup.component';
 
 
 @Component({
@@ -139,7 +140,7 @@ export class ItemListComponent implements AfterViewInit {
   }
 
   openDetailDialog(element: any): void {
-    const dialogRef = this.dialog.open(ItemDetailsPopupComponent, {
+    this.dialog.open(ItemDetailsPopupComponent, {
       data: element,
       width: '60vw',          
       maxWidth: '60vw',  
@@ -155,5 +156,23 @@ export class ItemListComponent implements AfterViewInit {
   changeItemQuantity(item : CharacterItemValue, delta : number) {
     item.quantity += delta;
     this.changeItemQuantityEvent.emit(item);
+  }
+
+  openQuantityDialog(item : CharacterItemValue): void {
+    const dialogRef = this.dialog.open(QuantityPopupComponent, {
+      data: item, 
+      minWidth: '750px',    
+      height: '225px',     
+      maxWidth: '750px',  
+      maxHeight: '225px',   
+      autoFocus: false,
+    });
+
+    dialogRef.afterClosed().subscribe((result: CharacterItemValue | undefined) => {
+      if (result) {
+        item = result;
+        this.changeItemQuantityEvent.emit(item); 
+      }
+    });
   }
 }
