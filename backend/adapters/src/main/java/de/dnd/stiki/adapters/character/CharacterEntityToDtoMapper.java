@@ -77,11 +77,8 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
     private void setInventory(CharacterDto dto, List<CharacterItemEntity> itemEntities) {
 
-        dto.setCurrencies(new ArrayList<>());
         dto.setItems(new ArrayList<>());
-        dto.setWeapons(new ArrayList<>());
-        dto.setArmor(new ArrayList<>());
-        dto.setShields(new ArrayList<>());
+        dto.setEquipment(new ArrayList<>());
 
         if (itemEntities == null) {
             return;
@@ -90,25 +87,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         for (CharacterItemEntity itemEntity : itemEntities) {
             CharacterItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
 
-            if (CURRENCY.equals(itemEntity.getType())) {
-                dto.getCurrencies().add(itemDto);
-                continue;
-            }
-
-            List<ItemType> weaponItems = List.of(WEAPON, MELEE_WEAPON, RANGED_WEAPON);
-            if (weaponItems.contains(itemEntity.getType())) {
-                dto.getWeapons().add(itemDto);
-                continue;
-            }
-
-            List<ItemType> armorItems = List.of(ARMOR, LIGHT_ARMOR, MEDIUM_ARMOR, HEAVY_ARMOR);
-            if (armorItems.contains(itemEntity.getType())) {
-                dto.getArmor().add(itemDto);
-                continue;
-            }
-
-            if (SHIELD.equals(itemEntity.getType())) {
-                dto.getShields().add(itemDto);
+            List<ItemType> equipmentItems = List.of(WEAPON, MELEE_WEAPON, RANGED_WEAPON, ARMOR, LIGHT_ARMOR, MEDIUM_ARMOR, HEAVY_ARMOR, SHIELD);
+            if (equipmentItems.contains(itemEntity.getType())) {
+                dto.getEquipment().add(itemDto);
                 continue;
             }
 

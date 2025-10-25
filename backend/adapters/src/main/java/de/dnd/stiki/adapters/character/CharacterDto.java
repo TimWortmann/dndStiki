@@ -49,11 +49,8 @@ public class CharacterDto {
 
     private List<CharacterSkillDto> skills;
 
-    private List<CharacterItemDto> currencies;
     private List<CharacterItemDto> items;
-    private List<CharacterItemDto> weapons;
-    private List<CharacterItemDto> armor;
-    private List<CharacterItemDto> shields;
+    private List<CharacterItemDto> equipment;
 
     private List<TraitDto> classFeatures;
     private List<TraitDto> backgroundTraits;
@@ -220,14 +217,6 @@ public class CharacterDto {
         this.skills = skills;
     }
 
-    public List<CharacterItemDto> getCurrencies() {
-        return currencies;
-    }
-
-    public void setCurrencies(List<CharacterItemDto> currencies) {
-        this.currencies = currencies;
-    }
-
     public List<CharacterItemDto> getItems() {
         return items;
     }
@@ -236,28 +225,12 @@ public class CharacterDto {
         this.items = items;
     }
 
-    public List<CharacterItemDto> getWeapons() {
-        return weapons;
+    public List<CharacterItemDto> getEquipment() {
+        return equipment;
     }
 
-    public void setWeapons(List<CharacterItemDto> weapons) {
-        this.weapons = weapons;
-    }
-
-    public List<CharacterItemDto> getArmor() {
-        return armor;
-    }
-
-    public void setArmor(List<CharacterItemDto> armor) {
-        this.armor = armor;
-    }
-
-    public List<CharacterItemDto> getShields() {
-        return shields;
-    }
-
-    public void setShields(List<CharacterItemDto> shields) {
-        this.shields = shields;
+    public void setEquipment(List<CharacterItemDto> equipment) {
+        this.equipment = equipment;
     }
 
     public List<TraitDto> getClassFeatures() {

@@ -24,11 +24,8 @@ export interface CharacterValue {
     proficiencyBonus: number;
     abilities: CharacterAbilityValue[];
     skills: CharacterSkillValue[];
-    currencies: CharacterItemValue[];
     items: CharacterItemValue[];
-    weapons: CharacterItemValue[];
-    armor: CharacterItemValue[];
-    shields: CharacterItemValue[];
+    equipment: CharacterItemValue[];
     classFeatures: TraitValue[];
     backgroundTraits: TraitValue[];
     raceTraits: TraitValue[];

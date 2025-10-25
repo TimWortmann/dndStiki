@@ -353,36 +353,15 @@
       </button>
     </div>
     <mat-tab-group>
-      <mat-tab label="Currencies">
-        <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.currencies" [bigQuantityColumn]="true"
-          (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
-        </div>
-      </mat-tab>
       <mat-tab label="Items">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [typeColumn]="true" [quantityColumn]="true" 
+          <app-item-list [data]="characterValue.items" [typeColumn]="true" [bigQuantityColumn]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
         </div>
       </mat-tab>
-      
-      <mat-tab label="Weapons">
+      <mat-tab label="Equipment">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.weapons" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true" [propertiesColumn]="true" 
-          (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
-        </div>
-      </mat-tab>
-      
-      <mat-tab label="Armor">
-        <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.armor" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true" 
-          (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Shields">
-        <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.shields" [quantityColumn]="true" [equippedColumn]="true" 
+          <app-item-list [data]="characterValue.equipment" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true" [propertiesColumn]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
         </div>
       </mat-tab>

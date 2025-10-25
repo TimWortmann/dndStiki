@@ -428,10 +428,10 @@ public class CharacterService {
         characterItem.setDmg2(itemEntity.getDmg2());
         characterItem.setDmgType(itemEntity.getDmgType());
         characterItem.setRange(itemEntity.getRange());
-        characterItem.setAc(characterItem.getAc());
-        characterItem.setStealth(characterItem.getStealth());
-        characterItem.setMagic(characterItem.getMagic());
-        characterItem.setStrength(characterItem.getStrength());
+        characterItem.setAc(itemEntity.getAc());
+        characterItem.setStealth(itemEntity.getStealth());
+        characterItem.setMagic(itemEntity.getMagic());
+        characterItem.setStrength(itemEntity.getStrength());
         characterItem.setText(itemEntity.getText());
         characterItem.setQuantity(1);
         return characterItem;
