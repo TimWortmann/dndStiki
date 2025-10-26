@@ -227,7 +227,11 @@
             <mat-icon>edit</mat-icon>
           </button>
         </div>
-        <p *ngIf="characterValue.equippedShield"><b>{{characterValue.equippedShield.name}}:</b> +{{characterValue.equippedShield.ac}} ({{characterValue.armorClass + characterValue.equippedShield.ac}})</p>
+        <div class="vertical-flex">
+          <p> <b>Leather Armor [2024] </b></p>
+          <p *ngIf="characterValue.equippedShield"> | </p>
+          <p *ngIf="characterValue.equippedShield"><b>{{characterValue.equippedShield.name}}:</b> +{{characterValue.equippedShield.ac}} ({{characterValue.armorClass + characterValue.equippedShield.ac}})</p>
+        </div>
       </div>
 
       <div class="panel">
