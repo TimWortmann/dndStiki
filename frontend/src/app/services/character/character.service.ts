@@ -7,6 +7,7 @@ import { CharacterAbilityValue } from '../../models/character-ability-value';
 import { CharacterSkillValue } from '../../models/character-skill-value';
 import { FeatValue } from '../../models/feat-value';
 import { ItemValue } from '../../models/item-value';
+import { CharacterItemValue } from '../../models/character-item-value';
 
 @Injectable({
   providedIn: 'root'
@@ -95,5 +96,13 @@ export class CharacterService {
 
   changeItemQuantity(characterId : number, itemName : string, quantity : number) {
     return this.http.put<CharacterValue>(this.baseUrl + "/item/" + characterId + "/" + encodeURIComponent(itemName) + "/" + quantity, undefined)  
+  }
+
+  equipShield(id : number, shieldItem : CharacterItemValue) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/shield/" + id, shieldItem);
+  }
+
+  unequipShield(id : number) {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/shield/" + id);
   }
 }

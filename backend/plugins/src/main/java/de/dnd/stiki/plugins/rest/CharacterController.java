@@ -3,6 +3,7 @@ package de.dnd.stiki.plugins.rest;
 import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.feat.FeatDto;
 import de.dnd.stiki.adapters.item.ItemDto;
@@ -119,5 +120,15 @@ public class CharacterController {
     @PutMapping("/item/{characterId}/{itemName}/{quantity}")
     public ResponseEntity<CharacterDto> changeItemQuantity(@PathVariable Long characterId, @PathVariable String itemName, @PathVariable Integer quantity) {
         return ResponseEntity.ok().body(service.changeItemQuantity(characterId, itemName, quantity));
+    }
+
+    @PutMapping("/shield/{id}")
+    public ResponseEntity<CharacterDto> equipShield(@PathVariable Long id, @RequestBody CharacterItemDto shieldItem) {
+        return ResponseEntity.ok().body(service.equipShield(id, shieldItem));
+    }
+
+    @DeleteMapping("/shield/{id}")
+    public ResponseEntity<CharacterDto> unequipShield(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.equipShield(id, null));
     }
 }

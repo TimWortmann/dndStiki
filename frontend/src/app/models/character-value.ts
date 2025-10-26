@@ -1,5 +1,6 @@
 import { CharacterAbilityValue } from "./character-ability-value";
 import { CharacterItemValue } from "./character-item-value";
+import { CharacterShieldValue } from "./character-shield-value";
 import { CharacterSkillValue } from "./character-skill-value";
 import { TraitValue } from "./trait-value";
 
@@ -30,4 +31,5 @@ export interface CharacterValue {
     backgroundTraits: TraitValue[];
     raceTraits: TraitValue[];
     feats: TraitValue[];
+    equippedShield: CharacterShieldValue;
 }

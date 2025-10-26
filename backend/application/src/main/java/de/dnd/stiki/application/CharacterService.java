@@ -6,6 +6,7 @@ import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.adapters.feat.FeatDto;
@@ -448,6 +449,21 @@ public class CharacterService {
             } else {
                 characterItem.setQuantity(quantity);
             }
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto equipShield(Long id, CharacterItemDto shieldItem) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        if (shieldItem != null) {
+            CharacterShieldEntity shield = new CharacterShieldEntity();
+            shield.setName(shieldItem.getName());
+            shield.setAc(shieldItem.getAc());
+            characterEntity.setEquippedShield(shield);
+        } else {
+            characterEntity.setEquippedShield(null);
         }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));

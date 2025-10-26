@@ -221,7 +221,13 @@
 
       <div class="panel">
         <h3> Armor Class </h3>
-        <p> {{characterValue.armorClass}} </p>
+        <div class="flex-without-gap">
+          <p> {{characterValue.armorClass}} </p>
+          <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <p *ngIf="characterValue.equippedShield"><b>{{characterValue.equippedShield.name}}:</b> +{{characterValue.equippedShield.ac}} ({{characterValue.armorClass + characterValue.equippedShield.ac}})</p>
       </div>
 
       <div class="panel">
@@ -361,8 +367,13 @@
       </mat-tab>
       <mat-tab label="Equipment">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.equipment" [quantityColumn]="true" [equippedColumn]="true" [typeColumn]="true" [propertiesColumn]="true" 
-          (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
+          <app-item-list 
+          [data]="characterValue.equipment" [quantityColumn]="true" 
+          [equippedColumn]="true" [typeColumn]="true" 
+          [propertiesColumn]="true" [equippedShield]="characterValue.equippedShield"
+          (changeItemQuantityEvent)="changeItemQuantity($event)"
+          (equipItemEvent)="equipItem($event)"
+          (unequipItemEvent)="unequipItem($event)"></app-item-list>
         </div>
       </mat-tab>
     </mat-tab-group>

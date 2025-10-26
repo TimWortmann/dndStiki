@@ -540,4 +540,20 @@ throw new Error('Method not implemented.');
       autoFocus: false,
     });
   }
+
+  equipItem(item: CharacterItemValue) {
+    if ("Shield" === item.type) { 
+      this.characterService.equipShield(this.characterValue.id, item).subscribe((response) => {
+        this.setCharacter(response);
+      })
+    }  
+  }
+
+  unequipItem(item: CharacterItemValue) {
+    if ("Shield" === item.type) { 
+      this.characterService.unequipShield(this.characterValue.id).subscribe((response) => {
+        this.setCharacter(response);
+      })
+    }  
+  }
 }

@@ -4,6 +4,7 @@ import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterShield.CharacterShieldEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
 import de.dnd.stiki.adapters.trait.TraitDto;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
@@ -38,6 +39,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     @Autowired
     private SubclassReader subclassReader;
 
+    @Autowired
+    private CharacterShieldEntityToDtoMapper shieldEntityToDtoMapper;
+
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
 
@@ -71,6 +75,8 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setBackgroundTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getBackgroundTraits()));
         dto.setRaceTraits(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getRaceTraits()));
         dto.setFeats(traitEntityToDtoMapper.mapEntitiesToDtos(entity.getFeats()));
+
+        dto.setEquippedShield(shieldEntityToDtoMapper.mapEntityToDto(entity.getEquippedShield()));
 
         return dto;
     }

@@ -7,6 +7,7 @@ import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-d
 import { CharacterItemValue } from '../../../models/character-item-value';
 import { it } from 'node:test';
 import { QuantityPopupComponent } from '../quantity-popup/quantity-popup.component';
+import { CharacterShieldValue } from '../../../models/character-shield-value';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ItemListComponent implements AfterViewInit {
   @ViewChild('addTemplate') addTemplate!: TemplateRef<any>;
 
   @Input() data!: ItemValue[] | CharacterItemValue[];
+  @Input() equippedShield? : CharacterShieldValue;
 
   @Input() isFilterableOnlyVisible: boolean = false;;
 
@@ -37,6 +39,8 @@ export class ItemListComponent implements AfterViewInit {
 
   @Output() addItemEvent = new EventEmitter<ItemValue>();
   @Output() changeItemQuantityEvent = new EventEmitter<CharacterItemValue>();
+  @Output() equipItemEvent = new EventEmitter<CharacterItemValue>();
+  @Output() unequipItemEvent = new EventEmitter<CharacterItemValue>();
 
   tableColumns: TableColumnValue[] = [];
 
@@ -174,5 +178,13 @@ export class ItemListComponent implements AfterViewInit {
         this.changeItemQuantityEvent.emit(item); 
       }
     });
+  }
+
+  equipItem(item: CharacterItemValue) {
+    this.equipItemEvent.emit(item);
+  }
+
+  unequipItem(item: CharacterItemValue) {
+    this.unequipItemEvent.emit(item);
   }
 }

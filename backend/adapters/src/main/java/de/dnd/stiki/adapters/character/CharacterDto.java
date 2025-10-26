@@ -2,6 +2,7 @@ package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
+import de.dnd.stiki.adapters.character.characterShield.CharacterShieldDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.trait.TraitDto;
 
@@ -56,6 +57,8 @@ public class CharacterDto {
     private List<TraitDto> backgroundTraits;
     private List<TraitDto> raceTraits;
     private List<TraitDto> feats;
+
+    private CharacterShieldDto equippedShield;
 
     public Long getId() {
         return id;
@@ -263,5 +266,13 @@ public class CharacterDto {
 
     public void setFeats(List<TraitDto> feats) {
         this.feats = feats;
+    }
+
+    public CharacterShieldDto getEquippedShield() {
+        return equippedShield;
+    }
+
+    public void setEquippedShield(CharacterShieldDto equippedShield) {
+        this.equippedShield = equippedShield;
     }
 }

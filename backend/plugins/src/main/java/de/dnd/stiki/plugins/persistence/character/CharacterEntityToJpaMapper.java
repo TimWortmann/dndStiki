@@ -7,6 +7,7 @@ import de.dnd.stiki.plugins.persistence.AbstractEntityToJpaMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitEntityToJpaMapper;
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityEntityToJpaMapper;
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemEntityToJpaMapper;
+import de.dnd.stiki.plugins.persistence.character.characterShield.CharacterShieldEntityToJpaMapper;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillEntityToJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,9 @@ public class CharacterEntityToJpaMapper extends AbstractEntityToJpaMapper<Charac
 
     @Autowired
     private TraitEntityToJpaMapper traitEntityToJpaMapper;
+
+    @Autowired
+    private CharacterShieldEntityToJpaMapper shieldEntityToJpaMapper;
 
     @Override
     public CharacterJpa mapEntityToJpa(CharacterEntity entity) {
@@ -58,6 +62,7 @@ public class CharacterEntityToJpaMapper extends AbstractEntityToJpaMapper<Charac
         jpa.setSkills(skillEntityToJpaMapper.mapEntitiesToJpa(entity.getSkills()));
         jpa.setItems(itemJpaToEntityMapper.mapEntitiesToJpa(entity.getItems()));
         setCharacterTraits(entity, jpa);
+        jpa.setEquippedShield(shieldEntityToJpaMapper.mapEntityToJpa(entity.getEquippedShield()));
 
         return jpa;
     }

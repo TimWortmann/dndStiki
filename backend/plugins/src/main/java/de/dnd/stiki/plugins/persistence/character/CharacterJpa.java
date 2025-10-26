@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
+import de.dnd.stiki.plugins.persistence.character.characterShield.CharacterShieldJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import jakarta.persistence.*;
 
@@ -75,6 +76,14 @@ public class CharacterJpa {
 
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterSkillJpa> skills;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(
+            name = "EQUIPPED_SHIELD",
+            referencedColumnName = "ID",
+            foreignKey = @ForeignKey(name = "FK_CHARACTER_EQUIPPED_SHIELD")
+    )
+    private CharacterShieldJpa equippedShield;
 
     public Long getId() {
         return id;
@@ -242,5 +251,13 @@ public class CharacterJpa {
 
     public void setSkills(List<CharacterSkillJpa> skills) {
         this.skills = skills;
+    }
+
+    public CharacterShieldJpa getEquippedShield() {
+        return equippedShield;
+    }
+
+    public void setEquippedShield(CharacterShieldJpa equippedShield) {
+        this.equippedShield = equippedShield;
     }
 }

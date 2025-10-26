@@ -55,6 +55,8 @@ public class CharacterEntity {
     private List<TraitEntity> raceTraits;
     private List<TraitEntity> feats;
 
+    private CharacterShieldEntity equippedShield;
+
     public Long getId() {
         return id;
     }
@@ -285,5 +287,13 @@ public class CharacterEntity {
 
     public void setFeats(List<TraitEntity> feats) {
         this.feats = feats;
+    }
+
+    public CharacterShieldEntity getEquippedShield() {
+        return equippedShield;
+    }
+
+    public void setEquippedShield(CharacterShieldEntity equippedShield) {
+        this.equippedShield = equippedShield;
     }
 }
