@@ -89,7 +89,7 @@ public class CharacterSheetPdfService {
         setAbilityFieldValues(fieldValues, character, CHARISMA, "CHA", 22);
 
         fieldValues.put("ProfBonus", "+" + character.getProficiencyBonus());
-        fieldValues.put("AC", character.getArmorClass().toString());
+        fieldValues.put("AC", character.getFinalArmorClass().toString());
         fieldValues.put("Speed", character.getSpeed().toString() + " feet");
         fieldValues.put("Passive", character.getPassivePerception().toString());
 

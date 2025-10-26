@@ -177,6 +177,14 @@ public class CharacterEntity {
         this.armorClass = armorClass;
     }
 
+    public Integer getFinalArmorClass() {
+        Integer finalArmorClass = armorClass;
+        if (equippedShield != null) {
+            return finalArmorClass + equippedShield.getAc();
+        }
+        return finalArmorClass;
+    }
+
     public Integer getSpeed() {
         return speed;
     }
