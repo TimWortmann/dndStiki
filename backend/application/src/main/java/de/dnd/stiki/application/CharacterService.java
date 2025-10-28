@@ -7,6 +7,7 @@ import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEnt
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.adapters.feat.FeatDto;
@@ -20,6 +21,7 @@ import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
+import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.race.RaceEntity;
@@ -63,6 +65,9 @@ public class CharacterService {
 
     @Autowired
     private ItemDtoToEnityMapper itemDtoToEnityMapper;
+
+    @Autowired
+    private CharacterItemDtoToEntityMapper characterItemDtoToEntityMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -464,6 +469,29 @@ public class CharacterService {
             characterEntity.setEquippedShield(shield);
         } else {
             characterEntity.setEquippedShield(null);
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto equipArmor(Long id, CharacterItemDto armorItem) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        if (armorItem != null) {
+            CharacterItemEntity armorItemEntity = characterItemDtoToEntityMapper.mapDtoToEntity(armorItem);
+
+            CharacterArmorEntity armor = new CharacterArmorEntity();
+            armor.setName(armorItem.getName());
+
+            if (ItemType.LIGHT_ARMOR.equals(armorItemEntity.getType())) {
+                armor.setAc(armorItemEntity.getAc() + + characterEntity.getAbility(AbilityType.DEXTERITY).getModifier());
+            } else {
+                armor.setAc(armorItem.getAc());
+            }
+            armor.setType(ItemType.fromName(armorItem.getType()));
+            characterEntity.setEquippedArmor(armor);
+        } else {
+            characterEntity.setEquippedArmor(null);
         }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));

@@ -56,6 +56,7 @@ public class CharacterEntity {
     private List<TraitEntity> feats;
 
     private CharacterShieldEntity equippedShield;
+    private CharacterArmorEntity equippedArmor;
 
     public Long getId() {
         return id;
@@ -179,6 +180,11 @@ public class CharacterEntity {
 
     public Integer getFinalArmorClass() {
         Integer finalArmorClass = armorClass;
+
+        if (equippedArmor != null) {
+            finalArmorClass = equippedArmor.getAc();
+        }
+
         if (equippedShield != null) {
             return finalArmorClass + equippedShield.getAc();
         }
@@ -303,5 +309,13 @@ public class CharacterEntity {
 
     public void setEquippedShield(CharacterShieldEntity equippedShield) {
         this.equippedShield = equippedShield;
+    }
+
+    public CharacterArmorEntity getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    public void setEquippedArmor(CharacterArmorEntity equippedArmor) {
+        this.equippedArmor = equippedArmor;
     }
 }

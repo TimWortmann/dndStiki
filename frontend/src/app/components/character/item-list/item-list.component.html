@@ -30,10 +30,10 @@
 </ng-template>
 
 <ng-template #equippedTemplate let-column="column" let-element="element">
-    <button mat-icon-button *ngIf="!equippedShield || equippedShield.name !== element.name" (click)="equipItem(element)">
+    <button mat-icon-button *ngIf="!isEquipped(element.name)" (click)="equipItem(element)">
         <mat-icon>radio_button_unchecked</mat-icon>
     </button>
-    <button mat-icon-button *ngIf="equippedShield?.name === element.name" (click)="unequipItem(element)">
+    <button mat-icon-button *ngIf="isEquipped(element.name)" (click)="unequipItem(element)">
         <mat-icon>radio_button_checked</mat-icon>
     </button>
 </ng-template>

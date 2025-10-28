@@ -105,4 +105,12 @@ export class CharacterService {
   unequipShield(id : number) {
     return this.http.delete<CharacterValue>(this.baseUrl + "/shield/" + id);
   }
+
+  equipArmor(id : number, armorItem : CharacterItemValue) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/armor/" + id, armorItem);
+  }
+
+  unequipArmor(id : number) {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/armor/" + id);
+  }
 }

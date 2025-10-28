@@ -222,15 +222,16 @@
       <div class="panel">
         <h3> Armor Class </h3>
         <div class="flex-without-gap">
-          <p> {{characterValue.armorClass}} </p>
+          <p> {{characterValue.realArmorClass}} </p>
           <button mat-icon-button>
             <mat-icon>edit</mat-icon>
           </button>
         </div>
         <div class="vertical-flex">
-          <p> <b>Leather Armor [2024] </b></p>
+          <p *ngIf="!characterValue.equippedArmor"> Unarmored <b>({{characterValue.basicArmorClass}})</b> </p>
+          <p *ngIf="characterValue.equippedArmor"> {{characterValue.equippedArmor.name}} <b>({{characterValue.equippedArmor.ac}}) </b> </p>
           <p *ngIf="characterValue.equippedShield"> | </p>
-          <p *ngIf="characterValue.equippedShield"><b>{{characterValue.equippedShield.name}}:</b> +{{characterValue.equippedShield.ac}} ({{characterValue.armorClass + characterValue.equippedShield.ac}})</p>
+          <p *ngIf="characterValue.equippedShield">{{characterValue.equippedShield.name}} <b>(+{{characterValue.equippedShield.ac}})</b> </p>
         </div>
       </div>
 
@@ -374,7 +375,9 @@
           <app-item-list 
           [data]="characterValue.equipment" [quantityColumn]="true" 
           [equippedColumn]="true" [typeColumn]="true" 
-          [propertiesColumn]="true" [equippedShield]="characterValue.equippedShield"
+          [propertiesColumn]="true" 
+          [equippedShield]="characterValue.equippedShield"
+          [equippedArmor]="characterValue.equippedArmor"
           (changeItemQuantityEvent)="changeItemQuantity($event)"
           (equipItemEvent)="equipItem($event)"
           (unequipItemEvent)="unequipItem($event)"></app-item-list>

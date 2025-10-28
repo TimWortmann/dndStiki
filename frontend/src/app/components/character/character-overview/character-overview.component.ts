@@ -546,7 +546,13 @@ throw new Error('Method not implemented.');
       this.characterService.equipShield(this.characterValue.id, item).subscribe((response) => {
         this.setCharacter(response);
       })
-    }  
+    }
+    
+    if (item.type.toLowerCase().includes("armor")) {
+      this.characterService.equipArmor(this.characterValue.id, item).subscribe((response) => {
+        this.setCharacter(response);
+      })
+    }
   }
 
   unequipItem(item: CharacterItemValue) {
@@ -554,6 +560,12 @@ throw new Error('Method not implemented.');
       this.characterService.unequipShield(this.characterValue.id).subscribe((response) => {
         this.setCharacter(response);
       })
-    }  
+    }
+    
+    if (item.type.toLowerCase().includes("armor")) {
+      this.characterService.unequipArmor(this.characterValue.id).subscribe((response) => {
+        this.setCharacter(response);
+      })  
+    }
   }
 }

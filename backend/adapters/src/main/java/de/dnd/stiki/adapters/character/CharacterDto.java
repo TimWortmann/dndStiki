@@ -1,6 +1,7 @@
 package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
+import de.dnd.stiki.adapters.character.characterArmor.CharacterArmorDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterShield.CharacterShieldDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
@@ -38,7 +39,9 @@ public class CharacterDto {
 
     private Integer currentHitDice;
 
-    private Integer armorClass;
+    private Integer basicArmorClass;
+
+    private Integer realArmorClass;
 
     private Integer speed;
 
@@ -59,6 +62,7 @@ public class CharacterDto {
     private List<TraitDto> feats;
 
     private CharacterShieldDto equippedShield;
+    private CharacterArmorDto equippedArmor;
 
     public Long getId() {
         return id;
@@ -172,12 +176,20 @@ public class CharacterDto {
         this.currentHitDice = currentHitDice;
     }
 
-    public Integer getArmorClass() {
-        return armorClass;
+    public Integer getBasicArmorClass() {
+        return basicArmorClass;
     }
 
-    public void setArmorClass(Integer armorClass) {
-        this.armorClass = armorClass;
+    public void setBasicArmorClass(Integer basicArmorClass) {
+        this.basicArmorClass = basicArmorClass;
+    }
+
+    public Integer getRealArmorClass() {
+        return realArmorClass;
+    }
+
+    public void setRealArmorClass(Integer realArmorClass) {
+        this.realArmorClass = realArmorClass;
     }
 
     public Integer getSpeed() {
@@ -274,5 +286,13 @@ public class CharacterDto {
 
     public void setEquippedShield(CharacterShieldDto equippedShield) {
         this.equippedShield = equippedShield;
+    }
+
+    public CharacterArmorDto getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    public void setEquippedArmor(CharacterArmorDto equippedArmor) {
+        this.equippedArmor = equippedArmor;
     }
 }

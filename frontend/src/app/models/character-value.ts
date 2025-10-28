@@ -1,4 +1,5 @@
 import { CharacterAbilityValue } from "./character-ability-value";
+import { CharacterArmorValue } from "./character-armor-value";
 import { CharacterItemValue } from "./character-item-value";
 import { CharacterShieldValue } from "./character-shield-value";
 import { CharacterSkillValue } from "./character-skill-value";
@@ -19,7 +20,8 @@ export interface CharacterValue {
     hitDice: string;
     maxHitDice: number;
     currentHitDice: number;
-    armorClass: number;
+    basicArmorClass: number;
+    realArmorClass: number;
     speed: number;
     passivePerception: number;
     proficiencyBonus: number;
@@ -32,4 +34,5 @@ export interface CharacterValue {
     raceTraits: TraitValue[];
     feats: TraitValue[];
     equippedShield: CharacterShieldValue;
+    equippedArmor: CharacterArmorValue;
 }
