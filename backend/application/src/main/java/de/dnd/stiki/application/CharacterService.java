@@ -8,6 +8,7 @@ import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDtoToEntityMapper;
+import de.dnd.stiki.adapters.character.characterItem.CharacterItemEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityMapper;
 import de.dnd.stiki.adapters.feat.FeatDto;
@@ -21,7 +22,6 @@ import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
-import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.race.RaceEntity;
@@ -35,6 +35,7 @@ import java.util.List;
 
 import static de.dnd.stiki.domain.enums.AbilityType.CONSTITUTION;
 import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
+import static de.dnd.stiki.domain.enums.ItemType.LIGHT_ARMOR;
 
 @Service
 public class CharacterService {
@@ -68,6 +69,9 @@ public class CharacterService {
 
     @Autowired
     private CharacterItemDtoToEntityMapper characterItemDtoToEntityMapper;
+
+    @Autowired
+    private CharacterItemEntityToDtoMapper characterItemEntityToDtoMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -413,7 +417,7 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
-    private static CharacterItemEntity getCharacterItemByName(List<CharacterItemEntity> characterItems, String name) {
+    private CharacterItemEntity getCharacterItemByName(List<CharacterItemEntity> characterItems, String name) {
         for (CharacterItemEntity characterItem : characterItems) {
             if (characterItem.getName().equals(name)) {
                 return characterItem;
@@ -463,10 +467,8 @@ public class CharacterService {
         CharacterEntity characterEntity = repository.get(id);
 
         if (shieldItem != null) {
-            CharacterShieldEntity shield = new CharacterShieldEntity();
-            shield.setName(shieldItem.getName());
-            shield.setAc(shieldItem.getAc());
-            characterEntity.setEquippedShield(shield);
+            CharacterItemEntity shieldItemEntity = characterItemDtoToEntityMapper.mapDtoToEntity(shieldItem);
+            equipShieldEntity(shieldItemEntity, characterEntity);
         } else {
             characterEntity.setEquippedShield(null);
         }
@@ -474,26 +476,36 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
+    private void equipShieldEntity(CharacterItemEntity shieldItem, CharacterEntity characterEntity) {
+        CharacterShieldEntity shield = new CharacterShieldEntity();
+        shield.setName(shieldItem.getName());
+        shield.setAc(shieldItem.getAc());
+        characterEntity.setEquippedShield(shield);
+    }
+
     public CharacterDto equipArmor(Long id, CharacterItemDto armorItem) {
         CharacterEntity characterEntity = repository.get(id);
 
         if (armorItem != null) {
             CharacterItemEntity armorItemEntity = characterItemDtoToEntityMapper.mapDtoToEntity(armorItem);
-
-            CharacterArmorEntity armor = new CharacterArmorEntity();
-            armor.setName(armorItem.getName());
-
-            if (ItemType.LIGHT_ARMOR.equals(armorItemEntity.getType())) {
-                armor.setAc(armorItemEntity.getAc() + + characterEntity.getAbility(AbilityType.DEXTERITY).getModifier());
-            } else {
-                armor.setAc(armorItem.getAc());
-            }
-            armor.setType(ItemType.fromName(armorItem.getType()));
-            characterEntity.setEquippedArmor(armor);
+            equipArmorEntity(armorItemEntity, characterEntity);
         } else {
             characterEntity.setEquippedArmor(null);
         }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private void equipArmorEntity(CharacterItemEntity armorItem, CharacterEntity characterEntity) {
+        CharacterArmorEntity armor = new CharacterArmorEntity();
+        armor.setName(armorItem.getName());
+
+        if (LIGHT_ARMOR.equals(armorItem.getType())) {
+            armor.setAc(armorItem.getAc() + + characterEntity.getAbility(AbilityType.DEXTERITY).getModifier());
+        } else {
+            armor.setAc(armorItem.getAc());
+        }
+        armor.setType(armorItem.getType());
+        characterEntity.setEquippedArmor(armor);
     }
 }
