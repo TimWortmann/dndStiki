@@ -35,7 +35,6 @@ import java.util.List;
 
 import static de.dnd.stiki.domain.enums.AbilityType.CONSTITUTION;
 import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
-import static de.dnd.stiki.domain.enums.ItemType.LIGHT_ARMOR;
 
 @Service
 public class CharacterService {
@@ -455,6 +454,14 @@ public class CharacterService {
         if (characterItem != null) {
             if (quantity < 1) {
                 characterEntity.getItems().remove(characterItem);
+
+                if (characterEntity.getEquippedShield() != null && characterEntity.getEquippedShield().getName().equals(itemName)) {
+                    characterEntity.setEquippedShield(null);
+                }
+                else if (characterEntity.getEquippedArmor() != null && characterEntity.getEquippedArmor().getName().equals(itemName)) {
+                    characterEntity.setEquippedArmor(null);
+                }
+
             } else {
                 characterItem.setQuantity(quantity);
             }
@@ -501,12 +508,7 @@ public class CharacterService {
     private void equipArmorEntity(CharacterItemEntity armorItem, CharacterEntity characterEntity) {
         CharacterArmorEntity armor = new CharacterArmorEntity();
         armor.setName(armorItem.getName());
-
-        if (LIGHT_ARMOR.equals(armorItem.getType())) {
-            armor.setAc(armorItem.getAc() + + characterEntity.getAbility(AbilityType.DEXTERITY).getModifier());
-        } else {
-            armor.setAc(armorItem.getAc());
-        }
+        armor.setAc(armorItem.getAc());
         armor.setType(armorItem.getType());
         characterEntity.setEquippedArmor(armor);
     }

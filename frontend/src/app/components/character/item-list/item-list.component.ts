@@ -126,7 +126,7 @@ export class ItemListComponent implements AfterViewInit {
           name: 'Equipped',
           dataKey: 'equipped',
           position: 'left',
-          isSortable: true,
+          isSortable: false,
           template: this.equippedTemplate,
         })
     }
@@ -137,7 +137,7 @@ export class ItemListComponent implements AfterViewInit {
           name: 'Actions',
           dataKey: 'actions',
           position: 'left',
-          isSortable: true,
+          isSortable: false,
           template: this.addTemplate,
         })
     }

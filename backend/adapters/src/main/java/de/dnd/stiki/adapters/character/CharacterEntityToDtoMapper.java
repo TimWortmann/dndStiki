@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
 import static de.dnd.stiki.domain.enums.ItemType.*;
 
 @Component
@@ -84,6 +85,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
         dto.setEquippedShield(shieldEntityToDtoMapper.mapEntityToDto(entity.getEquippedShield()));
         dto.setEquippedArmor(armorEntityToDtoMapper.mapEntityToDto(entity.getEquippedArmor()));
+        if (entity.getEquippedArmor() != null && LIGHT_ARMOR.equals(entity.getEquippedArmor().getType())) {
+            dto.getEquippedArmor().setAc(entity.getEquippedArmor().getAc() + entity.getAbility(DEXTERITY).getModifier());
+        }
 
         return dto;
     }

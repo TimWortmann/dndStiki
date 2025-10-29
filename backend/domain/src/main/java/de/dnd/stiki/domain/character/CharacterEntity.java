@@ -7,6 +7,9 @@ import de.dnd.stiki.domain.trait.TraitEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.dnd.stiki.domain.enums.AbilityType.*;
+import static de.dnd.stiki.domain.enums.ItemType.LIGHT_ARMOR;
+
 public class CharacterEntity {
 
     private Long id;
@@ -197,6 +200,9 @@ public class CharacterEntity {
 
         if (equippedArmor != null) {
             finalArmorClass = equippedArmor.getAc();
+            if (LIGHT_ARMOR.equals(equippedArmor.getType())) {
+                finalArmorClass += getAbility(DEXTERITY).getModifier();
+            }
         }
 
         if (equippedShield != null) {
