@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
 import de.dnd.stiki.plugins.persistence.character.characterArmor.CharacterArmorJpa;
+import de.dnd.stiki.plugins.persistence.character.characterAttack.CharacterAttackJpa;
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterShield.CharacterShieldJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
@@ -99,6 +100,9 @@ public class CharacterJpa {
 
     @Column(name = "WEAPON_PROFICIENCIES")
     private String weaponProficiencies;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CharacterAttackJpa> attacks;
 
     public Long getId() {
         return id;
@@ -298,5 +302,13 @@ public class CharacterJpa {
 
     public void setWeaponProficiencies(String weaponProficiencies) {
         this.weaponProficiencies = weaponProficiencies;
+    }
+
+    public List<CharacterAttackJpa> getAttacks() {
+        return attacks;
+    }
+
+    public void setAttacks(List<CharacterAttackJpa> attacks) {
+        this.attacks = attacks;
     }
 }

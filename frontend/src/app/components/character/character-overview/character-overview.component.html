@@ -359,20 +359,20 @@
 
           <p></p>
 
-          <div class="vertical-flex" style="width: 99%;">
+          <div class="vertical-flex" style="width: 99%;" *ngFor="let attack of characterValue.attacks">
             <mat-form-field appearance="outline" style="width: 100%;">
               <mat-label>Name</mat-label>
-              <input matInput disabled="true">
+              <input matInput [(ngModel)]="attack.name" disabled="true">
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Hit Roll</mat-label>
-              <input matInput disabled="true">
+              <mat-label>Hit Bonus</mat-label>
+              <input matInput [(ngModel)]="attack.hitBonus" disabled="true">
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="width: 100%;">
               <mat-label>Damage Roll</mat-label>
-              <input matInput disabled="true">
+              <input matInput [(ngModel)]="attack.damageRoll" disabled="true">
             </mat-form-field>
 
             <div class="flex-without-gap">
@@ -384,33 +384,6 @@
               </button>
             </div>
           </div>
-
-          <div class="vertical-flex" style="width: 99%;">
-            <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Name</mat-label>
-              <input matInput disabled="true">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Hit Roll</mat-label>
-              <input matInput disabled="true">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Damage Roll</mat-label>
-              <input matInput disabled="true">
-            </mat-form-field>
-
-            <div class="flex-without-gap">
-              <button mat-icon-button matTooltip="Edit">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Remove">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
-
         </mat-tab>
         <mat-tab label="Spells"> 
           

@@ -3,6 +3,7 @@ package de.dnd.stiki.adapters.character;
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterArmor.CharacterArmorEntityToDtoMapper;
+import de.dnd.stiki.adapters.character.characterAttack.CharacterAttackEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterShield.CharacterShieldEntityToDtoMapper;
@@ -47,6 +48,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     @Autowired
     private CharacterArmorEntityToDtoMapper armorEntityToDtoMapper;
 
+    @Autowired
+    private CharacterAttackEntityToDtoMapper attackEntityToDtoMapper;
+
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
 
@@ -90,6 +94,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         }
 
         dto.setWeaponProficiencies(entity.getWeaponProficiencies());
+        dto.setAttacks(attackEntityToDtoMapper.mapEntitiesToDtos(entity.getAttacks(), entity.getAbilities(), entity.getProficiencyBonus()));
 
         return dto;
     }

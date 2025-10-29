@@ -3,6 +3,7 @@ package de.dnd.stiki.plugins.persistence.character;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
 import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbilityJpa;
+import de.dnd.stiki.plugins.persistence.character.characterAttack.CharacterAttackJpa;
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         if (jpa.getItems() != null) {
             for (CharacterItemJpa itemJpa : jpa.getItems()) {
                 itemJpa.setCharacter(jpa);
+            }
+        }
+
+        if (jpa.getAttacks() != null) {
+            for (CharacterAttackJpa attackJpa : jpa.getAttacks()) {
+                attackJpa.setCharacter(jpa);
             }
         }
 

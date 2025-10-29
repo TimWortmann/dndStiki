@@ -1,5 +1,6 @@
 import { CharacterAbilityValue } from "./character-ability-value";
 import { CharacterArmorValue } from "./character-armor-value";
+import { CharacterAttackValue } from "./character-attack-value";
 import { CharacterItemValue } from "./character-item-value";
 import { CharacterShieldValue } from "./character-shield-value";
 import { CharacterSkillValue } from "./character-skill-value";
@@ -37,4 +38,5 @@ export interface CharacterValue {
     equippedShield: CharacterShieldValue;
     equippedArmor: CharacterArmorValue;
     weaponProficiencies: string[];
+    attacks: CharacterAttackValue[];
 }

@@ -2,6 +2,7 @@ package de.dnd.stiki.adapters.character;
 
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterArmor.CharacterArmorDto;
+import de.dnd.stiki.adapters.character.characterAttack.CharacterAttackDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterShield.CharacterShieldDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
@@ -67,6 +68,7 @@ public class CharacterDto {
     private CharacterArmorDto equippedArmor;
 
     private List<String> weaponProficiencies;
+    private List<CharacterAttackDto> attacks;
 
     public Long getId() {
         return id;
@@ -314,5 +316,13 @@ public class CharacterDto {
 
     public void setWeaponProficiencies(List<String> weaponProficiencies) {
         this.weaponProficiencies = weaponProficiencies;
+    }
+
+    public List<CharacterAttackDto> getAttacks() {
+        return attacks;
+    }
+
+    public void setAttacks(List<CharacterAttackDto> attacks) {
+        this.attacks = attacks;
     }
 }
