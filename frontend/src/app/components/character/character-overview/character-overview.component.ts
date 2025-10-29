@@ -577,7 +577,7 @@ throw new Error('Method not implemented.');
       height: '150px',     
       maxWidth: '350px',  
       maxHeight: '150px',   
-      autoFocus: true,
+      autoFocus: false,
     });
   
     dialogRef.afterClosed().subscribe((result: number | undefined) => {
