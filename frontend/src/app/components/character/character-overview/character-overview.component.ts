@@ -549,10 +549,16 @@ throw new Error('Method not implemented.');
       })
     }
     
-    if (item.type.toLowerCase().includes("armor")) {
+    else if (item.type.toLowerCase().includes("armor")) {
       this.characterService.equipArmor(this.characterValue.id, item).subscribe((response) => {
         this.setCharacter(response);
       })
+    }
+
+    else if (item.type.toLowerCase().includes("weapon")) {
+      this.characterService.equipWeapon(this.characterValue.id, item).subscribe((response) => {
+        this.setCharacter(response);
+      })  
     }
   }
 

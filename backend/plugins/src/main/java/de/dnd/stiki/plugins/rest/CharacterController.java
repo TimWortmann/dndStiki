@@ -151,4 +151,9 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> resetArmorClass(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.changeArmorClass(id, null));
     }
+
+    @PutMapping("/weapon/{id}")
+    public ResponseEntity<CharacterDto> equipWeapon(@PathVariable Long id, @RequestBody CharacterItemDto weaponItem) {
+        return ResponseEntity.ok().body(service.equipWeapon(id, weaponItem));
+    }
 }

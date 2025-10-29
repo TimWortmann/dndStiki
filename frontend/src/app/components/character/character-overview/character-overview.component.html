@@ -409,11 +409,12 @@
         <div *ngIf="characterValue" class="item-list">
           <app-item-list 
           [data]="characterValue.equipment" 
+          [equippedShield]="characterValue.equippedShield"
+          [equippedArmor]="characterValue.equippedArmor"
+          [equippedWeapons]="characterValue.attacks"
           [bigQuantityColumn]="true" 
           [equippedColumn]="true" [typeColumn]="true" 
           [propertiesColumn]="true" 
-          [equippedShield]="characterValue.equippedShield"
-          [equippedArmor]="characterValue.equippedArmor"
           (changeItemQuantityEvent)="changeItemQuantity($event)"
           (equipItemEvent)="equipItem($event)"
           (unequipItemEvent)="unequipItem($event)"></app-item-list>

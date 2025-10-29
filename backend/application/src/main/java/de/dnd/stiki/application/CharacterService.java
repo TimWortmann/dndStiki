@@ -33,8 +33,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.dnd.stiki.domain.enums.AbilityType.CONSTITUTION;
-import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
+import static de.dnd.stiki.domain.enums.AbilityType.*;
 
 @Service
 public class CharacterService {
@@ -519,5 +518,51 @@ public class CharacterService {
         CharacterEntity characterEntity = repository.get(id);
         characterEntity.setModifiedArmorClass(armorClass);
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto equipWeapon(Long id, CharacterItemDto weaponItem) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        ItemEntity weaponItemEntity = itemDtoToEnityMapper.mapDtoToEntity(weaponItem);
+
+        if (characterEntity.getAttacks() == null) {
+            characterEntity.setAttacks(new ArrayList<>());
+        }
+
+        CharacterAttackEntity attackEntity = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), STRENGTH);
+        characterEntity.getAttacks().add(attackEntity);
+
+        if (weaponItemEntity.getDmg2() != null) {
+            CharacterAttackEntity attackEntity2 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg2(), STRENGTH);
+            attackEntity2.setName(attackEntity2.getName() + " (Two Handed)");
+            characterEntity.getAttacks().add(attackEntity2);
+        }
+
+        for (String weaponProperty : weaponItemEntity.getProperties()) {
+            if (weaponProperty.equalsIgnoreCase("finesse")) {
+                CharacterAttackEntity attackEntity3 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), DEXTERITY);
+                attackEntity3.setName(attackEntity3.getName() + " (Finesse)");
+                characterEntity.getAttacks().add(attackEntity3);
+            }
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    private static CharacterAttackEntity createCharacterAttackEntity(ItemEntity weaponItemEntity, CharacterEntity characterEntity, String baseDamage, AbilityType ability) {
+        CharacterAttackEntity attackEntity = new CharacterAttackEntity();
+        attackEntity.setName(weaponItemEntity.getName());
+        attackEntity.setBaseDamageRoll(baseDamage);
+        attackEntity.setAbility(ability);
+
+        attackEntity.setProficient(false);
+        for (String weaponProficiency : characterEntity.getWeaponProficiencies()) {
+            for (String weaponProperty : weaponItemEntity.getProperties()) {
+                if (weaponProficiency.toLowerCase().contains(weaponProperty.toLowerCase())) {
+                    attackEntity.setProficient(true);
+                }
+            }
+        }
+        return attackEntity;
     }
 }

@@ -121,4 +121,8 @@ export class CharacterService {
   resetArmorClass(id : number) {
     return this.http.put<CharacterValue>(this.baseUrl + "/armorClass/" + id, undefined);
   }
+
+  equipWeapon(id : number, weaponItem : CharacterItemValue) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/weapon/" + id, weaponItem);
+  }
 }

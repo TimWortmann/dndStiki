@@ -9,6 +9,7 @@ import { it } from 'node:test';
 import { QuantityPopupComponent } from '../quantity-popup/quantity-popup.component';
 import { CharacterShieldValue } from '../../../models/character-shield-value';
 import { CharacterArmorValue } from '../../../models/character-armor-value';
+import { CharacterAttackValue } from '../../../models/character-attack-value';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ItemListComponent implements AfterViewInit {
   @Input() data!: ItemValue[] | CharacterItemValue[];
   @Input() equippedShield? : CharacterShieldValue;
   @Input() equippedArmor? : CharacterArmorValue;
+  @Input() equippedWeapons? : CharacterAttackValue[];
 
   @Input() isFilterableOnlyVisible: boolean = false;;
 
@@ -191,6 +193,17 @@ export class ItemListComponent implements AfterViewInit {
   }
 
   isEquipped(name : string) : boolean {
+
+    if (this.equippedWeapons) {
+      for (const weapon of this.equippedWeapons) {
+        if (name === weapon.name 
+          || name + " (Two Handed)" == weapon.name 
+          || name + " (Finesse)" === weapon.name) {
+          return true;
+        }
+      }
+    }
+
     return name === this.equippedShield?.name || name === this.equippedArmor?.name;
   }
 }
