@@ -154,6 +154,8 @@ public class CharacterService {
                 }
             }
         }
+
+        characterEntity.setWeaponProficiencies(dndClass.getWeaponProficiencies());
     }
 
     public CharacterDto changeName (Long id, String name) {

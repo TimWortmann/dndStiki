@@ -89,6 +89,8 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
             dto.getEquippedArmor().setAc(entity.getEquippedArmor().getAc() + entity.getAbility(DEXTERITY).getModifier());
         }
 
+        dto.setWeaponProficiencies(entity.getWeaponProficiencies());
+
         return dto;
     }
 

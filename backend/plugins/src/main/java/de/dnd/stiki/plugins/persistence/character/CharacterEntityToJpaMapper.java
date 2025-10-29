@@ -69,6 +69,7 @@ public class CharacterEntityToJpaMapper extends AbstractEntityToJpaMapper<Charac
         setCharacterTraits(entity, jpa);
         jpa.setEquippedShield(shieldEntityToJpaMapper.mapEntityToJpa(entity.getEquippedShield()));
         jpa.setEquippedArmor(armorEntityToJpaMapper.mapEntityToJpa(entity.getEquippedArmor()));
+        jpa.setWeaponProficiencies(getStringFromList(entity.getWeaponProficiencies()));
 
         return jpa;
     }

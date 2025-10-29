@@ -36,4 +36,5 @@ export interface CharacterValue {
     feats: TraitValue[];
     equippedShield: CharacterShieldValue;
     equippedArmor: CharacterArmorValue;
+    weaponProficiencies: string[];
 }

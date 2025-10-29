@@ -326,8 +326,7 @@
           </div>
           <div class="info-box" *ngIf="currentClass || currentBackground">
             <div *ngIf="currentClass">
-              <div class="flex">
-                <div class="flex"></div>    
+              <div class="flex">  
                 <span><b>Class Proficiencies:</b></span>
                 <span> {{getFancyListString((currentClass.skillProficiencies))}}</span>
               </div>
@@ -350,8 +349,13 @@
   <div class="subsection">
     <h2>Attacks & Spells</h2>
     <mat-tab-group>
-        <mat-tab label="Attacks"> 
-
+        <mat-tab label="Attacks">
+          <div class="info-box flex" *ngIf="characterValue.weaponProficiencies">
+            <span><b>Class Proficiencies:</b></span>
+            <span> {{getFancyListString((characterValue.weaponProficiencies))}}</span>
+            <div class="flex"> 
+            </div>
+          </div>  
         </mat-tab>
         <mat-tab label="Spells"> 
           

@@ -62,6 +62,8 @@ public class CharacterEntity {
     private CharacterShieldEntity equippedShield;
     private CharacterArmorEntity equippedArmor;
 
+    private List<String> weaponProficiencies;
+
     public Long getId() {
         return id;
     }
@@ -337,5 +339,13 @@ public class CharacterEntity {
 
     public void setEquippedArmor(CharacterArmorEntity equippedArmor) {
         this.equippedArmor = equippedArmor;
+    }
+
+    public List<String> getWeaponProficiencies() {
+        return weaponProficiencies;
+    }
+
+    public void setWeaponProficiencies(List<String> weaponProficiencies) {
+        this.weaponProficiencies = weaponProficiencies;
     }
 }

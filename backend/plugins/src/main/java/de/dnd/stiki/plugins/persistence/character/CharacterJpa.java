@@ -97,6 +97,9 @@ public class CharacterJpa {
     )
     private CharacterArmorJpa equippedArmor;
 
+    @Column(name = "WEAPON_PROFICIENCIES")
+    private String weaponProficiencies;
+
     public Long getId() {
         return id;
     }
@@ -287,5 +290,13 @@ public class CharacterJpa {
 
     public void setEquippedArmor(CharacterArmorJpa equippedArmor) {
         this.equippedArmor = equippedArmor;
+    }
+
+    public String getWeaponProficiencies() {
+        return weaponProficiencies;
+    }
+
+    public void setWeaponProficiencies(String weaponProficiencies) {
+        this.weaponProficiencies = weaponProficiencies;
     }
 }
