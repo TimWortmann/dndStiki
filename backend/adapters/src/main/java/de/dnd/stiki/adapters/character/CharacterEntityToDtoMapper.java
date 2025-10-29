@@ -68,6 +68,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setCurrentHitDice(entity.getCurrentHitDice());
         dto.setBasicArmorClass(entity.getArmorClass());
         dto.setRealArmorClass(entity.getFinalArmorClass());
+        dto.setArmorClassIsModified(entity.getModifiedArmorClass() != null);
         dto.setSpeed(entity.getSpeed());
         dto.setPassivePerception(entity.getPassivePerception());
         dto.setProficiencyBonus(entity.getProficiencyBonus());

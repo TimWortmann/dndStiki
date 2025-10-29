@@ -52,6 +52,7 @@ import { ItemListComponent } from './components/character/item-list/item-list.co
 import { QuantityPopupComponent } from './components/character/quantity-popup/quantity-popup.component';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { ArmorClassPopupComponent } from './components/character/armor-class-popup/armor-class-popup.component';
 
 registerLocaleData(localeDe);
 
@@ -82,6 +83,7 @@ registerLocaleData(localeDe);
     ItemListPopupComponent,
     ItemListComponent,
     QuantityPopupComponent,
+    ArmorClassPopupComponent,
   ],
   imports: [
     BrowserModule,

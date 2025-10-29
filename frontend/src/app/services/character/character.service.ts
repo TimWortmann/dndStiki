@@ -113,4 +113,12 @@ export class CharacterService {
   unequipArmor(id : number) {
     return this.http.delete<CharacterValue>(this.baseUrl + "/armor/" + id);
   }
+
+  changeArmorClass(id : number, armorClass : number) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/armorClass/" + id + "/" + armorClass, undefined);
+  }
+
+  resetArmorClass(id : number) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/armorClass/" + id, undefined);
+  }
 }

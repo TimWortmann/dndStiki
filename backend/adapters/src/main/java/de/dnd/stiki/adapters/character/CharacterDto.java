@@ -43,6 +43,8 @@ public class CharacterDto {
 
     private Integer realArmorClass;
 
+    private boolean armorClassIsModified;
+
     private Integer speed;
 
     private Integer passivePerception;
@@ -190,6 +192,14 @@ public class CharacterDto {
 
     public void setRealArmorClass(Integer realArmorClass) {
         this.realArmorClass = realArmorClass;
+    }
+
+    public boolean isArmorClassIsModified() {
+        return armorClassIsModified;
+    }
+
+    public void setArmorClassIsModified(boolean armorClassIsModified) {
+        this.armorClassIsModified = armorClassIsModified;
     }
 
     public Integer getSpeed() {

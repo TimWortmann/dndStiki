@@ -1,0 +1,28 @@
+h1 {
+    margin-bottom: 4%;
+}
+
+.dialog-content {
+    margin: 2%;
+
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.save-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.vertical-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+}

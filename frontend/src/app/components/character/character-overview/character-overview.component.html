@@ -154,7 +154,7 @@
       <div class="panel">
          <div class="vertical-flex">
             <button mat-icon-button color="primary" matTooltip="Discard" (click)="discardHealthChange()" *ngIf="isHealthChangeActive()">
-              <mat-icon>refresh</mat-icon>
+              <mat-icon>undo</mat-icon>
             </button>
             <h3>Health</h3>
             <button mat-icon-button color="primary" matTooltip="Save" (click)="saveHealthChange()" *ngIf="isHealthChangeActive()">
@@ -188,7 +188,7 @@
       <div class="panel">
         <div class="vertical-flex">
             <button mat-icon-button color="primary" matTooltip="Discard" (click)="discardHitDiceChange()" *ngIf="isHitDiceChangeActive()">
-              <mat-icon>refresh</mat-icon>
+              <mat-icon>undo</mat-icon>
             </button>
             <h3>Hit Dice (d{{characterValue.hitDice}})</h3>
             <button mat-icon-button color="primary" matTooltip="Save" (click)="saveHitDiceChange()" *ngIf="isHitDiceChangeActive()">
@@ -223,8 +223,11 @@
         <h3> Armor Class </h3>
         <div class="flex-without-gap">
           <p> {{characterValue.realArmorClass}} </p>
-          <button mat-icon-button>
+          <button mat-icon-button matTooltip="Edit" (click)="openArmorClassDialog()" *ngIf="!characterValue.armorClassIsModified">
             <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Reset" (click)="resetArmorClass()" *ngIf="characterValue.armorClassIsModified">
+            <mat-icon>autorenew</mat-icon>
           </button>
         </div>
         <div class="vertical-flex">

@@ -59,6 +59,7 @@ public class CharacterEntityToJpaMapper extends AbstractEntityToJpaMapper<Charac
         jpa.setMaxHitDice(entity.getMaxHitDice());
         jpa.setCurrentHitDice(entity.getCurrentHitDice());
         jpa.setArmorClass(entity.getArmorClass());
+        jpa.setModifiedArmorClass(entity.getModifiedArmorClass());
         jpa.setSpeed(entity.getSpeed());
         jpa.setPassivePerception(entity.getPassivePerception());
         jpa.setProficiencyBonus(entity.getProficiencyBonus());

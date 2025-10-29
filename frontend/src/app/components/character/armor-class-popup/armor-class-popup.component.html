@@ -1,0 +1,21 @@
+<div class="dialog-content">
+    <h1 mat-dialog-title>Change Armor Class</h1>
+
+    <p></p>
+
+    <div class="vertical-flex">
+        <button mat-icon-button color="primary" (click)="changeArmorClass(-1)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+        <p> {{armorClass}}</p>
+        <button mat-icon-button color="primary" (click)="changeArmorClass(1)">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </div>
+</div>
+
+<button mat-icon-button class="close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+</button>
+
+<button mat-flat-button color="primary" class="save-button" (click)="save()" [disabled]="isSavingDisabled()">Save</button>

@@ -22,6 +22,7 @@ export interface CharacterValue {
     currentHitDice: number;
     basicArmorClass: number;
     realArmorClass: number;
+    armorClassIsModified: boolean;
     speed: number;
     passivePerception: number;
     proficiencyBonus: number;

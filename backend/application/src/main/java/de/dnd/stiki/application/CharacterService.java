@@ -472,6 +472,7 @@ public class CharacterService {
         } else {
             characterEntity.setEquippedShield(null);
         }
+        characterEntity.setModifiedArmorClass(null);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
@@ -492,6 +493,7 @@ public class CharacterService {
         } else {
             characterEntity.setEquippedArmor(null);
         }
+        characterEntity.setModifiedArmorClass(null);
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
@@ -507,5 +509,11 @@ public class CharacterService {
         }
         armor.setType(armorItem.getType());
         characterEntity.setEquippedArmor(armor);
+    }
+
+    public CharacterDto changeArmorClass(Long id, Integer armorClass) {
+        CharacterEntity characterEntity = repository.get(id);
+        characterEntity.setModifiedArmorClass(armorClass);
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 }

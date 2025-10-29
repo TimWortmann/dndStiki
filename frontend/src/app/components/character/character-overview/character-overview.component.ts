@@ -21,6 +21,7 @@ import { ItemValue } from '../../../models/item-value';
 import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-details-popup.component';
 import { ItemService } from '../../../services/item/item.service';
 import { CharacterItemValue } from '../../../models/character-item-value';
+import { ArmorClassPopupComponent } from '../armor-class-popup/armor-class-popup.component';
 
 @Component({
   selector: 'app-character-overview',
@@ -567,5 +568,30 @@ throw new Error('Method not implemented.');
         this.setCharacter(response);
       })  
     }
+  }
+
+  openArmorClassDialog(): void {
+    const dialogRef = this.dialog.open(ArmorClassPopupComponent, {
+      data: this.characterValue.realArmorClass, 
+      minWidth: '350px',    
+      height: '150px',     
+      maxWidth: '350px',  
+      maxHeight: '150px',   
+      autoFocus: true,
+    });
+  
+    dialogRef.afterClosed().subscribe((result: number | undefined) => {
+      if (result) {
+        this.characterService.changeArmorClass(this.characterValue.id, result).subscribe((response) => {
+          this.setCharacter(response);
+        })  
+      }
+    });
+  }
+
+  resetArmorClass() {
+    this.characterService.resetArmorClass(this.characterValue.id).subscribe((response) => {
+      this.setCharacter(response);
+    })  
   }
 }

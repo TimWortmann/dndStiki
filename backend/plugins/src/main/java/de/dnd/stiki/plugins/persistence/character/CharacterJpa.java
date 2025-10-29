@@ -57,6 +57,9 @@ public class CharacterJpa {
     @Column(name = "ARMOR_CLASS")
     private Integer armorClass;
 
+    @Column(name = "MODIFIED_ARMOR_CLASS")
+    private Integer modifiedArmorClass;
+
     @Column(name = "SPEED")
     private Integer speed;
 
@@ -204,6 +207,14 @@ public class CharacterJpa {
 
     public void setArmorClass(Integer armorClass) {
         this.armorClass = armorClass;
+    }
+
+    public Integer getModifiedArmorClass() {
+        return modifiedArmorClass;
+    }
+
+    public void setModifiedArmorClass(Integer modifiedArmorClass) {
+        this.modifiedArmorClass = modifiedArmorClass;
     }
 
     public Integer getSpeed() {

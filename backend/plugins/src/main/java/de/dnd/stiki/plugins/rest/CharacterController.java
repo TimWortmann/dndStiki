@@ -141,4 +141,14 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> unequipArmor(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.equipArmor(id, null));
     }
+
+    @PutMapping("/armorClass/{id}/{armorClass}")
+    public ResponseEntity<CharacterDto> changeArmorClass(@PathVariable Long id, @PathVariable Integer armorClass) {
+        return ResponseEntity.ok().body(service.changeArmorClass(id, armorClass));
+    }
+
+    @PutMapping("/armorClass/{id}")
+    public ResponseEntity<CharacterDto> resetArmorClass(@PathVariable Long id) {
+        return ResponseEntity.ok().body(service.changeArmorClass(id, null));
+    }
 }

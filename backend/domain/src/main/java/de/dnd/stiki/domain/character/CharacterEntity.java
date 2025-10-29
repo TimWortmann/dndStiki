@@ -38,6 +38,7 @@ public class CharacterEntity {
     private Integer currentHitDice;
 
     private Integer armorClass;
+    private Integer modifiedArmorClass;
 
     private Integer speed;
 
@@ -178,7 +179,20 @@ public class CharacterEntity {
         this.armorClass = armorClass;
     }
 
+    public Integer getModifiedArmorClass() {
+        return modifiedArmorClass;
+    }
+
+    public void setModifiedArmorClass(Integer modifiedArmorClass) {
+        this.modifiedArmorClass = modifiedArmorClass;
+    }
+
     public Integer getFinalArmorClass() {
+
+        if (modifiedArmorClass != null) {
+            return modifiedArmorClass;
+        }
+
         Integer finalArmorClass = armorClass;
 
         if (equippedArmor != null) {
