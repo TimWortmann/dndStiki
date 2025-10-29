@@ -376,7 +376,8 @@
       <mat-tab label="Equipment">
         <div *ngIf="characterValue" class="item-list">
           <app-item-list 
-          [data]="characterValue.equipment" [quantityColumn]="true" 
+          [data]="characterValue.equipment" 
+          [bigQuantityColumn]="true" 
           [equippedColumn]="true" [typeColumn]="true" 
           [propertiesColumn]="true" 
           [equippedShield]="characterValue.equippedShield"
