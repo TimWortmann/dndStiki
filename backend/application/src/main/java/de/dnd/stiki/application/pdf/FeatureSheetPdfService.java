@@ -13,7 +13,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.UnitValue;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterRepository;
-import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.helper.SubclassHelper;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class FeatureSheetPdfService {
     private CharacterRepository characterRepository;
 
     @Autowired
-    private SubclassReader subclassReader;
+    private SubclassHelper subclassHelper;
 
     PdfFont bold;
 
@@ -73,7 +73,7 @@ public class FeatureSheetPdfService {
 
             document.add(new AreaBreak());
             document.add(new Paragraph(classFeaturesHeader).setFont(bold));
-            addTraitBoxes(document, subclassReader.getRelevantClassFeatures(character, filterLevelFeatures));
+            addTraitBoxes(document, subclassHelper.getRelevantClassFeatures(character, filterLevelFeatures));
         }
 
         File file = tempOutput.toFile();

@@ -1,4 +1,4 @@
-package de.dnd.stiki.domain.reader;
+package de.dnd.stiki.domain.helper;
 
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.enums.SubclassPrefix;
@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
-public class SubclassReader {
+public class SubclassHelper {
 
     public List<String> getDndSubclasses(List<String> featureNames) {
         List<String> subclasses = featureNames.stream()

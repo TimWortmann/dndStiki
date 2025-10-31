@@ -2,7 +2,7 @@ package de.dnd.stiki.plugins.persistence.character;
 
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
-import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.helper.SubclassHelper;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import de.dnd.stiki.plugins.persistence.AbstractJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.basic.trait.TraitJpaToEntityMapper;
@@ -34,7 +34,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
     private TraitJpaToEntityMapper traitJpaToEntityMapper;
 
     @Autowired
-    private SubclassReader subclassReader;
+    private SubclassHelper subclassHelper;
 
     @Autowired
     private CharacterShieldJpaToEntiyMapper shieldJpaToEntiyMapper;
@@ -122,6 +122,6 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
                 .toList();
 
         // Delegate parsing to the shared method
-        return subclassReader.getDndSubclasses(featureNames);
+        return subclassHelper.getDndSubclasses(featureNames);
     }
 }

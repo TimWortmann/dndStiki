@@ -2,6 +2,8 @@ package de.dnd.stiki.adapters.character.characterAttack;
 
 import de.dnd.stiki.domain.character.CharacterAbilityEntity;
 import de.dnd.stiki.domain.character.CharacterAttackEntity;
+import de.dnd.stiki.domain.helper.AttackHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.List;
 
 @Component
 public class CharacterAttackEntityToDtoMapper {
+
+    @Autowired
+    private AttackHelper attackHelper;
 
 
     public CharacterAttackDto mapEntityToDto(CharacterAttackEntity entity, List<CharacterAbilityEntity> abilities, int proficiencyBonus) {
@@ -21,20 +26,8 @@ public class CharacterAttackEntityToDtoMapper {
             return dto;
         }
 
-        Integer abilityModifier = null;
-        for (CharacterAbilityEntity ability : abilities) {
-            if (ability.getName().equals(entity.getAbility())) {
-                abilityModifier = ability.getModifier();
-            }
-        }
-        int hitBonus = abilityModifier;
-
-        if (entity.isProficient()) {
-            hitBonus += proficiencyBonus;
-        }
-
-        dto.setHitBonus("+ " + hitBonus);
-        dto.setDamageRoll(entity.getBaseDamageRoll() + " + " + abilityModifier);
+        dto.setHitBonus(attackHelper.getFinalHitBonus(entity, abilities, proficiencyBonus));
+        dto.setDamageRoll(attackHelper.getFinalDamageRoll(entity, abilities));
         return dto;
     }
 

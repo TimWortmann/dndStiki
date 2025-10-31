@@ -13,7 +13,7 @@ import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
 import de.dnd.stiki.domain.character.CharacterItemEntity;
 import de.dnd.stiki.domain.enums.ItemType;
-import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.helper.SubclassHelper;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
     private TraitEntityToDtoMapper traitEntityToDtoMapper;
 
     @Autowired
-    private SubclassReader subclassReader;
+    private SubclassHelper subclassHelper;
 
     @Autowired
     private CharacterShieldEntityToDtoMapper shieldEntityToDtoMapper;
@@ -123,7 +123,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
     private List<TraitDto> getRelevantClassFeatures(CharacterEntity entity) {
 
-        List<TraitEntity> relevantClassFeatures = subclassReader.getRelevantClassFeatures(entity, true);
+        List<TraitEntity> relevantClassFeatures = subclassHelper.getRelevantClassFeatures(entity, true);
 
         return traitEntityToDtoMapper.mapEntitiesToDtos(relevantClassFeatures);
     }

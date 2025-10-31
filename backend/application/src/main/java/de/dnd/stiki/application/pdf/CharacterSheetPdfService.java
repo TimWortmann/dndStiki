@@ -8,7 +8,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import de.dnd.stiki.domain.character.*;
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
-import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.helper.AttackHelper;
+import de.dnd.stiki.domain.helper.SubclassHelper;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -36,7 +37,10 @@ public class CharacterSheetPdfService {
     private CharacterRepository characterRepository;
 
     @Autowired
-    private SubclassReader subclassReader;
+    private SubclassHelper subclassHelper;
+
+    @Autowired
+    private AttackHelper attackHelper;
 
     public File fillCharacterSheet(Long characterId) throws Exception {
 
@@ -155,6 +159,10 @@ public class CharacterSheetPdfService {
 
         fieldValues.put("Equipment", equipmentBuilder.toString());
 
+        setAttackFieldValues(fieldValues, character, 0);
+        setAttackFieldValues(fieldValues, character, 1);
+        setAttackFieldValues(fieldValues, character, 2);
+
         return fieldValues;
     }
 
@@ -223,7 +231,7 @@ public class CharacterSheetPdfService {
         StringBuilder featureBuilder = new StringBuilder();
 
         featureBuilder.append("Class Features:");
-        for (TraitEntity classFeature : subclassReader.getRelevantClassFeatures(character, true)) {
+        for (TraitEntity classFeature : subclassHelper.getRelevantClassFeatures(character, true)) {
             featureBuilder.append("\n- ");
             featureBuilder.append(classFeature.getName());
         }
@@ -254,5 +262,31 @@ public class CharacterSheetPdfService {
         }
 
         fieldValues.put("Features and Traits", featureBuilder.toString());
+    }
+
+    private void setAttackFieldValues(Map<String, String> fieldValues, CharacterEntity character, int attackNumber) {
+        CharacterAttackEntity attackEntity = character.getAttacks().get(attackNumber);
+        int pdfAttackNumber = attackNumber + 1;
+
+        String nameKey = "Wpn Name";
+        if (pdfAttackNumber != 1) {
+            nameKey += " " + pdfAttackNumber;
+        }
+        fieldValues.put(nameKey, attackEntity.getName());
+
+        String attackBonusKey = "Wpn" + pdfAttackNumber + " AtkBonus";
+        String damageKey = "Wpn" + pdfAttackNumber + " Damage";
+
+        if (pdfAttackNumber != 1) {
+            attackBonusKey += " ";
+            damageKey += " ";
+        }
+
+        if (pdfAttackNumber == 3) {
+            attackBonusKey += " ";
+        }
+
+        fieldValues.put(attackBonusKey, attackHelper.getFinalHitBonus(attackEntity, character.getAbilities(), character.getProficiencyBonus()));
+        fieldValues.put(damageKey, attackHelper.getFinalDamageRoll(attackEntity, character.getAbilities()));
     }
 }

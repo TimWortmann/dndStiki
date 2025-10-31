@@ -2,7 +2,7 @@ package de.dnd.stiki.adapters.dndClass;
 
 import de.dnd.stiki.adapters.AbstractEntityToDtoMapper;
 import de.dnd.stiki.adapters.dndClass.classLevel.ClassLevelEntityToDtoMapper;
-import de.dnd.stiki.domain.reader.SubclassReader;
+import de.dnd.stiki.domain.helper.SubclassHelper;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.dndClass.DndClassEntity;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
@@ -23,7 +23,7 @@ public class DndClassEntityToDtoMapper extends AbstractEntityToDtoMapper<DndClas
     private TraitEntityToDtoMapper traitEntityToDtoMapper;
 
     @Autowired
-    private SubclassReader subclassReader;
+    private SubclassHelper subclassHelper;
 
     @Override
     public DndClassDto mapEntityToDto(DndClassEntity entity) {
@@ -56,7 +56,7 @@ public class DndClassEntityToDtoMapper extends AbstractEntityToDtoMapper<DndClas
                 .toList();
 
         // Delegate parsing to the other method
-        return subclassReader.getDndSubclasses(featureNames);
+        return subclassHelper.getDndSubclasses(featureNames);
     }
 
 }
