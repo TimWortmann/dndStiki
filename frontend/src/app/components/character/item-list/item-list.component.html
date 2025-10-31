@@ -44,6 +44,12 @@
     </button>
 </ng-template>
 
+<ng-template #removeTemplate let-column="column" let-element="element">
+    <button mat-icon-button color="primary" (click)="removeItem(element)">
+        <mat-icon>delete</mat-icon>
+    </button>
+</ng-template>
+
 <div>
     <div>
         <custom-table

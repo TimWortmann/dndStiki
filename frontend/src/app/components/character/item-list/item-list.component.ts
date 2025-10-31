@@ -26,6 +26,7 @@ export class ItemListComponent implements AfterViewInit {
   @ViewChild('detailsTemplate') detailsTemplate!: TemplateRef<any>;
   @ViewChild('equippedTemplate') equippedTemplate!: TemplateRef<any>;
   @ViewChild('addTemplate') addTemplate!: TemplateRef<any>;
+  @ViewChild('removeTemplate') removeTemplate!: TemplateRef<any>;
 
   @Input() data!: ItemValue[] | CharacterItemValue[];
   @Input() equippedShield? : CharacterShieldValue;
@@ -40,6 +41,7 @@ export class ItemListComponent implements AfterViewInit {
   @Input() bigQuantityColumn: boolean = false;
   @Input() equippedColumn: boolean = false;
   @Input() addColumn: boolean = false;
+  @Input() removeColumn: boolean = false;
 
   @Output() addItemEvent = new EventEmitter<ItemValue>();
   @Output() changeItemQuantityEvent = new EventEmitter<CharacterItemValue>();
@@ -137,10 +139,21 @@ export class ItemListComponent implements AfterViewInit {
       this.tableColumns.push(
         {
           name: 'Actions',
-          dataKey: 'actions',
+          dataKey: 'add',
           position: 'left',
           isSortable: false,
           template: this.addTemplate,
+        })
+    }
+
+    if (this.removeColumn) {
+      this.tableColumns.push(
+        {
+          name: 'Actions',
+          dataKey: 'remove',
+          position: 'left',
+          isSortable: false,
+          template: this.removeTemplate,
         })
     }
 
@@ -182,6 +195,11 @@ export class ItemListComponent implements AfterViewInit {
         this.changeItemQuantityEvent.emit(item); 
       }
     });
+  }
+
+  removeItem(item : CharacterItemValue) {
+    item.quantity = 0;
+    this.changeItemQuantityEvent.emit(item); 
   }
 
   equipItem(item: CharacterItemValue) {
