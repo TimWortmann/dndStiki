@@ -125,8 +125,8 @@ export class ItemListComponent implements AfterViewInit {
     if (this.equippedColumn) {
       this.tableColumns.push(
         {
-          name: 'Equipped',
-          dataKey: 'equipped',
+          name: 'Equip',
+          dataKey: 'equip',
           position: 'left',
           isSortable: false,
           template: this.equippedTemplate,

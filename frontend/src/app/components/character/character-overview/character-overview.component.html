@@ -409,7 +409,7 @@
       </button>
     </div>
     <mat-tab-group>
-      <mat-tab label="Items">
+      <mat-tab label="All Items">
         <div *ngIf="characterValue" class="item-list">
           <app-item-list [data]="characterValue.items" [typeColumn]="true" [bigQuantityColumn]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
@@ -422,7 +422,6 @@
           [equippedShield]="characterValue.equippedShield"
           [equippedArmor]="characterValue.equippedArmor"
           [equippedWeapons]="characterValue.attacks"
-          [bigQuantityColumn]="true" 
           [equippedColumn]="true" [typeColumn]="true" 
           [propertiesColumn]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"
