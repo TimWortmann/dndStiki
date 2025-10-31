@@ -38,6 +38,9 @@ import static de.dnd.stiki.domain.enums.AbilityType.*;
 @Service
 public class CharacterService {
 
+    private static final String TWO_HANDED = " (Two Handed)";
+    private static final String FINESSE = " (Finesse)";
+
     @Autowired
     private CharacterRepository repository;
 
@@ -534,14 +537,14 @@ public class CharacterService {
 
         if (weaponItemEntity.getDmg2() != null) {
             CharacterAttackEntity attackEntity2 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg2(), STRENGTH);
-            attackEntity2.setName(attackEntity2.getName() + " (Two Handed)");
+            attackEntity2.setName(attackEntity2.getName() + TWO_HANDED);
             characterEntity.getAttacks().add(attackEntity2);
         }
 
         for (String weaponProperty : weaponItemEntity.getProperties()) {
             if (weaponProperty.equalsIgnoreCase("finesse")) {
                 CharacterAttackEntity attackEntity3 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), DEXTERITY);
-                attackEntity3.setName(attackEntity3.getName() + " (Finesse)");
+                attackEntity3.setName(attackEntity3.getName() + FINESSE);
                 characterEntity.getAttacks().add(attackEntity3);
             }
         }
@@ -549,7 +552,7 @@ public class CharacterService {
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 
-    private static CharacterAttackEntity createCharacterAttackEntity(ItemEntity weaponItemEntity, CharacterEntity characterEntity, String baseDamage, AbilityType ability) {
+    private CharacterAttackEntity createCharacterAttackEntity(ItemEntity weaponItemEntity, CharacterEntity characterEntity, String baseDamage, AbilityType ability) {
         CharacterAttackEntity attackEntity = new CharacterAttackEntity();
         attackEntity.setName(weaponItemEntity.getName());
         attackEntity.setBaseDamageRoll(baseDamage);
@@ -564,5 +567,23 @@ public class CharacterService {
             }
         }
         return attackEntity;
+    }
+
+    public CharacterDto unequipWeapon (Long id, String weaponName) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        characterEntity.getAttacks().removeIf(attack -> attack.getName().equals(weaponName)
+                || attack.getName().equals(weaponName + TWO_HANDED)
+                || attack.getName().equals(weaponName + FINESSE));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto removeAttack(Long id, String attackName) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        characterEntity.getAttacks().removeIf(attack -> attack.getName().equals(attackName));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
 }

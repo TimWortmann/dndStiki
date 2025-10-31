@@ -156,4 +156,14 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> equipWeapon(@PathVariable Long id, @RequestBody CharacterItemDto weaponItem) {
         return ResponseEntity.ok().body(service.equipWeapon(id, weaponItem));
     }
+
+    @DeleteMapping("/weapon/{characterId}/{weaponName}")
+    public ResponseEntity<CharacterDto> unequipWeapon(@PathVariable Long characterId, @PathVariable String weaponName) {
+        return ResponseEntity.ok().body(service.unequipWeapon(characterId, weaponName));
+    }
+
+    @DeleteMapping("/attack/{characterId}/{attackName}")
+    public ResponseEntity<CharacterDto> removeAttack(@PathVariable Long characterId, @PathVariable String attackName) {
+        return ResponseEntity.ok().body(service.removeAttack(characterId, attackName));
+    }
 }

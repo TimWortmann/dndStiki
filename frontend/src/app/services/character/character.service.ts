@@ -125,4 +125,13 @@ export class CharacterService {
   equipWeapon(id : number, weaponItem : CharacterItemValue) {
     return this.http.put<CharacterValue>(this.baseUrl + "/weapon/" + id, weaponItem);
   }
+
+  unequipWeapon(id : number, weaponName : string) {
+    console.log("Id", id)
+    return this.http.delete<CharacterValue>(this.baseUrl + "/weapon/" + id + "/" + encodeURIComponent(weaponName));
+  }
+
+  removeAttack(id : number, attackName : string) {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/attack/" + id + "/" + encodeURIComponent(attackName));
+  }
 }

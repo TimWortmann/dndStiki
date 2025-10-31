@@ -569,8 +569,14 @@ throw new Error('Method not implemented.');
       })
     }
     
-    if (item.type.toLowerCase().includes("armor")) {
+    else if (item.type.toLowerCase().includes("armor")) {
       this.characterService.unequipArmor(this.characterValue.id).subscribe((response) => {
+        this.setCharacter(response);
+      })  
+    }
+
+    else if (item.type.toLowerCase().includes("weapon")) {
+      this.characterService.unequipWeapon(this.characterValue.id, item.name).subscribe((response) => {
         this.setCharacter(response);
       })  
     }
@@ -598,6 +604,12 @@ throw new Error('Method not implemented.');
   resetArmorClass() {
     this.characterService.resetArmorClass(this.characterValue.id).subscribe((response) => {
       this.setCharacter(response);
+    })  
+  }
+
+  removeAttack(attackName : string) {
+    this.characterService.removeAttack(this.characterValue.id, attackName).subscribe((response) => {
+        this.setCharacter(response);
     })  
   }
 }

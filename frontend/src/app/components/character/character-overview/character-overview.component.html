@@ -353,7 +353,9 @@
           <div class="info-box flex" *ngIf="characterValue.weaponProficiencies">
             <span><b>Class Proficiencies:</b></span>
             <span> {{getFancyListString((characterValue.weaponProficiencies))}}</span>
+            <hr class="divider">
             <div class="flex"> 
+              <span style="color: red;">Only the first three attacks will be shown in the pdf character sheet.</span>  
             </div>
           </div>  
 
@@ -379,7 +381,7 @@
               <button mat-icon-button matTooltip="Edit">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button matTooltip="Remove">
+              <button mat-icon-button matTooltip="Remove" (click)="removeAttack(attack.name)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
