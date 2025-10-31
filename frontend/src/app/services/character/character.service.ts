@@ -139,4 +139,8 @@ export class CharacterService {
   modifyAttack(id : number, attack : CharacterAttackValue) {
     return this.http.put<CharacterValue>(this.baseUrl + "/attack/" + id, attack);
   }
+
+  changeAttackProficiency(id : number, attackName : string, proficiency : boolean) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/attack/" + id + "/" + encodeURIComponent(attackName) + "/" + proficiency, undefined);
+  }
 }

@@ -624,4 +624,16 @@ public class CharacterService {
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
+
+    public CharacterDto changeAttackProficiency(Long id, String attackName, boolean newProficiency) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        for (CharacterAttackEntity attack : characterEntity.getAttacks()) {
+            if (attack.getName().equals(attackName)) {
+                attack.setProficient(newProficiency);
+            }
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
 }

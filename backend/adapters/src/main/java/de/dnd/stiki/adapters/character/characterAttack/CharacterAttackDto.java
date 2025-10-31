@@ -5,6 +5,7 @@ public class CharacterAttackDto {
     private String name;
     private String hitBonus;
     private String damageRoll;
+    private boolean proficient;
 
     public String getName() {
         return name;
@@ -28,5 +29,13 @@ public class CharacterAttackDto {
 
     public void setDamageRoll(String damageRoll) {
         this.damageRoll = damageRoll;
+    }
+
+    public boolean isProficient() {
+        return proficient;
+    }
+
+    public void setProficient(boolean proficient) {
+        this.proficient = proficient;
     }
 }

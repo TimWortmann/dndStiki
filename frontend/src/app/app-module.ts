@@ -106,7 +106,7 @@ registerLocaleData(localeDe);
     MatProgressBarModule,
     MatTooltipModule,
     MatListModule,
-    NgxMatSelectSearchModule,  
+    NgxMatSelectSearchModule, 
 ],
   providers: [
     provideBrowserGlobalErrorListeners(),

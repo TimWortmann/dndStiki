@@ -172,4 +172,9 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> modifyAttack(@PathVariable Long id, @RequestBody CharacterAttackDto modifiedAttack) {
         return ResponseEntity.ok().body(service.modifyAttack(id, modifiedAttack));
     }
+
+    @PutMapping("/attack/{characterId}/{attackName}/{newProficiency}")
+    public ResponseEntity<CharacterDto> changeAttackProficiency(@PathVariable Long characterId, @PathVariable String attackName, @PathVariable boolean newProficiency) {
+        return ResponseEntity.ok().body(service.changeAttackProficiency(characterId,attackName, newProficiency));
+    }
 }

@@ -265,6 +265,10 @@ public class CharacterSheetPdfService {
     }
 
     private void setAttackFieldValues(Map<String, String> fieldValues, CharacterEntity character, int attackNumber) {
+        if (character.getAttacks().size() <= attackNumber) {
+            return;
+        }
+
         CharacterAttackEntity attackEntity = character.getAttacks().get(attackNumber);
         int pdfAttackNumber = attackNumber + 1;
 
@@ -286,7 +290,25 @@ public class CharacterSheetPdfService {
             attackBonusKey += " ";
         }
 
-        fieldValues.put(attackBonusKey, attackHelper.getFinalHitBonus(attackEntity, character.getAbilities(), character.getProficiencyBonus()));
-        fieldValues.put(damageKey, attackHelper.getFinalDamageRoll(attackEntity, character.getAbilities()));
+        String finalHitBonus;
+        String finalDamageBonus;
+
+        if (attackEntity.getModifiedHitBonus() != null) {
+            finalHitBonus = attackEntity.getModifiedHitBonus();
+        }
+        else {
+            finalHitBonus = attackHelper.getFinalHitBonus(attackEntity, character.getAbilities(), character.getProficiencyBonus());
+        }
+
+
+        if (attackEntity.getModifiedDamageRoll() != null) {
+            finalDamageBonus = attackEntity.getModifiedDamageRoll();
+        }
+        else {
+            finalDamageBonus = attackHelper.getFinalDamageRoll(attackEntity, character.getAbilities());
+        }
+
+        fieldValues.put(attackBonusKey, finalHitBonus);
+        fieldValues.put(damageKey, finalDamageBonus);
     }
 }

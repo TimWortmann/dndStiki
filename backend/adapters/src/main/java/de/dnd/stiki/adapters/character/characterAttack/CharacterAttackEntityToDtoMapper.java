@@ -28,6 +28,7 @@ public class CharacterAttackEntityToDtoMapper {
 
         dto.setHitBonus(attackHelper.getFinalHitBonus(entity, abilities, proficiencyBonus));
         dto.setDamageRoll(attackHelper.getFinalDamageRoll(entity, abilities));
+        dto.setProficient(entity.isProficient());
         return dto;
     }
 

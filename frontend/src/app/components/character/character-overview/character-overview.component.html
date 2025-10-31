@@ -382,6 +382,7 @@
             </mat-form-field>
 
             <div class="flex-without-gap">
+              <mat-checkbox [(ngModel)]="attack.proficient" matTooltip="Proficient" (change)="changeAttackProficiency(attack)"></mat-checkbox>
               <button mat-icon-button matTooltip="Edit" *ngIf="!isThisAttackCurrentlyEdited(attack)"
               [disabled]="isAttackEditDisabled()" (click)="editAttack(attack)">
                 <mat-icon>edit</mat-icon>

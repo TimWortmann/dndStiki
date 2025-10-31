@@ -123,6 +123,7 @@ throw new Error('Method not implemented.');
     this.characterValue.skills = this.sortSkills();  
     this.readCurrentClass();
     this.readCurrentBackground();
+    this.currentAttackEdit = undefined;
     this.cdr.detectChanges();
   }
 
@@ -561,7 +562,6 @@ throw new Error('Method not implemented.');
     else if (item.type.toLowerCase().includes("weapon")) {
       this.characterService.equipWeapon(this.characterValue.id, item).subscribe((response) => {
         this.setCharacter(response);
-        this.currentAttackEdit = undefined;
       })  
     }
   }
@@ -582,7 +582,6 @@ throw new Error('Method not implemented.');
     else if (item.type.toLowerCase().includes("weapon")) {
       this.characterService.unequipWeapon(this.characterValue.id, item.name).subscribe((response) => {
         this.setCharacter(response);
-        this.currentAttackEdit = undefined;
       })  
     }
   }
@@ -615,7 +614,6 @@ throw new Error('Method not implemented.');
   removeAttack(attackName : string) {
     this.characterService.removeAttack(this.characterValue.id, attackName).subscribe((response) => {
       this.setCharacter(response);
-      this.currentAttackEdit = undefined;
     })  
   }
 
@@ -634,7 +632,6 @@ throw new Error('Method not implemented.');
   saveAttack(attack : CharacterAttackValue) {
     this.characterService.modifyAttack(this.characterValue.id, attack).subscribe((response) => {
       this.setCharacter(response);
-      this.currentAttackEdit = undefined;
     }) 
   }
 
@@ -642,12 +639,18 @@ throw new Error('Method not implemented.');
     if (!this.characterValue.attacks) {
       return false;
     }
-    
+
     for (let attack of this.characterValue.attacks) {
       if (attack.name.toLowerCase().includes("modified")) {
         return true;
       }
     }
     return false;
+  }
+
+  changeAttackProficiency(attack : CharacterAttackValue) {
+    this.characterService.changeAttackProficiency(this.characterValue.id, attack.name, attack.proficient).subscribe((response) => {
+      this.setCharacter(response);
+    }) 
   }
 }
