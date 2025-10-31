@@ -637,4 +637,17 @@ throw new Error('Method not implemented.');
       this.currentAttackEdit = undefined;
     }) 
   }
+
+  hasModifiedAttacks() : boolean {
+    if (!this.characterValue.attacks) {
+      return false;
+    }
+    
+    for (let attack of this.characterValue.attacks) {
+      if (attack.name.toLowerCase().includes("modified")) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

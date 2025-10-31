@@ -23,6 +23,7 @@ import de.dnd.stiki.domain.dndClass.DndClassRepository;
 import de.dnd.stiki.domain.dndClass.classLevel.ClassLevelEntity;
 import de.dnd.stiki.domain.dndClass.feature.FeatureEntity;
 import de.dnd.stiki.domain.enums.AbilityType;
+import de.dnd.stiki.domain.enums.ItemType;
 import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.race.RaceEntity;
@@ -533,18 +534,18 @@ public class CharacterService {
             characterEntity.setAttacks(new ArrayList<>());
         }
 
-        CharacterAttackEntity attackEntity = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), STRENGTH);
+        CharacterAttackEntity attackEntity = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), getMainAbility(weaponItemEntity.getType()));
         characterEntity.getAttacks().add(attackEntity);
 
         if (weaponItemEntity.getDmg2() != null) {
-            CharacterAttackEntity attackEntity2 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg2(), STRENGTH);
+            CharacterAttackEntity attackEntity2 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg2(), getMainAbility(weaponItemEntity.getType()));
             attackEntity2.setName(attackEntity2.getName() + TWO_HANDED);
             characterEntity.getAttacks().add(attackEntity2);
         }
 
         for (String weaponProperty : weaponItemEntity.getProperties()) {
             if (weaponProperty.equalsIgnoreCase("finesse")) {
-                CharacterAttackEntity attackEntity3 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), DEXTERITY);
+                CharacterAttackEntity attackEntity3 = createCharacterAttackEntity(weaponItemEntity, characterEntity, weaponItemEntity.getDmg1(), getSecondaryAbility(weaponItemEntity.getType()));
                 attackEntity3.setName(attackEntity3.getName() + FINESSE);
                 characterEntity.getAttacks().add(attackEntity3);
             }
@@ -570,7 +571,23 @@ public class CharacterService {
         return attackEntity;
     }
 
-    public CharacterDto unequipWeapon (Long id, String weaponName) {
+    private AbilityType getMainAbility(ItemType weaponType) {
+        if (weaponType.equals(ItemType.MELEE_WEAPON)) {
+            return STRENGTH;
+        }
+
+        return DEXTERITY;
+    }
+
+    private AbilityType getSecondaryAbility(ItemType weaponType) {
+        if (weaponType.equals(ItemType.MELEE_WEAPON)) {
+            return DEXTERITY;
+        }
+
+        return STRENGTH;
+    }
+
+    public CharacterDto unequipWeapon(Long id, String weaponName) {
         CharacterEntity characterEntity = repository.get(id);
 
         characterEntity.getAttacks().removeIf(attack -> attack.getName().equals(weaponName)

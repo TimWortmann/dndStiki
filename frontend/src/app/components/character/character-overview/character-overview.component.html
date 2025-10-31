@@ -353,9 +353,13 @@
           <div class="info-box flex" *ngIf="characterValue.weaponProficiencies">
             <span><b>Class Proficiencies:</b></span>
             <span> {{getFancyListString((characterValue.weaponProficiencies))}}</span>
-            <hr class="divider">
-            <div class="flex"> 
-              <span style="color: red;">Only the first three attacks will be shown in the pdf character sheet.</span>  
+            <div *ngIf="characterValue.attacks && characterValue.attacks.length > 3">
+              <hr class="divider" >
+              <span style="color: red;">Only the first three attacks will be visible in the PDF character sheet.</span>  
+            </div>
+            <div *ngIf="hasModifiedAttacks()">
+              <hr class="divider">
+              <span style="color: red;">Modified attacks do not update with ability modifier or proficiency bonus changes.</span> 
             </div>
           </div>  
 
