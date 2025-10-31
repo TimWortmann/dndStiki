@@ -24,6 +24,12 @@ public class CharacterAttackJpa {
     @Column(name = "PROFICIENT")
     private boolean proficient;
 
+    @Column(name = "MODIFIED_HIT_BONUS")
+    private String modifiedHitBonus;
+
+    @Column(name = "MODIFIED_DAMAGE_ROLL")
+    private String modifiedDamageRoll;
+
     @ManyToOne
     @JoinColumn(name = "CHARACTER_ID")
     private CharacterJpa character;
@@ -66,6 +72,22 @@ public class CharacterAttackJpa {
 
     public void setProficient(boolean proficient) {
         this.proficient = proficient;
+    }
+
+    public String getModifiedHitBonus() {
+        return modifiedHitBonus;
+    }
+
+    public void setModifiedHitBonus(String modifiedHitBonus) {
+        this.modifiedHitBonus = modifiedHitBonus;
+    }
+
+    public String getModifiedDamageRoll() {
+        return modifiedDamageRoll;
+    }
+
+    public void setModifiedDamageRoll(String modifiedDamageRoll) {
+        this.modifiedDamageRoll = modifiedDamageRoll;
     }
 
     public CharacterJpa getCharacter() {

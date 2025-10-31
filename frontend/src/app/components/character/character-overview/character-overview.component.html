@@ -369,17 +369,21 @@
 
             <mat-form-field appearance="outline" style="width: 100%;">
               <mat-label>Hit Bonus</mat-label>
-              <input matInput [(ngModel)]="attack.hitBonus" disabled="true">
+              <input matInput [(ngModel)]="attack.hitBonus" [disabled]="!isThisAttackCurrentlyEdited(attack)">
             </mat-form-field>
 
             <mat-form-field appearance="outline" style="width: 100%;">
               <mat-label>Damage Roll</mat-label>
-              <input matInput [(ngModel)]="attack.damageRoll" disabled="true">
+              <input matInput [(ngModel)]="attack.damageRoll" [disabled]="!isThisAttackCurrentlyEdited(attack)">
             </mat-form-field>
 
             <div class="flex-without-gap">
-              <button mat-icon-button matTooltip="Edit">
+              <button mat-icon-button matTooltip="Edit" *ngIf="!isThisAttackCurrentlyEdited(attack)"
+              [disabled]="isAttackEditDisabled()" (click)="editAttack(attack)">
                 <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Save" *ngIf="isThisAttackCurrentlyEdited(attack)" (click)="saveAttack(attack)">
+                <mat-icon>save</mat-icon>
               </button>
               <button mat-icon-button matTooltip="Remove" (click)="removeAttack(attack.name)">
                 <mat-icon>delete</mat-icon>

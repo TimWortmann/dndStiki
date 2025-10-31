@@ -22,6 +22,7 @@ import { ItemDetailsPopupComponent } from '../../items/item-details-popup/item-d
 import { ItemService } from '../../../services/item/item.service';
 import { CharacterItemValue } from '../../../models/character-item-value';
 import { ArmorClassPopupComponent } from '../armor-class-popup/armor-class-popup.component';
+import { CharacterAttackValue } from '../../../models/character-attack-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -60,6 +61,8 @@ throw new Error('Method not implemented.');
   skillChangeActive : boolean = false;
 
   allItems? : ItemValue[];
+
+  currentAttackEdit? : CharacterAttackValue;
 
   constructor(
     private dndClassService: DndClassService, 
@@ -558,6 +561,7 @@ throw new Error('Method not implemented.');
     else if (item.type.toLowerCase().includes("weapon")) {
       this.characterService.equipWeapon(this.characterValue.id, item).subscribe((response) => {
         this.setCharacter(response);
+        this.currentAttackEdit = undefined;
       })  
     }
   }
@@ -578,6 +582,7 @@ throw new Error('Method not implemented.');
     else if (item.type.toLowerCase().includes("weapon")) {
       this.characterService.unequipWeapon(this.characterValue.id, item.name).subscribe((response) => {
         this.setCharacter(response);
+        this.currentAttackEdit = undefined;
       })  
     }
   }
@@ -609,7 +614,27 @@ throw new Error('Method not implemented.');
 
   removeAttack(attackName : string) {
     this.characterService.removeAttack(this.characterValue.id, attackName).subscribe((response) => {
-        this.setCharacter(response);
+      this.setCharacter(response);
+      this.currentAttackEdit = undefined;
     })  
+  }
+
+  isAttackEditDisabled() : boolean {
+    return this.currentAttackEdit !== undefined;
+  }
+
+  isThisAttackCurrentlyEdited(attack : CharacterAttackValue) : boolean {
+    return this.currentAttackEdit === attack;
+  }
+
+  editAttack(attack : CharacterAttackValue) {
+    this.currentAttackEdit = attack;
+  }
+
+  saveAttack(attack : CharacterAttackValue) {
+    this.characterService.modifyAttack(this.characterValue.id, attack).subscribe((response) => {
+      this.setCharacter(response);
+      this.currentAttackEdit = undefined;
+    }) 
   }
 }

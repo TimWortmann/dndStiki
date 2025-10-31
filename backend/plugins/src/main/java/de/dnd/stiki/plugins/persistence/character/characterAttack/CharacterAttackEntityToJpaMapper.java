@@ -14,6 +14,8 @@ public class CharacterAttackEntityToJpaMapper extends AbstractEntityToJpaMapper<
         jpa.setBaseDamageRoll(entity.getBaseDamageRoll());
         jpa.setAbility(entity.getAbility().getName());
         jpa.setProficient(entity.isProficient());
+        jpa.setModifiedHitBonus(entity.getModifiedHitBonus());
+        jpa.setModifiedDamageRoll(entity.getModifiedDamageRoll());
         return jpa;
     }
 }

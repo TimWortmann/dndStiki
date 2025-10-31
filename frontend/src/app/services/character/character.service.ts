@@ -8,6 +8,7 @@ import { CharacterSkillValue } from '../../models/character-skill-value';
 import { FeatValue } from '../../models/feat-value';
 import { ItemValue } from '../../models/item-value';
 import { CharacterItemValue } from '../../models/character-item-value';
+import { CharacterAttackValue } from '../../models/character-attack-value';
 
 @Injectable({
   providedIn: 'root'
@@ -133,5 +134,9 @@ export class CharacterService {
 
   removeAttack(id : number, attackName : string) {
     return this.http.delete<CharacterValue>(this.baseUrl + "/attack/" + id + "/" + encodeURIComponent(attackName));
+  }
+
+  modifyAttack(id : number, attack : CharacterAttackValue) {
+    return this.http.put<CharacterValue>(this.baseUrl + "/attack/" + id, attack);
   }
 }

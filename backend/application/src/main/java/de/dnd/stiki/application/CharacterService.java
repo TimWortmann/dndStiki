@@ -4,6 +4,7 @@ import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.CharacterEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDtoToEntityMapper;
+import de.dnd.stiki.adapters.character.characterAttack.CharacterAttackDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDtoToEntityMapper;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
@@ -583,6 +584,26 @@ public class CharacterService {
         CharacterEntity characterEntity = repository.get(id);
 
         characterEntity.getAttacks().removeIf(attack -> attack.getName().equals(attackName));
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto modifyAttack(Long id, CharacterAttackDto modifiedAttack) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        CharacterAttackEntity originalAttack = null;
+        for (CharacterAttackEntity characterAttack : characterEntity.getAttacks()) {
+            if (characterAttack.getName().equals(modifiedAttack.getName())) {
+                originalAttack = characterAttack;
+                break;
+            }
+        }
+
+        if (originalAttack != null) {
+            originalAttack.setName(originalAttack.getName() + " (Modified)");
+            originalAttack.setModifiedHitBonus(modifiedAttack.getHitBonus());
+            originalAttack.setModifiedDamageRoll(modifiedAttack.getDamageRoll());
+        }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }

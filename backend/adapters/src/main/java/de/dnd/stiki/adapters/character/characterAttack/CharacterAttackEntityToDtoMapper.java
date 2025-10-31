@@ -15,6 +15,12 @@ public class CharacterAttackEntityToDtoMapper {
         CharacterAttackDto dto = new CharacterAttackDto();
         dto.setName(entity.getName());
 
+        if (entity.getModifiedHitBonus() != null || entity.getModifiedDamageRoll() != null) {
+            dto.setHitBonus(entity.getModifiedHitBonus());
+            dto.setDamageRoll(entity.getModifiedDamageRoll());
+            return dto;
+        }
+
         Integer abilityModifier = null;
         for (CharacterAbilityEntity ability : abilities) {
             if (ability.getName().equals(entity.getAbility())) {

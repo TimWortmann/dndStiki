@@ -9,6 +9,9 @@ public class CharacterAttackEntity {
     private AbilityType ability;
     private boolean proficient;
 
+    private String modifiedHitBonus;
+    private String modifiedDamageRoll;
+
     public String getName() {
         return name;
     }
@@ -39,5 +42,21 @@ public class CharacterAttackEntity {
 
     public void setProficient(boolean proficient) {
         this.proficient = proficient;
+    }
+
+    public String getModifiedHitBonus() {
+        return modifiedHitBonus;
+    }
+
+    public void setModifiedHitBonus(String modifiedHitBonus) {
+        this.modifiedHitBonus = modifiedHitBonus;
+    }
+
+    public String getModifiedDamageRoll() {
+        return modifiedDamageRoll;
+    }
+
+    public void setModifiedDamageRoll(String modifiedDamageRoll) {
+        this.modifiedDamageRoll = modifiedDamageRoll;
     }
 }

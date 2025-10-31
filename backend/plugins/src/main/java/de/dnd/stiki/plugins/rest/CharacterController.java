@@ -2,6 +2,7 @@ package de.dnd.stiki.plugins.rest;
 
 import de.dnd.stiki.adapters.character.CharacterDto;
 import de.dnd.stiki.adapters.character.characterAbility.CharacterAbilityDto;
+import de.dnd.stiki.adapters.character.characterAttack.CharacterAttackDto;
 import de.dnd.stiki.adapters.character.characterCreation.CharacterCreationDto;
 import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
@@ -165,5 +166,10 @@ public class CharacterController {
     @DeleteMapping("/attack/{characterId}/{attackName}")
     public ResponseEntity<CharacterDto> removeAttack(@PathVariable Long characterId, @PathVariable String attackName) {
         return ResponseEntity.ok().body(service.removeAttack(characterId, attackName));
+    }
+
+    @PutMapping("/attack/{id}")
+    public ResponseEntity<CharacterDto> modifyAttack(@PathVariable Long id, @RequestBody CharacterAttackDto modifiedAttack) {
+        return ResponseEntity.ok().body(service.modifyAttack(id, modifiedAttack));
     }
 }
