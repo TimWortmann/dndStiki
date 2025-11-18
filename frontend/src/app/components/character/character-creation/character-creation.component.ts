@@ -221,4 +221,20 @@ export class CharacterCreationComponent implements OnInit {
     const filterValue = this.raceFilter.toLowerCase();
     return list.filter(r => r.name.toLowerCase().includes(filterValue));
   }
+
+  getAbilityScores() : string[] { 
+    let abilityScores : string[] = [];
+    this.selectedBackground?.traits.forEach(trait => {
+      if (trait.name.startsWith("Ability Scores:")) {
+        const afterColon = trait.name.split(":")[1]; 
+        const parts = afterColon
+          .split(",")                          
+          .map(p => p.trim())                
+          .filter(p => p.length > 0);
+        abilityScores.push(...parts);
+      }
+    });
+
+    return abilityScores;
+  }
 }

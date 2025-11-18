@@ -103,6 +103,13 @@
                     <span><b>Skill Proficiencies:</b></span>
                     <span> {{getFancyListString((selectedBackground.proficiencies))}}</span>
                 </div>
+                <div *ngIf="getAbilityScores().length > 0">
+                    <p></p>
+                    <div class="flex" >
+                        <span><b>Ability Scores:</b></span>
+                        <span> {{getFancyListString(getAbilityScores())}}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
