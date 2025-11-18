@@ -653,4 +653,20 @@ throw new Error('Method not implemented.');
       this.setCharacter(response);
     }) 
   }
+
+   getAbilityScores() : string[] { 
+    let abilityScores : string[] = [];
+    this.currentBackground?.traits.forEach(trait => {
+      if (trait.name.startsWith("Ability Scores:")) {
+        const afterColon = trait.name.split(":")[1]; 
+        const parts = afterColon
+          .split(",")                          
+          .map(p => p.trim())                
+          .filter(p => p.length > 0);
+        abilityScores.push(...parts);
+      }
+    });
+
+    return abilityScores;
+  }
 }
