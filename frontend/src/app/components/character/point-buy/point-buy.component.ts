@@ -9,6 +9,7 @@ import { CharacterAbilityValue } from '../../../models/character-ability-value';
 })
 export class PointBuyComponent {
 
+  @Input() backgroundAbilityScores? : string[];
   @Input() abilities: CharacterAbilityValue[] = [];
   @Input() pointBuySum: number = 0;
 
@@ -69,5 +70,20 @@ export class PointBuyComponent {
   private emitChanges() {
     this.abilitiesChange.emit(this.abilities);
     this.pointBuySumChange.emit(this.pointBuySum);
+  }
+
+  getFancyListString(list : string[] | undefined) : string {
+    let fancyString : string = "";
+
+    list?.forEach((element: string) => {
+      if (fancyString === "") {
+        fancyString += element;
+      }
+      else {
+        fancyString += " | " + element;
+      }
+    });
+
+    return fancyString;
   }
 }

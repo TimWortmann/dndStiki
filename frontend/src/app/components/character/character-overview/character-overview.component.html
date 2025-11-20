@@ -279,15 +279,6 @@
               <p>Score: <b>{{ability.basicScore + ability.bonus}}</b></p>
             </div> 
           </div>
-           <div class="info-box">
-            <div class="flex">
-                <span><b>Background Ability Scores:</b></span>
-                <span *ngIf="getAbilityScores().length > 0"> {{getFancyListString((getAbilityScores()))}} </span>
-                <span *ngIf="getAbilityScores().length === 0"> Choose 3 suitable abilities </span>
-            </div>
-            <hr class="divider" *ngIf="currentClass && currentBackground">
-            <span style="color: red;">Background ability score improvements are not set automatically.</span> 
-          </div> 
         </mat-tab>
         <mat-tab label="Saving Throws"> 
           <div class="panel-container">

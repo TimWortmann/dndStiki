@@ -149,6 +149,7 @@
             <h2>Abilities</h2>
             <app-point-buy
                 [(abilities)]="creationValue.abilities"
+                [backgroundAbilityScores]="getAbilityScores()"
                 [(pointBuySum)]="pointBuySum">
             </app-point-buy>
         </div>

@@ -12,13 +12,15 @@ import { CharacterService } from '../../../services/character/character.service'
 export class PointBuyPopupComponent {
 
   abilities! : CharacterAbilityValue[];
+  backgroundAbilityScores?: string[];
   pointBuySum : number = 27;
 
   constructor(
     public dialogRef: MatDialogRef<PointBuyPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ){
-    this.abilities = data.map((a: any) => ({ ...a }));
+    this.abilities = data.abilities.map((a: any) => ({ ...a }));
+    this.backgroundAbilityScores = data.backgroundAbilityScores;
   }
 
   close(): void {
