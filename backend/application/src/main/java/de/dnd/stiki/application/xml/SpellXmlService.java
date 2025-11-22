@@ -39,6 +39,11 @@ public class SpellXmlService extends AbstractXmlService<SpellEntity, SpellReposi
         spellEntity.setRoll(getTextByTagName(spellElement, "roll"));
         spellEntity.setClasses(getListByTagName(spellElement, "classes"));
 
+        Boolean isRitual= getXmlBooleanTag(spellElement, "ritual");
+        if (isRitual != null) {
+            spellEntity.setRitual(isRitual);
+        }
+
         return spellEntity;
     }
 }

@@ -9,6 +9,7 @@ export interface SpellValue {
   text: string;
   roll: string;
   classes: string[];
+  ritual: boolean;
 }
 
 

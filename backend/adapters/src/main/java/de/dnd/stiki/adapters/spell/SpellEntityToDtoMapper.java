@@ -9,7 +9,6 @@ public class SpellEntityToDtoMapper extends AbstractEntityToDtoMapper<SpellEntit
 
     @Override
     public SpellDto mapEntityToDto(SpellEntity entity) {
-
         SpellDto dto = new SpellDto();
         dto.setName(entity.getName());
         dto.setLevel(entity.getLevel());
@@ -21,7 +20,7 @@ public class SpellEntityToDtoMapper extends AbstractEntityToDtoMapper<SpellEntit
         dto.setText(entity.getText());
         dto.setRoll(entity.getRoll());
         dto.setClasses(entity.getClasses());
-
+        dto.setRitual(entity.isRitual());
         return dto;
     }
 }

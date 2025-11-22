@@ -36,6 +36,12 @@
                 <p>{{spell.roll}}</p>
             </div>
 
+            <div class="flex icon-row" *ngIf="spell.ritual">
+                <h3>Ritual:</h3>
+                <mat-icon *ngIf="spell.ritual === true">check</mat-icon>
+                <mat-icon *ngIf="spell.ritual !== true">close</mat-icon>
+            </div>
+
         </div>
 
         <p></p>

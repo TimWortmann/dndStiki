@@ -9,7 +9,6 @@ public class SpellJpaToEntityMapper extends AbstractJpaToEntityMapper<SpellJpa, 
 
     @Override
     public SpellEntity mapJpaToEntity(SpellJpa jpa) {
-
         SpellEntity entity = new SpellEntity();
         entity.setName(jpa.getName());
         entity.setLevel(jpa.getLevel());
@@ -21,7 +20,7 @@ public class SpellJpaToEntityMapper extends AbstractJpaToEntityMapper<SpellJpa, 
         entity.setText(jpa.getText());
         entity.setRoll(jpa.getRoll());
         entity.setClasses(getListFromString(jpa.getClasses()));
-
+        entity.setRitual(jpa.isRitual());
         return  entity;
     }
 }

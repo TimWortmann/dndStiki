@@ -50,13 +50,6 @@ export class SpellsComponent {
         template: this.levelTemplate
       },
       {
-        name: 'Classes',
-        dataKey: 'classes',
-        position: 'left',
-        isSortable: true,
-        template: this.classesTemplate
-      },
-      {
         name: 'Details',
         dataKey: 'details',
         position: 'left',

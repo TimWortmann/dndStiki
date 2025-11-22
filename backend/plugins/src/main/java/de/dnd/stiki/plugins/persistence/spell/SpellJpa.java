@@ -40,6 +40,9 @@ public class SpellJpa {
     @Column(name="CLASSES")
     private String classes;
 
+    @Column(name = "RITUAL")
+    private boolean ritual;
+
     public String getName() {
         return name;
     }
@@ -118,5 +121,13 @@ public class SpellJpa {
 
     public void setClasses(String classes) {
         this.classes = classes;
+    }
+
+    public boolean isRitual() {
+        return ritual;
+    }
+
+    public void setRitual(boolean ritual) {
+        this.ritual = ritual;
     }
 }

@@ -24,6 +24,8 @@ public class SpellDto {
 
     private List<String> classes;
 
+    private boolean ritual;
+
     public String getName() {
         return name;
     }
@@ -102,5 +104,13 @@ public class SpellDto {
 
     public void setClasses(List<String> classes) {
         this.classes = classes;
+    }
+
+    public boolean isRitual() {
+        return ritual;
+    }
+
+    public void setRitual(boolean ritual) {
+        this.ritual = ritual;
     }
 }
