@@ -396,7 +396,19 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Spells"> 
+        <mat-tab> 
+          <ng-template mat-tab-label>
+            <div class="flex-without-gap">
+              <button mat-icon-button>
+                <mat-icon>archive</mat-icon>
+              </button>
+              <span>Spells</span>
+              <button mat-icon-button>
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+
           <div class="spell-accordion">
             <app-character-spells></app-character-spells>
           </div>

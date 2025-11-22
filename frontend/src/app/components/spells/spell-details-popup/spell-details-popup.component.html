@@ -1,7 +1,7 @@
 <div mat-dialog-content class="dialog-content">
     <h1 mat-dialog-title>Spell Details ({{spell.name}})</h1>
     <h3 *ngIf="spell.level === 0" class="spellSubtitle"> Cantrip {{spell.school}} </h3>
-    <h3 *ngIf="spell.level !== 0" class="spellSubtitle"> {{spell.level}}rd Level {{spell.school}} </h3>
+    <h3 *ngIf="spell.level !== 0" class="spellSubtitle"> Level {{spell.level}} {{spell.school}} </h3>
     
     <div class="infos">
         <div>
