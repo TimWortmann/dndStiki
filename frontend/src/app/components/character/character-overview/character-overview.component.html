@@ -396,7 +396,7 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab> 
+        <mat-tab *ngIf="characterValue.spellSlots"> 
           <ng-template mat-tab-label>
             <div class="flex-without-gap">
               <button mat-icon-button>
@@ -409,8 +409,8 @@
             </div>
           </ng-template>
 
-          <div class="spell-accordion">
-            <app-character-spells></app-character-spells>
+          <div class="spell-accordion" *ngIf="characterValue">
+            <app-character-spells [characterValue]="characterValue"></app-character-spells>
           </div>
         </mat-tab>
       </mat-tab-group>

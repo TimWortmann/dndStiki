@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CharacterValue } from '../../../models/character-value';
 
 @Component({
   selector: 'app-character-spells',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './character-spells.component.scss'
 })
 export class CharacterSpellsComponent {
-
+  
+  @Input() characterValue! : CharacterValue;
 }
