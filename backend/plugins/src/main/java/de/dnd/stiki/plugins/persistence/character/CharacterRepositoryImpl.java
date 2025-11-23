@@ -51,10 +51,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         List<CharacterAbilityJpa> abilities = jpa.getAbilities();
         List<CharacterSkillJpa> skills = jpa.getSkills();
         List<CharacterTraitJpa> traits = jpa.getTraits();
+        List<CharacterSpellSlotsJpa> spellSlots = jpa.getSpellSlots();
 
         jpa.setAbilities(null);
         jpa.setSkills(null);
         jpa.setTraits(null);
+        jpa.setSpellSlots(null);
         jpa = jpaRepository.save(jpa);
 
         jpa.setAbilities(abilities);
@@ -70,6 +72,13 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         jpa.setSkills(skills);
         for (CharacterSkillJpa skillJpa : skills) {
             skillJpa.setCharacter(jpa);
+        }
+
+        if (spellSlots != null && !spellSlots.isEmpty()) {
+            jpa.setSpellSlots(spellSlots);
+            for (CharacterSpellSlotsJpa spellSlotJpa : spellSlots) {
+                spellSlotJpa.setCharacter(jpa);
+            }
         }
 
         return jpaToEntityMapper.mapJpaToEntity(jpaRepository.save(jpa));
