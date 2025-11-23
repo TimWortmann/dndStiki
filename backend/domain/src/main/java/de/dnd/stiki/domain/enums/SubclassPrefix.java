@@ -5,7 +5,8 @@ public enum SubclassPrefix {
     SUBCLASS("Subclass"),
     ARCHETYPE("Archetype"),
     COLLEGE("College"),
-    PATRON("Patron");
+    PATRON("Patron"),
+    DOMAIN("Domain");
 
     private final String name;
 
