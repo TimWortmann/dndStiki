@@ -41,9 +41,9 @@ public class DndClassJpaToEntityMapper extends AbstractJpaToEntityMapper<DndClas
         entity.setSkillProficiencies(entitySkillProficiencies);
 
         entity.setNumberOfSkillProficiencies(jpa.getNumberOfSkillProficiencies());
-        entity.setArmorProficiencies(getListFromString(jpa.getArmorProficiencies()));
-        entity.setWeaponProficiencies(getListFromString(jpa.getWeaponProficiencies()));
-        entity.setToolProficiencies(getListFromString(jpa.getToolProficiencies()));
+        entity.setArmorProficiencies(getStringListFromString(jpa.getArmorProficiencies()));
+        entity.setWeaponProficiencies(getStringListFromString(jpa.getWeaponProficiencies()));
+        entity.setToolProficiencies(getStringListFromString(jpa.getToolProficiencies()));
         entity.setWealth(jpa.getWealth());
 
         if (jpa.getSpellAbility() != null) {

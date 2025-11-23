@@ -10,7 +10,7 @@ public class CharacterSpellSlotsJpaToEntityMapper extends AbstractJpaToEntityMap
     @Override
     public CharacterSpellSlotsEntity mapJpaToEntity(CharacterSpellSlotsJpa jpa) {
         CharacterSpellSlotsEntity entity = new CharacterSpellSlotsEntity();
-        entity.setSpellSlots(jpa.getSpellSlots());
+        entity.setSpellSlots(getIntegerListFromString(jpa.getSpellSlots()));
         entity.setLevel(jpa.getLevel());
         return entity;
     }

@@ -24,19 +24,18 @@ public abstract class AbstractEntityToJpaMapper<E, J> {
 
     public abstract J mapEntityToJpa(E entity);
 
-    protected String getStringFromList(List<String> list) {
+    protected <T> String getStringFromList(List<T> list) {
 
         if (list == null || list.isEmpty()) {
             return null;
         }
 
         StringBuilder sb = new StringBuilder();
-        for (String listElement : list) {
+        for (T element : list) {
             if (sb.isEmpty()) {
-                sb.append(listElement);
-            }
-            else {
-                sb.append(",").append(listElement);
+                sb.append(element);
+            } else {
+                sb.append(",").append(element);
             }
         }
         return sb.toString();

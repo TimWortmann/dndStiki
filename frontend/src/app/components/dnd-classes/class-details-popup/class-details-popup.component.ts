@@ -41,19 +41,8 @@ export class ClassDetailsPopupComponent {
     return fancyString;
   }
 
-  getSpellSlotsDataArray(spellSlotsString: string): number[] {
-    return spellSlotsString
-    .split(",")
-    .filter(s => s !== "")
-    .map(s => Number(s)); 
-  }
-
   getSpellSlotsHeaderArray() : string[] {
     return ["Known Cantrips", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"];  
-  }
-
-  changeSubclass() {
-
   }
 
   isFeatureVisible(featureName: string): boolean {

@@ -13,7 +13,7 @@ public class ClassLevelEntity {
 
     private boolean scoreImprovement;
 
-    private String spellSlots;
+    private List<Integer> spellSlots;
 
     private List<FeatureEntity> features;
 
@@ -43,11 +43,11 @@ public class ClassLevelEntity {
         this.scoreImprovement = scoreImprovement;
     }
 
-    public String getSpellSlots() {
+    public List<Integer> getSpellSlots() {
         return spellSlots;
     }
 
-    public void setSpellSlots(String spellSlots) {
+    public void setSpellSlots(List<Integer> spellSlots) {
         this.spellSlots = spellSlots;
     }
 

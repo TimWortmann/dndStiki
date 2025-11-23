@@ -71,7 +71,7 @@
             <h2> Levels </h2>
             <mat-form-field style="width: 500px;">
                 <mat-label>Subclass</mat-label>
-                <mat-select required [(ngModel)]="selectedSubclass"  (selectionChange)="changeSubclass()">
+                <mat-select required [(ngModel)]="selectedSubclass">
                 <ng-container *ngFor="let subclass of dndClass.subclasses"> 
                     <mat-option [value]="subclass"> {{subclass}} </mat-option>
                 </ng-container>
@@ -135,7 +135,7 @@
     </mat-expansion-panel>
 </ng-template>
 
-<ng-template #spellSlotTable let-spellSlotsString>
+<ng-template #spellSlotTable let-spellSlots>
     <table>
         <thead>
             <tr>
@@ -144,7 +144,7 @@
         </thead>
         <tbody>
             <tr>
-                <td *ngFor="let slot of getSpellSlotsDataArray(spellSlotsString)">{{ slot }}</td>
+                <td *ngFor="let slot of spellSlots">{{ slot }}</td>
             </tr>
         </tbody>
     </table>

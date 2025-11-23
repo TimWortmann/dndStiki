@@ -5,7 +5,7 @@ export interface ClassLevelValue {
   id: number;
   level: number;
   scoreImprovement: boolean;
-  spellSlots: String;
+  spellSlots: number[];
   features: FeatureValue[];
   counters: CounterValue[];
 }

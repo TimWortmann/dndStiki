@@ -1,4 +1,4 @@
 export interface CharacterSpellSlotsValue {
-    spellSlots: string;
+    spellSlots: number[];
     level: number;
 }

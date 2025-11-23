@@ -26,7 +26,7 @@ public abstract class AbstractJpaToEntityMapper <J, E> {
     public abstract E mapJpaToEntity(J jpa);
 
 
-    protected List<String> getListFromString(String concatenatedList) {
+    protected List<String> getStringListFromString(String concatenatedList) {
         if (concatenatedList == null) {
             return new ArrayList<>();
         }
@@ -36,4 +36,19 @@ public abstract class AbstractJpaToEntityMapper <J, E> {
                 .map(String::trim)
                 .toList();
     }
+
+    protected List<Integer> getIntegerListFromString(String concatenatedList) {
+
+        if (concatenatedList == null || concatenatedList.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return Arrays.stream(concatenatedList.split(",(?![^()]*\\))"))
+                .map(String::trim)
+                .map(Integer::valueOf)
+                .toList();
+    }
+
+
+
 }

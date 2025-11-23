@@ -16,7 +16,7 @@ public class FeatJpaToEntityMapper extends AbstractJpaToEntityMapper<FeatJpa, Fe
     public FeatEntity mapJpaToEntity(FeatJpa jpa) {
         FeatEntity entity = new FeatEntity();
         entity.setName(jpa.getName());
-        entity.setPrerequisites(getListFromString(jpa.getPrerequisites()));
+        entity.setPrerequisites(getStringListFromString(jpa.getPrerequisites()));
         entity.setText(jpa.getText());
         entity.setModifiers(modifierJpaToEntityMapper.mapJpasToEntities(jpa.getModifiers()));
         return entity;
