@@ -160,6 +160,22 @@ public class CharacterService {
         }
 
         characterEntity.setWeaponProficiencies(dndClass.getWeaponProficiencies());
+
+        characterEntity.setSpellSlots(null);
+        characterEntity.setSpellSlots(getCharacterSpellSlots(dndClass));
+    }
+
+    private static List<CharacterSpellSlotsEntity> getCharacterSpellSlots(DndClassEntity dndClass) {
+        List<CharacterSpellSlotsEntity> spellSlots = new ArrayList<>();
+        for (ClassLevelEntity classLevel : dndClass.getClassLevels()) {
+            if (classLevel.getSpellSlots() != null && !classLevel.getSpellSlots().isEmpty()) {
+                CharacterSpellSlotsEntity spellSlotsEntity = new CharacterSpellSlotsEntity();
+                spellSlotsEntity.setSpellSlots(classLevel.getSpellSlots());
+                spellSlotsEntity.setLevel(classLevel.getLevel());
+                spellSlots.add(spellSlotsEntity);
+            }
+        }
+        return spellSlots;
     }
 
     public CharacterDto changeName (Long id, String name) {

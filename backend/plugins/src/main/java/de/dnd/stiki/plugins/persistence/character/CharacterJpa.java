@@ -6,6 +6,7 @@ import de.dnd.stiki.plugins.persistence.character.characterAttack.CharacterAttac
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterShield.CharacterShieldJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
+import de.dnd.stiki.plugins.persistence.character.characterSpellSlots.CharacterSpellSlotsJpa;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -103,6 +104,9 @@ public class CharacterJpa {
 
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CharacterAttackJpa> attacks;
+
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CharacterSpellSlotsJpa> spellSlots;
 
     public Long getId() {
         return id;
@@ -310,5 +314,13 @@ public class CharacterJpa {
 
     public void setAttacks(List<CharacterAttackJpa> attacks) {
         this.attacks = attacks;
+    }
+
+    public List<CharacterSpellSlotsJpa> getSpellSlots() {
+        return spellSlots;
+    }
+
+    public void setSpellSlots(List<CharacterSpellSlotsJpa> spellSlots) {
+        this.spellSlots = spellSlots;
     }
 }

@@ -65,6 +65,8 @@ public class CharacterEntity {
     private List<String> weaponProficiencies;
     private List<CharacterAttackEntity> attacks;
 
+    private List<CharacterSpellSlotsEntity> spellSlots;
+
     public Long getId() {
         return id;
     }
@@ -356,5 +358,13 @@ public class CharacterEntity {
 
     public void setAttacks(List<CharacterAttackEntity> attacks) {
         this.attacks = attacks;
+    }
+
+    public List<CharacterSpellSlotsEntity> getSpellSlots() {
+        return spellSlots;
+    }
+
+    public void setSpellSlots(List<CharacterSpellSlotsEntity> spellSlots) {
+        this.spellSlots = spellSlots;
     }
 }
