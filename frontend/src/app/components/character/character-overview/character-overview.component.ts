@@ -691,4 +691,10 @@ throw new Error('Method not implemented.');
       }
     });
   }
+
+  removeSpell(spell : SpellValue) {
+    this.characterService.removeSpell(this.characterValue.id, spell.name).subscribe((response) => {
+      this.setCharacter(response)
+    }) 
+  }
 }

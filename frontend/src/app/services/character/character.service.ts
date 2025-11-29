@@ -148,4 +148,8 @@ export class CharacterService {
   addSpell(id : number, spell : SpellValue) : Observable<CharacterValue> {
     return this.http.put<CharacterValue>(this.baseUrl + "/spell/" + id, spell)
   }
+
+  removeSpell(id : number, spellName : string) : Observable<CharacterValue> {
+    return this.http.delete<CharacterValue>(this.baseUrl + "/spell/" + id + "/" + encodeURIComponent(spellName))
+  }
 }

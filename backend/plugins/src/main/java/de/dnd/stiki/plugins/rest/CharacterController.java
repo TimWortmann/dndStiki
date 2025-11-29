@@ -183,4 +183,9 @@ public class CharacterController {
     public ResponseEntity<CharacterDto> addSpell(@PathVariable Long id, @RequestBody SpellDto spell) {
         return ResponseEntity.ok().body(service.addSpell(id, spell));
     }
+
+    @DeleteMapping("/spell/{id}/{spellName}")
+    public ResponseEntity<CharacterDto> removSpell(@PathVariable Long id, @PathVariable String spellName) {
+        return ResponseEntity.ok().body(service.removeSpell(id, spellName));
+    }
 }

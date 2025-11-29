@@ -410,7 +410,7 @@
           </ng-template>
 
           <div class="spell-accordion" *ngIf="characterValue">
-            <app-character-spells [characterValue]="characterValue"></app-character-spells>
+            <app-character-spells [characterValue]="characterValue" (removeSpellEvent)="removeSpell($event)"></app-character-spells>
           </div>
         </mat-tab>
       </mat-tab-group>
