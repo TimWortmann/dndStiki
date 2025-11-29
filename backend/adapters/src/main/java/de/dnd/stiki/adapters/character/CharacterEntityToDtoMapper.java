@@ -122,7 +122,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         for (CharacterItemEntity itemEntity : itemEntities) {
             CharacterItemDto itemDto = itemEntityToDtoMapper.mapEntityToDto(itemEntity);
 
-            List<ItemType> equipmentItems = List.of(MELEE_WEAPON, RANGED_WEAPON, ARMOR, LIGHT_ARMOR, MEDIUM_ARMOR, HEAVY_ARMOR, SHIELD);
+            List<ItemType> equipmentItems = List.of(MELEE_WEAPON, RANGED_WEAPON, LIGHT_ARMOR, MEDIUM_ARMOR, HEAVY_ARMOR, SHIELD);
             if (equipmentItems.contains(itemEntity.getType())) {
                 dto.getEquipment().add(itemDto);
             }
