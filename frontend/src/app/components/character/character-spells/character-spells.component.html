@@ -1,45 +1,43 @@
 <mat-accordion>
-    <ng-container *ngFor="let spellSlotsElement of characterValue.spellSlots">
-        <ng-container *ngIf="this.characterValue.level === spellSlotsElement.level">
-            <ng-container *ngFor="let spellSlots of spellSlotsElement.spellSlots; let i = index">
-                <mat-expansion-panel>
-                 <mat-expansion-panel-header>
-                    <mat-panel-title *ngIf="i === 0"> ({{countSpells(i)}}) Cantrips (Known: {{spellSlots}}) </mat-panel-title>
-                    <mat-panel-title *ngIf="i !== 0"> ({{countSpells(i)}}) Level {{i}} (Slots: {{spellSlots}}) </mat-panel-title>
-                </mat-expansion-panel-header>
-                    <ng-container *ngFor="let spell of characterValue.spells">
-                        <div class="flex-without-gap" *ngIf="spell.level === i">
-                            <span>{{spell.name}}</span>
-                            <div>
-                                <button mat-icon-button (click)="openDetailDialog(spell)">
-                                    <mat-icon>info_outline</mat-icon>
-                                </button>
-                                <button mat-icon-button (click)="removeSpell(spell)">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                            </div>
-                        </div>
-                    </ng-container>
-                </mat-expansion-panel>
-            </ng-container>
-            <mat-expansion-panel *ngIf="hasSpellsWithoutSpellslots(spellSlotsElement.spellSlots)">
-                <mat-expansion-panel-header>
-                   <mat-panel-title> ({{countSpellsWithoutSpellslot(spellSlotsElement.spellSlots)}}) No Spellslots available </mat-panel-title>
-                </mat-expansion-panel-header>
-                <ng-container *ngFor="let spell of characterValue.spells">
-                    <div class="flex-without-gap" *ngIf="isSpellWithoutSpellslot(spell.level, spellSlotsElement.spellSlots)">
-                        <span>{{spell.name}} <b>(Level {{spell.level}})</b></span>
-                        <div>
-                            <button mat-icon-button (click)="openDetailDialog(spell)">
-                                <mat-icon>info_outline</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="removeSpell(spell)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </div>
+     <ng-container *ngFor="let spellSlot of getCurrentSpellSlots(); let i = index">
+         <mat-expansion-panel>
+             <mat-expansion-panel-header>
+                <mat-panel-title *ngIf="i === 0"> ({{countSpells(i)}}) Cantrips (Known: {{spellSlot}}) </mat-panel-title>
+                <mat-panel-title *ngIf="i !== 0"> ({{countSpells(i)}}) Level {{i}} (Slots: {{spellSlot}}) </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let spell of characterValue.spells">
+                <div class="flex-without-gap" *ngIf="spell.level === i">
+                    <span>{{spell.name}}</span>
+                    <div>
+                        <button mat-icon-button (click)="openDetailDialog(spell)">
+                            <mat-icon>info_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="removeSpell(spell)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
-                </ng-container>
-            </mat-expansion-panel>
-        </ng-container>
-    </ng-container>
-</mat-accordion>  
+                </div>
+            </ng-container>
+        </mat-expansion-panel>
+     </ng-container>
+     <ng-container *ngIf="getCurrentSpellSlots().length === 0 || getSpellsWithoutSpellSlot().length > 0">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> ({{getSpellsWithoutSpellSlot().length}}) No Spellslots available </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container *ngFor="let spell of getSpellsWithoutSpellSlot()">
+                <div class="flex-without-gap">
+                    <span>{{spell.name}} <b>(Level {{spell.level}})</b></span>
+                    <div>
+                        <button mat-icon-button (click)="openDetailDialog(spell)">
+                            <mat-icon>info_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="removeSpell(spell)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </mat-expansion-panel>
+     </ng-container>
+</mat-accordion>

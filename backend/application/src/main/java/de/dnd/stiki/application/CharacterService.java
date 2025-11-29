@@ -684,7 +684,7 @@ public class CharacterService {
     public CharacterDto removeSpell(Long id, String spellName) {
         CharacterEntity characterEntity = repository.get(id);
 
-        characterEntity.getSpells().removeIf(trait -> trait.getName().equals(spellName));
+        characterEntity.getSpells().removeIf(spell -> spell.getName().equals(spellName));
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
     }
