@@ -185,7 +185,7 @@ public class CharacterController {
     }
 
     @DeleteMapping("/spell/{id}/{spellName}")
-    public ResponseEntity<CharacterDto> removSpell(@PathVariable Long id, @PathVariable String spellName) {
+    public ResponseEntity<CharacterDto> removeSpell(@PathVariable Long id, @PathVariable String spellName) {
         return ResponseEntity.ok().body(service.removeSpell(id, spellName));
     }
 }
