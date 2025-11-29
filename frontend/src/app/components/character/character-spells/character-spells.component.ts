@@ -13,9 +13,6 @@ export class CharacterSpellsComponent {
 
 
   isSpellWithoutSpellslot(level : number, spellSlots : number[]) : boolean {
-
-    console.log("Spell level", level);   
-
     return level >= spellSlots.length;
   }
 
@@ -27,4 +24,26 @@ export class CharacterSpellsComponent {
     }
     return false;
   }
+
+  countSpells(level : number) : number {
+    let counter = 0;
+    for (let spell of this.characterValue.spells) {
+      if (spell.level === level) {
+        counter++;
+      }
+    }
+    return counter;
+  }
+
+  countSpellsWithoutSpellslot(spellSlots: number[]) : number {
+    let counter = 0;
+    for (let spell of this.characterValue.spells) {
+      if (this.isSpellWithoutSpellslot(spell.level, spellSlots)) {
+        counter++;
+      }  
+    }
+    return counter;
+  }
+
+  
 }

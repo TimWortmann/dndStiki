@@ -4,8 +4,8 @@
             <ng-container *ngFor="let spellSlots of spellSlotsElement.spellSlots; let i = index">
                 <mat-expansion-panel>
                  <mat-expansion-panel-header>
-                    <mat-panel-title *ngIf="i === 0"> Cantrips (Known: {{spellSlots}}) </mat-panel-title>
-                    <mat-panel-title *ngIf="i !== 0"> Level {{i}} (Slots: {{spellSlots}}) </mat-panel-title>
+                    <mat-panel-title *ngIf="i === 0"> ({{countSpells(i)}}) Cantrips (Known: {{spellSlots}}) </mat-panel-title>
+                    <mat-panel-title *ngIf="i !== 0"> ({{countSpells(i)}}) Level {{i}} (Slots: {{spellSlots}}) </mat-panel-title>
                 </mat-expansion-panel-header>
                     <ng-container *ngFor="let spell of characterValue.spells">
                         <div class="flex-without-gap" *ngIf="spell.level === i">
@@ -22,7 +22,7 @@
             </ng-container>
             <mat-expansion-panel *ngIf="hasSpellsWithoutSpellslots(spellSlotsElement.spellSlots)">
                 <mat-expansion-panel-header>
-                   <mat-panel-title > No Spellslots available </mat-panel-title>
+                   <mat-panel-title> ({{countSpellsWithoutSpellslot(spellSlotsElement.spellSlots)}}) No Spellslots available </mat-panel-title>
                 </mat-expansion-panel-header>
                 <ng-container *ngFor="let spell of characterValue.spells">
                     <div class="flex-without-gap" *ngIf="isSpellWithoutSpellslot(spell.level, spellSlotsElement.spellSlots)">
