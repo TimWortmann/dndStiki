@@ -9,6 +9,7 @@ import { FeatValue } from '../../models/feat-value';
 import { ItemValue } from '../../models/item-value';
 import { CharacterItemValue } from '../../models/character-item-value';
 import { CharacterAttackValue } from '../../models/character-attack-value';
+import { SpellValue } from '../../models/spell-value';
 
 @Injectable({
   providedIn: 'root'
@@ -142,5 +143,9 @@ export class CharacterService {
 
   changeAttackProficiency(id : number, attackName : string, proficiency : boolean) {
     return this.http.put<CharacterValue>(this.baseUrl + "/attack/" + id + "/" + encodeURIComponent(attackName) + "/" + proficiency, undefined);
+  }
+
+  addSpell(id : number, spell : SpellValue) : Observable<CharacterValue> {
+    return this.http.put<CharacterValue>(this.baseUrl + "/spell/" + id, spell)
   }
 }

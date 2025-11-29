@@ -12,6 +12,7 @@ import de.dnd.stiki.plugins.persistence.character.characterAttack.CharacterAttac
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.character.characterShield.CharacterShieldJpaToEntiyMapper;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpaToEntityMapper;
+import de.dnd.stiki.plugins.persistence.character.characterSpell.CharacterSpellJpaToEntityMapper;
 import de.dnd.stiki.plugins.persistence.character.characterSpellSlots.CharacterSpellSlotsJpaToEntityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +50,9 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
     @Autowired
     private CharacterSpellSlotsJpaToEntityMapper spellSlotsJpaToEntityMapper;
 
+    @Autowired
+    private CharacterSpellJpaToEntityMapper characterSpellJpaToEntityMapper;
+
     @Override
     public CharacterEntity mapJpaToEntity(CharacterJpa jpa) {
 
@@ -81,6 +85,7 @@ public class CharacterJpaToEntityMapper extends AbstractJpaToEntityMapper<Charac
         entity.setWeaponProficiencies(getStringListFromString(jpa.getWeaponProficiencies()));
         entity.setAttacks(attackJpaToEntityMapper.mapJpasToEntities(jpa.getAttacks()));
         entity.setSpellSlots(spellSlotsJpaToEntityMapper.mapJpasToEntities(jpa.getSpellSlots()));
+        entity.setSpells(characterSpellJpaToEntityMapper.mapJpasToEntities(jpa.getSpells()));
 
         entity.setDndSubclasses(getDndSubclasses(entity.getClassFeatures()));
 

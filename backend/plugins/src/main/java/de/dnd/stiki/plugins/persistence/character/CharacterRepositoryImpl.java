@@ -6,6 +6,7 @@ import de.dnd.stiki.plugins.persistence.character.characterAbility.CharacterAbil
 import de.dnd.stiki.plugins.persistence.character.characterAttack.CharacterAttackJpa;
 import de.dnd.stiki.plugins.persistence.character.characterItem.CharacterItemJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSkill.CharacterSkillJpa;
+import de.dnd.stiki.plugins.persistence.character.characterSpell.CharacterSpellJpa;
 import de.dnd.stiki.plugins.persistence.character.characterSpellSlots.CharacterSpellSlotsJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -114,6 +115,12 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         if (jpa.getSpellSlots() != null) {
             for (CharacterSpellSlotsJpa spellSlotsJpa : jpa.getSpellSlots()) {
                 spellSlotsJpa.setCharacter(jpa);
+            }
+        }
+
+        if (jpa.getSpells() != null) {
+            for (CharacterSpellJpa spellJpa : jpa.getSpells()) {
+                spellJpa.setCharacter(jpa);
             }
         }
 

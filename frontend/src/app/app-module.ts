@@ -54,6 +54,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { ArmorClassPopupComponent } from './components/character/armor-class-popup/armor-class-popup.component';
 import { CharacterSpellsComponent } from './components/character/character-spells/character-spells.component';
+import { SpellListPopupComponent } from './components/character/spell-list-popup/spell-list-popup.component';
 
 registerLocaleData(localeDe);
 
@@ -86,6 +87,7 @@ registerLocaleData(localeDe);
     QuantityPopupComponent,
     ArmorClassPopupComponent,
     CharacterSpellsComponent,
+    SpellListPopupComponent,
   ],
   imports: [
     BrowserModule,

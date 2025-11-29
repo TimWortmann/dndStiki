@@ -7,8 +7,26 @@
                     <mat-panel-title *ngIf="i === 0"> Cantrips (Known: {{spellSlots}}) </mat-panel-title>
                     <mat-panel-title *ngIf="i !== 0"> Level {{i}} (Slots: {{spellSlots}}) </mat-panel-title>
                 </mat-expansion-panel-header>
-                    <div class="flex-without-gap">
-                        <span>Some Cantrip or Spell</span>
+                    <ng-container *ngFor="let spell of characterValue.spells">
+                        <div class="flex-without-gap" *ngIf="spell.level === i">
+                            <span>{{spell.name}}</span>
+                            <button mat-icon-button>
+                                <mat-icon>info_outline</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </mat-expansion-panel>
+            </ng-container>
+            <mat-expansion-panel *ngIf="hasSpellsWithoutSpellslots(spellSlotsElement.spellSlots)">
+                <mat-expansion-panel-header>
+                   <mat-panel-title > No Spellslots available </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-container *ngFor="let spell of characterValue.spells">
+                    <div class="flex-without-gap" *ngIf="isSpellWithoutSpellslot(spell.level, spellSlotsElement.spellSlots)">
+                        <span>{{spell.name}} <b>(Level {{spell.level}})</b></span>
                         <button mat-icon-button>
                             <mat-icon>info_outline</mat-icon>
                         </button>
@@ -16,8 +34,8 @@
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
-                </mat-expansion-panel>
-            </ng-container>
+                </ng-container>
+            </mat-expansion-panel>
         </ng-container>
     </ng-container>
 </mat-accordion>  

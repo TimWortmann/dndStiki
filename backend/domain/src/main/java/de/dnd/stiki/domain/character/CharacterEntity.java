@@ -2,12 +2,13 @@ package de.dnd.stiki.domain.character;
 
 import de.dnd.stiki.domain.enums.AbilityType;
 import de.dnd.stiki.domain.enums.SkillType;
+import de.dnd.stiki.domain.spell.SpellEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.dnd.stiki.domain.enums.AbilityType.*;
+import static de.dnd.stiki.domain.enums.AbilityType.DEXTERITY;
 import static de.dnd.stiki.domain.enums.ItemType.LIGHT_ARMOR;
 
 public class CharacterEntity {
@@ -66,6 +67,7 @@ public class CharacterEntity {
     private List<CharacterAttackEntity> attacks;
 
     private List<CharacterSpellSlotsEntity> spellSlots;
+    private List<SpellEntity> spells;
 
     public Long getId() {
         return id;
@@ -366,5 +368,13 @@ public class CharacterEntity {
 
     public void setSpellSlots(List<CharacterSpellSlotsEntity> spellSlots) {
         this.spellSlots = spellSlots;
+    }
+
+    public List<SpellEntity> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<SpellEntity> spells) {
+        this.spells = spells;
     }
 }

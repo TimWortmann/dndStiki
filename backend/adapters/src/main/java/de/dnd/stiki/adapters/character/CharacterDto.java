@@ -7,6 +7,7 @@ import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterShield.CharacterShieldDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.character.characterSpellSlots.CharacterSpellSlotsDto;
+import de.dnd.stiki.adapters.spell.SpellDto;
 import de.dnd.stiki.adapters.trait.TraitDto;
 
 import java.util.List;
@@ -72,6 +73,7 @@ public class CharacterDto {
     private List<CharacterAttackDto> attacks;
 
     private List<CharacterSpellSlotsDto> spellSlots;
+    private List<SpellDto> spells;
 
     public Long getId() {
         return id;
@@ -335,5 +337,13 @@ public class CharacterDto {
 
     public void setSpellSlots(List<CharacterSpellSlotsDto> spellSlots) {
         this.spellSlots = spellSlots;
+    }
+
+    public List<SpellDto> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<SpellDto> spells) {
+        this.spells = spells;
     }
 }

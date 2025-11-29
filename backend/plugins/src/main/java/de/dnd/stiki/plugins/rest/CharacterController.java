@@ -8,6 +8,7 @@ import de.dnd.stiki.adapters.character.characterItem.CharacterItemDto;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDto;
 import de.dnd.stiki.adapters.feat.FeatDto;
 import de.dnd.stiki.adapters.item.ItemDto;
+import de.dnd.stiki.adapters.spell.SpellDto;
 import de.dnd.stiki.application.CharacterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -176,5 +177,10 @@ public class CharacterController {
     @PutMapping("/attack/{characterId}/{attackName}/{newProficiency}")
     public ResponseEntity<CharacterDto> changeAttackProficiency(@PathVariable Long characterId, @PathVariable String attackName, @PathVariable boolean newProficiency) {
         return ResponseEntity.ok().body(service.changeAttackProficiency(characterId,attackName, newProficiency));
+    }
+
+    @PutMapping("/spell/{id}")
+    public ResponseEntity<CharacterDto> addSpell(@PathVariable Long id, @RequestBody SpellDto spell) {
+        return ResponseEntity.ok().body(service.addSpell(id, spell));
     }
 }

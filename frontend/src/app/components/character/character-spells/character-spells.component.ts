@@ -10,4 +10,21 @@ import { CharacterValue } from '../../../models/character-value';
 export class CharacterSpellsComponent {
   
   @Input() characterValue! : CharacterValue;
+
+
+  isSpellWithoutSpellslot(level : number, spellSlots : number[]) : boolean {
+
+    console.log("Spell level", level);   
+
+    return level >= spellSlots.length;
+  }
+
+  hasSpellsWithoutSpellslots(spellSlots : number[]) : boolean {
+    for (let spell of this.characterValue.spells) {
+      if (this.isSpellWithoutSpellslot(spell.level, spellSlots)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

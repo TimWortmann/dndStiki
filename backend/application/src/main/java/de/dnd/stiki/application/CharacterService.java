@@ -15,6 +15,8 @@ import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillDtoToEntityM
 import de.dnd.stiki.adapters.feat.FeatDto;
 import de.dnd.stiki.adapters.item.ItemDto;
 import de.dnd.stiki.adapters.item.ItemDtoToEnityMapper;
+import de.dnd.stiki.adapters.spell.SpellDto;
+import de.dnd.stiki.adapters.spell.SpellDtoToEntityMapper;
 import de.dnd.stiki.domain.background.BackgroundEntity;
 import de.dnd.stiki.domain.background.BackgroundRepository;
 import de.dnd.stiki.domain.character.*;
@@ -28,6 +30,7 @@ import de.dnd.stiki.domain.enums.SkillType;
 import de.dnd.stiki.domain.item.ItemEntity;
 import de.dnd.stiki.domain.race.RaceEntity;
 import de.dnd.stiki.domain.race.RaceRepository;
+import de.dnd.stiki.domain.spell.SpellEntity;
 import de.dnd.stiki.domain.trait.TraitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +78,9 @@ public class CharacterService {
 
     @Autowired
     private CharacterItemEntityToDtoMapper characterItemEntityToDtoMapper;
+
+    @Autowired
+    private SpellDtoToEntityMapper spellDtoToEntityMapper;
 
     public List<CharacterDto> getAll() {
         return entityToDtoMapper.mapEntitiesToDtos(repository.getAll());
@@ -648,6 +654,28 @@ public class CharacterService {
             if (attack.getName().equals(attackName)) {
                 attack.setProficient(newProficiency);
             }
+        }
+
+        return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));
+    }
+
+    public CharacterDto addSpell(Long id, SpellDto spellDto) {
+        CharacterEntity characterEntity = repository.get(id);
+
+        if (characterEntity.getSpells() == null) {
+            characterEntity.setSpells(new ArrayList<>());
+        }
+
+        boolean spellAlreadyAdded = false;
+        for (SpellEntity spell : characterEntity.getSpells()) {
+            if (spell.getName().equals(spellDto.getName())) {
+                spellAlreadyAdded = true;
+                break;
+            }
+        }
+
+        if (!spellAlreadyAdded) {
+            characterEntity.getSpells().add(spellDtoToEntityMapper.mapDtoToEntity(spellDto));
         }
 
         return entityToDtoMapper.mapEntityToDto(repository.save(characterEntity));

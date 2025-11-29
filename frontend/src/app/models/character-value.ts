@@ -5,6 +5,7 @@ import { CharacterItemValue } from "./character-item-value";
 import { CharacterShieldValue } from "./character-shield-value";
 import { CharacterSkillValue } from "./character-skill-value";
 import { CharacterSpellSlotsValue } from "./character-spell-slots-value";
+import { SpellValue } from "./spell-value";
 import { TraitValue } from "./trait-value";
 
 export interface CharacterValue {
@@ -41,4 +42,5 @@ export interface CharacterValue {
     weaponProficiencies: string[];
     attacks: CharacterAttackValue[];
     spellSlots: CharacterSpellSlotsValue[];
+    spells: SpellValue[];
 }

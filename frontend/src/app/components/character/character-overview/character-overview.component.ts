@@ -23,6 +23,8 @@ import { ItemService } from '../../../services/item/item.service';
 import { CharacterItemValue } from '../../../models/character-item-value';
 import { ArmorClassPopupComponent } from '../armor-class-popup/armor-class-popup.component';
 import { CharacterAttackValue } from '../../../models/character-attack-value';
+import { SpellListPopupComponent } from '../spell-list-popup/spell-list-popup.component';
+import { SpellValue } from '../../../models/spell-value';
 
 @Component({
   selector: 'app-character-overview',
@@ -671,5 +673,22 @@ throw new Error('Method not implemented.');
     });
 
     return abilityScores;
+  }
+
+  openSpellDialog() {
+    const dialogRef = this.dialog.open(SpellListPopupComponent, {
+          width: '1300px',        
+          maxWidth: '1300px',  
+          maxHeight: '650px',  
+          autoFocus: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result: SpellValue | undefined) => {
+      if (result) {
+        this.characterService.addSpell(this.characterValue.id, result).subscribe((response) => {
+          this.setCharacter(response)
+        })  
+      }
+    });
   }
 }

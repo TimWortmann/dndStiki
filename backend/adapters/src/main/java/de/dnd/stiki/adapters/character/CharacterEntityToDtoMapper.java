@@ -9,6 +9,7 @@ import de.dnd.stiki.adapters.character.characterItem.CharacterItemEntityToDtoMap
 import de.dnd.stiki.adapters.character.characterShield.CharacterShieldEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSkill.CharacterSkillEntityToDtoMapper;
 import de.dnd.stiki.adapters.character.characterSpellSlots.CharacterSpellSlotsEntityToDtoMapper;
+import de.dnd.stiki.adapters.spell.SpellEntityToDtoMapper;
 import de.dnd.stiki.adapters.trait.TraitDto;
 import de.dnd.stiki.adapters.trait.TraitEntityToDtoMapper;
 import de.dnd.stiki.domain.character.CharacterEntity;
@@ -54,6 +55,9 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
 
     @Autowired
     private CharacterSpellSlotsEntityToDtoMapper spellSlotsEntityToDtoMapper;
+
+    @Autowired
+    private SpellEntityToDtoMapper spellEntityToDtoMapper;
 
     @Override
     public CharacterDto mapEntityToDto(CharacterEntity entity) {
@@ -101,6 +105,7 @@ public class CharacterEntityToDtoMapper extends AbstractEntityToDtoMapper<Charac
         dto.setAttacks(attackEntityToDtoMapper.mapEntitiesToDtos(entity.getAttacks(), entity.getAbilities(), entity.getProficiencyBonus()));
 
         dto.setSpellSlots(spellSlotsEntityToDtoMapper.mapEntitiesToDtos(entity.getSpellSlots()));
+        dto.setSpells(spellEntityToDtoMapper.mapEntitiesToDtos(entity.getSpells()));
 
         return dto;
     }
