@@ -10,12 +10,14 @@
                     <ng-container *ngFor="let spell of characterValue.spells">
                         <div class="flex-without-gap" *ngIf="spell.level === i">
                             <span>{{spell.name}}</span>
-                            <button mat-icon-button>
-                                <mat-icon>info_outline</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="removeSpell(spell)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
+                            <div>
+                                <button mat-icon-button (click)="openDetailDialog(spell)">
+                                    <mat-icon>info_outline</mat-icon>
+                                </button>
+                                <button mat-icon-button (click)="removeSpell(spell)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
                         </div>
                     </ng-container>
                 </mat-expansion-panel>
@@ -27,12 +29,14 @@
                 <ng-container *ngFor="let spell of characterValue.spells">
                     <div class="flex-without-gap" *ngIf="isSpellWithoutSpellslot(spell.level, spellSlotsElement.spellSlots)">
                         <span>{{spell.name}} <b>(Level {{spell.level}})</b></span>
-                        <button mat-icon-button>
-                            <mat-icon>info_outline</mat-icon>
-                        </button>
-                        <button mat-icon-button (click)="removeSpell(spell)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <div>
+                            <button mat-icon-button (click)="openDetailDialog(spell)">
+                                <mat-icon>info_outline</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="removeSpell(spell)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </ng-container>
             </mat-expansion-panel>

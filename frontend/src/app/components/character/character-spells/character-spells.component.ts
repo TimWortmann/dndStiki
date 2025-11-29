@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CharacterValue } from '../../../models/character-value';
 import { SpellValue } from '../../../models/spell-value';
+import { SpellDetailsPopupComponent } from '../../spells/spell-details-popup/spell-details-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-character-spells',
@@ -13,6 +15,9 @@ export class CharacterSpellsComponent {
   @Input() characterValue! : CharacterValue;
   @Output() removeSpellEvent = new EventEmitter<SpellValue>();
 
+  constructor(
+    private dialog: MatDialog,
+  ){}
 
   isSpellWithoutSpellslot(level : number, spellSlots : number[]) : boolean {
     return level >= spellSlots.length;
@@ -56,5 +61,15 @@ export class CharacterSpellsComponent {
   removeSpell(spell: SpellValue) {
     this.removeSpellEvent.emit(spell);
   }
+
+  openDetailDialog(element: any): void {
+      const dialogRef = this.dialog.open(SpellDetailsPopupComponent, {
+        data: element,
+        width: '60vw',          
+        maxWidth: '60vw',  
+        maxHeight: '60vh',  
+        autoFocus: false,
+      });
+    }
 
 }

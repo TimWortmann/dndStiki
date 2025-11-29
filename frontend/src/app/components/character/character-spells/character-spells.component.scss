@@ -1,5 +1,6 @@
 .flex-without-gap {
   display: flex;
   align-items: center;
-  gap: 0px;
+  justify-content: space-between;
+  gap: 8px; /* optional for some spacing between name and buttons */
 }

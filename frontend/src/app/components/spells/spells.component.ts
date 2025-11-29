@@ -24,7 +24,7 @@ export class SpellsComponent {
   constructor(
     private tableService: TableService,
     private spellService: SpellService, 
-    public dialog: MatDialog,
+    private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
   ){}
 
