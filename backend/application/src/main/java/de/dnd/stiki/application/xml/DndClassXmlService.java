@@ -104,8 +104,11 @@ public class DndClassXmlService extends AbstractXmlService<DndClassEntity, DndCl
             levelEntity.setLevel(Integer.valueOf(levelAttribute));
         }
         levelEntity.setScoreImprovement(getXmlBooleanAttribute(levelElement, "scoreImprovement"));
-        levelEntity.setSpellSlots(getListByTagName(levelElement, "slots")
-                .stream().map(Integer::valueOf).toList());
+
+        List<String> spellSlotsStringList = getListByTagName(levelElement, "slots");
+        if (spellSlotsStringList != null) {
+            levelEntity.setSpellSlots(spellSlotsStringList.stream().map(Integer::valueOf).toList());
+        }
 
         levelEntity.setFeatures(getFeatureEntities(levelElement.getElementsByTagName("feature")));
         levelEntity.setCounters(getCounterEntities(levelElement.getElementsByTagName("counter")));

@@ -1,15 +1,16 @@
 package de.dnd.stiki.plugins.persistence.spell;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Spell", schema = "DND_STIKI")
 public class SpellJpa {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
+    private Long id;
+
     @Column(name = "NAME")
     private String name;
 
@@ -42,6 +43,14 @@ public class SpellJpa {
 
     @Column(name = "RITUAL")
     private boolean ritual;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
