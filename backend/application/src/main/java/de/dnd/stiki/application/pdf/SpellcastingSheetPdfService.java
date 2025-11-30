@@ -64,11 +64,12 @@ public class SpellcastingSheetPdfService {
 
         Map<String, String> fieldValues = new HashMap<>();
         fieldValues.put("Spellcasting Class 2", character.getDndClass());
-        fieldValues.put("SpellcastingAbility 2", character.getSpellcastingAbility().getName());
-
-        int spellAttackBonus = character.getProficiencyBonus() + character.getAbility(character.getSpellcastingAbility()).getModifier();
-        fieldValues.put("SpellSaveDC  2", String.valueOf(8 + spellAttackBonus));
-        fieldValues.put("SpellAtkBonus 2", "+" + spellAttackBonus);
+        if (character.getSpellcastingAbility() != null) {
+            fieldValues.put("SpellcastingAbility 2", character.getSpellcastingAbility().getName());
+            int spellAttackBonus = character.getProficiencyBonus() + character.getAbility(character.getSpellcastingAbility()).getModifier();
+            fieldValues.put("SpellSaveDC  2", String.valueOf(8 + spellAttackBonus));
+            fieldValues.put("SpellAtkBonus 2", "+" + spellAttackBonus);
+        }
 
         setCantripFields(character, fieldValues);
 
@@ -107,9 +108,11 @@ public class SpellcastingSheetPdfService {
     }
 
     private List<Integer> getCurrentSpellSlots(CharacterEntity character) {
-        for (CharacterSpellSlotsEntity spellSlotsEntity : character.getSpellSlots()) {
-            if (Objects.equals(character.getLevel(), spellSlotsEntity.getLevel())) {
-                return spellSlotsEntity.getSpellSlots();
+        if (character.getSpellSlots() != null) {
+            for (CharacterSpellSlotsEntity spellSlotsEntity : character.getSpellSlots()) {
+                if (Objects.equals(character.getLevel(), spellSlotsEntity.getLevel())) {
+                    return spellSlotsEntity.getSpellSlots();
+                }
             }
         }
         return new ArrayList<>();
