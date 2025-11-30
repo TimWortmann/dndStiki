@@ -25,6 +25,7 @@ import { ArmorClassPopupComponent } from '../armor-class-popup/armor-class-popup
 import { CharacterAttackValue } from '../../../models/character-attack-value';
 import { SpellListPopupComponent } from '../spell-list-popup/spell-list-popup.component';
 import { SpellValue } from '../../../models/spell-value';
+import { SpellService } from '../../../services/spell/spell.service';
 
 @Component({
   selector: 'app-character-overview',
@@ -62,6 +63,7 @@ throw new Error('Method not implemented.');
 
   skillChangeActive : boolean = false;
 
+  allSpells? : SpellValue[];
   allItems? : ItemValue[];
 
   currentAttackEdit? : CharacterAttackValue;
@@ -71,6 +73,7 @@ throw new Error('Method not implemented.');
     private backgroundService: BackgroundService,
     private raceService: RaceService,
     private itemService: ItemService,
+    private spellService: SpellService,
     private route: ActivatedRoute,
     private characterService : CharacterService,
     private dialog: MatDialog,
@@ -675,8 +678,20 @@ throw new Error('Method not implemented.');
     return abilityScores;
   }
 
-  openSpellDialog() {
+  addSpell() {
+    if (this.allSpells) {
+      this.openSpellListDialog();
+    } else {
+      this.spellService.getAllSpells().subscribe((response) => {
+        this.allSpells = response;
+        this.openSpellListDialog();
+      })
+    }
+  }
+
+  openSpellListDialog() {
     const dialogRef = this.dialog.open(SpellListPopupComponent, {
+          data: this.allSpells,
           width: '1300px',        
           maxWidth: '1300px',  
           maxHeight: '650px',  

@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { SpellDetailsPopupComponent } from '../../spells/spell-details-popup/spell-details-popup.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SpellValue } from '../../../models/spell-value';
 import { TableColumnValue } from '../../../models/table-column-value';
 import { SpellService } from '../../../services/spell/spell.service';
@@ -17,7 +17,7 @@ export class SpellListPopupComponent {
   @ViewChild('levelTemplate') levelTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate') actionsTemplate!: TemplateRef<any>;
 
-  data?: SpellValue[];
+  spells?: SpellValue[];
   tableColumns: TableColumnValue[] = [];
 
   constructor(
@@ -25,7 +25,10 @@ export class SpellListPopupComponent {
     private spellService: SpellService, 
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-  ){}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ){
+    this.spells = data;
+  }
 
   close(): void {
     this.dialogRef.close();
@@ -64,15 +67,7 @@ export class SpellListPopupComponent {
         template: this.actionsTemplate,
       },
     ];
-    this.pullDataFromBackend();
-  }
-
-  pullDataFromBackend() {
-    this.spellService.getAllSpells()
-      .subscribe((response) => {
-        this.data = response;
-        this.cdr.detectChanges();
-      });
+    this.cdr.detectChanges();
   }
   
   openDetailDialog(element: any): void {

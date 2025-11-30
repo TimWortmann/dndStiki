@@ -17,9 +17,9 @@
 <div mat-dialog-content class="dialog-content">
     <h1 mat-dialog-title> Add Spell </h1>
     
-    <div *ngIf="data && data.length > 0">
+    <div *ngIf="spells && spells.length > 0">
         <custom-table
-            [tableData]="data"
+            [tableData]="spells"
             [tableColumns]="tableColumns"
             [isFilterable]="true"
             [isFilterableOnlyVisible]="true"
