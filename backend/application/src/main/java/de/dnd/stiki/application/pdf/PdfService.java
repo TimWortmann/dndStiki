@@ -15,11 +15,18 @@ public class PdfService {
     @Autowired
     private FeatureSheetPdfService featureSheetPdfService;
 
+    @Autowired
+    private SpellcastingSheetPdfService spellcastingSheetPdfService;
+
     public File fillCharacterSheet(Long characterId) throws Exception {
         return characterSheetPdfService.fillCharacterSheet(characterId);
     }
 
     public File createFeatureSheet(Long characterId, boolean filterLevelFeatures) throws IOException {
         return featureSheetPdfService.createFeatureSheet(characterId, filterLevelFeatures);
+    }
+
+    public File fillSpellcastingSheet(Long characterId) throws Exception {
+        return spellcastingSheetPdfService.fillSpellcastingSheet(characterId);
     }
 }

@@ -56,7 +56,13 @@ export class DownloadsPopupComponent {
       a.click();
 
       window.URL.revokeObjectURL(url);
+  }
 
+  downloadSpellcastingSheet() {
+    this.pdfService.downloadSpellcastingSheet(this.characterValue.id).subscribe((response) => {
+
+      this.openPdf(response, 'Spellcasting Sheet (' + this.characterValue.name + ') (Level ' + this.characterValue.level + ')')
+    });
   }
 
 }

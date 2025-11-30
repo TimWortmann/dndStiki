@@ -36,4 +36,15 @@ public class PdfController {
                 .header("Content-Disposition", "attachment; filename=\"Feature Sheet (Filled).pdf\"")
                 .body(pdfBytes);
     }
+
+    @GetMapping("/spellcasting/{id}")
+    public ResponseEntity<byte[]> getFilledSpellcastingSheet(@PathVariable Long id) throws Exception {
+        File filledPdf = pdfService.fillSpellcastingSheet(id);
+        byte[] pdfBytes = Files.readAllBytes(filledPdf.toPath());
+
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/pdf")
+                .header("Content-Disposition", "attachment; filename=\"Spellcasting Sheet (Filled).pdf\"")
+                .body(pdfBytes);
+    }
 }

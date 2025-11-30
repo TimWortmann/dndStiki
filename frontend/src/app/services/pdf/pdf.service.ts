@@ -20,4 +20,7 @@ export class PdfService {
     return this.http.get(this.baseUrl + "/features/" + id + "?filterLevelFeatures=" + filterLevelFeatures, { responseType: 'blob', });
   }
   
+  downloadSpellcastingSheet(id : number) : Observable<Blob> {
+    return this.http.get(this.baseUrl + "/spellcasting/" + id, { responseType: 'blob', });
+  }
 }
