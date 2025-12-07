@@ -65,4 +65,11 @@ export class DownloadsPopupComponent {
     });
   }
 
+  downloadSpellInfoSheet() {
+    this.pdfService.downloadSpellInfoSheet(this.characterValue.id).subscribe((response) => {
+
+      this.openPdf(response, 'Spell Info Sheet (' + this.characterValue.name + ') (Level ' + this.characterValue.level + ')')
+    });
+  }
+
 }

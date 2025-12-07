@@ -23,4 +23,8 @@ export class PdfService {
   downloadSpellcastingSheet(id : number) : Observable<Blob> {
     return this.http.get(this.baseUrl + "/spellcasting/" + id, { responseType: 'blob', });
   }
+
+  downloadSpellInfoSheet(id : number) : Observable<Blob> {
+    return this.http.get(this.baseUrl + "/spellInfo/" + id, { responseType: 'blob', });
+  }
 }

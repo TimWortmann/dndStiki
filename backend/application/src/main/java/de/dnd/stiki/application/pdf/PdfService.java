@@ -18,6 +18,9 @@ public class PdfService {
     @Autowired
     private SpellcastingSheetPdfService spellcastingSheetPdfService;
 
+    @Autowired
+    private SpellInfoSheetPdfService spellInfoSheetPdfService;
+
     public File fillCharacterSheet(Long characterId) throws Exception {
         return characterSheetPdfService.fillCharacterSheet(characterId);
     }
@@ -28,5 +31,9 @@ public class PdfService {
 
     public File fillSpellcastingSheet(Long characterId) throws Exception {
         return spellcastingSheetPdfService.fillSpellcastingSheet(characterId);
+    }
+
+    public File createSpellInfoSheet(Long characterId) throws IOException {
+        return spellInfoSheetPdfService.createSpellInfoSheet(characterId);
     }
 }
