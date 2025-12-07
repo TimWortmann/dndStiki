@@ -92,8 +92,23 @@ public class SpellInfoSheetPdfService {
         for (SpellEntity spell : spells) {
             Div spellBox = getSpellBox();
             spellBox.add(new Paragraph(spell.getName()).setFont(bold).setFontSize(12));
-            spellBox.add(new Paragraph(spell.getText()).setFontSize(10));
+            addSpellAttributeText(spellBox, "School: ", spell.getSchool());
+            addSpellAttributeText(spellBox, "Casting Time: ", spell.getTime());
+            addSpellAttributeText(spellBox, "Range: ", spell.getRange());
+            addSpellAttributeText(spellBox, "Components: ", spell.getComponents().toString());
+            addSpellAttributeText(spellBox, "Duration: ", spell.getDuration());
+            addSpellAttributeText(spellBox, "Roll: ", spell.getRoll());
+            if (spell.isRitual()) {
+                addSpellAttributeText(spellBox, "Ritual: ", "Yes");
+            }
+            addSpellAttributeText(spellBox, "", spell.getText());
             document.add(spellBox);
+        }
+    }
+
+    private void addSpellAttributeText(Div spellBox, String prefixText, String spellAttribute) {
+        if (spellAttribute != null) {
+            spellBox.add(new Paragraph(prefixText + spellAttribute).setFontSize(10));
         }
     }
 
