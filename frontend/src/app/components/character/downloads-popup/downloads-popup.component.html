@@ -22,19 +22,21 @@
         </button>
     </div>
 
-    <div class="vertical-flex">
-        <span> Spellcasting Sheet </span>
-        <button mat-icon-button color="primary" (click)="downloadSpellcastingSheet()">
-            <mat-icon>download</mat-icon>
-        </button>
-    </div>
-
-    <div class="vertical-flex">
-        <span> Spell Info Sheet </span>
-        <button mat-icon-button color="primary" (click)="downloadSpellInfoSheet()">
-            <mat-icon>download</mat-icon>
-        </button>
-    </div>
+    <ng-container *ngIf="this.characterValue.spells && this.characterValue.spells.length > 0"> 
+        <div class="vertical-flex">
+            <span> Spellcasting Sheet </span>
+            <button mat-icon-button color="primary" (click)="downloadSpellcastingSheet()">
+                <mat-icon>download</mat-icon>
+            </button>
+        </div>
+    
+        <div class="vertical-flex">
+            <span> Spell Info Sheet </span>
+            <button mat-icon-button color="primary" (click)="downloadSpellInfoSheet()">
+                <mat-icon>download</mat-icon>
+            </button>
+        </div>
+    </ng-container>
 </div>
 
 <button mat-icon-button class="close-button" (click)="close()">

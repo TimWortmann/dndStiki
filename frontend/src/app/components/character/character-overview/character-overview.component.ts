@@ -501,10 +501,8 @@ throw new Error('Method not implemented.');
   openDownloadsDialog() {
     this.dialog.open(DownloadsPopupComponent, {
       data: this.characterValue,    
-      width: '500px',     
-      height: '400px',     
+      width: '500px',        
       maxWidth: '500px',  
-      maxHeight: '400px',  
       autoFocus: false,
     });
   }

@@ -27,7 +27,6 @@ import java.util.List;
 @Service
 public class SpellInfoSheetPdfService {
 
-
     @Autowired
     private CharacterRepository characterRepository;
 
