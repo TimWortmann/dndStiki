@@ -104,8 +104,8 @@ export class TableComponent implements AfterViewInit {
       const newSizes = this.getDynamicPaginationSizes();
       if (newSizes.length) {
         if (this.showAllData) {
-            this.matPaginator._changePageSize(newSizes[newSizes.length-1]);
-          }  
+          this.matPaginator._changePageSize(newSizes[newSizes.length-1]);
+        }  
       }
     }
   }
