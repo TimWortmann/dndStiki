@@ -42,6 +42,7 @@ export class ItemListComponent implements AfterViewInit {
   @Input() equippedColumn: boolean = false;
   @Input() addColumn: boolean = false;
   @Input() removeColumn: boolean = false;
+  @Input() showAllData: boolean = false;
 
   @Output() addItemEvent = new EventEmitter<ItemValue>();
   @Output() changeItemQuantityEvent = new EventEmitter<CharacterItemValue>();

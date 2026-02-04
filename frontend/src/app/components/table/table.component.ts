@@ -28,6 +28,8 @@ export class TableComponent implements AfterViewInit {
   @Input() tableColumns: TableColumnValue[] = [];
   @Input() rowActionIcon!: string;
   @Input() isFilterableOnlyVisible = false;
+  @Input() showAllData = false;
+
 
   @Output() sort: EventEmitter<Sort> = new EventEmitter();
   @Output() rowAction: EventEmitter<any> = new EventEmitter<any>();
@@ -44,9 +46,14 @@ export class TableComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.paginationSizes = this.getDynamicPaginationSizes();
-    this.defaultPageSize = this.paginationSizes[0];
+    this.defaultPageSize = this.showAllData
+      ? this.paginationSizes[this.paginationSizes.length - 1]
+      : this.paginationSizes[0];
+
     this.tableDataSource.paginator = this.matPaginator;
     this.tableDataSource.sort = this.matSort;
+
+    this.applyInitialPageSize();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -65,6 +72,7 @@ export class TableComponent implements AfterViewInit {
     this.tableDataSource.paginator = this.matPaginator;
     this.tableDataSource.sort = this.matSort;
     this.applyFilter(this.filterValue); // preserve filter after data set
+    this.applyInitialPageSize();        
   }
 
   applyFilter(value: string) {
@@ -128,4 +136,18 @@ export class TableComponent implements AfterViewInit {
 
     return sizes.sort((a, b) => a - b);
   }
+
+  private applyInitialPageSize() {
+    if (!this.matPaginator) return;
+
+    const sizes = this.getDynamicPaginationSizes();
+    if (!sizes.length) return;
+
+    const pageSize = this.showAllData
+      ? sizes[sizes.length - 1] // MAX = alle Daten
+      : sizes[0];               // MIN (z. B. 5)
+
+    this.matPaginator._changePageSize(pageSize);
+  }
+
 }

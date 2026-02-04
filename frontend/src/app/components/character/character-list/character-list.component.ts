@@ -87,7 +87,7 @@ export class CharacterListComponent {
   pullDataFromBackend() {
     this.characterService.getAllCharacters()
       .subscribe((response) => {
-        this.data = response;
+        this.data = [...response].reverse();
         this.cdr.detectChanges();
       });
   }
