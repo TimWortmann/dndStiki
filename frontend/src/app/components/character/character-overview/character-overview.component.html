@@ -426,7 +426,7 @@
     <mat-tab-group>
       <mat-tab label="All Items">
         <div *ngIf="characterValue" class="item-list">
-          <app-item-list [data]="characterValue.items" [typeColumn]="true" [bigQuantityColumn]="true" [removeColumn]="true" 
+          <app-item-list [data]="characterValue.items" [typeColumn]="true" [bigQuantityColumn]="true" [removeColumn]="true" [showAllData]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"></app-item-list>
         </div>
       </mat-tab>
@@ -439,6 +439,7 @@
           [equippedWeapons]="characterValue.attacks"
           [equippedColumn]="true" [typeColumn]="true" 
           [propertiesColumn]="true" 
+          [showAllData]="true" 
           (changeItemQuantityEvent)="changeItemQuantity($event)"
           (equipItemEvent)="equipItem($event)"
           (unequipItemEvent)="unequipItem($event)"></app-item-list>
