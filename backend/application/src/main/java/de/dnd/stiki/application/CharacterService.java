@@ -238,8 +238,7 @@ public class CharacterService {
     }
 
     private Integer getLevelHealth(CharacterEntity characterEntity) {
-        int fixedHitpoints = (characterEntity.getHitDice() + 1) / 2;
-
+        int fixedHitpoints = (int) Math.ceil((double) (characterEntity.getHitDice() + 1) / 2);
         int healthIncreasePerLevel = fixedHitpoints + characterEntity.getAbility(CONSTITUTION).getModifier();
 
         return getBeginnerHealth(characterEntity) + ((characterEntity.getLevel()-1) * healthIncreasePerLevel);
